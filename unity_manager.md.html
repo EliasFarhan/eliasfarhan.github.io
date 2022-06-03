@@ -17,11 +17,11 @@ During my search, I found this StackOverflow answer "[In every Unity project you
 
 I also found this article: [UNITY TIP: DON’T USE YOUR FIRST SCENE FOR GLOBAL SCRIPT INITIALIZATION](https://low-scope.com/unity-tips-1-dont-use-your-first-scene-for-global-script-initialization/), that goes against the first article, but propose a script that loads the game systems before loading the scene.
 
-Finally another example I found was a static class 
+Finally another example I found was a static class which would load the references in the scene with a constructor: [Design Advice: Power Up System (static variables?)](https://answers.unity.com/questions/663351/design-advice-power-up-system-static-variables.html?childToView=663681#answer-663681).
 
 The short answer
 ===============================================================================
-It depends on the game, but mostly, it depends on the game scene layout. It depends on the actual Game System, on its lifetime, what data needs to be shared with which other Game System. Not all Game Systems are the same and thus they require different approaches (no generic implementation will work in all cases).
+It depends on the game, but mostly, it depends on the game scene layout. It depends on the actual Game System, on its lifetime, what data needs to be shared with which other Game System. Not all Game Systems are the same and thus they require different approaches (no generic implementation will work in all cases). It also depends on the team who is working on the game. You will have more freedom to do what you prefer when you are the only programmer on the project (often my case), than when you are working in a team of programmers (often the case in reality). 
 
 This is my current approach when dealing with Game System.
 
@@ -117,9 +117,6 @@ public class MusicManagerData : SingletonScriptableObject<MusicManagerData>
 
 In script, we ask the MusicManager to play a certain track (the first enum type, easier to deal with than actual string). The MusicManager will ask the MusicManagerData the actual string of the FMOD event. The MusicManagerData is a ScriptableObject that is in the Resource folder that will be loaded the moment we instantiate the MusicManagerData. The memory cost of keeping the list of string of all the music tracks is negligeable compare to the ease of use of simply calling SwitchToNewTrack
 
-
-
-
 Bad implementations
 ==============================================================================
 A bad implementation of a Game System can deeply extend testing time. For example, in Splash Blast Panic, I needed to go through the Main Menu everytime I needed to test a match (meaning, going through the title screen menu, character menu, level menu to finally a match).
@@ -139,9 +136,10 @@ When designing any Game System, one should ask the following questions:
 * Do I depend of another Game System in a certain scene. You know for sure that you will have to go through this scene, so try to avoid this situation.
 * What is the lifetime of this Game System? If you only need it in a scene, don't make it "DontDestroyOnLoad", even if you want to copy data to the next scene. It will mean that your next scene will depend on the current scene. If you need to pass data, put them into a ScriptableObject and give them to a specific GameObject whose only task is to give the data to the next scene.
 * Do I need to make this Game System a Singleton or even a (sort of) Locator with a static reference? Having different Game Systems having a global entry point can be error prone, especially when their lifetimes differ. 
+* Will the dependency with other Game Systems be clear to my colleagues? I mainly work alone as a programmer, so it's not a question that I often ask myself, but you have to have in mind that your Game System lifetime will have an effect on its dependency and nobody likes to get a NullRefException.
 
 Conclusion
 ==============================================================================
-There are several ways to define the lifetime and access to a Game System. There is no correct way of implementing those, but your choice will affect game testing time if done badly. The most important is to use a good enough specialized implementation instead of a generic one for all the Game Systems and then have a bloated dependency graph of subsystems.
+There are several ways to define the lifetime and access to a Game System. I did not talk about the Preload scene, which I don't personaly recommend, however Alkemi Games use it in their way of using Unity, which is more programmer-oriented, here: [ADDON 2018 - Alkemi - Unity... but differently](https://docs.google.com/presentation/d/1YmG8Ou6UtnYnqihmx2fwgGktUmIJWU-tmV6xlsDLf5A/edit?usp=sharing). There is no correct way of implementing those, but your choice will affect game testing time if done badly. The most important is to use a good enough specialized implementation instead of a generic one for all the Game Systems and then have a bloated dependency graph of subsystems. 
 
 <!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js" charset="utf-8"></script><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js" charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
