@@ -1,0 +1,18 @@
+<meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/slate.css?">
+
+                          **Horcrux Render Engine**
+
+At SAE Institute Geneva, we learn to use OpenGL ES 3.0 to be able to use the same features and shaders on various platforms. The goal of the Horcrux render engine is to show a scene on all the platforms with the same C++ and GLSL code.
+
+# Platforms
+## WebGL2
+
+Requires emsdk and vcpkg. Then run this command:
+
+export CC=emcc; export CXX=emcc; cmake -DCMAKE_TOOLCHAIN_FILE=~/Development/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_AR="$(which emar)" -DCMAKE_RANLIB="$(which emranlib)" -DVCPKG_TARGET_TRIPLET=wasm32-emscripten ..
+
+# Rendering Engine
+
+
+<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'long'};</script>
+<!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?" charset="utf-8"></script>
