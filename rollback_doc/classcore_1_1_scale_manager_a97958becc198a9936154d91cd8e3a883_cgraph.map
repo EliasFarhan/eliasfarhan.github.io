@@ -1,0 +1,4 @@
+<map id="core::ScaleManager::AddComponent" name="core::ScaleManager::AddComponent">
+<area shape="rect" id="node1" title="AddComponent is a method that sets the flag C in the EntityManager and resize if need the components_..." alt="" coords="5,5,144,45"/>
+<area shape="rect" id="node2" href="$classcore_1_1_component_manager.html#a8c4d23215a5deaeecb8c9be843b05e7e" title="AddComponent is a method that sets the flag C in the EntityManager and resize if need the components_..." alt="" coords="192,5,363,45"/>
+</map>

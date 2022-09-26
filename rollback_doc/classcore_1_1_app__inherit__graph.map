@@ -1,0 +1,10 @@
+<map id="core::App" name="core::App">
+<area shape="rect" id="node1" title="App is an interface for applications that need to init/update/destroy, draw and get event from OS." alt="" coords="220,80,299,105"/>
+<area shape="rect" id="node6" href="$classgame_1_1_client_app.html" title="ClientApp is a App that owns a NetworkClient and shows it on the screen directly." alt="" coords="389,31,507,56"/>
+<area shape="rect" id="node7" href="$classgame_1_1_network_client_debug_app.html" title="NetworkClientDebugApp is a class that have several NetworkClient and shows them on the screen,..." alt="" coords="347,80,549,105"/>
+<area shape="rect" id="node8" href="$classgame_1_1_simulation_app.html" title="SimulationApp is an application that owns SimulationClient and SimulationServer." alt="" coords="375,129,521,155"/>
+<area shape="rect" id="node2" href="$classcore_1_1_draw_interface.html" title="DrawInterface is an interface used by the Engine to be called when the game loop is drawing elements ..." alt="" coords="22,5,155,31"/>
+<area shape="rect" id="node3" href="$classcore_1_1_draw_im_gui_interface.html" title="DrawImGuiInterface is an interface used by the Engine to be called when the game loop is drawing ImGu..." alt="" coords="5,55,172,80"/>
+<area shape="rect" id="node4" href="$classcore_1_1_system_interface.html" title="SystemInterface is an interface to a game system that needs to begin, update and end by the Engine...." alt="" coords="14,104,163,129"/>
+<area shape="rect" id="node5" href="$classcore_1_1_on_event_interface.html" title="OnEventInterface is an interface to a class that needs to read events from the Engine...." alt="" coords="12,153,165,179"/>
+</map>

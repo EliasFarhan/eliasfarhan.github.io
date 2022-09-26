@@ -1,0 +1,7 @@
+<map id="core::ComponentManager::AddComponent" name="core::ComponentManager::AddComponent">
+<area shape="rect" id="node1" title="AddComponent is a method that sets the flag C in the EntityManager and resize if need the components_..." alt="" coords="661,37,832,77"/>
+<area shape="rect" id="node2" href="$classcore_1_1_scale_manager.html#a97958becc198a9936154d91cd8e3a883" title="AddComponent is a method that sets the flag C in the EntityManager and resize if need the components_..." alt="" coords="454,5,593,45"/>
+<area shape="rect" id="node3" href="$classgame_1_1_client_game_manager.html#a3ed76b11423836ca830c03bc67d28551" title="SpawnPlayer is method that is called when receiving a SpawnPlayerPacket from the server." alt="" coords="433,69,613,109"/>
+<area shape="rect" id="node4" href="$classgame_1_1_client.html#aa6b592010503d0d99e509395a1c7c3a4" title="ReceiveNetPacket is a method called by an app owning a client when receiving a packet...." alt="" coords="196,77,385,102"/>
+<area shape="rect" id="node5" href="$classgame_1_1_network_client.html#acf8ef57fababa1347d46fb54caa613b3" title="ReceiveNetPacket is a method called by an app owning a client when receiving a packet...." alt="" coords="5,69,148,109"/>
+</map>

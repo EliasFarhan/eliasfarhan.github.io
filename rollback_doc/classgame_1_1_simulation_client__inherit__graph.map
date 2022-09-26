@@ -1,0 +1,8 @@
+<map id="game::SimulationClient" name="game::SimulationClient">
+<area shape="rect" id="node1" title="SimulationClient is a Client that uses simulated sockets with a direct reference to the server." alt="" coords="389,80,545,105"/>
+<area shape="rect" id="node2" href="$classgame_1_1_client.html" title="Client is an interface of a player game manager and the net client interface (receive and send packet..." alt="" coords="247,80,341,105"/>
+<area shape="rect" id="node3" href="$classcore_1_1_draw_interface.html" title="DrawInterface is an interface used by the Engine to be called when the game loop is drawing elements ..." alt="" coords="35,5,169,31"/>
+<area shape="rect" id="node4" href="$classcore_1_1_draw_im_gui_interface.html" title="DrawImGuiInterface is an interface used by the Engine to be called when the game loop is drawing ImGu..." alt="" coords="19,55,185,80"/>
+<area shape="rect" id="node5" href="$classgame_1_1_packet_sender_interface.html" title="PacketSenderInterface is a interface for any Server or Client who wants to send and receive packets." alt="" coords="5,104,199,129"/>
+<area shape="rect" id="node6" href="$classcore_1_1_system_interface.html" title="SystemInterface is an interface to a game system that needs to begin, update and end by the Engine...." alt="" coords="27,153,177,179"/>
+</map>

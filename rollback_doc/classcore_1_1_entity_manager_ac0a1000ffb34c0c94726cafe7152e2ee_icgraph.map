@@ -1,0 +1,4 @@
+<map id="core::EntityManager::AddComponent" name="core::EntityManager::AddComponent">
+<area shape="rect" id="node1" title="AddComponent is a method that adds the bitwise entity mask to the entity mask. It is normally called ..." alt="" coords="192,5,331,45"/>
+<area shape="rect" id="node2" href="$classcore_1_1_entity_manager.html#a7e4e63feaf3f5eb9ceadbae9a0f293cb" title="CreateEntity is a method that will return the next available Entity index. It will look at the intern..." alt="" coords="5,5,144,45"/>
+</map>

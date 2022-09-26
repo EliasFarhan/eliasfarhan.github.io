@@ -1,0 +1,5 @@
+<map id="game::BulletManager" name="game::BulletManager">
+<area shape="rect" id="node1" title="BulletManager is a ComponentManager that holds all the Bullet in one place. It will automatically des..." alt="" coords="549,27,695,53"/>
+<area shape="rect" id="node2" href="$classcore_1_1_component_manager.html" title=" " alt="" coords="285,5,500,75"/>
+<area shape="rect" id="node3" href="$classcore_1_1_entity_manager.html" title="Manages the entities in an array using bitwise operations to know if it has components." alt="" coords="5,27,144,53"/>
+</map>

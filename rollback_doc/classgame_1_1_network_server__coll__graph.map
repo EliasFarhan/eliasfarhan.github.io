@@ -1,0 +1,11 @@
+<map id="game::NetworkServer" name="game::NetworkServer">
+<area shape="rect" id="node1" title="NetworkServer is a network server using SFML sockets." alt="" coords="225,331,371,356"/>
+<area shape="rect" id="node2" href="$classgame_1_1_server.html" title="Server is an interface to a network or simulated server. It owns a simple GameManager." alt="" coords="249,256,347,281"/>
+<area shape="rect" id="node3" href="$classgame_1_1_packet_sender_interface.html" title="PacketSenderInterface is a interface for any Server or Client who wants to send and receive packets." alt="" coords="5,168,199,193"/>
+<area shape="rect" id="node4" href="$classcore_1_1_system_interface.html" title="SystemInterface is an interface to a game system that needs to begin, update and end by the Engine...." alt="" coords="223,168,373,193"/>
+<area shape="rect" id="node5" href="$classgame_1_1_game_manager.html" title="GameManager is a class which manages the state of the game. It is shared between the client and the s..." alt="" coords="397,168,543,193"/>
+<area shape="rect" id="node6" href="$classcore_1_1_entity_manager.html" title="Manages the entities in an array using bitwise operations to know if it has components." alt="" coords="226,80,365,105"/>
+<area shape="rect" id="node7" href="$classcore_1_1_transform_manager.html" title="TransformManager is a class combining a PositionManager, a ScaleManager and a RotationManager in one." alt="" coords="389,80,551,105"/>
+<area shape="rect" id="node8" href="$classgame_1_1_rollback_manager.html" title="RollbackManager is a class that manages all the rollback mechanisms of the game. It contains two copi..." alt="" coords="575,80,738,105"/>
+<area shape="rect" id="node9" href="$classgame_1_1_on_trigger_interface.html" title="OnTriggerInterface is an interface for classes that needs to be called when two boxes are in contact...." alt="" coords="573,5,740,31"/>
+</map>

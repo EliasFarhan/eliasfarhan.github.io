@@ -1,0 +1,5 @@
+<map id="game::ValidateFramePacket" name="game::ValidateFramePacket">
+<area shape="rect" id="node1" title="ValidateFramePacket is an UDP packet that is sent by the server to validate the last physics state of..." alt="" coords="5,181,192,207"/>
+<area shape="rect" id="node2" href="$structgame_1_1_typed_packet.html" title=" " alt="" coords="16,79,181,133"/>
+<area shape="rect" id="node3" href="$structgame_1_1_packet.html" title="Packet is a interface that defines what a packet with a PacketType." alt="" coords="47,5,150,31"/>
+</map>

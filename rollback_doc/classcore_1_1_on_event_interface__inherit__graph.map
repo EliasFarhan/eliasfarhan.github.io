@@ -1,0 +1,7 @@
+<map id="core::OnEventInterface" name="core::OnEventInterface">
+<area shape="rect" id="node1" title="OnEventInterface is an interface to a class that needs to read events from the Engine...." alt="" coords="173,5,327,31"/>
+<area shape="rect" id="node2" href="$classcore_1_1_app.html" title="App is an interface for applications that need to init/update/destroy, draw and get event from OS." alt="" coords="211,79,289,104"/>
+<area shape="rect" id="node3" href="$classgame_1_1_client_app.html" title="ClientApp is a App that owns a NetworkClient and shows it on the screen directly." alt="" coords="5,152,124,177"/>
+<area shape="rect" id="node4" href="$classgame_1_1_network_client_debug_app.html" title="NetworkClientDebugApp is a class that have several NetworkClient and shows them on the screen,..." alt="" coords="149,152,351,177"/>
+<area shape="rect" id="node5" href="$classgame_1_1_simulation_app.html" title="SimulationApp is an application that owns SimulationClient and SimulationServer." alt="" coords="375,152,522,177"/>
+</map>

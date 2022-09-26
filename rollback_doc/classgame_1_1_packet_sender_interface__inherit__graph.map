@@ -1,0 +1,9 @@
+<map id="game::PacketSenderInterface" name="game::PacketSenderInterface">
+<area shape="rect" id="node1" title="PacketSenderInterface is a interface for any Server or Client who wants to send and receive packets." alt="" coords="5,80,199,105"/>
+<area shape="rect" id="node2" href="$classgame_1_1_client.html" title="Client is an interface of a player game manager and the net client interface (receive and send packet..." alt="" coords="249,55,343,80"/>
+<area shape="rect" id="node5" href="$classgame_1_1_server.html" title="Server is an interface to a network or simulated server. It owns a simple GameManager." alt="" coords="247,104,345,129"/>
+<area shape="rect" id="node3" href="$classgame_1_1_network_client.html" title="NetworkClient is a network client that uses SFML sockets." alt="" coords="401,5,544,31"/>
+<area shape="rect" id="node4" href="$classgame_1_1_simulation_client.html" title="SimulationClient is a Client that uses simulated sockets with a direct reference to the server." alt="" coords="395,55,551,80"/>
+<area shape="rect" id="node6" href="$classgame_1_1_network_server.html" title="NetworkServer is a network server using SFML sockets." alt="" coords="400,104,545,129"/>
+<area shape="rect" id="node7" href="$classgame_1_1_simulation_server.html" title="SimulationServer is a Server that delays Packet internally before &quot;receiving&quot; them and then sends the..." alt="" coords="393,153,552,179"/>
+</map>

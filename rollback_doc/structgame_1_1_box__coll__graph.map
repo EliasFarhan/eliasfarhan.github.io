@@ -1,0 +1,4 @@
+<map id="game::Box" name="game::Box">
+<area shape="rect" id="node1" title="Box is a class that represents an axis&#45;aligned box collider." alt="" coords="7,93,92,119"/>
+<area shape="rect" id="node2" href="$structcore_1_1_vec2f.html" title="Vec2f is a utility class that represents a mathematical 2d vector." alt="" coords="5,5,93,31"/>
+</map>

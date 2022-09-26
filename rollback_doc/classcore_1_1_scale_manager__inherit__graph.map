@@ -1,0 +1,4 @@
+<map id="core::ScaleManager" name="core::ScaleManager">
+<area shape="rect" id="node1" title="ScaleManager is a ComponentManager that holds the scale ratio in x and y. By default,..." alt="" coords="37,123,176,148"/>
+<area shape="rect" id="node2" href="$classcore_1_1_component_manager.html" title=" " alt="" coords="5,5,208,75"/>
+</map>

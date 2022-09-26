@@ -1,0 +1,7 @@
+<map id="game::ClientGameManager" name="game::ClientGameManager">
+<area shape="rect" id="node1" title="ClientGameManager is a class that inherits from GameManager by adding the visual part and specific im..." alt="" coords="220,80,400,105"/>
+<area shape="rect" id="node2" href="$classgame_1_1_game_manager.html" title="GameManager is a class which manages the state of the game. It is shared between the client and the s..." alt="" coords="15,5,162,31"/>
+<area shape="rect" id="node3" href="$classcore_1_1_draw_interface.html" title="DrawInterface is an interface used by the Engine to be called when the game loop is drawing elements ..." alt="" coords="22,55,155,80"/>
+<area shape="rect" id="node4" href="$classcore_1_1_draw_im_gui_interface.html" title="DrawImGuiInterface is an interface used by the Engine to be called when the game loop is drawing ImGu..." alt="" coords="5,104,172,129"/>
+<area shape="rect" id="node5" href="$classcore_1_1_system_interface.html" title="SystemInterface is an interface to a game system that needs to begin, update and end by the Engine...." alt="" coords="14,153,163,179"/>
+</map>

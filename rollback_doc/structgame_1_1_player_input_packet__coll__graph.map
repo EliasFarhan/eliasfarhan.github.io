@@ -1,0 +1,5 @@
+<map id="game::PlayerInputPacket" name="game::PlayerInputPacket">
+<area shape="rect" id="node1" title="PlayerInputPacket is a UDP Packet sent by the player client and then replicated by the server to all ..." alt="" coords="5,167,173,192"/>
+<area shape="rect" id="node2" href="$structgame_1_1_typed_packet.html" title=" " alt="" coords="13,79,165,119"/>
+<area shape="rect" id="node3" href="$structgame_1_1_packet.html" title="Packet is a interface that defines what a packet with a PacketType." alt="" coords="38,5,141,31"/>
+</map>

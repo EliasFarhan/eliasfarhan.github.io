@@ -1,0 +1,7 @@
+<map id="game::DestroyedBullet" name="game::DestroyedBullet">
+<area shape="rect" id="node1" title="DestroyedBullet is a struct that contains information on newly &quot;destroyed&quot; Bullet...." alt="" coords="21,196,175,221"/>
+<area shape="rect" id="node2" href="$structgame_1_1_bullet.html" title="Bullet is a struct that contains info about a player bullet (when it will be destroyed and whose play..." alt="" coords="5,108,100,133"/>
+<area shape="rect" id="node3" href="$structgame_1_1_body.html" title="Body is a class that represents a rigid body." alt="" coords="124,108,216,133"/>
+<area shape="rect" id="node4" href="$structcore_1_1_vec2f.html" title="Vec2f is a utility class that represents a mathematical 2d vector." alt="" coords="67,5,155,31"/>
+<area shape="rect" id="node5" href="$classcore_1_1_degree.html" title="Degree is an utility class that describes degree angles (0 to 360). It can be easily converted to Rad..." alt="" coords="179,5,275,31"/>
+</map>

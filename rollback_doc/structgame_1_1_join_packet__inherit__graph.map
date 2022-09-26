@@ -1,0 +1,5 @@
+<map id="game::JoinPacket" name="game::JoinPacket">
+<area shape="rect" id="node1" title="JoinPacket is a TCP Packet that is sent by a client to the server to join a game." alt="" coords="15,167,142,192"/>
+<area shape="rect" id="node2" href="$structgame_1_1_typed_packet.html" title=" " alt="" coords="5,79,152,119"/>
+<area shape="rect" id="node3" href="$structgame_1_1_packet.html" title="Packet is a interface that defines what a packet with a PacketType." alt="" coords="27,5,130,31"/>
+</map>

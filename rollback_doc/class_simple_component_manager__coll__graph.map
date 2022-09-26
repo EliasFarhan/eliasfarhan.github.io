@@ -1,0 +1,5 @@
+<map id="SimpleComponentManager" name="SimpleComponentManager">
+<area shape="rect" id="node1" title=" " alt="" coords="5,183,184,208"/>
+<area shape="rect" id="node2" href="$classcore_1_1_component_manager.html" title=" " alt="" coords="9,93,180,133"/>
+<area shape="rect" id="node3" href="$classcore_1_1_entity_manager.html" title="Manages the entities in an array using bitwise operations to know if it has components." alt="" coords="25,5,164,31"/>
+</map>

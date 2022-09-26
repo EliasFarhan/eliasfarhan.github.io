@@ -1,0 +1,4 @@
+<map id="game::TypedPacket&lt; type &gt;" name="game::TypedPacket&lt; type &gt;">
+<area shape="rect" id="node1" title="TypedPacket is a template class that sets the packetType of Packet automatically at construction with..." alt="" coords="5,79,152,119"/>
+<area shape="rect" id="node2" href="$structgame_1_1_packet.html" title="Packet is a interface that defines what a packet with a PacketType." alt="" coords="27,5,130,31"/>
+</map>

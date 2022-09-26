@@ -1,0 +1,4 @@
+<map id="game::StarBackground" name="game::StarBackground">
+<area shape="rect" id="node1" title="StarBackground is a drawable object that draws a starfield on a screen." alt="" coords="5,79,160,104"/>
+<area shape="rect" id="node2" href="$classcore_1_1_draw_interface.html" title="DrawInterface is an interface used by the Engine to be called when the game loop is drawing elements ..." alt="" coords="16,5,149,31"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="core::ComponentManager&lt; T, C &gt;" name="core::ComponentManager&lt; T, C &gt;">
+<area shape="rect" id="node1" title="ComponentManager is a class that owns Component in a contiguous array. Component indexing is done wit..." alt="" coords="5,93,176,133"/>
+<area shape="rect" id="node2" href="$classcore_1_1_entity_manager.html" title="Manages the entities in an array using bitwise operations to know if it has components." alt="" coords="21,5,160,31"/>
+</map>

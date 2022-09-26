@@ -1,0 +1,13 @@
+<map id="core::DrawInterface" name="core::DrawInterface">
+<area shape="rect" id="node1" title="DrawInterface is an interface used by the Engine to be called when the game loop is drawing elements ..." alt="" coords="5,153,139,179"/>
+<area shape="rect" id="node2" href="$classcore_1_1_app.html" title="App is an interface for applications that need to init/update/destroy, draw and get event from OS." alt="" coords="237,55,316,80"/>
+<area shape="rect" id="node6" href="$classcore_1_1_sprite_manager.html" title="SpriteManager is a ComponentManager that manages sprites, order by greater entity index,..." alt="" coords="207,104,346,129"/>
+<area shape="rect" id="node7" href="$classgame_1_1_client.html" title="Client is an interface of a player game manager and the net client interface (receive and send packet..." alt="" coords="229,153,324,179"/>
+<area shape="rect" id="node10" href="$classgame_1_1_client_game_manager.html" title="ClientGameManager is a class that inherits from GameManager by adding the visual part and specific im..." alt="" coords="187,203,367,228"/>
+<area shape="rect" id="node11" href="$classgame_1_1_star_background.html" title="StarBackground is a drawable object that draws a starfield on a screen." alt="" coords="199,252,354,277"/>
+<area shape="rect" id="node3" href="$classgame_1_1_client_app.html" title="ClientApp is a App that owns a NetworkClient and shows it on the screen directly." alt="" coords="457,5,575,31"/>
+<area shape="rect" id="node4" href="$classgame_1_1_network_client_debug_app.html" title="NetworkClientDebugApp is a class that have several NetworkClient and shows them on the screen,..." alt="" coords="415,55,617,80"/>
+<area shape="rect" id="node5" href="$classgame_1_1_simulation_app.html" title="SimulationApp is an application that owns SimulationClient and SimulationServer." alt="" coords="443,104,589,129"/>
+<area shape="rect" id="node8" href="$classgame_1_1_network_client.html" title="NetworkClient is a network client that uses SFML sockets." alt="" coords="445,153,587,179"/>
+<area shape="rect" id="node9" href="$classgame_1_1_simulation_client.html" title="SimulationClient is a Client that uses simulated sockets with a direct reference to the server." alt="" coords="438,203,594,228"/>
+</map>

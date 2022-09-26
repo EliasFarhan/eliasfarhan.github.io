@@ -1,0 +1,7 @@
+<map id="game::SimulationServer" name="game::SimulationServer">
+<area shape="rect" id="node1" title="SimulationServer is a Server that delays Packet internally before &quot;receiving&quot; them and then sends the..." alt="" coords="199,152,357,177"/>
+<area shape="rect" id="node2" href="$classgame_1_1_server.html" title="Server is an interface to a network or simulated server. It owns a simple GameManager." alt="" coords="150,79,249,104"/>
+<area shape="rect" id="node3" href="$classgame_1_1_packet_sender_interface.html" title="PacketSenderInterface is a interface for any Server or Client who wants to send and receive packets." alt="" coords="5,5,199,31"/>
+<area shape="rect" id="node4" href="$classcore_1_1_system_interface.html" title="SystemInterface is an interface to a game system that needs to begin, update and end by the Engine...." alt="" coords="223,5,373,31"/>
+<area shape="rect" id="node5" href="$classcore_1_1_draw_im_gui_interface.html" title="DrawImGuiInterface is an interface used by the Engine to be called when the game loop is drawing ImGu..." alt="" coords="273,79,440,104"/>
+</map>

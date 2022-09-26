@@ -1,0 +1,5 @@
+<map id="game::PingPacket" name="game::PingPacket">
+<area shape="rect" id="node1" title="PingPacket is an UDP Packet sent by the client to the server and resend by the server to measure the ..." alt="" coords="14,167,143,192"/>
+<area shape="rect" id="node2" href="$structgame_1_1_typed_packet.html" title=" " alt="" coords="5,79,152,119"/>
+<area shape="rect" id="node3" href="$structgame_1_1_packet.html" title="Packet is a interface that defines what a packet with a PacketType." alt="" coords="27,5,130,31"/>
+</map>

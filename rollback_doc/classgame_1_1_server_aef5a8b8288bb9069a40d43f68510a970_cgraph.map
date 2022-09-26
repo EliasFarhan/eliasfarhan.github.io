@@ -1,0 +1,4 @@
+<map id="game::Server::ReceivePacket" name="game::Server::ReceivePacket">
+<area shape="rect" id="node1" title="ReceiveNetPacket is a method that is called when the Server receives a Packet from a Client." alt="" coords="5,13,197,38"/>
+<area shape="rect" id="node2" href="$classgame_1_1_game_manager.html#a4d70a71fcf52c78a7cd62a5ac28f19b5" title="Validate is a method called by the server to validate a frame." alt="" coords="245,5,400,45"/>
+</map>

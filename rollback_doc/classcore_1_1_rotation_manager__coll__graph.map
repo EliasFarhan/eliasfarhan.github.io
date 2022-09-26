@@ -1,0 +1,5 @@
+<map id="core::RotationManager" name="core::RotationManager">
+<area shape="rect" id="node1" title="RotationManager is a ComponentManager that holds the Degree angle." alt="" coords="545,27,699,53"/>
+<area shape="rect" id="node2" href="$classcore_1_1_component_manager.html" title=" " alt="" coords="285,5,496,75"/>
+<area shape="rect" id="node3" href="$classcore_1_1_entity_manager.html" title="Manages the entities in an array using bitwise operations to know if it has components." alt="" coords="5,27,144,53"/>
+</map>

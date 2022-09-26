@@ -1,0 +1,7 @@
+<map id="core::SpriteManager" name="core::SpriteManager">
+<area shape="rect" id="node1" title="SpriteManager is a ComponentManager that manages sprites, order by greater entity index,..." alt="" coords="660,99,799,125"/>
+<area shape="rect" id="node2" href="$classcore_1_1_component_manager.html" title=" " alt="" coords="285,5,496,75"/>
+<area shape="rect" id="node3" href="$classcore_1_1_entity_manager.html" title="Manages the entities in an array using bitwise operations to know if it has components." alt="" coords="5,27,144,53"/>
+<area shape="rect" id="node4" href="$classcore_1_1_draw_interface.html" title="DrawInterface is an interface used by the Engine to be called when the game loop is drawing elements ..." alt="" coords="324,99,457,125"/>
+<area shape="rect" id="node5" href="$classcore_1_1_transform_manager.html" title="TransformManager is a class combining a PositionManager, a ScaleManager and a RotationManager in one." alt="" coords="309,149,472,174"/>
+</map>

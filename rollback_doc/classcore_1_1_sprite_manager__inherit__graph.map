@@ -1,0 +1,5 @@
+<map id="core::SpriteManager" name="core::SpriteManager">
+<area shape="rect" id="node1" title="SpriteManager is a ComponentManager that manages sprites, order by greater entity index,..." alt="" coords="264,63,403,89"/>
+<area shape="rect" id="node2" href="$classcore_1_1_component_manager.html" title=" " alt="" coords="5,5,216,75"/>
+<area shape="rect" id="node3" href="$classcore_1_1_draw_interface.html" title="DrawInterface is an interface used by the Engine to be called when the game loop is drawing elements ..." alt="" coords="44,99,177,125"/>
+</map>

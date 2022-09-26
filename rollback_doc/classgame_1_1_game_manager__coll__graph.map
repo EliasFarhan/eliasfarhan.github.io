@@ -1,0 +1,7 @@
+<map id="game::GameManager" name="game::GameManager">
+<area shape="rect" id="node1" title="GameManager is a class which manages the state of the game. It is shared between the client and the s..." alt="" coords="176,168,323,193"/>
+<area shape="rect" id="node2" href="$classcore_1_1_entity_manager.html" title="Manages the entities in an array using bitwise operations to know if it has components." alt="" coords="5,80,144,105"/>
+<area shape="rect" id="node3" href="$classcore_1_1_transform_manager.html" title="TransformManager is a class combining a PositionManager, a ScaleManager and a RotationManager in one." alt="" coords="168,80,331,105"/>
+<area shape="rect" id="node4" href="$classgame_1_1_rollback_manager.html" title="RollbackManager is a class that manages all the rollback mechanisms of the game. It contains two copi..." alt="" coords="355,80,517,105"/>
+<area shape="rect" id="node5" href="$classgame_1_1_on_trigger_interface.html" title="OnTriggerInterface is an interface for classes that needs to be called when two boxes are in contact...." alt="" coords="353,5,519,31"/>
+</map>

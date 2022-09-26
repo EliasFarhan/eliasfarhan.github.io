@@ -1,0 +1,5 @@
+<map id="game::StartGamePacket" name="game::StartGamePacket">
+<area shape="rect" id="node1" title="StartGamePacket is a TCP Packet send by the server to start a game at a given time." alt="" coords="23,167,190,192"/>
+<area shape="rect" id="node2" href="$structgame_1_1_typed_packet.html" title=" " alt="" coords="5,79,208,119"/>
+<area shape="rect" id="node3" href="$structgame_1_1_packet.html" title="Packet is a interface that defines what a packet with a PacketType." alt="" coords="55,5,158,31"/>
+</map>

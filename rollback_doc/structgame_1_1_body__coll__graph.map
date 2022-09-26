@@ -1,0 +1,5 @@
+<map id="game::Body" name="game::Body">
+<area shape="rect" id="node1" title="Body is a class that represents a rigid body." alt="" coords="61,108,153,133"/>
+<area shape="rect" id="node2" href="$structcore_1_1_vec2f.html" title="Vec2f is a utility class that represents a mathematical 2d vector." alt="" coords="5,5,93,31"/>
+<area shape="rect" id="node3" href="$classcore_1_1_degree.html" title="Degree is an utility class that describes degree angles (0 to 360). It can be easily converted to Rad..." alt="" coords="117,5,213,31"/>
+</map>

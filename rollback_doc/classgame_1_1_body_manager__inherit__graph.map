@@ -1,0 +1,4 @@
+<map id="game::BodyManager" name="game::BodyManager">
+<area shape="rect" id="node1" title="BodyManager is a ComponentManager that holds all the Body in the world." alt="" coords="292,27,435,53"/>
+<area shape="rect" id="node2" href="$classcore_1_1_component_manager.html" title=" " alt="" coords="5,5,244,75"/>
+</map>
