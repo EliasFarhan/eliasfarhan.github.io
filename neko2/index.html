@@ -34,6 +34,9 @@ Graphics Objects
 
 Shaders
 ---------------------------------------------------------------
+![The Shader Editor](images/shader_editor.png)
+The shader editor allows to import shaders into our 3d scene. It checks if the shader is valid (compiled with glslangValidator), list the uniforms, inputs, and outputs. You can edit the shader content in the center view (useful for quick fix, but prefer an auto-completion IDE).
+
 When loading a GLSL shader, take care of using the correct extension:
 - Vertex shaders: .vert (for Rasterizer pipeline)
 - Fragment shaders: .frag (for Rasterizer pipeline)
@@ -42,7 +45,7 @@ When loading a GLSL shader, take care of using the correct extension:
 - Tesselation Evaluation shaders: .tese (for Rasterizer pipeline)
 - Compute shaders: .comp (for Compute pipeline)
 - Ray Generation shaders: .rgen (for Raytracing pipeline)
-- Ray Interesction shaders: .rint (for Raytracing pipeline)
+- Ray Intersection shaders: .rint (for Raytracing pipeline)
 - Ray Any-Hit shaders: .rahit (for Raytracing pipeline)
 - Ray Closest-Hit shaders: .rchit (for Raytracing pipeline)
 - Ray Miss shader: .rmiss (for Raytracing pipeline)
@@ -72,10 +75,19 @@ layout(location = 4) in vec3 inBitangent;
 
 Pipeline
 ---------------------------------------------------------------
+![The Pipeline Editor](images/pipeline_editor.png)
+The Pipeline Editor allows to create graphics or compute pipelines from shaders. 
+
 Pipeline serialized data file format is .pipe. There are three types of pipeline:
 - Rasterizer pipeline: requires at least a vertex and fragment shaders. 
 - Compute pipeline: requires at least a compute shader.
-- Raytracing pipeline (only available with Vulkan shaders)
+- Raytracing pipeline (only available with Vulkan shaders).
+
+You can give a hint for the type of textures that you want for a given sampler:
+
+![](images/pipeline_sampler.png)
+
+It will then be used when generating the materials and commands from an imported 3d model.
 
 
 Textures
@@ -106,7 +118,9 @@ Model
 
 3d models can be imported from a file. You can find a list of all the supported imported formats [here](https://assimp-docs.readthedocs.io/en/latest/about/introduction.html).
 
-From the editor, we can generate the Materials and Draw Commands associated with a 3d model, according to a specific pipeline.
+From the editor, we can generate the Materials and Draw Commands associated with a 3d model, according to a specific pipeline:
+
+![](images/model_generate_draw_command.png)
 
 Draw Command
 ---------------------------------------------------------------
@@ -118,7 +132,9 @@ Render Pass
 
 A renderpass contains some subpasses. Each subpass have a framebuffer and some draw commands.
 
+When commands are generated from a Model and a Pipeline, you can import all of them at once with the "Import From Model Command" button:
 
+![](images/render_pass_import_from_model.png)
 
 Scripts
 ---------------------------------------------------------------
@@ -142,10 +158,10 @@ Python API
 
 You can use Python scripts to make your scene more interactive, the minimum requirements for a script are:
 ```````````````````````````````````````````````
-import core
+from neko2 import *
 
 
-class PythonScript(core.System):
+class PythonScript(System):
       def begin(self):
          pass
 
@@ -159,11 +175,12 @@ Your class has to implement at least those three methods:
 - begin(): Called at the scene loading
 - update(dt): Called at each graphic update, do not draw inside it!
 - end(): Called at the scene unloading
+- draw(draw_command): Called at each graphic update, use this to draw with a draw command!
 
 Draw Command
 -------------------------------------------------------------------------------
-core.DrawCommand is a wrapper around a draw command. Here is the methods' and attributes' list:
-- bind():
+DrawCommand is a wrapper around a draw command. Here is the methods' and attributes' list:
+- bind(): bind the textures from the material.
 - set_float(name, value)
 - set_int(name, value)
 - set_vec2(name, value)
@@ -174,16 +191,17 @@ core.DrawCommand is a wrapper around a draw command. Here is the methods' and at
 - name: can be used to differentiate draw commands. For example:
 
 ```````````````````````````````````````````````
-def draw(self, draw_command: core.DrawCommand):
+def draw(self, draw_command: DrawCommand):
    if draw_command.name == "CubeCommand":
       draw_command.bind()
+      draw_command.draw()
 
 ```````````````````````````````````````````````
 
 When setting up Draw Command, you can decide if the draw call is going to be automatic or manual through script. When manual, an important method can be overriden in Python:
 ```````````````````````````````````````````````
 
-   def draw(self, draw_command: core.DrawCommand):
+   def draw(self, draw_command: DrawCommand):
       pass
 
 ```````````````````````````````````````````````
@@ -207,6 +225,7 @@ Libraries in use
 - [Assimp](https://github.com/assimp/assimp): [license](https://raw.githubusercontent.com/assimp/assimp/master/LICENSE)
 - [Argh](https://github.com/adishavit/argh): [license](https://raw.githubusercontent.com/adishavit/argh/master/LICENSE)
 - [Tracy](https://github.com/wolfpld/tracy): [license](https://raw.githubusercontent.com/wolfpld/tracy/master/LICENSE)
+- Volk
 
  
 <style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'long'};</script>
