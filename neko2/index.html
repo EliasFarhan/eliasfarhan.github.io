@@ -100,9 +100,12 @@ The framebuffer contains several color attachments and a depth-stencil attachmen
 
 Material
 ---------------------------------------------------------------
+![Material Editor](images/material_editor.png)
+
 Materials bind pipelines and textures together. For textures, their sources can be:
 - A loaded Texture from an image file
 - A framebuffer attachment (color or depth)
+When generated from a model, the material can have their textures automatically linked with the proper sampler, given the Pipeline set the hint on the Pipeline Editor.
 
 Mesh
 ---------------------------------------------------------------
@@ -150,7 +153,9 @@ Scripts are Python or C++ System that implements that can implement those method
 Scene
 ---------------------------------------------------------------
 
-A scene is the ultimate structure of the engine. It contains a renderpass and some scripts.
+A scene is the ultimate structure of the engine. It contains a renderpass and some scripts. The render API is either OpenGL or Vulkan and is selected at scene creation.
+
+The editor is segregated by scene (only one scene can be opened and edited at once).
 
 
 Python API
