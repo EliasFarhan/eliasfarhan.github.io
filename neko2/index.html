@@ -217,12 +217,28 @@ Maths
 Here are the several maths objects:
 - Vec2: a 2 dimensional single floating point number vector
    * dot(v1: Vec2, v2: Vec2): the dot product
+   * normalize(): returns the 2d vector with length 1 and same direction.
+   * length(): returns the length of the vector
 - Vec3: a 3 dimensional single floating point number vector
    * dot(v1: Vec3, v2: Vec3): the dot product
+   * normalize():
+   * length():
+   * cross(v1: Vec3, v2: Vec3):
 - Vec4: a 4 dimensional single floating point number vector
    * dot(v1: Vec4, v2: Vec4): the dot product
+   * length():
+   * normalize():
 - Mat3: a 3x3 single floating point number matrix
+   * inverse(): returns the Mat3 inverse.
+   * transpose(): returns the transposed (switching rows and columns) Mat3.
 - Mat4: a 4x4 single floating point number matrix
+   * translate(mat: Mat4, v: Vec3): Apply translate transformation matrix from a original matrix mat.
+   * scale(mat: Mat4, v: Vec3): Apply scale transformation matrix from an original matrix mat.
+   * rotate(mat: Mat4, angle: Radian, axis: Vec3): Apply a rotation transformation matrix from an original matrix using an angle around an axis.
+   * inverse(): Returns the Mat4 inverse.
+   * transpose(): Returns the Mat4 transpose matrix (switching rows and columns).
+   * view(eye: Vec3, center: Vec3, up: Vec3): Generates the view transformation matrix from an eye position, looking at a center position with the up vector.
+   * perspective(fov: Radian, aspect: float, near: float, far: float):
 - Radian: an angle structure that allows to explicitly define angles in radian (2*PI to a full round).
 - Degree: an angle structure that allows to explicitly define angles in degree (360° to a full round).
 
