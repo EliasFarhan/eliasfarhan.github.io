@@ -19,15 +19,15 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Elias Farhan
-email: elias.farhan@eteam-kwakwa.com
+email: elias.farhan@team-kwakwa.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Elias Farhan is a indie game developer, programmer, teacher and speaker.
+  He has fun with the gameboy, computer graphics, game engine programming, C++, prototyping with Unity and online multiplayer game programming.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://eliasfarhan.ch" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: kraklegrand
 github_username:  EliasFarhan
+google_analytics: GTM-M4PR6GNL
 
 # Build settings
 theme: minima
