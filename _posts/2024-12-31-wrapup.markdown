@@ -1,0 +1,38 @@
+---
+layout: post
+title:  "2024 Wrap up!"
+date:   2024-12-31 17:10:25 +0200
+categories: jekyll update
+---
+Let’s wrap up 2024. A lot of things happened this year for me and I wanted to share them. 
+
+![RGB Conference Photos 1](/images/2024_wrapup/rgb_conf.jpg)
+
+Earlier this year, I organized the RGB Games Programming Conference - Green Edition. I finally edited the video of the talks [here](https://www.youtube.com/playlist?list=PL9ITdIsuPmAEg7XBd95XCpLX4Hjd9HoNB).
+I was very lucky to have the support of the [SAE Institute Geneva](https://www.sae.edu/ch-ge/) and the [French embassy](https://ch.ambafrance.org/) to bring Swiss and French speakers. It was pretty hard to get speakers outside of my social circles. Probably the most disappointing for me was that it seemed that most of the game programmers working in studio in the local area did not want or did not even care about a games programming conference. For me, it is simply a sign that we are not ready to upgrade the kind of production that we can make locally. We will continue to outsource outside of Switzerland and not learn from it. Organizing a conference made me realize the cost and effort behind it. I will always deeply respect the people behind any conference. I was very lucky to have an amazing team that I did not need to micro-manage, because they ruled.
+
+![CppCon](/images/2024_wrapup/cppcon.jpg)
+
+Later in the year, I was very lucky to be selected to give a talk at [CppCon, The C++ Conference](https://cppcon.org/) this year for my rollback talk. I still remember exactly where I was at school when I got the news and how happy I was. I could not realize how much this would have an impact. I spent the summer to work on my talk. It means that I felt a bit overworked when starting the new school year in September before going to CppCon. I gave a less formal version of the talk the local game developer meetup and then an similar version at school the week before the event. When I arrived in the US, I was very jetlagged and it took some time for me to adapt. Luckily, my talk was on the 4th day of the conference, but there were so many interesting talks. For me, it felt great to be with a lot of people that I could talk about C++. I liked feeling like an idiot in a room full of geniuses. My talk went really well. When I rehearsed it the week before, I finished it in 35 minutes, so I added a few more content, felt more confident, took my time and I time it at 57 minutes. You can watch it [here](https://www.youtube.com/watch?v=xkcGa-Xw154).
+
+![Splash Online Switch](/images/2024_wrapup/splash_online.jpg)
+
+For this talk, I work on a multiplayer online version of Splash Blast Panic, the game I released on 2018. It was sort of a revenge over life kid of project. You can find the open-source repository [here](https://github.com/EliasFarhan/SplashOnline). 
+The conference version was buggy, but I fixed most of it and it should work, I have Nintendo Switch port as well, but that I cannot make public unfortunately (except if you are a Nintendo developer). It was an interesting experiment to program a game from scratch using SDL2, FMOD, Photon Realtime. I also used my own physics engine (Neko Physics) that I continue to work on. 
+
+After the conference, I got a proposal to work at [Six Impossible Things Before Breakfast](https://6it.dev/) and I accepted it! It’s a full remote position and it changed my life. It’s a direct consequence of my talk at CppCon. I can’t talk about what I am working on there (NDA etc…). I am learning so much in such a short amount of time. I am leraning a lot of new things in C++ of course. It’s a hard language to master (I like to compare it to the French language in a way). A downside on my part is my current life planning. I have effectively three jobs now with SAE Institute, 6it and Team KwaKwa. So my current work-life balance is non-existent :S But I love what I am doing and I already started to take some decisions to change things next year for the best.
+
+![Beach Slap](/images/beach_slap.jpg)
+
+With Team KwaKwa, I am currently working on Beach Slap, a game we made for Epic Game Jam 2023 and that I started to work on earlier this year. It features online rollback multiplayer. I feel back at the time in 2016 when I was working on Splash Blast Panic, a fun game to work on. You can find more [here](https://team-kwakwa.com/beach-slap) and wishlist it on Steam [here](https://store.steampowered.com/app/3170110/Beach_Slap/)
+
+![Soup Raiders](/images/sr.jpg)
+
+Finally, after countless roundtrip between working on it or leaving it behind, I decided to leave Soup Raiders behind. I released today the latest demo [here](https://teamkwakwa.itch.io/soup-raiders).
+It was a very personal and charming project to work on. I am not done with the Soup Raiders universe, but this game is canceled.
+
+![RGB Conference Photos 1](/images/2024_wrapup/trail1.jpg){: style="width: 32%;"}![RGB Conference Photos 1](/images/2024_wrapup/trail2.jpg){: style="width: 32%;"}![RGB Conference Photos 1](/images/2024_wrapup/trail3.jpg){: style=" width: 32%;"}
+
+One more thing, I also ran the [Fribourg by night trail](https://fribourgbynighttrail.ch/) last week: 32km with 1200m elevation by night in 4 hours and 46 minutes. It was very long, but an achievement I trained hard for!
+
+That’s about it for 2024. So many things changed for me, and I am thankful where I am. I am so grateful for the support of my partner and my family and I am looking forward for 2025! Merry Christmas everyone and Happy New Year!
