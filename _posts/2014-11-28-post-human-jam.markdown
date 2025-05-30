@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Post-Human Jam"
+title:  "Post-Human Jam 2014"
 date:   2014-11-28 17:10:25 +0200
 categories: jekyll update
 ---

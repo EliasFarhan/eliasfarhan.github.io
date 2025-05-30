@@ -1,0 +1,23 @@
+---
+layout: post
+title:  "Outlane - Pinball & Arcade"
+date:   2015-03-02 13:10:58 +0200
+categories: jekyll update
+---
+![Sisyphus 1](/images/2015/03/image.jpg)
+
+For the ETH course \"Game Programming\", we were in an arcade pinball bar. The ETH course is a cooperation from ZHdK and ETH with support of Disney Research Project. The goal of the course is to create a game in a semester. The theme of the game should be link to \"evolution\". I will talk more about my experience about this course in an other post.
+
+![Sisyphus 1](/images/2015/03/image1.jpg)
+
+So, with the ETH people, we went to Outlane, an underground bar with a collection of pinball arcade machine. The owner went through the history of games and more precisely the history of pinball machine.
+
+![Sisyphus 1](/images/2015/03/image2.jpg)
+
+After this little presentation, we had all the pleasure to play old and new pinball machines, with free beers (which does not improve performances).
+
+![Sisyphus 1](/images/2015/03/image3.jpg)
+
+My favorite one was the Indiana Jones pinball machine and the Metal Slug 3 Arcade machine.
+
+![Sisyphus 1](/images/2015/03/image4.jpg)

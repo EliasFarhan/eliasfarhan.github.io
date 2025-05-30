@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "Honk Kong and Macau"
+date:   2015-03-30 21:55:20 +0200
+categories: jekyll update
+---
+![Sisyphus 1](/images//2015/03/IMG_05011.jpg) 
+
+I went in Hong Kong for an International Workshop. With Keng, a design colleage, we took the plane on Wednesday from Zürich to Moscow, Moscow to Bangkok, Bangkok to Hong Kong. There were 50 minutes transit time in Moscow, that\'s why we didn\'t go directly from Moscow to Hong Kong. Thanks Obama! 
+
+![Sisyphus 1](/images//2015/03/IMG_0419.jpg)
+
+We arrived finally Thursday evening in Youth Square hostel, located in Chai-Wan, not Taiwan! We drank some Tsingtao before going to sleep (actually Keng partied all night). We had an excursion around North Point on Friday, where the purpose was to listen, so everyone had to keep quiet. It was an amazing experience. More than listening, I had the impression to catch every moments of this Soundwalk.
+
+![Sisyphus 1](/images/2015/03/IMG_0446.jpg)
+
+On Saturday, we went in the mountains around Hong Kong, in the north, in the new territories. Not everyone was prepared for a walk in the mountains. I still had a bit of my old physical glory, so it was not really a problem. I even propose to go on top of Lion Rock. Some brave people followed me. The view was magnificent with also the taste of achievement in our mouth. When we rejoin our colleagues, we learned that they had lost themselves and lost some efforts in it.
+
+![Sisyphus 1](/images//2015/03/IMG_0452.jpg)
+
+On Sunday, Stefan and me went in Macau. We decided to lost ourself. We went in the casino area to look at those wealthy monsters. We then went in the ruin of Sao Paulo by going through the little streets hidden in the residential quarter. We visited some fortress, went in a park, meet Willem an old computer engineer, saw some old men playing Chinese chess, visited a pixel-art exhibition. All of those because we lost ourself in the city. Of course, in the evening, we visited the casinos. My most astonishing of them are a man counting his several 1000HK$.
+
+![Sisyphus 1](/images//2015/03/IMG_0478.jpg)
+
+![Sisyphus 1](/images/2015/03/IMG_0463.jpg)
+
+From Monday to Friday, I worked in the \"Codesign With Super-Density\" workshop with the DESIS Lab from the HKDI ([another blog post is dedicated to it]({% post_url 2015-03-30-codesign-with-super-density %})). Saturday, I went with Dennis in Mong Kok in the Ladies\' Market to buy some souvenirs and a T-Shirt.
+
+![Sisyphus 1](/images//2015/03/IMG_0570.jpg)
+
+I flew back Sunday. I had a bit of stress to again miss my transit in Moscow, because of the daylight saving hour. What I wasn\'t sure that Russia use it or not. Hopefully, Russia does indead not use the daylight saving hour. It meant that I directly caught my flight without any problem. ![Sisyphus 1](/images/2015/03/IMG_0572.jpg)
+
+In conclusion, I learned a lot of things from the Asian cultures and made a lot of Hong Kong friends. I\'d like to thank the ZHdK to make this workshop possible, the DESIS Lab team to welcome us and lead us.
