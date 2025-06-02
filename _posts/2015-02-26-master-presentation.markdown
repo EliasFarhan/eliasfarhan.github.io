@@ -9,6 +9,8 @@ categories: jekyll update
 
 So, I just began one week ago a Master in Game Design at the Zürich University of Art. We are 6 students in the 1. Semester and there are also 5 students in the 3. Semester, with also 40 students Design Master Students. The group atmosphere is really great, because we have different courses in common.
 
+<!--more-->
+
 Yesterday, we had the task to present our Master Project idea to the teachers and to the other students in Game Design. So here is my project:
 
 I want to do a game about Faith. Let\'s first define it. Faith is the conviction of a belief. As simple as that. It can do on believing that your train will arrive at the same hour than written on the timetable or to believe in the existence of a (or several) god(s). For example, in Christianity, the base of faith is the Apostles\' Creed (a good name for a Assassins\' Creed mobile clone). What is interesting to see is that there\'s no mention of creationism, homosexuality and abortion in the Apostles\' Creed nor any mention of the Bible. So, I\'m between two possibilities: Faith as a mechanic or Faith as a Theme or both. On the mechanic, the first puzzle I have is this one:

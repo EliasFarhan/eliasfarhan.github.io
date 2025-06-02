@@ -1,0 +1,66 @@
+---
+# Front matter (required for Jekyll to process)
+---
+@import "{{ site.theme }}";
+
+/* Custom blog post list styles */
+.posts {
+  list-style-type: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.posts li {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 1.5rem 0;
+}
+
+.posts li:last-child {
+  border-bottom: none;
+}
+
+.posts h2 {
+  margin-bottom: 0.5rem;
+}
+
+.post-date {
+  color: #666;
+  font-size: 0.9em;
+  margin: 0.5rem 0;
+}
+
+.excerpt {
+  margin: 1rem 0;
+  color: #333;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+.posts li {
+  font: 16px/1.5 sans-serif;
+  border-bottom: 1px solid #eee;
+  padding: 1.5rem 0;
+}
+.posts li:last-child {
+  border-bottom: none;
+}
+.posts h2 {
+  font: 400 24px/1.2 sans-serif;
+  margin: 0 0 0.5rem 0;
+}
+.posts a {
+  color: #0066cc;
+  text-decoration: none;
+}
+.posts a:hover {
+  text-decoration: underline;
+}

@@ -11,6 +11,8 @@ Nordic Game Jam is the biggest local game jam in the world. It happened in Copen
 
 I went there without expecting something, just meet people and make games. I found a couch-surfing by [Mike]("https://twitter.com/mikekrolik?lang=en), one of the organizers of the jam.
 
+<!--more-->
+
 I visited the city the Thursday afternoon. It was a bit cold, but not as cold as Switzerland with the wind. I went up in the Observatory to have a sky-view of the city. What I found was out of place was the big pipes of the industry building not very far from the center. I then went to the little mermaid, near the 16th fortress. We don't have such building in Switzerland so it was nice to find this.
 
 Finally for Thursday, I went to Christina, because the Pre-Jam Party occurred there. You could smell the cannabis, but that\'s the purpose of the area. At the party, I met [Wiktor](https://twitter.com/WiktorWasowski), a polish 3d artist from Poznan. Their delegation came with bus, ferry and bus. They even did a little jam during the ferry travel, with \"Pirate\" as a theme. I also met [Phillipp](https://twitter.com/phillipphoenix), a Danish programmer and [Richard](https://twitter.com/richy486), an Australian organizer. I'm not much a party guy, but it was to meet all those new people.

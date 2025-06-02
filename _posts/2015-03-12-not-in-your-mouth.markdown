@@ -10,6 +10,8 @@ The best conference I followed in the last two years\" said Stefano Vanotti, the
 
 ![Sisyphus 1](/images/2015/03/B_0vyIgUcAAzHEt.jpg-large.jpg)
 
+<!--more-->
+
 That was the close keynote of the conference. I was sort of the host for the show, presenting every lecturer. We began with a welcome from [@Philo](https://twitter.com/PhilomenaSchwab), the Chair from the #NotInYourMouth conference. Then we had a opening keynote from Nambirajan about Jugaad, which is an Indian attitude about designing things quickly due to circumstances, or better described:
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">jugaad = pizza baked on hot iron, cutting onions using motorbike helmet <a href="https://twitter.com/hashtag/notinyourmouth?src=hash&amp;ref_src=twsrc%5Etfw">#notinyourmouth</a></p>&mdash; Mela Kocher (@PinkCloud13) <a href="https://twitter.com/PinkCloud13/status/575640306877620224?ref_src=twsrc%5Etfw">March 11, 2015</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

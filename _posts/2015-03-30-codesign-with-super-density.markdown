@@ -8,6 +8,8 @@ categories: jekyll update
 
 For the International Workshop in Hong Kong, I chose to pass the week with the Honk Kong students of the HKDI (The Design Institute). The result of this workshop was a performance where students from Zürich and Hong Kong lived together in a village. We were 9 students, 4 from Zürich and 5 from Hong Kong.
 
+<!--more-->
+
 Yanki Lee, Albert and William, with Louise helping, leaded this workshop by giving us inputs and by making us visit Hong Kong and showing us some film that was similar than the performance that was expected from us. Each day was divided in three: Visit a part of Hong Kong, See some film or dance short video and perform. The week was divided by the three different density of Hong Kong: Low, Medium and High Density.
 
 Monday was an introduction to the workshop and a warm-up performance. We see 10 minutes of Dogville. The idea was to familiarize with the 36.8 m2 that is the standard size of an apartement in Hong Kong. We were then divided in three groups of three students. My group was composed by Pearl and Marco. We decided to show the different challenges of the 36.8 m2, by being roommates and where we could find bottlenecks. It was typically the toilets.

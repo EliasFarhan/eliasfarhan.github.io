@@ -29,10 +29,15 @@ twitter_username: kraklegrand
 github_username:  EliasFarhan
 google_analytics: GTM-M4PR6GNL
 
+excerpt_separator: "<!--more-->"
+paginate: 5
+paginate_path: "/blog/page:num/"
+
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-paginate
 
 # Exclude from processing.
 # The following items will not be processed, by default.

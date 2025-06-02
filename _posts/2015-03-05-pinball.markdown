@@ -8,6 +8,8 @@ categories: jekyll update
 
 For the ETH course \"Game Programming\", we were in an arcade pinball bar. The ETH course is a cooperation from ZHdK and ETH with support of Disney Research Project. The goal of the course is to create a game in a semester. The theme of the game should be link to \"evolution\". I will talk more about my experience about this course in an other post.
 
+<!--more-->
+
 ![Sisyphus 1](/images/2015/03/image1.jpg)
 
 So, with the ETH people, we went to Outlane, an underground bar with a collection of pinball arcade machine. The owner went through the history of games and more precisely the history of pinball machine.

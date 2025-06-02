@@ -9,6 +9,8 @@ categories: jekyll update
 
 During 3 days, I was in the Devonshire with 11 friends of mine. We had a beautiful home in Halberton.
 
+<!--more-->
+
 ![Sisyphus 1](/images/2015/03/image6.jpg)
 
 The first day we went to the south. Visiting Totnes, we ate the typical gourmet sandwich. I went to a cloth shop where I bought a pair of gloves from a nice Londonian who lived in Totnes since 23 years. He indicated me a beautiful road following the sea. So we went there:
