@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "Faith 0.1"
+date:   2015-03-12 16:27:14 +0200
+categories: jekyll update
+---
+![Sisyphus 1](/images/2015/03/Pastafarisme-monste-spaghetti-volant.jpg)
+
+Today, in the Research Workshop, we had to finish our master project O_O
+
+So I took the opportunity to play with the concept of my master project and create Faith 0.1, a first version of the game I am trying to achieve.
+
+You can play it <a href="/games/Faith0.1.zip">here</a>.
+
+It's Windows 64 only. WASD to move & jump.
+
+Don't hesitate to record you playing, I like feedback.

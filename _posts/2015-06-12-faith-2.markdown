@@ -1,0 +1,19 @@
+---
+layout: post
+title:  "Faith 0.2"
+date:   2015-06-12 17:04:49 +0200
+categories: jekyll update
+---
+![Sisyphus](/images/2015/06/Sisyphus.jpg)
+
+So, after a semester of research for my master project, here is the second version of my prototype. It contains three different stages:
+
+- The Leap of Faith
+
+- The Sisyphus' Myth
+
+- The Falling Choice
+
+It is still an early prototype, so it can feel too frustrating at some point. You can download it here (Windows 64-bits): <a href="/games/Faith0.2.zip" target="_blank">Faith0.2.zip</a>
+
+You can also find my Master Project Disposition here: <a href="/docs/dispo.pdf" target="_blank">dispo.pdf</a>

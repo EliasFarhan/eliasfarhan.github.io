@@ -1,0 +1,23 @@
+---
+layout: post
+title:  "Fresh Off The Boat - a game for NewsGames Hackathon at ZHdK"
+date:   2015-05-07 12:34:35 +0200
+categories: jekyll update
+---
+![Sisyphus 1](/images/2015/05/tumblr_nnxnury4TU1uuhxzuo3_1280.png)
+
+We created a game in 4 hours. That was the challenge of the ZHdK NewsGames Hackathon of the 6th of May.  NewsGames are a special genre between Serious Games and Traditionnal Video-Games, about news, events or political situations (Papers Please can be considered a News Game).
+
+![Sisyphus 1](/images/2015/05/tumblr_nnxnury4TU1uuhxzuo1_1280.png)
+
+We decided to create a game about immigration, with a very macabre concept. The player tries to rescue Africans refugees who are drowning. At the end of the game, a newspaper indicates how many people died.
+
+I really like the adrenalin of those types of challenges, so it was a nice afternoon doing "Fresh Off The Boat". You can play it here for Windows 64bits: <a href="/games/FreshOffTheBoat.zip</a>
+
+Links:
+
+<a href="http://gamedesign.zhdk.ch/de/news/zhdk-game-design-der-zdok-2015">http://gamedesign.zhdk.ch/de/news/zhdk-game-design-der-zdok-2015</a>
+
+<a href="http://zhdkngh.tumblr.com/">http://zhdkngh.tumblr.com/</a>
+
+<a href="https://vine.co/tags/zhdkngh">https://vine.co/tags/zhdkngh</a>

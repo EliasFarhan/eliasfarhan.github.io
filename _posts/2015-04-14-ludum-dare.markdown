@@ -4,6 +4,8 @@ title:  "Ludum Dare Spring 2015"
 date:   2015-04-27 07:22:15 +0200
 categories: jekyll update
 ---
+![start_screen](/images//2015/04/start_screen.jpg)
+
 Last week-end, I made Super Splash Fistiguffs for the Ludum dare 32. Our team was composed with [Kevin Peclet](https://bsky.app/profile/hoot.bsky.social), a very talented artist that I met at the Swiss French Game Developer Meetup. He works on Starfallen, an exploration Rogue-lite. [Hamza \"Tenchi\" Haiken](https://twitter.com/2xhTenchi) made the music.
 
 Kevin and I took the train on Saturday morning for Basel. A location was organized in the Oslo Spielhalle. We brainstormed the idea in the 2hours of the trip. Kevin wanted to test something new, so he proposed a local multi-player game in the spirit of Towerfall. We wanted something not too serious, so there would have cats. What does cat hate? Water. So, water gun it was. Now, let\'s go on the Post-Mortem:
