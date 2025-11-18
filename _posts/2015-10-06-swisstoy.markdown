@@ -1,0 +1,44 @@
+---
+layout: post
+title:  "Splash - SuisseToy & gameZ"
+date:   2015-10-06 09:52:35 +0200
+categories: jekyll update
+---
+
+![Swiss Toy Booth](/images/2015/10/IMG_12351-e1444118284250.jpg)
+<!--more-->
+
+
+Here was our booth for Splash from Wednesday to Sunday (30th of September to 4th of October 2015). If there is something in the previous phrase, it's probably the part saying "From Wednesday to Sunday". Yep, you can already make the process of thoughts of what is wrong with that. IT WAS WAY TOO LONG. There were less players during the three days than in Plaine des Jeunes the week-end before. Of course, there was the Playstation booth or the Nintendo booth, where we could play to pass time. There was also couches to sleep (Kevin always slept two hours in the beginning of the afternoon). Hopefully, the SGDA understood this feed-back, because that is an argument that would disqualify my participation next year. It was three too chilling days:
+
+<blockquote class="twitter-tweet" lang="en">
+<p dir="ltr" lang="en">Chilling day at <a href="https://twitter.com/hashtag/SuisseToy?src=hash">#SuisseToy</a> with <a href="https://twitter.com/kpeclet">@kpeclet</a> and <a href="https://twitter.com/dkingdomCH">@dkingdomCH</a> <a href="http://t.co/cNuywM6K6C">pic.twitter.com/cNuywM6K6C</a></p>
+— Elias Farhan (@kraklegrand) <a href="https://twitter.com/kraklegrand/status/649280143006007296">September 30, 2015</a></blockquote>
+<script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script>
+
+Now, before everyone tells that I always say the negative points, I will be positive. I will say some negative part in term of organization against SGDA after this section, but the least I can say is that they care about Swiss game developers. We always have this prejudice in the French part that the SGDA and Pro Helvetia prefer the Swiss-German games and always give their moneys to them, but they prove this wrong this week. They were always smiling and took feed-backs calmly. It was their first try at SuisseToy, so it is excusable that they were mistakes. I was also happy to be there with <a href="http://digitalkingdom.ch/">Digital Kingdom</a> and their upcoming game <a href="http://yamgun.com/">Yamgun</a>. We laughed a lot together and they made those three days clearly less boring. Cheers guys, you are the nicest on Earth!   
+
+<blockquote class="twitter-tweet" lang="en">Suisse Toy &amp; E-games after party ! <a href="https://twitter.com/kraklegrand">@kraklegrand</a> <a href="https://twitter.com/dkingdomCH">@dkingdomCH</a> <a href="https://t.co/7ZCIDIDM2r">pic.twitter.com/7ZCIDIDM2r</a> — Ben Vurlod (@benvurlod) <a href="https://twitter.com/benvurlod/status/649644311689207812">October 1, 2015</a></blockquote>
+<script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script>
+
+Now, let's continue with some negative points. First, <a href="https://twitter.com/benvurlod">Benjamin Vurlod</a> had to organize an after-party on Thursday. He had a budget of 100.- to buy some drinks (that makes a lot of drinking). Of course, after a very long boring Wednesday, there were not a lot of developer on Thursday, and the Swiss-german wanted to go home after yet an other boring day, so at the end, we were three "welsch" drinking together. We also decided on Thursday to do a game jam on Friday to pass time, but we had a struggle to find a theme. After Thursday, it was obvious that the theme would be: SGDA Afterparty. My laptop was used by the game, so I decided to create a card-game where you had themes and elements and one after another each player were playing a swiss-german trying to find a excuse with at least a theme or element on cards. Digital Kingdom had their laptops and made:
+
+<blockquote class="twitter-tweet" lang="en">
+<p dir="ltr" lang="en">E-Games JAM result: "E-games afterparty" <a href="http://t.co/4BruNwn7xJ">http://t.co/4BruNwn7xJ</a> <a href="https://twitter.com/restaste">@restaste</a> <a href="https://twitter.com/kraklegrand">@kraklegrand</a> <a href="https://twitter.com/BP_DK_">@BP_DK_</a> <a href="https://twitter.com/hashtag/swissgames?src=hash">#swissgames</a> <a href="http://t.co/gtG9y0v2hi">pic.twitter.com/gtG9y0v2hi</a></p>
+— Ben Vurlod (@benvurlod) <a href="https://twitter.com/benvurlod/status/649961699878027265">October 2, 2015</a></blockquote>
+<script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script>
+
+A video-game where swiss-germans try to run away and you have to bring them back by giving them beer. I had laugh so much when I was playing, because the game over music was the music we heard on the street at the end of the after-party: 
+
+![After party](/images/2015/10/IMG_12391.jpg)
+
+Of course, the album has an autograph from the singer with a dedication: "For SGDA". The song was "With or Without You", because the Swiss-frenchs go to after-party with or without the Swiss-germans. Finally, we arrive at Saturday where I went to gameZ to give a (little) hand to help for the organization. It was a relief for me after three boring days. So it started with bring Jesper Juul from Zürich Airport to the location of the gameZ. After 45 minutes of waiting, my teacher told me to come back and during my return, announce me that Jesper Juul was already in gameZ. He slipped through my finger and I was tired. I had to moderate the OpenMic session &amp; also give a 5-min talk about it at the same time. Terrible mistake, but at least I now know that you should NEVER moderate and present something. I could test some games, but I was waiting for the final presentation of the day. It was one talk about a very famous game that came out this year, beginning with "The Wi..." and finishing with "tcher 3". Yes, Philipp Weber, one of the quest designer at CD Projekt Red had a talk about "Quest Design in Non-Linear Story". I took 4 pages of notes and was just amazed by the amount of details they put in the game:   
+
+<blockquote class="twitter-tweet" lang="en">Philipp Weber talking about quest design in <a href="https://twitter.com/witchergame">@witchergame</a> at <a href="https://twitter.com/gameZfestival">@gameZfestival</a> was just mind-blowing! <a href="https://twitter.com/hashtag/gamedev?src=hash">#gamedev</a> <a href="http://t.co/TfoyedmVZ7">pic.twitter.com/TfoyedmVZ7</a> — Elias Farhan (@kraklegrand) <a href="https://twitter.com/kraklegrand/status/650413858595729425">October 3, 2015</a></blockquote>
+<script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script>
+
+Finally, Sunday, last day of SuisseToy. There were a lot more people than on the first three days. Young people liked it &amp; I could play with some very good players. The mind-blowing moment was, when I wanted to play Splash with Digital Kingdom, but a horde of young guys rushed to game before us and just play like crazy:
+
+![Suisse Toy Last Day](/images/2015/10/IMG_12471-e1444118203147.jpg)
+
+The final day was rewarding for me. Like in Plaine des Jeunes, it fills me up to know that my game is fun. With so much people, we could also test the Team Versus, that is really fun to play (even more than the single player sometimes). Now, we concentrate our efforts to make a Greenlight for middle of October and have an alpha for IGF submission. Who would be interested in a Team Versus =) ? We will maybe be there at PolyLAN with an animation of Splash, but I will be for sure at Neuchâtel the 10th of October to show Black Whispers at a retro event.

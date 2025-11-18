@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "First I3 game jam, second iteration"
+date: 2015-12-13 17:02:31 +0200
+categories: jekyll update
+---
+![IMG_10051.jpg](/images/2015/12/YDoypVgU_400x400.jpg)
+
+What is I3 game jam? It's a Swiss-French community-based attempt to "commercial" or "In-Studio" game jam. You could see Amnesia Fortnight as a model. Practically, it is 26 Swiss-French Game Developers at the same place working hard on the same game for 45 hours.
+<blockquote class="twitter-tweet" lang="en">
+<p dir="ltr" lang="en">Look, all those swiss <a href="https://twitter.com/hashtag/indiedev?src=hash">#indiedev</a> working hard to create a game in a AAA jam style. <a href="https://twitter.com/hashtag/swissgame?src=hash">#swissgame</a> <a href="https://twitter.com/hashtag/gamejam?src=hash">#gamejam</a> <a href="http://t.co/IolUf0oXFm">pic.twitter.com/IolUf0oXFm</a></p>
+— I³ Game Jam (@i3gamejam) <a href="https://twitter.com/i3gamejam/status/624729523167318020">July 24, 2015</a></blockquote>
+<script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script>
+<!--more-->
+
+
+I was not invited to the first iteration in July 2015 (like you can see on the picture up there) and I was a bit pissed off at the time. I was not completely known as the extreme game jam hunter like I'm now in the Swiss-French community. Of course, my anger turned off completely when they actually announced the result of this week-end in term of human experience. Managing 26 independent people is a nightmare, worse if you have a game to finish at the end of the week-end.
+
+Communication was one of the main problem. Rumors arose from nowhere, misunderstandings came after it. At the end, the goal to have a game to send for the SwitzerLAN contest was not successful. Indie Game Jams have this notion of equality between the participants. Whenever you worked in the industry or you are a beginner, you own and are represented equally, which sometimes create problems in team that collapsesdirectly, but equality is one of the main rules of indie game jam.
+
+In "In-Studio" game jam like Amnesia Fortnight, there is a clear project chief that can give power to other people, the equality is broken. I3 game jam is between the two concepts. People are voluntary to participate to the game jam, they are not paid like in Double Fine when participating. A leader team have the decisional power, but everyone owns the game at the end and legally, a participant can ask that his work has to be removed from the shown game.
+
+<blockquote class="twitter-tweet" lang="en">
+A NEW CHALLENGER HAS ARRIVED! the Great <a href="https://twitter.com/kraklegrand">@kraklegrand</a> joins the Team Game Design on Stonebond. <a href="https://twitter.com/hashtag/SwissGames?src=hash">#SwissGames</a> <a href="https://t.co/iXpPbcsjGr">pic.twitter.com/iXpPbcsjGr</a> — I³ Game Jam (@i3gamejam) <a href="https://twitter.com/i3gamejam/status/670609187592867840">November 28, 2015</a>
+</blockquote>
+
+So I was invited to this second iteration, without really knowing what would await me. With my master project on Game Jam it was a fantastic opportunities to see a different way to use the tool that are game jam. To paraphrase David Javet, the Organizer and Project Manager, the I3 Game Jam is platform of meeting and sharing for the game developers.
+
+I was not expecting anything, maybe work on Level Design, maybe code a bit. I arrived there at noon, because I had crunched a bit on Splash with Kevin the day before and I wanted to take the morning for me. David Javet, the project organizer proposes me to be assigned to the gameplay programming team, because one of the original team was missing. I accepted and setup to help my game designer neighbor to learn a bit of Unity, setup some prefabs correctly and finally to install InControl, a Unity plugin that allows cross-platform controllers support, because the game jam game was only supporting Xbox360 controllers on Windows. Quickly as I was going deep in the code, I realized that the InputManager class was not a Singleton, not use in the Menu and all the nightmare you can think about from a code that comes after a game jam. Also, communication with other team members becomes critical. There was a bug with InControl if you had Unity 5.1 compared to Unity 5.2. It meant that developers that did not update to the last version of Unity had a bug with the InControl plugin and was shouting at me, while I was trying to make it work on Unity 5.2. I quickly switch to my own branch, pulling everything from master some times. Finally when it worked I merged it in the master branch and let it go.
+
+I learned several useful lessons on working with a lot of people. Everyone has to be synchronized at the beginning of the event. I think one of the reason the game jam game was not completely successful at it first iteration was that a lot of developers learned Unity during the weekend. I never did a game jam with an unknown engine. I always test the engine before the event. Learning takes to much of precious time that can not be lost. I am going to be the Lead Designer of the second i3 game jam and my approach will be more collaborative. I don't want to be the only designer in the place saying everyone what he has to do. The second iteration will occur in Fribourg in the first half of next year and I'm looking forward to it.
+
+<script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script>
