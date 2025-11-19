@@ -1,0 +1,33 @@
+---
+title: "Pax West 2017"
+date: 2017-09-12
+---
+
+![IMG_20170901_094214.jpg](/images/2017/09/IMG_20170901_094214.jpg)
+
+After the Numerik Games, we prepared our luggage and flew to the United States of America to go to Seattle for the Penny Arcade Expo (Pax West). We were supposed to get a booth with big company that I will not name here, but they canceled the deal. Of course, we already bought our flight tickets, so I did boldly contact the organization of Pax West to get a booth and we managed to get a booth at the <a href="http://west.paxsite.com/rising/archive?year=2017">Pax Rising booth</a>. It was completely unexpected and both Kevin and I were suprisingly happy by the turn of events.
+
+Right after the Numerik Games, we took the plane for Seattle and landed on Tuesday evening. Just the time to get a sandwich (Which Wich) we went to sleep at Kevin's friend place. We had the PS4 we tested at the Numerik Games and we went on Thursday to setup the booth. In the jungle that is the setup of a game convention of this size, we found our booth:
+
+![IMG_20170831_112619.jpg](/images/2017/09/IMG_20170831_112619.jpg)Our position was perfect, just next to the people flood of people and close to the entrance. The booth was big and we got food and drink every day during the convention, sponsored by Facebook. We were just behind Slime-san, with Fabraz that we already met at Gamescom. So of course, it was to be expected that starting Friday, there would always be someone playing the game: ![IMG_20170903_123345.jpg](/images/2017/09/IMG_20170903_123345.jpg)Except at the very beginning of the day, when everyone was running to their favorite games they wanted to absolutely test, people were curious to test our party game. But Pax West was not just exhibiting for us, we were switching exhibition time Kevin and I to wonder around the convention center. We went to buy goodies, and I also bought a computer keyboard (the US layout being useful for programming) and a new headphone.
+
+Pax West is also about meeting other game developers. On Friday, I went to say hi to the developers of Owlboy and bought a plush of Otus, the main character of the game, signed by them. I also met Christophe Galati again after the Tokyo Game Show. Because he waas alone at his booth, I went for him to get an Otus plush too and say hi to the developers again. On Saturday, I met Aurélien Regard and the nice people at Playdius.
+
+![21248511_10154869450763161_6484920106700723792_o.jpg](/images/2017/09/21248511_10154869450763161_6484920106700723792_o.jpg)
+
+It's always funny to meet people that live at less than 1000km meet at the other side of the world. We went to eat a nice burger and drink some tasteful whiskey. We exchange on various subjects like education, publishing, marketing, indie games and more. Compared to GDC, people are running around to their next meeting and often don't have time to stop and to other gamedev. Here at Pax, gamedevs are happy to be there and meet their peers and fans. On Sunday, I met Sean Velasco from Yacht Club Games and I made him test my gameboy homebrew rom Soup Raiders: Jailbreak. We exchanged on game development and Shovel Knight of course:
+
+&nbsp;
+<blockquote class="twitter-tweet" data-lang="fr">
+<p dir="ltr" lang="en">Had a chat today with <a href="https://twitter.com/SeanyfaceYCG">@SeanyfaceYCG</a>, such a nice guy and motivates me to play the new extension even if I suck at Shovel Knight.</p>
+— Elias Farhan (@kraklegrand) <a href="https://twitter.com/kraklegrand/status/904559983462715392">4 septembre 2017</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+Overall, this Pax West was a huge success and it would be amazing to have a booth similar to the Poland one, with a compact lineup of hig-quality games:
+
+![IMG_20170901_150049.jpg](/images/2017/09/IMG_20170901_150049.jpg)
+
+I was interviewed by Mithical Entertainment about Splash Blast Panic. Bear the stuttering and the mistakes, I did my best with how much tired I was. Pax West is amazing and we hope we can join the lineup for Pax East in April 2018. Meanwhile, I leave you with the interview:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://youtube.com/embed/v=h-S4-UYGw4o" frameborder="0" allowfullscreen></iframe>
+</div>

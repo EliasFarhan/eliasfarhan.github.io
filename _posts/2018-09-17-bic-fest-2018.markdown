@@ -1,0 +1,32 @@
+---
+title: "BIC Fest 2018"
+date: 2018-09-17
+---
+
+![20180916_095443.jpg](/images/2018/11/20180916_095443.jpg)
+
+In mid-September, I went to South Korea for the BIC Festival (Busan Indie Connect, not to confuse with Casual Connect) with a little detour in Seoul. The first thing that happened in Busan was the "Make Play <span class="il">Jam", a game jam before the conferences &amp; exhibition. There, I had the change to meet Zak (programmer at 11-bits studio) and Wolf (part of Poppy Works). Each of us got separated into different teams as we were mostly the only programmers. The novelty for me was to make a game with people that barely spoke english, which was challenging in a way. We were communicating through Slack to exchange informations. I was also sick to death, so I was happy to buy laxative.</span>
+
+<span class="il">![20180910_170514.jpg](/images/2018/11/20180910_170514.jpg) </span>
+
+We finally did a small platformer game called Happy Dog:
+<blockquote class="twitter-tweet" data-lang="en">
+<p dir="ltr" lang="en">Meanwhile at <a href="https://twitter.com/hashtag/MapleJam?src=hash&amp;ref_src=twsrc%5Etfw">#MapleJam</a> before <a href="https://twitter.com/BIC_Festival?ref_src=twsrc%5Etfw">@BIC_Festival</a>, we are doing a game with a <a href="https://twitter.com/hashtag/corgi?src=hash&amp;ref_src=twsrc%5Etfw">#corgi</a> on a <a href="https://twitter.com/hashtag/gba?src=hash&amp;ref_src=twsrc%5Etfw">#gba</a> <a href="https://twitter.com/hashtag/gamejam?src=hash&amp;ref_src=twsrc%5Etfw">#gamejam</a> <a href="https://twitter.com/hashtag/gamedev?src=hash&amp;ref_src=twsrc%5Etfw">#gamedev</a> <a href="https://t.co/btqjgd9Krp">pic.twitter.com/btqjgd9Krp</a></p>
+— Elias Farhan (@kraklegrand) <a href="https://twitter.com/kraklegrand/status/1039489308128772098?ref_src=twsrc%5Etfw">September 11, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+After the jam, there was one day (13.11) for conferences, with high quality talks from Chris Hecker, Tyrone Rodriguez (Nicalis), Casey Muratori, Nick Suttner and others. Even though the day was full, it seemed pretty short of a lineup compared to events like Reboot Develop, Respawn (before Gamescom) or other smaller conferences events (not like GDC).
+
+![20180913_110936.jpg](/images/2018/11/20180913_110936.jpg)
+
+Then the day after was Business Day (14.11), it was the occasion for press to test the game before the consumer's days and to pitch to publishers (mostly sponsors of the event). I got the occasion to pitch the early prototype of Soup Raiders to Nicalis and Devolver Digital to get feedback (there was also Humble Bundle and Epic Games).
+
+Of course, the two days following where the exhibition open to the public. The festival organization did a little game where developers gave stickers to players when they came to their booth, motivating them to test as much game as possible. Because it is a indie game only festival, there was no too much noise (compare to Taipei Game Show for example).
+
+![20180915_133127.jpg](/images/2018/11/20180915_133127.jpg)
+
+BIC Fest would be what it is without talking the Beach parties. every evening, after dinner, was probably the best networking opportunity with beer and alcohol. This is the place I met some developers from the Kyoto indie game scene and other.
+
+In the end, the BIC Fest is a nice stop before TGS, without the crowd and noise, but with the high quality developers.
+
+![20180912_201941.jpg](/images/2018/11/20180912_201941.jpg)
