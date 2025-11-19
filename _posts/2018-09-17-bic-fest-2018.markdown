@@ -4,7 +4,7 @@ date: 2018-09-17
 ---
 
 ![20180916_095443.jpg](/images/2018/11/20180916_095443.jpg)
-
+<!--more-->
 In mid-September, I went to South Korea for the BIC Festival (Busan Indie Connect, not to confuse with Casual Connect) with a little detour in Seoul. The first thing that happened in Busan was the "Make Play <span class="il">Jam", a game jam before the conferences &amp; exhibition. There, I had the change to meet Zak (programmer at 11-bits studio) and Wolf (part of Poppy Works). Each of us got separated into different teams as we were mostly the only programmers. The novelty for me was to make a game with people that barely spoke english, which was challenging in a way. We were communicating through Slack to exchange informations. I was also sick to death, so I was happy to buy laxative.</span>
 
 <span class="il">![20180910_170514.jpg](/images/2018/11/20180910_170514.jpg) </span>

@@ -4,7 +4,7 @@ date: 2017-01-22
 ---
 
 ![Screen-Shot-2017-05-09-at-22.13.30.png](/images/2017/01/Screen-Shot-2017-05-09-at-22.13.30.png)
-
+<!--more-->
 For this year's Global Game Jam, Kevin and I combined our forces with <a href="https://twitter.com/DavidJavet">David Javet</a> and Mathieu Pellet from Team <a href="https://en.wikipedia.org/wiki/Chattagahaka_Jantu_of_Anuradhapura">Tchagata</a>, and joined later on Saturday by <a href="https://soundcloud.com/aden-16">Antoine Tuloup</a>. We jammed with 78 other jammers in Yverdon-les-Bains' castle:
 
 ![Castle](https://upload.wikimedia.org/wikipedia/commons/6/61/Yverdon-les-Bains_Castle.jpg)

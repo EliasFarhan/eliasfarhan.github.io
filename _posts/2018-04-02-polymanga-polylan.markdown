@@ -4,7 +4,7 @@ date: 2018-04-02
 ---
 
 ![IMG_20180331_180434.jpg](/images/2018/04/IMG_20180331_180434.jpg)
-
+<!--more-->
 The Easter week-end was a long one. It started on Friday morning at 8:00am at Montreux to get our entrance and setup the booth at Polymanga. For a second time after Japan Impact, we had the chance to exhibit our game on the Nintendo of Switzerland booth. And it was PACKED pretty quickly after the opening, to the point we, the developers, had to stand at about 5 meters from our stand to check it. There were just too much noise and people. But from kids to parents, everybody was enjoying the game.
 
 ![IMG_20180330_092121.jpg](/images/2018/04/IMG_20180330_092121.jpg)

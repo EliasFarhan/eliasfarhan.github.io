@@ -4,7 +4,7 @@ date: 2017-03-19
 ---
 
 ![omg.png](/images/2017/05/omg.png)
-
+<!--more-->
 With my new job, comes new responsibilities. I had the task with Game Department to organise a game jam at the SAE Institute Geneva. I had to select the theme and kickoff the event. You can see my interview in French here:
 
 [embed]https://www.youtube.com/watch?v=S_4LCSmmylU[/embed]

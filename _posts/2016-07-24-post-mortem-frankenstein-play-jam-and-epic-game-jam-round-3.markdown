@@ -4,7 +4,7 @@ date: 2016-07-24
 ---
 
 ![wB2qpr.png](/images/2016/07/wB2qpr.png)
-
+<!--more-->
 What a monster did I create. "Return to Castle Frankenstein" is an experimental game, switching narration and mix of horror. I had to put together completely different assets and the result is a monster of a game. You can download it <a href="https://kraklegrand.itch.io/enter-castle-frankenstein">here</a>.
 
 Okay, I cheated. I did not use all the assets, but I could not do miracles. I had a very limited amount of time and exams at the same time. The execution was pretty random, but it is the goal of a Play Jam. I am expressing this notion of play, not of game, no rules, fuck the rules.

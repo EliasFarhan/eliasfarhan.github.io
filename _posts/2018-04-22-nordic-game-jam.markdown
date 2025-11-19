@@ -4,7 +4,7 @@ date: 2018-04-22
 ---
 
 ![IMG_20180412_165851.jpg](/images/2018/04/IMG_20180412_165851.jpg)
-
+<!--more-->
 I took one week and half for the Nordic Game Jam and the Reboot: Develop conference. Switching from 10°C-15°C to 25°C-30°C was pretty brutal, but immensely needed. I was pretty down after the disease of the year after Polymanga and those trips were a nice opportunity to recover.
 
 First stop, Copenhagen. We went there with Alexis and Anirul. The theme of the jam was Breaking Point. I wanted to try to do a city management game, but with the constraint of the 48 hours, it would been to create a really compelling game experience. Then Alexis had the brilliant idea to add Arcade mechanics, where you click on building to repair them or get taxes and then the setting unfolded. It would be an industrial siberian city. And then we had Novyzavod:

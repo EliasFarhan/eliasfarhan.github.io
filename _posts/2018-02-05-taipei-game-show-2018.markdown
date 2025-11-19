@@ -4,7 +4,7 @@ date: 2018-02-05
 ---
 
 ![27021268_1544811022299183_2531941028172451949_o.jpg](/images/2018/02/27021268_1544811022299183_2531941028172451949_o.jpg)
-
+<!--more-->
 After some months of production hibernation, we showcased Splash Blast Panic at the Ludicious and the Taipei Game Show on the Nintendo Switch. The game is running great and we are in the final phases before release. There are still things to do like localization, age ratings, setup the consoles stores, etc...
 
 The Taipei Game Show was a final opportunity to check if players that do not know anything about the game still like the final version. For that, it was a success:

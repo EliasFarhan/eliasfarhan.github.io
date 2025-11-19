@@ -5,7 +5,7 @@ date: 2019-05-26
 
 ![20190520_142042-e1559640247460.jpg](/images/2019/06/20190520_142042-e1559640247460.jpg)
 *Next to Malmö train station*
-
+<!--more-->
 During a cold May month in Switzerland, we went north to get warmer and showcase Soup Raiders at the Nordic Game Conference. I took the whole week to be able to visit on the first day. Our airbnb was a bit outside the city, but it takes less than 30 minutes to go throw the entire city. It is also 30 minutes by train from Copenhagen airport.
 
 On Tuesday, we had the chance to visit several game studios like Massive, Avalanche, King, Tarsier, and all the lovely people at the Game Habitat. We visited the Game Assembly school and damn I was jealous.

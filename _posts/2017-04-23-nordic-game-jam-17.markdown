@@ -4,7 +4,7 @@ date: 2017-04-23
 ---
 
 ![startscreen_v1.jpg](/images/2017/05/startscreen_v1.jpg)
-
+<!--more-->
 With <a href="https://twitter.com/JulieKlement">Julia Klement</a>, we went on holiday in Copenhagen during the freezing week of Spring. Maybe not the best timing, but we went there also for the Nordic Game Jam 15, the biggest local game jam in the world with around 700 participants every year.
 
 ![ngj17.png](/images/2017/05/ngj17.png)

@@ -4,7 +4,7 @@ date: 2016-04-14
 ---
 
 ![IMG_1986.jpg](/images/2016/03/IMG_1986.jpg)
-
+<!--more-->
 It is 4:30pm and I am very tired due to jetlag. I realized I did not write a post since the Swiss Train Jam, so much as happened since then. I helped at the LvlUp Game Jam in Fribourg. I gave a talk about Game Jams and Game Design.
 
 ![12747336_1687297318221459_8145149298272698120_o.jpg](/images/2016/03/12747336_1687297318221459_8145149298272698120_o.jpg)

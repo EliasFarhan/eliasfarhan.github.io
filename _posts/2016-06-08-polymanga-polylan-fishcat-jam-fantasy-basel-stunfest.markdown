@@ -4,7 +4,7 @@ date: 2016-06-08
 ---
 
 ![IMG_2095.jpg](/images/2016/06/IMG_2095.jpg)
-
+<!--more-->
 After going to the US, I participated in several events to show <a href="http://playsbp.ch">Splash Blast Panic</a>. I also spent a lot of time to finish my master thesis, that I will soon release for everyone to read. Meaning I did not have the time to write on this blog. So here is what I did:
 
 I went to Polymanga at the booth of the <a href="http://siea.ch/fr/">SIEA</a>, with Oniroforge. I do not really enjoy the mood of the Polymanga, as it is mostly young adolescents screaming for nothing, we do not call that the dumb age for nothing. At the same time, we organized a tournament during the PolyLAN, and that is way more interesting for me, as a game developer, to see people not only playing the game for 10 minutes, but trying to master the game to win. From the tournament, I recorded one of the most crazy match of Splash Blast Panic, the B-Final between Cutips and StrawberryPie:

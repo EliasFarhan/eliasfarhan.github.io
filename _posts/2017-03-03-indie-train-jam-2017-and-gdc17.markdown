@@ -3,10 +3,8 @@ title: "Indie Train Jam 2017 and GDC17"
 date: 2017-03-03
 ---
 
-&nbsp;
-
 ![IMG_20170301_101754.jpg](/images/2017/05/IMG_20170301_101754.jpg)
-
+<!--more-->
 March was an intense month for me. After we signed the contract with our new publisher <a href="http://www.digital-smash.com/">Digital Smash</a> for the upcoming release of our game, it was time for Kevin and I to pack our things and to go to the USA for the <a href="http://www.gdconf.com/">Game Developers Conference</a>. At the same time, the Nintendo Switch was about to release March the 3rd and it was a really good occasion to get it for 50CHF cheaper than in Switzerland. Nintendo announced a conference at the GDC (I could not attend it, I had to many things to do) but here is a link:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">

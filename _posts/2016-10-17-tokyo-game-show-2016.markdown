@@ -4,7 +4,7 @@ date: 2016-10-17
 ---
 
 ![IMG_2938.jpg](/images/2016/10/IMG_2938.jpg)
-
+<!--more-->
 Tokyo, the Mecca of okatus, gamers and game developers alike. We were surprised to be selected for the Tokyo Game Show 2016 with Splash Blast Panic and for me, it was an opportunity  to get back to this city that I love so much. I went there in 2014, when 4 friends of mine did this incredible journey of the Transiberian and at the same time, visited Tokyo, Kyoto, Nara, Fukuoka, Busan and Seoul in one week.
 
 ![IMG_2873.jpg](/images/2016/10/IMG_2873.jpg)

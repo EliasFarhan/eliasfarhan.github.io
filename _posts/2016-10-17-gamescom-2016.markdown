@@ -4,7 +4,7 @@ date: 2016-10-17
 ---
 
 ![IMG_2801.jpg](/images/2016/10/IMG_2801.jpg)
-
+<!--more-->
 It has been two very long weeks. Kevin and I were working hard to have the best Splash version for the tournament and for the Gamescom. For me, the work was mostly about making the game as stable as possible. There are some minor details still to change, but everything is coming together.
 The tournament was an awesome experience. 11 participants tried as hard as they could to win the precious Steam keys and water guns. I commentated the different matches in French, how I loved it. I could express so much emotions and stress a bit the players.
 Finally, we had our winners with very intense finals.

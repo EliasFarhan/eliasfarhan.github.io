@@ -4,7 +4,7 @@ date: 2017-06-04
 ---
 
 ![ADDON-BAN-032017.jpeg](/images/2017/06/ADDON-BAN-032017.jpeg)
-
+<!--more-->
 This week, I was at ADDON in Brittany, France, to meet my fellow French game developers. This year, the Stunfest hit pause, whch was pretty sad. The Stunfest is one of the only festivals were people were actually beating me at my own game. It is the meeting point of the best players in France and compared to Paris Games Week or Gamescom, it is not a money grabbing event, but a passionate one.
 
 I had two presentations to make, one about my upcoming game Splash Blast Panic and the other one about the gameboy homebrew entry of the GBJam 5 we did back last year. So with a small Swiss french delegation, we went there to network. Here is Twitter story:

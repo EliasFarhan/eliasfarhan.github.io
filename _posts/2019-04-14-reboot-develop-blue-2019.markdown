@@ -4,7 +4,7 @@ date: 2019-04-14
 ---
 
 ![20190411_102521.jpg](/images/2019/04/20190411_102521.jpg)
-
+<!--more-->
 Reboot Develop Blue is my yearly conference since last year in April. The lineup of speakers are always crazy and the costs are super cheap, adding that we are by the sea. It's hard for any other conference to compare. This year, the main keynote was a discussion between Fumito Ueda and Hidetaki Miyazaki.
 
 ![20190410_111805.jpg](/images/2019/04/20190410_111805.jpg)

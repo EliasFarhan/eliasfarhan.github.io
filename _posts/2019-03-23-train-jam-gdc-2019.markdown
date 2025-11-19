@@ -4,7 +4,7 @@ date: 2019-03-23
 ---
 
 ![20190317_153737.jpg](/images/2019/05/20190317_153737.jpg)
-
+<!--more-->
 In March, I went to GDC with <a href="https://www.artstation.com/alexis_simonetta">Alexis Simonetta</a> to showcase our game Soup Raiders. Our goal was to get contact with publishers. But before that, our first stop was Chicago:
 
 ![20190313_165335.jpg](/images/2019/05/20190313_165335.jpg)

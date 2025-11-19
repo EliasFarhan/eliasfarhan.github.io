@@ -3,10 +3,8 @@ title: "Beginning of May 2017 holidays"
 date: 2017-05-14
 ---
 
-&nbsp;
-
 ![IMG_20170505_201417.jpg](/images/2017/05/IMG_20170505_201417.jpg)
-
+<!--more-->
 With Julia Klement, we did a one week holiday through Austria, Italy and Switzerland. We visited Innsbruck, Verona and Domodossola. Enjoy the following photos:
 
 ![IMG_20170506_121455.jpg](/images/2017/05/IMG_20170506_121455.jpg)

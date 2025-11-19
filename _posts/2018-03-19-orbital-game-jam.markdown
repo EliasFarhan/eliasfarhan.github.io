@@ -4,7 +4,7 @@ date: 2018-03-19
 ---
 
 ![YxgDGN.png](https://img.itch.zone/aW1hZ2UvMjM2MDQzLzExMjIwNzMucG5n/original/YxgDGN.png)
-
+<!--more-->
 Between Sat. March 17th to Sun. March 18th, Alexis and I went to the Orbital Game Jam, a small student game jam at the EPFL. Unlike most game jams, it only lasted 24 hours, so we needed to be quick and simple with our game. The themes were:
 <ul>
  	<li>Et si ?</li>

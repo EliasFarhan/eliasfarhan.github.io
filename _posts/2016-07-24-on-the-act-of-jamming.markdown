@@ -4,7 +4,7 @@ date: 2016-07-24
 ---
 
 ![IMG_1772.jpg](/images/2016/07/IMG_1772.jpg)
-
+<!--more-->
 I have it, my master degree in Game Design. I got the best grades of the class (ex aequo with Philomena Schwab, one of the most successful game designer in Switzerland). I finished my master with a Play Jam, a nice experiment on the act of jamming.
 
 I have started creating games since the end of 2013, having the chance to work with very talented artists like Dan Iorgulescu, Valentin Terramorsi, Hamza Haiken, or Virgile Paultre, with whom we rose to the top of the Ludum Dare Jam ranks.

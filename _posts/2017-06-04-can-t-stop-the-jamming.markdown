@@ -4,7 +4,7 @@ date: 2017-06-04
 ---
 
 ![13568908_619957394825587_6629570988310749194_o.jpg](/images/2017/05/13568908_619957394825587_6629570988310749194_o.jpg)
-
+<!--more-->
 I remember <a href="http://eliasfarhan.ch/?p=489">my post</a> from last year. After one year and a half of exhausting jamming and master study, I was starting to get bored by game jams. But I did a game on GameBoy and suddenly I realized something important. Game jams are not just about creating games. It is about living extraordinary experience (painful one too). Oh God I was happy when I compiled the last rom and uploaded it (with my shitty upload bandwidth, I was actually happy to create a 256kB gb rom instead of the usual 100mB .zip files that takes 20 min to upload home).
 
 Jamming is easy for me now, so I try to go outside of my comfort zone on the game ideas. <a href="http://eliasfarhan.ch/?p=584">Welcome at Houdini's</a> for example made me try something new in terms of gameplay. As a beginner game developer, I was focused on creating game in a certain genre. Now, I have several prototypes that I want to continue as game project. For example, I want to have a Soup Raiders TRPG with crazy cartoon mechanics inspired by Disgaea, Fire Emblem and the like.

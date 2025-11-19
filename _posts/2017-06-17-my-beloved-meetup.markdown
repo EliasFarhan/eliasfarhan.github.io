@@ -4,7 +4,7 @@ date: 2017-06-17
 ---
 
 ![Screen-Shot-2017-06-15-at-08.16.07.png](/images/2017/06/Screen-Shot-2017-06-15-at-08.16.07.png)
-
+<!--more-->
 Every month, game developers from all around the Swiss French part come together for a casual meetup to learn about a new subject and drink some beers. It is the central place of the Swiss French scene. Even though not everyone is a professional, people share their knowledge and motivate each other to move forward. It is hard to define if the meetup is moving the whole scene forward (like it is hard to know if the Nordic Game Jam helped the game industry in the Scandinavian countries).
 
 I started to go to the meetup in 2014, before going to the ZHdK. The first one I attended, funny enough, is the one that Kevin Péclet, my current colleague, actually presented Otherworld (now Starfallen): <a href="https://www.meetup.com/Game-Developers-Suisse-Romande/events/176334712/">https://www.meetup.com/Game-Developers-Suisse-Romande/events/176334712/</a>

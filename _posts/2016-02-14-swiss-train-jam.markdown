@@ -4,7 +4,7 @@ date: 2016-02-14
 ---
 
 ![IMG_1768.jpg](/images/2016/02/IMG_1768.jpg)
-
+<!--more-->
 It is 18:32, as I come back for the first experiment shot of the Swiss Train Jam, an 8-hours game jam travelling thourgh the unknown parts of Switzerland. We were 5 participants, changing trains every hour, and jamming in some extreme condition of movement.
 The theme that was given by David Javet early in the morning was: Rail. We divided in two teams and the results of the day are two games: Cow Lateral Damage and Meow Railways. I took a lot of pictures and activated my social network mode. As you can see:
 <blockquote class="twitter-tweet" data-lang="en">
