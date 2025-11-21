@@ -7,7 +7,7 @@ categories: jekyll update
 ![Sisyphus 1](/images/2015/03/IMG_05001.jpg)
 
 Today, we visited a little village high in the mountains (500 meters, so no comparaison to Swiss mountains) around Hong Kong as part of the Low-Density theme of the day. We met an old lady whose passion is to draw flowers everywhere. She call herself the Flower Granny (or Lady, when she was younger).
-
+<!--more-->
 ![Sisyphus 1](/images/2015/03/IMG_04991.jpg)
 
 Her work takes so much place in her house, that most of it is outside. She took things out of garbage to draw on them. Of course, it drew attention when people began to recognize her work, but she is not selling. She remembers every little piece she draw on, so she would be sad if some art was missing.

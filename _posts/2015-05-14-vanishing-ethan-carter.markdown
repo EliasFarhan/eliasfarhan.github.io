@@ -7,6 +7,7 @@ categories: jekyll update
 ![Vanising2](/images/2015/05/Vanising2.png)
 
 On Tuesday the 12th of May, we had the opportunity to present in front of the Bachelor students in Game Design of the ZHdK a game of our choice and explain how the story is stagged or how is the narration done. I chose the Vanishing of Ethan Carter, because it was a game that was taking the dust in my Steam library.
+<!--more-->
 
 ![TheVanishingOfEthanCarter_featured](/images/2015/05/TheVanishingOfEthanCarter_featured.jpg)
 
