@@ -8,10 +8,11 @@ Let’s wrap up 2024. A lot of things happened this year for me and I wanted to 
 
 ![RGB Conference Photos 1](/images/2024_wrapup/rgb_conf.jpg)
 
+<!--more-->
+
 Earlier this year, I organized the RGB Games Programming Conference - Green Edition. I finally edited the video of the talks [here](https://www.youtube.com/playlist?list=PL9ITdIsuPmAEg7XBd95XCpLX4Hjd9HoNB).
 I was very lucky to have the support of the [SAE Institute Geneva](https://www.sae.edu/ch-ge/) and the [French embassy](https://ch.ambafrance.org/) to bring Swiss and French speakers. It was pretty hard to get speakers outside of my social circles. Probably the most disappointing for me was that it seemed that most of the game programmers working in studio in the local area did not want or did not even care about a games programming conference. For me, it is simply a sign that we are not ready to upgrade the kind of production that we can make locally. We will continue to outsource outside of Switzerland and not learn from it. Organizing a conference made me realize the cost and effort behind it. I will always deeply respect the people behind any conference. I was very lucky to have an amazing team that I did not need to micro-manage, because they ruled.
 
-<!--more-->
 
 ![CppCon](/images/2024_wrapup/cppcon.jpg)
 
