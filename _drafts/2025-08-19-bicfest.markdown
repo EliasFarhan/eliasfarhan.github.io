@@ -5,8 +5,30 @@ title:  "BIC Fest 2025"
 categories: jekyll update
 ---
 
-Intro with link to old BICfest post
+![BIC fest image](/images/2025/bic/20250817_111043.jpg)
 
-The booth
+Last time that I went to Korea was in 2018 for BIC Fest ([post here]()). So I was happy that I could back this year and then enjoy some holidays afterwards. One of the big achievement for this time is that we localized the title from **Beach Slap** to **해변의 귓방망이** which roughly translates to the __violent slap on the ear of the beach__ which is the intented meaning.
 
-Winning an award
+![BIC conference]()
+
+So this year, the BIC Fest happened at BEXCO, but there was a dev conference on Thursday not to far from the beach in Haeundae. I really enjoyed the talk from 1001 nights and how they used LLMs directly in their gameplay. There was also a sponsored session by Solana, and while it made me think about how we could use blockchains in games, I did get much for me personnally. 
+
+![BIC booth](/images/2025/bic/20250817_114742.jpg)
+
+My booth was nicely located on the side, I put some Swiss balloons (leftover from National Day August the 1st) and then I let the game run. Beach Slap is an easy sell: "Conquer the beach, slap your friends." First night, I went to bed, but the next two evenings, I went to the Beach Party:
+
+![Beach Party](/images/2025/bic/20250817_223858.jpg)
+
+Already in 2018, in Haeudae, meeting so many new developers from Korea and Japan. I had a little though for Fahmi that I got to meet there as well. So many things changed since then, but some things remain. Still making games. Doug invited me on the game dev stream as well, you can see it here:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RQjEFSoLcno?si=xYncUdbjN84ugqNs&amp;start=8875" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+At the end of the last day, while game developers were dismantling their booth, the awards was taking place. From my booth location, I could directly see the awards, starting with all the categories of the rookies. Usually, before an award, organizers come to the nominees to tell them to stay, so because nobody came to me, I thought that we just did not win anything and I continued to dismantle my booth. When, finally, the categories for the actual competitors started, I had this little doubts that we could get nominated, so I just kept an eye in case I need to take a quick photo. And of course this moment arrived...
+
+![Nominated](/images/2025/bic/20250817_174859.jpg)
+
+I was quick enough to take a photo, but then, they announced that we won the E-Sports excellence award! I could not believe it, but I also realized that I need to go through the public to get my awards, which I did clumsly. You can see from my reaction:
+
+![Reaction]()
+
+Actually, this is our first award as Team KwaKwa. I guess we are an e-sport now?!? Finally, we got a game that is easy to understand, is a lot of fun and is also working with online multiplayer. Now I can start my holidays!
