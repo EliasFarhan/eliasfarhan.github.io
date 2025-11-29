@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "BIC Fest 2025"
+#date:   2024-12-23 20:19:00 +0200
+categories: jekyll update
+---
+
+Intro with link to old BICfest post
+
+The booth
+
+Winning an award

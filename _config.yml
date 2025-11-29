@@ -27,6 +27,14 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://eliasfarhan.ch" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: kraklegrand
 github_username:  EliasFarhan
+linkedin_username: elias-farhan-664373b5
+
+# For Mastodon:
+mastodon_username: kraklegrand
+mastodon_instance: mastodon.gamedev.place
+
+bluesky_username: kraklegrand.bsky.social
+
 google_analytics: GTM-M4PR6GNL
 
 excerpt_separator: "<!--more-->"
