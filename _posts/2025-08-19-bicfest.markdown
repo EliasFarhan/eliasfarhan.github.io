@@ -5,15 +5,16 @@ title:  "BIC Fest 2025"
 categories: jekyll update
 ---
 
-![BIC fest image](/images/2025/bic/20250817_111043.jpg)
+![BIC fest image](/images/2025/bic/20250815_184944.jpg)
+<!--more-->
 
 Last time that I went to Korea was in 2018 for BIC Fest ([post here]()). So I was happy that I could back this year and then enjoy some holidays afterwards. One of the big achievement for this time is that we localized the title from **Beach Slap** to **해변의 귓방망이** which roughly translates to the __violent slap on the ear of the beach__ which is the intented meaning.
 
-![BIC conference]()
+![BIC conference](/images/2025/bic/20250814_103121.jpg)
 
 So this year, the BIC Fest happened at BEXCO, but there was a dev conference on Thursday not to far from the beach in Haeundae. I really enjoyed the talk from 1001 nights and how they used LLMs directly in their gameplay. There was also a sponsored session by Solana, and while it made me think about how we could use blockchains in games, I did get much for me personnally. 
 
-![BIC booth](/images/2025/bic/20250817_114742.jpg)
+![BIC booth](/images/2025/bic/20250817_111043.jpg)
 
 My booth was nicely located on the side, I put some Swiss balloons (leftover from National Day August the 1st) and then I let the game run. Beach Slap is an easy sell: "Conquer the beach, slap your friends." First night, I went to bed, but the next two evenings, I went to the Beach Party:
 
@@ -29,6 +30,8 @@ At the end of the last day, while game developers were dismantling their booth, 
 
 I was quick enough to take a photo, but then, they announced that we won the E-Sports excellence award! I could not believe it, but I also realized that I need to go through the public to get my awards, which I did clumsly. You can see from my reaction:
 
-![Reaction]()
+![Reaction](/images/2025/bic/IMG-20250818-WA0002.jpg)
 
 Actually, this is our first award as Team KwaKwa. I guess we are an e-sport now?!? Finally, we got a game that is easy to understand, is a lot of fun and is also working with online multiplayer. Now I can start my holidays!
+
+![Winning](/images/2025/bic/IMG_7309.jpg)
