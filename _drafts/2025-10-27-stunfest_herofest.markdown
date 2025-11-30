@@ -11,6 +11,7 @@ This month was eventful for [Beach Slap](https://team-kwakwa.com/beach-slap). Fi
 
 Meeting David Wise
 
+
 Getting an award
 
 Stunfest

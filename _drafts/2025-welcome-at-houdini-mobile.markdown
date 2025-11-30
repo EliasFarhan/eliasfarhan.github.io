@@ -5,6 +5,10 @@ title:  "Welcome at Houdini's - Mobile version"
 categories: jekyll update
 ---
 
+![]()
+
+<!--more-->
+
 Introduction - mobile platforms
 
 Social platforms
