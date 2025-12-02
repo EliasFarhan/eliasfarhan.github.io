@@ -1,0 +1,51 @@
+---
+layout: post
+title:  "CppCon 2024"
+#date:   2024-12-23 20:19:00 +0200
+categories: jekyll update
+---
+
+![Talk slide](/images/2024_wrapup/A_Simple_Rollback_System_in_C-_TitleCard_copy.jpg)
+
+<!--more-->
+
+Earlier this year, I submitted a talk for the new gamedev track at CppCon in Denver, Colorado. I received a positive answer in June and I spent the summer working on the presentation and a little demo to support my talk:
+
+![Splash Online](/images/2024_wrapup/splash_online.jpg)
+
+I took the basic gameplay and assets of our game [Splash Blast Panic](https://team-kwakwa.com/splash-blast-panic) which was made in Unity from 2016 to 2018 and ported it to C++ using SDL2 renderer + Spine + Fmod. For this, I also needed a physics engine that supported rollback and determinism, so I made my own called [NekoPhysics](https://github.com/EliasFarhan/NekoPhysics). 
+
+![Flight to Denver](/images/2024_wrapup/Plane_to_us.jpg)
+
+So on Saturday, I took my flight to Newark then to Denver after doing two rehearsals of my talk (one at the Suisse Romande Game Developers meetup and the other one at school). I finally arrived to the Gaylord Rockies Resort (the hotel where the conference happens) after being awake for too long. My talk was scheduled for Thursday, so I had plenty of times to recover from the jetlag.
+
+![The hotel](/images/2024_wrapup/cppcon_hotel.jpg)
+
+The next day, we went in the mountains to take a steam train ride and socialize. I was a bit tired, but I survived and enjoyed talking with other developers from completely different fields. 
+
+![Train ride](/images/2024_wrapup/train_ride_us.jpg)
+
+There are a lot of talks at once at CppCon, so sometimes, it is really hard to choose (however they are all recorded so you can watch them later when they get published). Here is a list of talks that I liked:
+- [Back to Basic - Unit tests](https://www.youtube.com/watch?v=MwoAM3sznS0) by Dave Steffen. A really good introduction to testing. I definitely will send it to my students
+- [Work contracts - Rethinking Task Based Concurrency & Parallelism for Low Latency C++](https://www.youtube.com/watch?v=oj-_vpZNMVw) by Michael A Maniscalco. While I don't have a specific implementation in mind for my domain, I found interesting how he solved this problem. 
+- [Fast and Small C++](https://www.youtube.com/watch?v=rNl591__9zY) by Andreas Fertig. I learned a few things in C++ like ```[[no_unique_address]]```
+- [C++ Game Development - Techniques to Optimise Multithreaded Data Building](https://www.youtube.com/watch?v=ZrpB0gLteUI) by Dominik Grabiec. It was the first talk of the game dev track and I was really interested in this domain. As I am working on my small rendering/game engine on the side, how to parallelise or cook is an important part of the process of working with my editor. 
+- C++ tools by Jason Turner. Unfortunately, this was one of the unrecorded talk, but it was a big listing of all the tools available to work in C++. I just filled a full page of my notebook with all the entries.
+- [Cross-Platform Floating-Point Determinism Out of the Box](https://www.youtube.com/watch?v=7MatbTHGG6Q) by Sherry Ignatchenko. For Splash Online, I used fixed-point number to have determinism between my Nintendo Switch in ARM64 and my PC in x64, but with the new sixit-float library, I could now use a floating-point type that is determinism. Very excited to use it in Splash Online.
+- [C++ Data Structures That Make Video Games Go Round](https://www.youtube.com/watch?v=cGB3wT0U5Ao) by Al-Afiq Yeong. I learned some data structures that would be useful to teach my students like dense hash maps or plf::colony/std::hive.
+
+![](/images/2024_wrapup/cppcon.jpg)
+
+Then finally came the time of my talk. I felt confident, the room was full and thankfully because of practice, I gave a talk I was happy about. You can find it here:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xkcGa-Xw154?si=f5PLAvTkEv2c6HEv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Funny enough, Sherry Ignatchenko proposed me a job at [Six Impossible Things After Breakfast](https://sixit.dev/) right after my talk. A new chapter of my life is opening up. I leave you with some photos of Denver.
+
+![](/images/2024_wrapup/denver_city2.jpg)
+
+![](/images/2024_wrapup/denver_city3.jpg)
+
+![](/images/2024_wrapup/denver_city4.jpg)
+
+![](/images/2024_wrapup/denver_city.jpg)

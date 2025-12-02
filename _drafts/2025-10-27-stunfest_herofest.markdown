@@ -7,12 +7,15 @@ categories: jekyll update
 
 ![First image]()
 
-This month was eventful for [Beach Slap](https://team-kwakwa.com/beach-slap). First stop was Herofest in Bern. 
+This month was eventful for [Beach Slap](https://team-kwakwa.com/beach-slap). First stop was Herofest in Bern. We bought a new tv that we needed to setup 
 
 Meeting David Wise
+![David Wise selfie]()
 
 Getting an award
+![Award photo]()
 
 Stunfest
+![Stunfest photo]()
 
-Next steps
+Next steps: playtest
