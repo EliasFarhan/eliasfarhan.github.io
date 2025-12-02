@@ -6,6 +6,8 @@ categories: jekyll update
 ---
 ![Sisyphus 1](/images/2015/03/uetikon01-b48d24482df66f176d696d9e6f58bd26.jpg)
 
+<!--more-->
+
 Today, I went to the train station to catch my 8:11 train. I was stressed so when I ran when I arrived at the train station to be exactly at the good time. Then, I saw the panel and the train was eleven minutes late. I told myself: \"Damn, why did I run? I\'ll have to wait eleven minutes now\"
 
 Then the announcer explained the situation: \"Someone threw itself in front of the train.\"
