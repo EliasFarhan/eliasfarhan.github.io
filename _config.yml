@@ -38,7 +38,7 @@ bluesky_username: kraklegrand.bsky.social
 google_analytics: GTM-M4PR6GNL
 
 excerpt_separator: "<!--more-->"
-paginate: 5
+paginate: 10
 paginate_path: "/blog/page:num/"
 
 # Build settings

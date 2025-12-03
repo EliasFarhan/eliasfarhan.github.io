@@ -5,28 +5,82 @@ title: Blog
 
 {% include google-analytics.html %}
 
-<ul class="posts">
-  {% for post in paginator.posts %}
-    <li>
-      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-      <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
-      <div class="excerpt">
-        {{ post.excerpt }}
-        {% if post.excerpt != post.content %}
-          <a href="{{ post.url }}">Read more...</a>
-        {% endif %}
-      </div>
-    </li>
-  {% endfor %}
-</ul>
+<div class="content-wrapper">
+  <div class="main-content">
+    <ul class="posts">
+      {% for post in paginator.posts %}
+        <li>
+          <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+          <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
+          <div class="excerpt">
+            {{ post.excerpt }}
+            {% if post.excerpt != post.content %}
+              <a href="{{ post.url }}">Read more...</a>
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
 
 {% if paginator.total_pages > 1 %}
   <div class="pagination">
     {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path | relative_url }}">Previous</a>
+      <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-link">← Previous</a>
+    {% else %}
+      <span class="pagination-link disabled">← Previous</span>
     {% endif %}
+    
+    {% if paginator.page != 1 %}
+      <a href="{{ '/blog/' | relative_url }}" class="pagination-link">First</a>
+    {% endif %}
+    
+    {% assign show_pages = 5 %}
+    {% assign half_show = 2 %}
+    
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == 1 or page == paginator.total_pages %}
+        {% if page == 1 %}
+          <a href="{{ '/blog/' | relative_url }}" class="pagination-link{% if paginator.page == 1 %} current{% endif %}">1</a>
+        {% else %}
+          <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="pagination-link{% if paginator.page == page %} current{% endif %}">{{ page }}</a>
+        {% endif %}
+      {% elsif page >= paginator.page | minus: half_show and page <= paginator.page | plus: half_show %}
+        {% if page == 1 %}
+          <a href="{{ '/blog/' | relative_url }}" class="pagination-link{% if paginator.page == 1 %} current{% endif %}">{{ page }}</a>
+        {% else %}
+          <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="pagination-link{% if paginator.page == page %} current{% endif %}">{{ page }}</a>
+        {% endif %}
+      {% elsif page == paginator.page | minus: half_show | minus: 1 or page == paginator.page | plus: half_show | plus: 1 %}
+        <span class="pagination-ellipsis">...</span>
+      {% endif %}
+    {% endfor %}
+    
+    {% if paginator.page != paginator.total_pages %}
+      <a href="{{ site.paginate_path | relative_url | replace: ':num', paginator.total_pages }}" class="pagination-link">Last</a>
+    {% endif %}
+    
     {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | relative_url }}">Next</a>
+      <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-link">Next →</a>
+    {% else %}
+      <span class="pagination-link disabled">Next →</span>
     {% endif %}
   </div>
 {% endif %}
+    </div>
+
+
+  <aside class="sidebar">
+    <h3>All Posts</h3>
+    <ul class="post-list">
+      {% for post in site.posts %}
+        <li>
+          <a href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+</div>
+

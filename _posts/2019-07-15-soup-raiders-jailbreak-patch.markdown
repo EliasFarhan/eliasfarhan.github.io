@@ -50,10 +50,12 @@ There was a bug where depending on your velocity, you could go through a wall in
 
 There was one bug that took some time for me to fix. Alexis made a big doggy guard enemy (32x32 pixels which is pretty big for the gameboy's 144x120 pixels screen). I wanted to show it on screen, so I naively implemented the lines that where needed for this:
 
-```move_sprite( sprite_index+0U, levels[currentLvl]->doggy->box.x+8U, levels[currentLvl]->doggy->box.y-24U+8U);
+```c++
+move_sprite( sprite_index+0U, levels[currentLvl]->doggy->box.x+8U, levels[currentLvl]->doggy->box.y-24U+8U);
 move_sprite( sprite_index+1U, levels[currentLvl]->doggy->box.x+8U, levels[currentLvl]->doggy->box.y-16U+8U);
 move_sprite( sprite_index+2U, levels[currentLvl]->doggy->box.x+8U+8U, levels[currentLvl]->doggy->box.y-24U+8U);
-...```
+...
+```
 
 However, what happened is that I got a white screen when running the rom. So I remove one line after the other and it finnaly worked when I showed 6 out of the 16 tiles. Commenting out the 7th line or any other following line would make the game crash at startup. I finally got the lightbulb lighting up in my head when I realized that gdbk was trying to put a function too big into a rom that did not like it, but instead of an error, it just compiled. So I simply separated the __animation__ function into smaller functions and moved the doggy animation function into another rom bank. That did the trick and now I have a big invincible doggy guard in the game.
 
