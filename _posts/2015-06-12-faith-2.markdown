@@ -6,6 +6,8 @@ categories: jekyll update
 ---
 ![Sisyphus](/images/2015/06/Sisyphus.jpg)
 
+<!--more-->
+
 So, after a semester of research for my master project, here is the second version of my prototype. It contains three different stages:
 
 - The Leap of Faith

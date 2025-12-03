@@ -6,6 +6,8 @@ categories: jekyll update
 ---
 ![IMG_1083[1]](/images/2015/08/title_screen2.gif)
 
+<!--more-->
+
 It took some time to write this post-mortem. It was a long week those last ten days from 8th to 18th of August, but with a little team, we manage to create a little game called Black Whiskers. Without transition, here is the post-mortem:
 
 <b>What went right</b>

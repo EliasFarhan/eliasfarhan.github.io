@@ -6,8 +6,9 @@ categories: jekyll update
 ---
 ![IMG_0787[1]](/images/2015/05/IMG_07871-e1431886430646.jpg)
 
-One of the best feeling a game designer can have is to see players play his game. A while ago, my teacher, <a href="https://twitter.com/ixistenz">René Bauer</a>, was really upset, because for <a href="http://www.fantasybasel.ch/">Fantasy Basel</a> no student who was involved in a project outside of the school took the opportunity to show their game. To put it in context, a stand in Fantasy Basel is 3000CHF and there was a opportunity for <a href="http://sgda.ch/">SGDA</a> members (Swiss Game Developer Association) to get a free place there (of course, being the member means also paying the annual fee, still clearly less than 3000CHF).
 <!--more-->
+
+One of the best feeling a game designer can have is to see players play his game. A while ago, my teacher, <a href="https://twitter.com/ixistenz">René Bauer</a>, was really upset, because for <a href="http://www.fantasybasel.ch/">Fantasy Basel</a> no student who was involved in a project outside of the school took the opportunity to show their game. To put it in context, a stand in Fantasy Basel is 3000CHF and there was a opportunity for <a href="http://sgda.ch/">SGDA</a> members (Swiss Game Developer Association) to get a free place there (of course, being the member means also paying the annual fee, still clearly less than 3000CHF).
 
 ![IMG_0795[1]](/images/2015/05/IMG_07951.jpg)
 

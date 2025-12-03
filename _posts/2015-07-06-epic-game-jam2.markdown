@@ -7,6 +7,8 @@ categories: jekyll update
 
 ![MeowZeDong_Banner](/images/2015/07/MeowZeDong_Banner.bmp)
 
+<!--more-->
+
 Last week-end, I participate to te Epic Game Jam Round #2. We made "<a href="https://epicgamejam.com/editions/2015/games/meow-zedong-great-helmsman-future-chairman-urinal-leap-forward">Meow Zedong, The Great Helmsman, Future Chairman, The Urinal Leap Forward</a>" (a 74 characters title) a 3d shooter. You play as Meow Zedong who pees on hordes of catpitalists and fights a special boss (with a moustache). The team was composed by Frederic Dubouchet (anirul), Antoine Tuloup, Wiktor Wasowski, Corentin Colinet and Fiorella Annoni.
 <!--more-->
 

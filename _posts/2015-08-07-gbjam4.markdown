@@ -4,7 +4,10 @@ title:  "GBJam 4 - Catptain Hook"
 date:   2015-08-07 09:22:27 +0200
 categories: jekyll update
 ---
+
 ![IMG_1083[1]](http://4.bp.blogspot.com/-fNk62Hwmle4/VbjYBLwhcQI/AAAAAAAAWNI/re-o_Ok9sLs/s640/CK8nl7NUkAEYvYj.jpg)
+
+<!--more-->
 
 
 It was a long boring, hot month of July. It started right with some holidays in the north of Italy and in Austria, it was epic with the Epic Game Jam, then the Meetup BBQ was awesome to set up new projects and finally the Project Annoucement meeting with Kevin for the Project Splash. And then, civil service... I am still working until the 23th of August in the CRYOS lab to help on the front-end of swissex, a scientific data website. So most of my time is spent writing html and css, the dream of all computer scientists (says none of them). But then, came August and the deadline for SwitzerLAN "Swiss" Game Designer contest (you can find more on this blog post about something that I consider a minority discrimination: <a href="http://eliasfarhan.ch/?p=252">here</a>), where I proposed "Project Splash".
