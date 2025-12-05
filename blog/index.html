@@ -34,26 +34,36 @@ title: Blog
       <a href="{{ '/blog/' | relative_url }}" class="pagination-link">First</a>
     {% endif %}
     
-    {% assign show_pages = 5 %}
-    {% assign half_show = 2 %}
-    
-    {% for page in (1..paginator.total_pages) %}
-      {% if page == 1 or page == paginator.total_pages %}
-        {% if page == 1 %}
-          <a href="{{ '/blog/' | relative_url }}" class="pagination-link{% if paginator.page == 1 %} current{% endif %}">1</a>
-        {% else %}
-          <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="pagination-link{% if paginator.page == page %} current{% endif %}">{{ page }}</a>
-        {% endif %}
-      {% elsif page >= paginator.page | minus: half_show and page <= paginator.page | plus: half_show %}
-        {% if page == 1 %}
-          <a href="{{ '/blog/' | relative_url }}" class="pagination-link{% if paginator.page == 1 %} current{% endif %}">{{ page }}</a>
-        {% else %}
-          <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="pagination-link{% if paginator.page == page %} current{% endif %}">{{ page }}</a>
-        {% endif %}
-      {% elsif page == paginator.page | minus: half_show | minus: 1 or page == paginator.page | plus: half_show | plus: 1 %}
-        <span class="pagination-ellipsis">...</span>
-      {% endif %}
-    {% endfor %}
+{% assign show_pages = 5 %}
+{% assign half_show = 2 %}
+
+{% assign left_bound = paginator.page | minus: half_show %}
+{% assign right_bound = paginator.page | plus: half_show %}
+
+{% assign left_ellipsis = left_bound | minus: 1 %}
+{% assign right_ellipsis = right_bound | plus: 1 %}
+
+{% for page in (1..paginator.total_pages) %}
+
+  {% if page == 1 or page == paginator.total_pages %}
+    <!-- First and last page -->
+    {% if page == 1 %}
+      <a href="{{ '/blog/' | relative_url }}" class="pagination-link{% if paginator.page == 1 %} current{% endif %}">1</a>
+    {% else %}
+      <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="pagination-link{% if paginator.page == page %} current{% endif %}">{{ page }}</a>
+    {% endif %}
+
+  {% elsif page >= left_bound and page <= right_bound %}
+    <!-- Middle visible pages -->
+    <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="pagination-link{% if paginator.page == page %} current{% endif %}">{{ page }}</a>
+
+  {% elsif page == left_ellipsis or page == right_ellipsis %}
+    <!-- Ellipses -->
+    <span class="pagination-ellipsis">...</span>
+
+  {% endif %}
+
+{% endfor %}
     
     {% if paginator.page != paginator.total_pages %}
       <a href="{{ site.paginate_path | relative_url | replace: ':num', paginator.total_pages }}" class="pagination-link">Last</a>

@@ -3,7 +3,7 @@ title: "Frankenstein Play Jam (9-19th June)"
 date: 2016-06-08
 ---
 
-https://upload.wikimedia.org/wikipedia/commons/a/a7/Frankenstein's_monster_(Boris_Karloff).jpg
+![](https://upload.wikimedia.org/wikipedia/commons/a/a7/Frankenstein's_monster_(Boris_Karloff).jpg)
 <!--more-->
 Game jams are mostly gameful events with playful outcomes. It means that game jams are regulated events that allow participants to create crazy games. But often, as we participate in game jams, the event by itself is not fun or memorable, except for exceptional and extraordinary moments. In the continuum of Ludus (game with rules, like video-game, chess) and Paidia (game without rules, role-play), what if game jams become Paidia events, what if game jams become play jams.
 
