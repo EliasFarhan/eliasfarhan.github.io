@@ -4,6 +4,9 @@ title:  "ADDON 2022 + Stunfest"
 #date:   2024-12-23 20:19:00 +0200
 categories: jekyll update
 ---
+![Liberté]()
+
+Stunfest is back! This year, I went to Rennes to present our prototype of Soup Raiders. But just before the Stunfest, there is a conference for game developers called ADDON
 
 Here are my favorites talks:
 - [Faire des jeux qui vous survivront](https://www.youtube.com/watch?v=lpjvlu6l3jc) by Louve @ Systems.
