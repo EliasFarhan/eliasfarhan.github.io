@@ -4,3 +4,7 @@ title:  "La montagne - NaNoWriMo 2022"
 #date:   2024-12-23 20:19:00 +0200
 categories: jekyll update
 ---
+
+![Mountain]()
+
+For the first time, I won NaNoWriMo (National Novel Writing Month), a challenge to write 50'000 words in a month (about 1666 words per day). The novel that came out of it is an hommage to my grandma who passed away last year while I was in Japan. 

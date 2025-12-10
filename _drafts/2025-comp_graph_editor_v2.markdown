@@ -8,8 +8,8 @@ categories: jekyll update
 
 <!--more-->
 
-Switching to SDL GPU Api
-Modern API (vulkan, dx12, metal)
+Switching to SDL GPU Api.
+Modern API (vulkan, dx12, metal).
 Vulkan glsl shader compiled to dxil and msl and reflection done with SPIRV-Cross.
 
 Switching to flatbuffers
