@@ -7,6 +7,8 @@ categories: jekyll update
 
 Recently one of my first year student asked how he should implement game systems in Unity in particular with the goal of moving data from one scene to another. Instead of just answering him, I decided to write this blog post to detail my thoughts regarding Unity game systems by explaining how I use systems in Unity.
 
+<!--more-->
+
 The actual question in more detail
 ===============================================================================
 Here is a rough summary and translation of the actual question:
