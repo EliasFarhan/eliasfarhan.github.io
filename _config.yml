@@ -35,7 +35,7 @@ mastodon_instance: mastodon.gamedev.place
 
 bluesky_username: kraklegrand.bsky.social
 
-google_analytics: GTM-M4PR6GNL
+google_analytics: G-9XBS4HQ6G8
 
 excerpt_separator: "<!--more-->"
 paginate: 10
