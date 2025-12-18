@@ -16,12 +16,12 @@ Two talks really could my attention about education for Computer Graphics: the t
 
 ## The course content
 Since when I started to give Computer Graphics courses, I have been following the [learnopengl.com](https://learnopengl.com/) structure with the variation of OpenGL ES 3.0. But why specifically this version? Because it is the most cross-platform version of OpenGL for me, with this version you can run the same C++ program (with some caveats) and the same shaders for:
-- Windows
-- Linux
-- Android
-- Nintendo Switch (we have two devkits at school)
-- WebGL2 (with emscripten)
-- Probably iOS or MacOSX (I did not try personally)
+- Windows: while I encountered some driver issues throughout the year, OpenGL ES 3.0 is compatible with OpenGL 4.3, so I just assume OpenGL 4.3 on Windows not to worry.
+- Linux: recently I had some issue with Wayland vs X working on some OpenGL tests, I need to dig deeper if there is any issue (probably building SDL3 without the proper dependencies).
+- Android: this one is a bit complicated as the actual android app boots from Java and calls the native lib containing the code.
+- Nintendo Switch: we have two devkits at school and except removing glew or glad and replcing it with the embedding OpenGL wrapper, it works fine.
+- WebGL2: my favorite reason of using OpenGL ES 3.0 is that it is mostly compatible with WebGL2 with emscripten (except float color attachment that is an extension...), which allows my students to port their samples to their own website.
+- Probably iOS or MacOSX: I did not try personally.
 
 
 ## Core concepts
