@@ -4,7 +4,38 @@ title:  "Why I still teach OpenGL ES 3.0"
 categories: jekyll update
 ---
 
+<div id="webgl-container" style="text-align: center; margin: 20px 0;">
+  <canvas id="canvas" width="800" height="600" 
+          style="border: 1px solid #000; background-color: #000;">
+  </canvas>
+  <div id="status" style="margin-top: 10px;">Loading...</div>
+</div>
+
+<script>
+  var Module = {
+    canvas: document.getElementById('canvas'),
+    print: function(text) {
+      console.log(text);
+    },
+    setStatus: function(text) {
+      document.getElementById('status').innerText = text;
+    },
+    locateFile: function(path) {
+      return '/assets/webgl/hello-transform/' + path;
+    }
+  };
+</script>
+<script async src="/assets/webgl/hello-transform/HelloTransform.js"></script>
+<style>
+  #canvas {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4/3;
+    display: block !important;
+  }
+</style>
 <!--more-->
+*Little C++ OpenGL ES 3.0 sample compiled to the web with emscripten*
 
 ## Introduction
 
