@@ -109,7 +109,11 @@ Several things to unpack here:
 
 ### Render passes & Framebuffer
 
-<<<<<<< HEAD
+## Missing modern concepts
+
+### SSBO
+### Compute shader
+
 ## Modern Vulkan?
 
 Using Vulkan, but bye bye web rendering.
@@ -125,12 +129,7 @@ https://docs.vulkan.org/samples/latest/samples/extensions/shader_object/README.h
 
 ### Other abstractions
 
-=======
-## Missing modern concepts
 
-### SSBO
-### Compute shader
->>>>>>> 11bec826ba5443fdb3dc1b4144a6bb41588bec55
 
 
 ## Conclusion
