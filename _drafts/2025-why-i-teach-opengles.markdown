@@ -67,6 +67,23 @@ Since when I started to give Computer Graphics courses, I have been following th
 
 ### Render passes & Framebuffer
 
+## Modern Vulkan?
+
+Using Vulkan, but bye bye web rendering.
+
+### Pipeline dynamic state
+https://docs.vulkan.org/guide/latest/dynamic_state.html
+
+### Dynamic rendering
+https://docs.vulkan.org/samples/latest/samples/extensions/dynamic_rendering/README.html
+
+### Shader object
+https://docs.vulkan.org/samples/latest/samples/extensions/shader_object/README.html
+
+### Other abstractions
+
+
+
 ## Conclusion
 
 
