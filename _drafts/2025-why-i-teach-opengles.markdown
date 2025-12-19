@@ -10,7 +10,20 @@ categories: jekyll update
   </canvas>
   <div id="status" style="margin-top: 10px;">Loading...</div>
 </div>
-
+<script>
+  // Lock the title
+  const originalTitle = document.title;
+  
+  Object.defineProperty(document, 'title', {
+    get: function() {
+      return originalTitle;
+    },
+    set: function(newTitle) {
+      // Ignore any attempts to change title
+      console.log('Blocked title change to:', newTitle);
+    }
+  });
+</script>
 <script>
   var Module = {
     canvas: document.getElementById('canvas'),
@@ -22,7 +35,7 @@ categories: jekyll update
     },
     locateFile: function(path) {
       return '/assets/webgl/hello-transform/' + path;
-    }
+    },
   };
 </script>
 <script async src="/assets/webgl/hello-transform/HelloTransform.js"></script>
@@ -113,6 +126,7 @@ Several things to unpack here:
 
 ### SSBO
 ### Compute shader
+### Multithreading command generation
 
 ## Modern Vulkan?
 
