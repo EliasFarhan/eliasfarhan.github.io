@@ -1,0 +1,37 @@
+---
+layout: post
+title:  "ADDON 2025"
+#date:   2024-12-23 20:19:00 +0200
+categories: jekyll update
+---
+![ADDON 2025](/images/2025/addon/addon2025.jpg)
+
+<!--more-->
+
+This year, I went to the ADDON conference in Rennes like I did in 2023. It's a really nice conference where the organizers are not afraid for the speakers to go deeper into their subject, so I brought back my talk about online multiplayer using rollback from CppCon2024 (blogpost [here](/jekyll/update/2024/09/25/cppcon.html)), translated it to French, reworked some stuffs and updated some new content:
+
+- I added a few slides on better debugging which system is desync
+- I added a section about input compression (from representing buttons to sending states, sort of like an Huffman encoding of the inputs) and RLE (Run-Length Encoding)
+
+Other than that, it's mostly the talk from CppCon, I am looking forward to see how this talk will look like after Beach Slap release with all the added lessons learned on the way.
+
+Of course, as I was in Rennes, this is the mandatory crepe photo:
+
+![Crepe](/images/2025/addon/crepe.jpg)
+
+## The talks I liked
+
+![Thomas Bidaux](/images/2025/addon/bidaux.jpg)
+
+- Jeux Video et Financement Participatif : opportunités en 2025 by Thomas Bidaux. This talk was giving a bit overview of the landscape of Kickstarter and how to do the crowdfunding of a game project. I am always so afraid of the amount of work for a crowdfunding campaign, having seen my colleague Kevin Péclet go through one to fund Helvetii a few years ago, but at least this talk gave me a good idea of the good strategy and metrics that are important to take into account.
+
+![Break the Nice](/images/2025/addon/korea_gesture.jpg)
+
+- Break the Nice: navigating community development following GamerGate 2 and global harassment campaigns by Sarah Makdad. I learned some new things about Korea (the gesture that makes men think that their genital is too small), but also about protecting ourself against harassment campaign or how to help colleagues going through this. I added an extension to my browser that automatically block the blue mark on Twitter. 
+- Boostez le visuel de votre jeu avec des passes de rendu personnalisées dans Unreal Engine 5 by Thomas Poulet. I had the pleasure to meet Thomas that I actually knew from his very interesting frame analysis blog post of Ninokuni 2 that I show to my students every year.
+
+## Conclusion
+
+I was very happy to come to Rennes to give my talk and see all the other talks. It was a miracle that ADDON 2025 even happened with all the budget cuts happening in France right now. I was lucky to spend some times in Paris afterwards. 
+
+![Paris](/images/2025/addon/paris.jpg)

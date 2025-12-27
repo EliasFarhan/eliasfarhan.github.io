@@ -7,6 +7,8 @@ categories: jekyll update
 
 Working at 6it.dev
 
+ADDON
+
 Marathon de Genève
 
 Sierre-Zinal
@@ -17,4 +19,6 @@ Korean trip
 
 Herofest + stunfest
 
-Spellkolictivet
+Graphics Programming Conference
+
+Spelkollektivet
