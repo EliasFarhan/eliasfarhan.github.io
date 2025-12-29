@@ -14,7 +14,7 @@ categories: jekyll update
 
 After the initial rush of end of 2024 right after CppCon, I needed to rebalance my work-life balance to be able to continue to work at 6it. I can't really talk about what I am working on, but I could take the time to learn a lot about C++ and API design, as well as production management that I put into practice at SAE Institute with my students. 
 
-
+Overwork
 
 ## ADDON
 
@@ -44,6 +44,8 @@ Sierre-Zinal happened on August the 9th, during a heatwave. Fortunately, my race
 
 The first part of Sierre-Zinal goes from Sierre to Chandolin. It goes up about 1500m so it is considered the first half of the race. The slope is very intense as soon as we leave Niouc. 
 
+Waiting for my mom
+
 
 
 ## BIC Fest + awards
@@ -64,11 +66,15 @@ I had a week end of October when I took the train to go to Leukerbad, Koln, Gene
 
 ## Graphics Programming Conference
 
-
+Pushing the boundries. Trying new things in teaching as well.
 
 ## Spelkollektivet
 
-While my gf was going to see her family during the Winter Holidays, I decided to spend this period at SpelKollektivet, a community of game developers living in the Swedish countryside. 
+While my gf was going to see her family during the Winter Holidays, I decided to spend this period at SpelKollektivet, a community of game developers living in the Swedish countryside. While the perspective of being with complete strangers for one week and half sort of pertrify me, I still decided to go, such that I could spend some time to work on my own projects.
+
+Gym
+
+Why I like to be alone? Japan trip 2022, korean trip this year mostly alone.
 
 ## Next year?
 
