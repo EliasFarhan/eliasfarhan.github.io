@@ -72,7 +72,7 @@ Pushing the boundries. Trying new things in teaching as well.
 
 While my gf was going to see her family during the Winter Holidays, I decided to spend this period at SpelKollektivet, a community of game developers living in the Swedish countryside. While the perspective of being with complete strangers for one week and half sort of pertrify me, I still decided to go, such that I could spend some time to work on my own projects.
 
-Gym
+Gym + running on a treadmill
 
 Why I like to be alone? Japan trip 2022, korean trip this year mostly alone.
 
