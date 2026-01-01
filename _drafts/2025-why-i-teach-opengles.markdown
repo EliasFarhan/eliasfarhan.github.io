@@ -69,7 +69,7 @@ Since when I started to give Computer Graphics courses, I have been following th
 
 ## Core concepts
 
-When working on their samples, the students usually start to build their own abstraction. This year, we decided to work together and build the abstraction in a common repository such that those abstraction could be used by all the students of the class as soon as it was implemented. 
+When working on their samples, the students usually start to build their own abstraction. This year, we decided to work together and build the abstraction in a common git repository such that those abstraction could be used by all the students of the class as soon as it was implemented. 
 
 ### Pipeline
 
@@ -96,6 +96,7 @@ Because of OpenGL implementation of uniform buffer, we added a bunch of function
 class Pipeline
 {
 public:
+    [...]
     void SetInt(std::string_view uniform_name, int new_value);
     void SetFloat(std::string_view uniform_name, float new_value);
     template<typename T>
@@ -113,38 +114,26 @@ Several things to unpack here:
 - ```StringHash``` and ```StringEqual``` allows the use of ```std::string_view``` without the need to create a ```std::string``` when trying to find a uniform location in the map.
 
 
-
 ### GPU memory
 
 ### Textures
 
+stb_image
+
 ### Draw commands
+
+
 
 ### Render passes & Framebuffer
 
-## Missing modern concepts
+## Missing modern OpenGL in ES 3.0
 
+The cost of using OpenGL ES 3.0 (to allow use of WebGL 2.0) has still a cost though.
 ### SSBO
+
 ### Compute shader
-### Multithreading command generation
-
-## Modern Vulkan?
-
-Using Vulkan, but bye bye web rendering.
-
-### Pipeline dynamic state
-https://docs.vulkan.org/guide/latest/dynamic_state.html
-
-### Dynamic rendering
-https://docs.vulkan.org/samples/latest/samples/extensions/dynamic_rendering/README.html
-
-### Shader object
-https://docs.vulkan.org/samples/latest/samples/extensions/shader_object/README.html
 
 ### Other abstractions
-
-
-
 
 ## Conclusion
 
