@@ -59,12 +59,12 @@ Back in Novmeber, I was at the Graphics Programming Conference (my blog post [he
 Two talks really caught my attention about education for Computer Graphics: the talk _Bridging Pixels and Code: Teaching Computer Graphics to Technical Artists_ from Matthieu Delaere that focus on students creating their own rasterizer from scratch and the talk from Mike Shah that focuses on the next steps after the tutorial. The latter talk actually made me think about if the actual idea to do the transition to modern API for my course made still sense.
 
 ## The course content
-Since when I started to give Computer Graphics courses, I have been following the [learnopengl.com](https://learnopengl.com/) structure with the variation of OpenGL ES 3.0. But why specifically this version? Because it is the most cross-platform version of OpenGL for me, with this version you can run the same C++ program (with some caveats) and the same shaders for:
+Since when I started to give Computer Graphics courses, I have been following the [learnopengl.com](https://learnopengl.com/) structure with the variation of OpenGL ES 3.0 (released in August 2012, so about 14 years ago). But why specifically this version? Because it is the most cross-platform version of OpenGL for me, with this version you can run the same C++ program (with some caveats) and the same shaders for:
 - Windows: while I encountered some driver issues throughout the year, OpenGL ES 3.0 is compatible with OpenGL 4.3, so I just assume OpenGL 4.3 on Windows not to worry.
 - Linux: recently I had some issue with Wayland vs X working on some OpenGL tests, I need to dig deeper if there is any more issue (probably building SDL3 without the proper dependencies).
 - Android: this one is a bit complicated as the actual android app boots from Java and calls the native lib containing the code.
 - Nintendo Switch: we have two devkits at school and except removing glew or glad and replacing it with the embedding OpenGL wrapper, it works fine.
-- WebGL2: my favorite reason of using OpenGL ES 3.0 is that it is mostly compatible with WebGL2 with emscripten (except float color attachment that is an extension...), which allows my students to port their samples to their own website/blog.
+- WebGL2: my favorite reason of using OpenGL ES 3.0 is that it is mostly compatible with WebGL2 with emscripten (except float color attachment that is an extension...), which allows my students to port their samples to their own website/blog. It is the case with this blog post where I simply put the demo out of emscripten on the web page.
 - Probably iOS or MacOSX: I did not try personally.
 
 ## Core concepts
@@ -148,25 +148,103 @@ glVertexAttribPointer(
 	glEnableVertexAttribArray(vertexAttribData.index);
 
 ```
+
+Vertex Input becomes even more important when we want to give a buffer while using instancing (for example giving the model matrix of our models through vertex input). I usually let the students find their abstractions for VAO, VBO, EBO and instancing buffers, as they have to implement model loading as well.
+
 ### Textures
 
-stb_image
+The logic for texture in OpenGL is counter-intuitive. One has to understand the difference between texture name (the handle given by ```glGenTextures```) and the texture unit (```GL_TEXTURE0``` for example). It confuses a lot of my students each year. So binding a texture to a uniform sample looks like this:
+```C++
+glUniform1i(uniform_location, 0);
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE2D, my_texture);
+```
+This is put in a function in the pipeline to look this:
+```C++
+pipeline_.SetTexture("uniform_name", my_texture, 0);
+
+//with implementation looking like this:
+void Pipeline::SetTexture(std::string_view uniform_name, const Texture& texture, int texture_unit)
+{
+    const auto uniformLocation = GetUniformLocation(uniformName);
+    glUniform1i(uniformLocation, textureUnit);
+    glActiveTexture(GL_TEXTURE0 + textureUnit);
+    texture.Bind(); 
+}
+```
+
+For loading, in the beginning of the module, we start with [*stb_image*](https://github.com/nothings/stb) to load JPG, PNG, BMP, etc... This header-only library decompresses the images such that we can upload them to the GPU, something that looks like this:
+```C++
+image.pixels = stbi_load(imagePath.data(), &image.width, &image.height, &image.comp, 0);
+	
+glGenTextures(1, &my_texture);
+glBindTexture(GL_TEXTURE2D, name_);
+switch (image.comp)
+	{
+	case 3:
+		glTexImage2D(GL_TEXTURE2D, 
+      0, GL_RGB, image.width, image.height, 
+      0, GL_RGB, GL_UNSIGNED_BYTE, image.pixels);
+		break;
+	case 4:
+		glTexImage2D(GL_TEXTURE2D, 
+      0, GL_RGBA, image.width, image.height, 
+      0, GL_RGBA, GL_UNSIGNED_BYTE, image.pixels);
+		break;
+	default:
+		break;
+	}
+```
+All this is course hidden in a ```Texture``` abstraction with ```Load``` and ```Bind```.
 
 ### Draw commands
 
+In OpenGL, the driver is adding our commands into its own command buffer. This forbids multi-threading draw commands generation (compare to more modern API) and it gives this feeling that drawing happens immediately. Because of learnopengl.com, most of my students put their draw call in the ```Mesh``` contained in their ```Model```. So it looks like this:
+```C++
+void Model::Draw(const Pipeline& pipeline)
+{
+  pipeline.Bind();
+  for(auto& mesh: meshes)
+  {
+    mesh.Draw(pipeline);
+  }
+}
+
+void Mesh::Draw(const Pipeline& pipeline)
+{
+  material_.Bind(pipeline); //binding all textures to their samples
+  glDrawElements(GL_TRIANGLES, indices_count, GL_UNSIGNED_INT, nullptr);
+  //or depending on the abstraction
+  vao_.Draw();
+}
+
+```
+After working on my computer graphics editor (I wrote a blog post [here](/jekyll/update/2023/11/29/compgrapheditorv1.html)), I really prefer a separated approach where a scene has materials (pipeline + texture reference) and meshes, and that models do not exist as scene abstraction.
+
+Some other function that I see is the ```DrawScene(const Pipeline& pipeline)``` that can draw the scene with any pipeline. Useful when doing shadow map, but needing more parameters to implement frustum culling efficiently (giving a camera as input as well to filter the mesh that are not drawn). 
+
+### Dynamic states
+In OpenGL, those states (depth-stencil, back-face culling, blending) are all dynamic and can be changed with a line, for example:
+```C++
+glEnable(GL_DEPTH_TEST);
+```
 ### Render passes & Framebuffer
+
+Finally, the last big OpenGL core concept is about multi passes. The first half of the module is spent in one pass. Post-processing is the first example of multi-pass, where my students have to use a framebuffer to draw their scene, and then use another pipeline and the render targets as sampled texture. 
 
 ## Missing modern OpenGL in ES 3.0
 
-The cost of using OpenGL ES 3.0 (to allow use of WebGL 2.0) has still a cost though.
+The cost of using OpenGL ES 3.0 (to allow use of WebGL 2.0) has still a cost though. Some core concepts of modern rendering are explained in course content but not implemented (except if the students want to get rid of WebGL2 compatibility).
+
 ### SSBO
 
 Of course, we need to had another type of buffer that can be binded to an uniform. 
 
 ### Compute shader
-
-### Other abstractions
+Compute shader only appeared in OpenGL ES 3.1 (so not WebGL2). Coming back to the post-processing example explained before, instead of giving the color attachment of the scene as a ```sampler2D```, we could give it as an ```image2D``` and actually do the post-processing in compute. Typically, every the-whole-screen kind of shader are easier to implement with a compute pipeline with a single shader, rather than a graphics pipeline with 
 
 ## Conclusion
+
+OpenGL ES 3.0 has still a lot of advantages to be teached even in 2026 (especially WebGL2), at the cost of going through the struggle of the legacy of this API. 14 years is a lot of time in Computer Graphics. I want to write another blog post about why we are not yet switching to Vulkan. 
 
 
