@@ -21,9 +21,10 @@ Welcome at Houdini's is a mixing elements game where the player is a alchemist s
 
 ![The game screen](https://img.itch.zone/aW1hZ2UvMTIwNzEwLzU1NjM3Mi5wbmc=/original/jOvEB2.png)
 
-## Platform kit
+## Platform specficis
 - Achievements
 - Save file
+- Login
 
 ## Tools
 

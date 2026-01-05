@@ -114,15 +114,45 @@ Several things to unpack here:
 - ```StringHash``` and ```StringEqual``` allows the use of ```std::string_view``` without the need to create a ```std::string``` when trying to find a uniform location in the map.
 
 
-### GPU memory
+### Vertex inputs
 
+One of the weird thing for me going into OpenGL is how memory is allocated. For example, for a vertex input buffer, an index buffer:
+
+```C++
+int vbo_;
+glGenBuffers(vboCount, &vbo_);
+glBindBuffer(GL_ARRAY_BUFFER, vbo_);
+glBufferData(GL_ARRAY_BUFFER, vertex_buffer.size, vertex_buffer.data, GL_STATIC_DRAW);
+
+int ebo_;
+glGenBuffers(vboCount, &ebo_);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer.size, index_buffer.data, GL_STATIC_DRAW);
+```
+
+For vertex inputs, you have those buffers that are to be setup in a Vertex Array Object, sort of like a container of vertex buffers, to define how the pipeline is going to read the vertex buffers, with something like this:
+```C++
+int vao_;
+glGenVertexArrays(1, &vao_);
+glBindVertexArray(vao_);
+
+glBindBuffer(GL_ARRAY_BUFFER, vbo_);
+
+glVertexAttribPointer(
+  vertex_input_location, // in the shader (location = 0) 
+  vertexAttribData.size, // how many of the primitive: float => 1, vec2 => 2, vec3 => 3, vec4 => 4
+  vertexAttribData.type,
+  GL_FALSE,
+		vertexAttribData.stride,
+		(void*)vertexAttribData.offset);
+	glEnableVertexAttribArray(vertexAttribData.index);
+
+```
 ### Textures
 
 stb_image
 
 ### Draw commands
-
-
 
 ### Render passes & Framebuffer
 
@@ -130,6 +160,8 @@ stb_image
 
 The cost of using OpenGL ES 3.0 (to allow use of WebGL 2.0) has still a cost though.
 ### SSBO
+
+Of course, we need to had another type of buffer that can be binded to an uniform. 
 
 ### Compute shader
 
