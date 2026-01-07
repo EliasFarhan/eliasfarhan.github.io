@@ -59,7 +59,21 @@ Back in Novmeber, I was at the Graphics Programming Conference (my blog post [he
 Two talks really caught my attention about education for Computer Graphics: the talk _Bridging Pixels and Code: Teaching Computer Graphics to Technical Artists_ from Matthieu Delaere that focus on students creating their own rasterizer from scratch and the talk from Mike Shah that focuses on the next steps after the tutorial. The latter talk actually made me think about if the actual idea to do the transition to modern API for my course made still sense.
 
 ## The course content
-Since when I started to give Computer Graphics courses, I have been following the [learnopengl.com](https://learnopengl.com/) structure with the variation of OpenGL ES 3.0 (released in August 2012, so about 14 years ago). But why specifically this version? Because it is the most cross-platform version of OpenGL for me, with this version you can run the same C++ program (with some caveats) and the same shaders for:
+The goal of the introduction in computer graphics module is for the students to implement a 3d scene with a graphics API. What is important to understand is that they should not implement a generic 3d renderer, but specifically a 3d scene, so the final executable is not supposed to be data-driven. For example, it would be completely ok to have such implementation:
+
+```C++
+void DrawScene(const Pipeline& pipeline, const Camera& camera)
+{
+  //Cull the scene from the camera
+
+  //Draw each 3d object by hand
+
+}
+```
+
+Since when I started to give this module, I have been following the [learnopengl.com](https://learnopengl.com/) structure with the variation of OpenGL ES 3.0 . Each chapter is like a list of samples that have to be implemented and tested.
+
+But why specifically this version of OpenGL? OpenGL ES 3.0 is a mobile graphics API, released in August 2012, so about 14 years ago (which is a LONG time in computer graphics). I chose it because it is the most cross-platform version of OpenGL in my opinion, with this version you can run the same C++ program (with some #ifdef) and the same shaders for:
 - Windows: while I encountered some driver issues throughout the year, OpenGL ES 3.0 is compatible with OpenGL 4.3, so I just assume OpenGL 4.3 on Windows not to worry.
 - Linux: recently I had some issue with Wayland vs X working on some OpenGL tests, I need to dig deeper if there is any more issue (probably building SDL3 without the proper dependencies).
 - Android: this one is a bit complicated as the actual android app boots from Java and calls the native lib containing the code.
@@ -81,6 +95,7 @@ __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 #endif
 ```
 And this (supposedely) enables the discrete GPU and not the integrated one.
+
 ## Core concepts
 
 When working on their samples, the students usually start to build their own abstraction. This year, we decided to work together and build the abstraction in a common git repository such that those abstraction could be used by all the students of the class as soon as it was implemented. 
@@ -110,7 +125,7 @@ Because of OpenGL implementation of uniform buffer, we added a bunch of function
 class Pipeline
 {
 public:
-    [...]
+    //[...]
     void SetInt(std::string_view uniform_name, int new_value);
     void SetFloat(std::string_view uniform_name, float new_value);
     template<typename T>
@@ -130,7 +145,7 @@ Several things to unpack here:
 
 ### Vertex inputs
 
-One of the weird thing for me going into OpenGL is how memory is allocated. For example, for a vertex input buffer, an index buffer:
+One of the weird thing for me going into OpenGL is how memory is allocated (the glGen*, glBind*, and then upload the data and probably uplaod at the same time). For example, for a vertex input buffer, an index buffer:
 
 ```C++
 int vbo_;
@@ -228,7 +243,16 @@ switch (image.comp)
 		break;
 	}
 ```
-All this is course hidden in a ```Texture``` abstraction with ```Load``` and ```Bind```.
+All this is course hidden in a ```Texture``` abstraction with ```Load``` and ```Bind```. Then for cubemaps, we add:
+```C++
+class Texture
+{
+  public:
+  //[...]
+  void LoadCubemaps(std::span<const std::string_view, 6> paths);
+}
+```
+The ```Texture``` holds the "target" (```GL_TEXTURE2D``` or ```GL_TEXTURE_CUBE_MAP```, why not texture3d?) and then the ```Bind``` will bind the correct target.
 
 ### Draw commands
 
@@ -252,9 +276,7 @@ void Mesh::Draw(const Pipeline& pipeline)
 }
 
 ```
-After working on my computer graphics editor (I wrote a blog post [here](/jekyll/update/2023/11/29/compgrapheditorv1.html)), I really prefer a separated approach where a scene has materials (pipeline + texture reference) and meshes, and that models do not exist as scene abstraction.
-
-Some other function that I see is the ```DrawScene(const Pipeline& pipeline)``` that can draw the scene with any pipeline. Useful when doing shadow map, but needing more parameters to implement frustum culling efficiently (giving a camera as input as well to filter the mesh that are not drawn). 
+After working on my computer graphics editor (I wrote a blog post [here](/jekyll/update/2023/11/29/compgrapheditorv1.html)), I really prefer a separated approach where a scene has materials (pipeline + texture reference) and meshes, and that models do not exist as scene abstraction. However again, it is not about making a data-driven renderer, but just implement a 3d scene.
 
 ### Dynamic states
 In OpenGL, pipeline states (depth-stencil, back-face culling, blending) are all mostly dynamic and can be changed with a line, for example:
@@ -277,9 +299,17 @@ glStencilMask(GLuint mask);
 
 ### Render passes & Framebuffer
 
-Finally, the last big OpenGL core concept is about multi passes. The first half of the module is spent in one pass. Post-processing is the first example of multi-pass, where my students have to use a framebuffer to draw their scene, and then use another pipeline and the render targets as sampled texture. 
+Finally, the last big OpenGL core concept is about multi passes. The first half of the module is spent in one pass. Post-processing is the first example of multi-pass, where my students have to use a framebuffer to draw their scene, and then use another pipeline and the render targets as a sampled texture. 
 
-## Missing modern OpenGL in ES 3.0
+Depth-only framebuffer
+
+HDR
+
+Tonemapping
+
+
+
+## Missing modern OpenGL features in ES 3.0
 
 Using OpenGL ES 3.0 (to allow use of WebGL 2.0) has still a cost though. Some core concepts of modern rendering are explained in course content but not implemented (except if the students want to get rid of WebGL2 compatibility).
 
@@ -287,11 +317,30 @@ Using OpenGL ES 3.0 (to allow use of WebGL 2.0) has still a cost though. Some co
 
 As of OpenGL 4.3 and OpenGL 3.1, we can define shader storage buffer object. This is useful to remove the need to pass by the vertex inputs when doing instancing. Of course, we need to had another type of buffer that can be binded to an uniform. This would look like this:
 ```C++
+//in C++
+glGenBuffers(1, &ssbo_);
+glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo_);
+glBufferData(GL_SHADER_STORAGE_BUFFER, instancing_buffer.size, instancing_buffer.data, GL_DYNAMIC_DRAW);
+glBindBufferBase(GL_SHADER_STORAGE_BUFFER, binding_point, ssbo);
 
+//in shader
+layout(std430, binding = 3) buffer layoutName
+{
+    vec4 data_SSBO[];
+};
+
+void main()
+{
+  vec4 instancing_data = data_SSBO[gl_InstanceID];
+}
 ```
 
 ### Compute shader
-Compute shader only appeared in OpenGL ES 3.1 (so not WebGL2). Coming back to the post-processing example explained before, instead of giving the color attachment of the scene as a ```sampler2D```, we could give it as an ```image2D``` and actually do the post-processing in compute. Typically, every the-whole-screen kind of shader are easier to implement with a compute pipeline with a single shader, rather than a graphics pipeline with 
+Compute shader only appeared in OpenGL ES 3.1 (so not WebGL2). Coming back to the post-processing example explained before, instead of giving the color attachment of the scene as a ```sampler2D```, we could give it as an ```image2D``` and actually do the post-processing in compute. Typically, every the-whole-screen kind of shader are easier to implement with a compute pipeline with a single shader, rather than a graphics pipeline with a plane in NDC (Normal Device Coordinate) going from [-1, 1] just to recover the whole screen in the vertex shader and implementing the transformation in the fragment shader.
+
+### SPIR-V
+
+Starting with OpenGL 4.6 (not even available in OpenGL ES 3.2), we can load SPIR-V instead of plain text GLSL. This allow for quick loading of shader as the format is binary.
 
 ## Conclusion
 
