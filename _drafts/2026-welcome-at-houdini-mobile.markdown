@@ -78,7 +78,9 @@ I translated all that into a specific tool to generate character quest:
 
 ![Chara quest tool]()
 
-Of course, tools also needs to store the newly generated data, so I serialized all those data into specific scriptable object, specifically every object that have an image at the end (character, elements) or contains text.
+Of course, tools also needs to store the newly generated data, so I serialized all those data into specific scriptable object, specifically every object that have an image at the end (character, elements) or contains text, all this contained into a GameDataContainer scriptable object.
+
+
 
 ## Game analytics
 Playfab, privacy policy

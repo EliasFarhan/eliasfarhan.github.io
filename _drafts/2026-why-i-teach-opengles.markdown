@@ -67,6 +67,20 @@ Since when I started to give Computer Graphics courses, I have been following th
 - WebGL2: my favorite reason of using OpenGL ES 3.0 is that it is mostly compatible with WebGL2 with emscripten (except float color attachment that is an extension...), which allows my students to port their samples to their own website/blog. It is the case with this blog post where I simply put the demo out of emscripten on the web page.
 - Probably iOS or MacOSX: I did not try personally.
 
+One of the hassles of the first course is having the students' laptop chooses the wrong GPU on laptop (using the Intel integrated GPU instead of the Nvidia GPU). Last year, you just needed to set the whole Nvidia configuration to be on "Performant" mode, but with a new Windows update, you need to set individually the application that is to be performant in the Windows settings, not the Nvidia settings anymore. Also, there is this trick for Windows:
+```C++
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+__declspec(dllexport) DWORD NvOptimusEnablement = 1;
+__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
+
+#ifdef __cplusplus
+}
+#endif
+```
+And this (supposedely) enables the discrete GPU and not the integrated one.
 ## Core concepts
 
 When working on their samples, the students usually start to build their own abstraction. This year, we decided to work together and build the abstraction in a common git repository such that those abstraction could be used by all the students of the class as soon as it was implemented. 
@@ -145,11 +159,30 @@ glVertexAttribPointer(
   GL_FALSE,
 		vertexAttribData.stride,
 		(void*)vertexAttribData.offset);
-	glEnableVertexAttribArray(vertexAttribData.index);
+glEnableVertexAttribArray(vertexAttribData.index);
 
 ```
 
-Vertex Input becomes even more important when we want to give a buffer while using instancing (for example giving the model matrix of our models through vertex input). I usually let the students find their abstractions for VAO, VBO, EBO and instancing buffers, as they have to implement model loading as well.
+Vertex Input becomes even more important when we want to give a buffer while using instancing (for example giving the model matrix of our models through vertex input). I usually let the students find their abstractions for VAO, VBO, EBO and instancing buffers, as they have to implement model loading as well. But this would look like this:
+```C++
+//init instancing buffer object
+int ibo_;
+glGenBuffers(1, &ibo_);
+glBindBuffer(GL_ARRAY_BUFFER, ibo_);
+glBufferData(GL_ARRAY_BUFFER, instancing_buffer.size, instancing_buffer.data, GL_STATIC_DRAW);
+
+//link instancing bugger object to vao
+glVertexAttribPointer(
+  instancing_input_location, // in the shader (location = 0) 
+  instancingAttribData.size, // how many of the primitive: float => 1, vec2 => 2, vec3 => 3, vec4 => 4
+  instancingAttribData.type,
+  GL_FALSE,
+	instancingAttribData.stride,
+  (void*)instancingAttribData..offset);
+glEnableVertexAttribArray(instancingAttribData.index);
+glVertexAttribDivisor(instancing_input_location, 1);
+```
+The divisor thingy is confusing, but it means that we give the value of the instancing buffer per instance and not per vertex.
 
 ### Textures
 
@@ -224,21 +257,38 @@ After working on my computer graphics editor (I wrote a blog post [here](/jekyll
 Some other function that I see is the ```DrawScene(const Pipeline& pipeline)``` that can draw the scene with any pipeline. Useful when doing shadow map, but needing more parameters to implement frustum culling efficiently (giving a camera as input as well to filter the mesh that are not drawn). 
 
 ### Dynamic states
-In OpenGL, those states (depth-stencil, back-face culling, blending) are all dynamic and can be changed with a line, for example:
+In OpenGL, pipeline states (depth-stencil, back-face culling, blending) are all mostly dynamic and can be changed with a line, for example:
 ```C++
 glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+
+glEnable(GL_CULL_FACE);
+glCullFace(GL_BACK);
+glFrontFace(GL_CCW);
+
+glEnable(GL_BLEND);
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+glEnable(GL_STENCIL_TEST);
+glStencilFunc(GLenum func,GLint ref,GLuint mask);
+glStencilOp(GLenum sfail, GLenum dpfail, GLenum dppass);
+glStencilMask(GLuint mask);
 ```
+
 ### Render passes & Framebuffer
 
 Finally, the last big OpenGL core concept is about multi passes. The first half of the module is spent in one pass. Post-processing is the first example of multi-pass, where my students have to use a framebuffer to draw their scene, and then use another pipeline and the render targets as sampled texture. 
 
 ## Missing modern OpenGL in ES 3.0
 
-The cost of using OpenGL ES 3.0 (to allow use of WebGL 2.0) has still a cost though. Some core concepts of modern rendering are explained in course content but not implemented (except if the students want to get rid of WebGL2 compatibility).
+Using OpenGL ES 3.0 (to allow use of WebGL 2.0) has still a cost though. Some core concepts of modern rendering are explained in course content but not implemented (except if the students want to get rid of WebGL2 compatibility).
 
 ### SSBO
 
-Of course, we need to had another type of buffer that can be binded to an uniform. 
+As of OpenGL 4.3 and OpenGL 3.1, we can define shader storage buffer object. This is useful to remove the need to pass by the vertex inputs when doing instancing. Of course, we need to had another type of buffer that can be binded to an uniform. This would look like this:
+```C++
+
+```
 
 ### Compute shader
 Compute shader only appeared in OpenGL ES 3.1 (so not WebGL2). Coming back to the post-processing example explained before, instead of giving the color attachment of the scene as a ```sampler2D```, we could give it as an ```image2D``` and actually do the post-processing in compute. Typically, every the-whole-screen kind of shader are easier to implement with a compute pipeline with a single shader, rather than a graphics pipeline with 
