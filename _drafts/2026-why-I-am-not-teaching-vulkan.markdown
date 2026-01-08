@@ -3,6 +3,7 @@ layout: post
 title:  "Why I am not teaching Vulkan"
 categories: jekyll update
 ---
+<!--more-->
 ## Introduction
 
 I made a blog post about why I am still teaching OpenGL ES 3.0 in 2025-2026 in my introduction to Computer Graphics course at SAE Institute [here](), now let's talk about why I am not teaching Vulkan. 
@@ -22,15 +23,14 @@ On Android (from [here](https://developer.android.com/about/dashboards) as of Ja
 
 ### Render pass 
 
-### Synchronization
+### Synchronization + presenting
 
 ### The mental load
 Verbosity, so many different concepts for a triangle.
 
 ## Modern Vulkan?
 
-
-Sascha Willems 2026 [HowToVulkan](https://www.howtovulkan.com/) showcases an example of modern Vulkan (still bye bye old mobile phones).
+Sascha Willems 2026 [HowToVulkan](https://www.howtovulkan.com/) showcases an example of modern Vulkan (still bye bye old most of Android mobile phones).
 
 ### Pipeline dynamic state
 https://docs.vulkan.org/guide/latest/dynamic_state.html

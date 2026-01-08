@@ -110,14 +110,15 @@ class Shader
 public:
 //shader target being GL_VERTEX_SHADER or GL_FRAGMENT_SHADER
     void Load(std::string_view path, GLenum shader_target); 
-[...]
+//[...]
 
 class Pipeline
 {
 public:
     void Load(const Shader& vertex_shader, const Shader& fragment_shader);
-[...]
+//[...]
 ```
+Shaders are "compiled" with *glslangValidator* that I configure with *CMake*. This allows to check for syntax errors during compile-time instead of seeing a weird error in the run-time compilation of the glsl shader by the driver. 
 
 Because of OpenGL implementation of uniform buffer, we added a bunch of function to set those uniforms and to retrieve the uniform locations (and cache them for future retrieval):
 
@@ -145,6 +146,8 @@ Several things to unpack here:
 
 ### Vertex inputs
 
+**Replace with Buffer abstraction + Vertex Input abstraction**
+
 One of the weird thing for me going into OpenGL is how memory is allocated (the glGen*, glBind*, and then upload the data and probably uplaod at the same time). For example, for a vertex input buffer, an index buffer:
 
 ```C++
@@ -160,6 +163,7 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer.size, index_buffer.data, GL_S
 ```
 
 For vertex inputs, you have those buffers that are to be setup in a Vertex Array Object, sort of like a container of vertex buffers, to define how the pipeline is going to read the vertex buffers, with something like this:
+
 ```C++
 int vao_;
 glGenVertexArrays(1, &vao_);
@@ -186,14 +190,14 @@ glGenBuffers(1, &ibo_);
 glBindBuffer(GL_ARRAY_BUFFER, ibo_);
 glBufferData(GL_ARRAY_BUFFER, instancing_buffer.size, instancing_buffer.data, GL_STATIC_DRAW);
 
-//link instancing bugger object to vao
+//link instancing buffer object to vao
 glVertexAttribPointer(
   instancing_input_location, // in the shader (location = 0) 
   instancingAttribData.size, // how many of the primitive: float => 1, vec2 => 2, vec3 => 3, vec4 => 4
   instancingAttribData.type,
   GL_FALSE,
 	instancingAttribData.stride,
-  (void*)instancingAttribData..offset);
+  (void*)instancingAttribData.offset);
 glEnableVertexAttribArray(instancingAttribData.index);
 glVertexAttribDivisor(instancing_input_location, 1);
 ```
@@ -279,6 +283,7 @@ void Mesh::Draw(const Pipeline& pipeline)
 After working on my computer graphics editor (I wrote a blog post [here](/jekyll/update/2023/11/29/compgrapheditorv1.html)), I really prefer a separated approach where a scene has materials (pipeline + texture reference) and meshes, and that models do not exist as scene abstraction. However again, it is not about making a data-driven renderer, but just implement a 3d scene.
 
 ### Dynamic states
+
 In OpenGL, pipeline states (depth-stencil, back-face culling, blending) are all mostly dynamic and can be changed with a line, for example:
 ```C++
 glEnable(GL_DEPTH_TEST);
@@ -299,15 +304,56 @@ glStencilMask(GLuint mask);
 
 ### Render passes & Framebuffer
 
-Finally, the last big OpenGL core concept is about multi passes. The first half of the module is spent in one pass. Post-processing is the first example of multi-pass, where my students have to use a framebuffer to draw their scene, and then use another pipeline and the render targets as a sampled texture. 
+**Framebuffer abstraction**
 
-Depth-only framebuffer
+Finally, the last big OpenGL core concept is about multi passes. The first half of the module is spent in one pass. Post-processing is the first example of multi-pass, where my students have to use a framebuffer to draw their scene, and then use another pipeline and the render targets as a sampled texture. The first example is several variations of post-processing (like grayscale, inversing the color). Setting a certain framebuffer in OpenGL is starting a new render pass (RenderDoc will usually write it as Color Pass). Defining the framebuffer with a texture color attachment would look like this:
 
-HDR
+```C++
+glGenFramebuffers(1, &fbo_);
+//[...] Create the texture
 
-Tonemapping
+glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorBuffer_, 0);
+```
 
+The depth-stencil buffer in this case is setup as a RBO (render buffer object, yet another type of buffers), sort of like a GPU only kind of resource. This will look like this:
 
+```C++
+glGenRenderbuffers(1, &depthRbo_);
+glBindRenderbuffer(GL_RENDERBUFFER, depthRbo_);
+glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, size_.x, size_.y);
+glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRbo_);
+
+```
+For the shadow pass, we usually want depth-only pass and those are setup this was:
+```C++
+//No draw setup
+GLenum drawBuffers = GL_NONE;
+glDrawBuffers(1, &drawBuffers);
+glReadBuffer(GL_NONE);
+
+```
+The fragment shader of the depth-only pass would look like this (linearizing the depth by setting explicitely the ```gl_FragDepth```):
+```glsl
+#version 300 es
+precision highp float;
+
+out vec4 FragColor;
+
+void main()
+{
+    gl_FragDepth = gl_FragCoord.z;
+    FragColor = vec4(0,0,0,1);
+}
+```
+
+A big step in using framebuffer in the module comes with the introduction to HDR (High-Dynamic Range), basically the fact that we can use color in a bigger range than [0 - 255]. One of such applications is deferred rendering and the creation of G-Buffer (Geometry Buffer) to minimize the amount of lighting calculation per pixel. So first, you render a color pass on a G-Buffer with several color attachments each containing important geometry value (position, normal, base color) and then there is a light pass where lighting is calculated per pixel. This technique see a huge performance improvement when drawing a lot of lights on the screen.
+
+Of course, not all monitor outputs HDR, so we need a way to go back to LDR (Low-Dynamic Range, [0 - 255]) and this is done at the end of the lighting pass fragment shader:
+```glsl
+//Reinhard tonemapping
+vec3 result = lighting / (lighting + vec3(1.0));
+FragColor = vec4(result, 1.0);
+```
 
 ## Missing modern OpenGL features in ES 3.0
 
@@ -340,8 +386,24 @@ Compute shader only appeared in OpenGL ES 3.1 (so not WebGL2). Coming back to th
 
 ### SPIR-V
 
-Starting with OpenGL 4.6 (not even available in OpenGL ES 3.2), we can load SPIR-V instead of plain text GLSL. This allow for quick loading of shader as the format is binary.
+Starting with OpenGL 4.6 (not even available in OpenGL ES 3.2), we can load SPIR-V instead of plain text GLSL. This allow for quick loading of shader as the format is binary and it allows to add a compilation step to shaders (something we sort of do anyway with glslandValidator).
 
+## Missing features from Modern API
+Sticking with OpenGL means also mssing a lot about newer features of modern API like Vulkan and DX12.
+
+### Raytracing
+
+### Multithreaded rendering
+
+## The results
+
+Here are some of the works of my students during this module over the years:
+- [Fabian Huber](https://blog.stowy.ch/posts/how-i-implemented-a-deferred-pbr-renderer-in-opengl/)
+- [Samuel Styles](https://sstyles93.github.io/projects/openglscene/)
+- [Olivier Pachoud](https://chocolive24.github.io/blog/how-i-created-an-opengl-3d-scene/)
+- [Constantin Verine](https://cochta.github.io/work/nested/renderer)
+- [Remy Lambert](https://remlamb.github.io/3d_scene/scene.html)
+- [Maxime Roch](https://mebearwhodis.github.io/projects/opengl-renderer)
 ## Conclusion
 
 OpenGL ES 3.0 has still a lot of advantages to be teached even in 2026 (especially WebGL2), at the cost of going through the struggle of the legacy of this API. 14 years is a lot of time in Computer Graphics. I want to write another blog post about why we are not yet switching to Vulkan. 
