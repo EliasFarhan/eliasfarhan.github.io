@@ -388,12 +388,22 @@ Compute shader only appeared in OpenGL ES 3.1 (so not WebGL2). Coming back to th
 
 Starting with OpenGL 4.6 (not even available in OpenGL ES 3.2), we can load SPIR-V instead of plain text GLSL. This allow for quick loading of shader as the format is binary and it allows to add a compilation step to shaders (something we sort of do anyway with glslandValidator).
 
+### Bindless 
+
+
+
 ## Missing features from Modern API
 Sticking with OpenGL means also mssing a lot about newer features of modern API like Vulkan and DX12.
 
 ### Raytracing
+With all their marketing on RTX, Nvidia surely brought raytracing in every gamer's mouth when talking about computer graphics. Of course, raytracing exists since before the advent of graphics card. However in 2018, DXR was released, allowing for hardware raytracing on the GPU using new kind of shaders (closest-hit, miss, raygen, etc...) and Vulkan followed with the Nvidia extension and then the generic extension. 
+
+Most games are still living in a hybrid rendering world where some parts are done in rasterization and some are done in raytracing, with custom options for players. In its [State of GPU Hardware](https://asawicki.info/articles/state_of_gpu_hardware_2025.php), Dmytro “Boolka” Bulatov mentions that only games like *Indiana Jones and the Great Circle* (released in late 2024) that puts DXR as a requirement. So for me, as a teacher, I still showcase the hardware raytracing API, its advantages and disadvantages, and how the future looks like, but as it is an introduction to computer graphics, I can't ask all my students to have to implement a hardware raytracing pipeline.
 
 ### Multithreaded rendering
+When thinking about modern CPU architecture, we are living in a multi-core world now, but most of what we program in games is still happening in one thread on one core. To truly unlock the power of our CPU, we can divide our work between several threads. A common pattern is to have a threading model with Game/Cull/Render on the CPU, or having the loading done async and those still work with OpenGL. 
+
+However, certain games (like [Halo Infinite](https://www.youtube.com/watch?v=IUiNUky-ibM)) require the use of multiple threads to generate all the GPU commands. This is definitely possible with DX12 and Vulkan, but not in OpenGL where the render states are in the driver implementation in one thread.
 
 ## The results
 
@@ -404,6 +414,7 @@ Here are some of the works of my students during this module over the years:
 - [Constantin Verine](https://cochta.github.io/work/nested/renderer)
 - [Remy Lambert](https://remlamb.github.io/3d_scene/scene.html)
 - [Maxime Roch](https://mebearwhodis.github.io/projects/opengl-renderer)
+
 ## Conclusion
 
 OpenGL ES 3.0 has still a lot of advantages to be teached even in 2026 (especially WebGL2), at the cost of going through the struggle of the legacy of this API. 14 years is a lot of time in Computer Graphics. I want to write another blog post about why we are not yet switching to Vulkan. 

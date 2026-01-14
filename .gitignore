@@ -6,3 +6,4 @@ eliasfarhan.sql
 vendor
 Gemfile.lock
 _tmp
+*:Zone.Identifier
