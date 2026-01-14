@@ -94,7 +94,7 @@ __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 }
 #endif
 ```
-And this (supposedely) enables the discrete GPU and not the integrated one.
+And this (supposedely) enables the discrete GPU and not the integrated one (I am happy this is a solved problem in modern API like Vulkan).
 
 ## Core concepts
 
@@ -179,29 +179,52 @@ glVertexAttribPointer(
 		vertexAttribData.stride,
 		(void*)vertexAttribData.offset);
 glEnableVertexAttribArray(vertexAttribData.index);
-
+//when using instancing
+glVertexDivisor(vertexAttribData.index, 1);
 ```
+All this is abstracted in the VertexInput class with the Buffer abstraction:
+```c++
 
-Vertex Input becomes even more important when we want to give a buffer while using instancing (for example giving the model matrix of our models through vertex input). I usually let the students find their abstractions for VAO, VBO, EBO and instancing buffers, as they have to implement model loading as well. But this would look like this:
-```C++
-//init instancing buffer object
-int ibo_;
-glGenBuffers(1, &ibo_);
-glBindBuffer(GL_ARRAY_BUFFER, ibo_);
-glBufferData(GL_ARRAY_BUFFER, instancing_buffer.size, instancing_buffer.data, GL_STATIC_DRAW);
+template<GLenum target>
+class Buffer {
+public:
+  void Bind() const;
+  void Load();
+  /**
+   * @brief Allocate and upload the data in the buffer
+   */
 
-//link instancing buffer object to vao
-glVertexAttribPointer(
-  instancing_input_location, // in the shader (location = 0) 
-  instancingAttribData.size, // how many of the primitive: float => 1, vec2 => 2, vec3 => 3, vec4 => 4
-  instancingAttribData.type,
-  GL_FALSE,
-	instancingAttribData.stride,
-  (void*)instancingAttribData.offset);
-glEnableVertexAttribArray(instancingAttribData.index);
-glVertexAttribDivisor(instancing_input_location, 1);
+  template<typename T>
+  void UploadRange(std::span<const T> range, GLenum usage = GL_STATIC_DRAW);
+  /**
+   * @brief Update the data in the buffer (to be used after using UploadRange
+   */
+  template <typename T>
+  void UpdateRange(std::span<const T> range, GLintptr offset = 0, GLenum usage = GL_STATIC_DRAW);
+};
+
+using VertexBuffer = Buffer<GL_ARRAY_BUFFER>;
+using IndexBuffer = Buffer<GL_ELEMENT_ARRAY_BUFFER>;
+
+struct VertexBufferAttribute {
+  GLuint location;
+  GLint size;
+  GLenum type;
+  GLsizei stride;
+  size_t offset;
+  bool is_instanced = false;
+};
+
+class VertexInput {
+ public:
+  void Load();
+  void BindVertexBuffer(const VertexBuffer& vbo, std::span<const VertexBufferAttribute> attributes);
+  void BindIndexBuffer(const IndexBuffer& ebo);
+  void Bind();
+};
 ```
-The divisor thingy is confusing, but it means that we give the value of the instancing buffer per instance and not per vertex.
+- ```VertexBufferAttribute::is_instanced``` allows Buffer to be binded as per instance buffer as we don't have support for SSBO in OpenGL ES 3.0 (section below).
+
 
 ### Textures
 
@@ -301,37 +324,47 @@ glStencilFunc(GLenum func,GLint ref,GLuint mask);
 glStencilOp(GLenum sfail, GLenum dpfail, GLenum dppass);
 glStencilMask(GLuint mask);
 ```
+We don't use specific abstraction for those which mostly mimic modern Vulkan dynamic state features.
 
 ### Render passes & Framebuffer
 
-**Framebuffer abstraction**
-
-Finally, the last big OpenGL core concept is about multi passes. The first half of the module is spent in one pass. Post-processing is the first example of multi-pass, where my students have to use a framebuffer to draw their scene, and then use another pipeline and the render targets as a sampled texture. The first example is several variations of post-processing (like grayscale, inversing the color). Setting a certain framebuffer in OpenGL is starting a new render pass (RenderDoc will usually write it as Color Pass). Defining the framebuffer with a texture color attachment would look like this:
-
+Finally, the last big OpenGL core concept is about multi passes. The first half of the module is spent in one pass. Post-processing is the first example of multi-pass, where my students have to use a framebuffer to draw their scene, and then use another pipeline and the render targets as a sampled texture. The first example is several variations of post-processing (like grayscale, inversing the color). Setting a certain framebuffer in OpenGL is starting a new render pass (RenderDoc will usually write it as Color Pass). With the students, we worked out an ```Framebuffer``` abstraction that use a ```FramebufferCreateInfo``` struct (very similar to Vulkan) with the color attachments and the depth color:
 ```C++
-glGenFramebuffers(1, &fbo_);
-//[...] Create the texture
 
-glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorBuffer_, 0);
+struct ColorAttachmentInfo {
+  GLenum target = GL_TEXTURE_2D;
+  GLint internal_format = GL_RGB8;
+  bool is_active = false;
+};
+
+struct DepthAttachmentInfo {
+  GLenum target = GL_TEXTURE_2D;
+  GLenum internal_format = GL_DEPTH24_STENCIL8;
+  bool is_active = false;
+  bool is_rbo = true;
+};
+
+struct FramebufferCreateInfo {
+  //OpenGL has maximum 16 color attachments
+  std::array<ColorAttachmentInfo, 16> color_attachment_infos{};
+  DepthAttachmentInfo depth_stencil_attachment_info{};
+  core::Vec2I size{};
+};
+
+class Framebuffer
+{
+void Load(const FramebufferCreateInfo& info);
+void Bind();
+static void BindBackbuffer();
+const Texture& color_attachments(int index);
+const Texture& depth_attachment();
+};
 ```
 
-The depth-stencil buffer in this case is setup as a RBO (render buffer object, yet another type of buffers), sort of like a GPU only kind of resource. This will look like this:
+- RBO (render buffer object, yet another type of buffers) is sort of like a GPU write-only kind of resource. 
 
-```C++
-glGenRenderbuffers(1, &depthRbo_);
-glBindRenderbuffer(GL_RENDERBUFFER, depthRbo_);
-glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, size_.x, size_.y);
-glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRbo_);
+Usually, we want one or several color attachments as ```Texture``` and a depth-buffer as RBO, except for a shadow pass, where we want a depth-only pass (that outputs to a ```Texture```).
 
-```
-For the shadow pass, we usually want depth-only pass and those are setup this was:
-```C++
-//No draw setup
-GLenum drawBuffers = GL_NONE;
-glDrawBuffers(1, &drawBuffers);
-glReadBuffer(GL_NONE);
-
-```
 The fragment shader of the depth-only pass would look like this (linearizing the depth by setting explicitely the ```gl_FragDepth```):
 ```glsl
 #version 300 es
@@ -346,7 +379,7 @@ void main()
 }
 ```
 
-A big step in using framebuffer in the module comes with the introduction to HDR (High-Dynamic Range), basically the fact that we can use color in a bigger range than [0 - 255]. One of such applications is deferred rendering and the creation of G-Buffer (Geometry Buffer) to minimize the amount of lighting calculation per pixel. So first, you render a color pass on a G-Buffer with several color attachments each containing important geometry value (position, normal, base color) and then there is a light pass where lighting is calculated per pixel. This technique see a huge performance improvement when drawing a lot of lights on the screen.
+A big step in using framebuffer in the module comes with the introduction to HDR (High-Dynamic Range), basically the fact that we can use color in a bigger range than [0 - 255]. One of such applications is deferred rendering and the creation of G-Buffer (Geometry Buffer that contains position, normals and baseColor for example) to minimize the amount of lighting calculation per pixel. So first, you render a color pass on a G-Buffer with several color attachments each containing important geometry value (position, normal, base color) and then there is a light pass where lighting is calculated per pixel. This technique see a huge performance improvement when drawing a lot of lights on the screen. With our abstraction, you just need to use a HDR type of internal format (for example ```GL_RGB16F```).
 
 Of course, not all monitor outputs HDR, so we need a way to go back to LDR (Low-Dynamic Range, [0 - 255]) and this is done at the end of the lighting pass fragment shader:
 ```glsl
@@ -361,7 +394,7 @@ Using OpenGL ES 3.0 (to allow use of WebGL 2.0) has still a cost though. Some co
 
 ### SSBO
 
-As of OpenGL 4.3 and OpenGL 3.1, we can define shader storage buffer object. This is useful to remove the need to pass by the vertex inputs when doing instancing. Of course, we need to had another type of buffer that can be binded to an uniform. This would look like this:
+As of OpenGL 4.3 and OpenGL ES 3.1, we can define shader storage buffer object. This is useful to remove the need to pass by the vertex inputs when doing instancing. Of course, we need to had another type of buffer that can be binded to an uniform. This would look like this:
 ```C++
 //in C++
 glGenBuffers(1, &ssbo_);
@@ -390,7 +423,15 @@ Starting with OpenGL 4.6 (not even available in OpenGL ES 3.2), we can load SPIR
 
 ### Bindless 
 
+Modern OpenGL desktop allows for "bindless" rendering where textures are not binded to a texture unit but can be referenced via a 64-bit handle stored in a buffer (enabling access to virtually an unlimited textures without expensive state changes) with the extension ```ARB_bindless_texture``` (supported on Nvidia and AMD, but not on Intel).
 
+For buffers, ```ARB_buffer_storage``` (core in OpenGL 4.4 and as an extension ```EXT_buffer_storage``` since OpenGL ES 3.1) allows to keep the GPU pointer to enables persistent mapped buffers, avoiding repeated map/unmap cycles. 
+
+This is not available in OpenGL ES 3.0, so the workarounds are usually texture atlases or texture arrays, combined with batching (draw calls with different vertex inputs, but the same textures) to avoid the costly switch of textures.
+
+### Indirect Drawing
+Another powerful feature that is unavailable in OpenGL ES 3.0 is indirect drawing. In our module, the CPU is issuing all the draw calls with ```glDrawArrays``` and ```glDrawElements``` or their instanced versions.
+```glDrawArraysIndirect``` and ```glDrawElementsIndirect``` are part of core since OpenGL 4.0 and OpenGL ES 3.1 allowing draw parameters to come from a ```GL_DRAW_INDIRECT_BUFFER```. More power comes with Multi-Draw Indirect (core in OpenGL 4.3 and extension ```EXT_multi_draw_indirect``` since OpenGL ES 3.1), which allows through ```glMultiDrawArraysIndirect``` and ```glMultiDrawElementsIndirect``` calls to dispatch entire arrays of draw commands which combined with compute shaders that enables fully GPU-driven rendering pipelines where the GPU performs frustum culling, LOD selection, and occlusion culling. ```ARB_indirect_parameters``` allows even the draw count itself be GPU-determined.
 
 ## Missing features from Modern API
 Sticking with OpenGL means also mssing a lot about newer features of modern API like Vulkan and DX12.
