@@ -433,6 +433,11 @@ This is not available in OpenGL ES 3.0, so the workarounds are usually texture a
 Another powerful feature that is unavailable in OpenGL ES 3.0 is indirect drawing. In our module, the CPU is issuing all the draw calls with ```glDrawArrays``` and ```glDrawElements``` or their instanced versions.
 ```glDrawArraysIndirect``` and ```glDrawElementsIndirect``` are part of core since OpenGL 4.0 and OpenGL ES 3.1 allowing draw parameters to come from a ```GL_DRAW_INDIRECT_BUFFER```. More power comes with Multi-Draw Indirect (core in OpenGL 4.3 and extension ```EXT_multi_draw_indirect``` since OpenGL ES 3.1), which allows through ```glMultiDrawArraysIndirect``` and ```glMultiDrawElementsIndirect``` calls to dispatch entire arrays of draw commands which combined with compute shaders that enables fully GPU-driven rendering pipelines where the GPU performs frustum culling, LOD selection, and occlusion culling. ```ARB_indirect_parameters``` allows even the draw count itself be GPU-determined.
 
+### Debugging
+For my students, what used to be the most time they were spending was with [RenderDoc](https://renderdoc.org/). Now I see more students just using LLM to check their code and see what is wrong (even one of my students who said "they told me there was an error there"). However, the exam explicitly forbids LLM to solve, so my students still have to go through the debugging process by themselves if they want to pass.
+
+Starting with OpenGL 4.3, ```KHR_debug``` is part of core and allows to have the driver sends error, warning, debug messages through a callback. As OpenGL 4.3 is fully compatible, I realized while writing this blog post that we could use it on Desktop to have better debug capabilities (registering OpenGL objects with ```glObjectLabel``` with a macro for example). 
+
 ## Missing features from Modern API
 Sticking with OpenGL means also mssing a lot about newer features of modern API like Vulkan and DX12.
 
