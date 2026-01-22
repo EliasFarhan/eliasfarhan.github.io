@@ -54,9 +54,11 @@ categories: jekyll update
 
 It's been a few years that I have been giving this Introduction to Computer Graphics module (a trimester) at SAE Institute Geneva and I have always been wondering if and when I would need to transition my course from OpenGL to more modern API. 
 
-Back in Novmeber, I was at the Graphics Programming Conference (my blog post [here](jekyll/update/2025/11/21/graphics_programming_conf.html)), and this subject reemerged for me during the conversations with people from the industry as well as from the talks. From the Teardown talk, the original game worked in OpenGL 3.3 and from the X-Plane talk, the rendering engine was using OpenGL 2.1. But both those talks were about how they transitionned to more modern API to have better graphics. 
+Back in November, I was at the Graphics Programming Conference (my blog post [here](jekyll/update/2025/11/21/graphics_programming_conf.html)), and this subject reemerged for me during the conversations with people from the industry as well as from the talks. From the Teardown talk, the original game worked in OpenGL 3.3 and from the X-Plane talk, the rendering engine was using OpenGL 2.1. But both those talks were about how they transitioned to more modern API to have better graphics. This sounds like the sunset of OpenGL.
 
 Two talks really caught my attention about education for Computer Graphics: the talk _Bridging Pixels and Code: Teaching Computer Graphics to Technical Artists_ from Matthieu Delaere that focus on students creating their own rasterizer from scratch and the talk from Mike Shah that focuses on the next steps after the tutorial. The latter talk actually made me think about if the actual idea to do the transition to modern API for my course made still sense.
+
+What have to be taken into account for a transition is that all the courses need to be translated to this new API/framework and updated depending on the new concept added. So if there is a transition to be made, it needs to be really worth it compare to OpenGL ES 3.0.
 
 ## The course content
 The goal of the introduction in computer graphics module is for the students to implement a 3d scene with a graphics API. What is important to understand is that they should not implement a generic 3d renderer, but specifically a 3d scene, so the final executable is not supposed to be data-driven. For example, it would be completely ok to have such implementation:
@@ -64,24 +66,26 @@ The goal of the introduction in computer graphics module is for the students to 
 ```C++
 void DrawScene(const Pipeline& pipeline, const Camera& camera)
 {
-  //Cull the scene from the camera
+  //Cull the scene from the camera POV
 
   //Draw each 3d object by hand
 
 }
 ```
 
-Since when I started to give this module, I have been following the [learnopengl.com](https://learnopengl.com/) structure with the variation of OpenGL ES 3.0 . Each chapter is like a list of samples that have to be implemented and tested.
+Since when I started to give this module, I have been following the [learnopengl.com](https://learnopengl.com/) structure but using OpenGL ES 3.0 instead. Each chapter is like a list of samples that have to be implemented and tested (Hello Triangle, Hello Texture, etc...)
 
 But why specifically this version of OpenGL? OpenGL ES 3.0 is a mobile graphics API, released in August 2012, so about 14 years ago (which is a LONG time in computer graphics). I chose it because it is the most cross-platform version of OpenGL in my opinion, with this version you can run the same C++ program (with some #ifdef) and the same shaders for:
 - Windows: while I encountered some driver issues throughout the year, OpenGL ES 3.0 is compatible with OpenGL 4.3, so I just assume OpenGL 4.3 on Windows not to worry.
-- Linux: recently I had some issue with Wayland vs X working on some OpenGL tests, I need to dig deeper if there is any more issue (probably building SDL3 without the proper dependencies).
+- Linux: some of my workstations boot on Linux by default, and it is good practice to compile the same C++ code with another compiler.
 - Android: this one is a bit complicated as the actual android app boots from Java and calls the native lib containing the code.
 - Nintendo Switch: we have two devkits at school and except removing glew or glad and replacing it with the embedding OpenGL wrapper, it works fine.
-- WebGL2: my favorite reason of using OpenGL ES 3.0 is that it is mostly compatible with WebGL2 with emscripten (except float color attachment that is an extension...), which allows my students to port their samples to their own website/blog. It is the case with this blog post where I simply put the demo out of emscripten on the web page.
-- Probably iOS or MacOSX: I did not try personally.
+- WebGL2: my favorite reason of using OpenGL ES 3.0 is that it is compatible with WebGL2 with emscripten (except float color attachment that is an extension...), which allows my students to port their samples to their own website/blog. It is the case with this blog post where I simply put the demo out of emscripten on the web page.
+- iOS or MacOSX: unfortunately not supported anymore, but none of my students work on a Mac as this is a Games Programming bachelor.
 
-One of the hassles of the first course is having the students' laptop chooses the wrong GPU on laptop (using the Intel integrated GPU instead of the Nvidia GPU). Last year, you just needed to set the whole Nvidia configuration to be on "Performant" mode, but with a new Windows update, you need to set individually the application that is to be performant in the Windows settings, not the Nvidia settings anymore. Also, there is this trick for Windows:
+Compare to more modern API, synchronization is taken care of by the driver in OpenGL. This allows to skip most of the setup of a lot of boilerplate initialization. This is nice, but is paid with the cost of the driver overhead added for this.
+
+However, one of the hassles of the first course is having the students' laptop chooses the wrong GPU on laptop (using the Intel integrated GPU instead of the Nvidia GPU). Last year, you just needed to set the whole Nvidia configuration to be on "Performant" mode, but with a new Windows update, you need to set individually the application that is to be performant in the Windows settings, not the Nvidia settings anymore. Also, there is this trick for Windows:
 ```C++
 #ifdef __cplusplus
 extern "C" {
@@ -94,11 +98,11 @@ __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 }
 #endif
 ```
-And this (supposedely) enables the discrete GPU and not the integrated one (I am happy this is a solved problem in modern API like Vulkan).
+And this (supposedely) enables the discrete GPU and not the integrated one (I am happy this is a solved problem in modern API like Vulkan). Let's see how we tackle other subjects!
 
 ## Core concepts
-
-When working on their samples, the students usually start to build their own abstraction. This year, we decided to work together and build the abstraction in a common git repository such that those abstraction could be used by all the students of the class as soon as it was implemented. 
+Every week, the students need to finish about 2-3 samples on a specific feature (for example: implement a sample that uses SSAO using the previous idea from the deferred rendering sample). 
+When working on their samples, the students usually start to build their own abstractions. This year, we decided to work together and build the abstraction in a common git repository such that those abstraction could be used by all the students of the class as soon as it was implemented. This is something that I want to continue in the next years.
 
 ### Pipeline
 
@@ -148,7 +152,7 @@ Several things to unpack here:
 
 **Replace with Buffer abstraction + Vertex Input abstraction**
 
-One of the weird thing for me going into OpenGL is how memory is allocated (the glGen*, glBind*, and then upload the data and probably uplaod at the same time). For example, for a vertex input buffer, an index buffer:
+One of the weird thing for me going into OpenGL is how memory is allocated (the glGen*, glBind*, and then upload the data and probably uplaod at the same time). For example, for a vertex input buffer:
 
 ```C++
 int vbo_;
@@ -156,10 +160,6 @@ glGenBuffers(vboCount, &vbo_);
 glBindBuffer(GL_ARRAY_BUFFER, vbo_);
 glBufferData(GL_ARRAY_BUFFER, vertex_buffer.size, vertex_buffer.data, GL_STATIC_DRAW);
 
-int ebo_;
-glGenBuffers(vboCount, &ebo_);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer.size, index_buffer.data, GL_STATIC_DRAW);
 ```
 
 For vertex inputs, you have those buffers that are to be setup in a Vertex Array Object, sort of like a container of vertex buffers, to define how the pipeline is going to read the vertex buffers, with something like this:
@@ -266,9 +266,6 @@ switch (image.comp)
       0, GL_RGBA, image.width, image.height, 
       0, GL_RGBA, GL_UNSIGNED_BYTE, image.pixels);
 		break;
-	default:
-		break;
-	}
 ```
 All this is course hidden in a ```Texture``` abstraction with ```Load``` and ```Bind```. Then for cubemaps, we add:
 ```C++
@@ -281,9 +278,49 @@ class Texture
 ```
 The ```Texture``` holds the "target" (```GL_TEXTURE2D``` or ```GL_TEXTURE_CUBE_MAP```, why not texture3d?) and then the ```Bind``` will bind the correct target.
 
+### Model Loading
+We use [Assimp](https://www.assimp.org/) as it simplifies the setup of the loading of 3d models and also allows to import and export in a lot of different formats. This would look like this:
+```C++
+
+void Model::LoadModel(std::string_view path)
+{
+  Assimp::Importer importer;
+  scene = importer.ReadFile(path.data(),
+                                aiProcess_Triangulate | aiProcess_FlipUVs |
+                                aiProcess_GenNormals |
+                                aiProcess_CalcTangentSpace);
+
+  if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+  {
+      ...
+  }
+  ProcessNode(scene->mRootNode, scene);
+}
+
+void Model::ProcessNode(aiNode* node, const aiScene* scene)
+{
+    // process all the node's meshes (if any)
+    for (unsigned int i = 0; i < node->mNumMeshes; i++)
+    {
+        aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+        meshes_.push_back(ProcessMesh(mesh, scene));
+    }
+    // then do the same for each of its children
+    for (unsigned int i = 0; i < node->mNumChildren; i++)
+    {
+        ProcessNode(node->mChildren[i], scene);
+    }
+}
+
+Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+{
+  // Processing the meshes
+```
+It is also used in the same way in [learnopengl.com](learnopengl.com), so the students can have a working implementation to check when they encounter a mistake.
+
 ### Draw commands
 
-In OpenGL, the driver is adding our commands into its own command buffer. This forbids multi-threading draw commands generation (compare to more modern API) and it gives this feeling that drawing happens immediately. Because of learnopengl.com, most of my students put their draw call in the ```Mesh``` contained in their ```Model```. So it looks like this:
+In OpenGL, the driver is adding our commands into its own command buffer. This forbids multi-threading draw commands generation (compare to more modern API) and it gives this feeling that drawing happens immediately. Because of [learnopengl.com](learnopengl.com), most of my students put their draw call in the ```Mesh``` contained in their ```Model```. So it looks like this:
 ```C++
 void Model::Draw(const Pipeline& pipeline)
 {
@@ -304,27 +341,6 @@ void Mesh::Draw(const Pipeline& pipeline)
 
 ```
 After working on my computer graphics editor (I wrote a blog post [here](/jekyll/update/2023/11/29/compgrapheditorv1.html)), I really prefer a separated approach where a scene has materials (pipeline + texture reference) and meshes, and that models do not exist as scene abstraction. However again, it is not about making a data-driven renderer, but just implement a 3d scene.
-
-### Dynamic states
-
-In OpenGL, pipeline states (depth-stencil, back-face culling, blending) are all mostly dynamic and can be changed with a line, for example:
-```C++
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-
-glEnable(GL_CULL_FACE);
-glCullFace(GL_BACK);
-glFrontFace(GL_CCW);
-
-glEnable(GL_BLEND);
-glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-glEnable(GL_STENCIL_TEST);
-glStencilFunc(GLenum func,GLint ref,GLuint mask);
-glStencilOp(GLenum sfail, GLenum dpfail, GLenum dppass);
-glStencilMask(GLuint mask);
-```
-We don't use specific abstraction for those which mostly mimic modern Vulkan dynamic state features.
 
 ### Render passes & Framebuffer
 
@@ -365,20 +381,6 @@ const Texture& depth_attachment();
 
 Usually, we want one or several color attachments as ```Texture``` and a depth-buffer as RBO, except for a shadow pass, where we want a depth-only pass (that outputs to a ```Texture```).
 
-The fragment shader of the depth-only pass would look like this (linearizing the depth by setting explicitely the ```gl_FragDepth```):
-```glsl
-#version 300 es
-precision highp float;
-
-out vec4 FragColor;
-
-void main()
-{
-    gl_FragDepth = gl_FragCoord.z;
-    FragColor = vec4(0,0,0,1);
-}
-```
-
 A big step in using framebuffer in the module comes with the introduction to HDR (High-Dynamic Range), basically the fact that we can use color in a bigger range than [0 - 255]. One of such applications is deferred rendering and the creation of G-Buffer (Geometry Buffer that contains position, normals and baseColor for example) to minimize the amount of lighting calculation per pixel. So first, you render a color pass on a G-Buffer with several color attachments each containing important geometry value (position, normal, base color) and then there is a light pass where lighting is calculated per pixel. This technique see a huge performance improvement when drawing a lot of lights on the screen. With our abstraction, you just need to use a HDR type of internal format (for example ```GL_RGB16F```).
 
 Of course, not all monitor outputs HDR, so we need a way to go back to LDR (Low-Dynamic Range, [0 - 255]) and this is done at the end of the lighting pass fragment shader:
@@ -397,8 +399,6 @@ Using OpenGL ES 3.0 (to allow use of WebGL 2.0) has still a cost though. Some co
 As of OpenGL 4.3 and OpenGL ES 3.1, we can define shader storage buffer object. This is useful to remove the need to pass by the vertex inputs when doing instancing. Of course, we need to had another type of buffer that can be binded to an uniform. This would look like this:
 ```C++
 //in C++
-glGenBuffers(1, &ssbo_);
-glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo_);
 glBufferData(GL_SHADER_STORAGE_BUFFER, instancing_buffer.size, instancing_buffer.data, GL_DYNAMIC_DRAW);
 glBindBufferBase(GL_SHADER_STORAGE_BUFFER, binding_point, ssbo);
 
@@ -439,7 +439,7 @@ For my students, what used to be the most time they were spending was with [Rend
 Starting with OpenGL 4.3, ```KHR_debug``` is part of core and allows to have the driver sends error, warning, debug messages through a callback. As OpenGL 4.3 is fully compatible, I realized while writing this blog post that we could use it on Desktop to have better debug capabilities (registering OpenGL objects with ```glObjectLabel``` with a macro for example). 
 
 ## Missing features from Modern API
-Sticking with OpenGL means also mssing a lot about newer features of modern API like Vulkan and DX12.
+Sticking with OpenGL means also missing a lot about newer features of modern API like Vulkan and DX12.
 
 ### Raytracing
 With all their marketing on RTX, Nvidia surely brought raytracing in every gamer's mouth when talking about computer graphics. Of course, raytracing exists since before the advent of graphics card. However in 2018, DXR was released, allowing for hardware raytracing on the GPU using new kind of shaders (closest-hit, miss, raygen, etc...) and Vulkan followed with the Nvidia extension and then the generic extension. 
@@ -461,8 +461,11 @@ Here are some of the works of my students during this module over the years:
 - [Remy Lambert](https://remlamb.github.io/3d_scene/scene.html)
 - [Maxime Roch](https://mebearwhodis.github.io/projects/opengl-renderer)
 
+## What about a framework?
+I love SDL GPU API. I am currently porting my computer graphics editor to it, and it allows to target Vulkan, DirectX and Metal at the same time. I heard some good things about bgfx also and raylib as well. WebGPU, on top of adding a new shader language, is very similar to Vulkan 1.0 that caused me more pain that joy.
+
+When having students working on their samples and they do a mistake in OpenGL, it can often be pretty clear why there is a mistake, but facing a framework, the code of the library has also to be taken into account. And my goal is to teach them a graphics API and build abstractions on top of it. 
+
 ## Conclusion
 
-OpenGL ES 3.0 has still a lot of advantages to be teached even in 2026 (especially WebGL2), at the cost of going through the struggle of the legacy of this API. 14 years is a lot of time in Computer Graphics. I want to write another blog post about why we are not yet switching to Vulkan. 
-
-
+OpenGL ES 3.0 has still a lot of advantages to be taught even in 2026 (especially WebGL2), at the cost of going through the struggle of the legacy of this API. 14 years is a lot of time in Computer Graphics.  This course has allowed throughout the years all of my students to discover how graphics programming work. For some of them, it was their first step in their computer graphics career and I am glad that I helped them in that. I want to write another blog post about why we are not yet switching to Vulkan, as I have a few things to say about this specific API. Don't hesitate to comment on the social media or just send me an e-mail, I don't have a comment section here.
