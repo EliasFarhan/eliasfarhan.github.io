@@ -8,6 +8,8 @@ categories: jekyll update
 
 I made a blog post about why I am still teaching OpenGL ES 3.0 in 2025-2026 in my introduction to Computer Graphics course at SAE Institute [here](), now let's talk about why I am not teaching Vulkan. 
 
+How about a [VRHI](https://uaasoftware.bitbucket.io/vrhi.html)
+
 ## Vulkan 1.0
 
 The portability (Switch, Android, Windows, Linux), but bye bye rendering

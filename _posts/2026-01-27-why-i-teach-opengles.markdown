@@ -52,9 +52,9 @@ categories: jekyll update
 
 ## Introduction
 
-It's been a few years that I have been giving this Introduction to Computer Graphics module (a trimester) at SAE Institute Geneva and I have always been wondering if and when I would need to transition my course from OpenGL to more modern API. 
+It's been a few years that I have been giving this Introduction to Computer Graphics module (a trimester) at [SAE Institute Geneva](https://www.sae.edu/ch-ge/) and I have always been wondering if and when I would need to transition my course from OpenGL ES 3.0 to more modern API. 
 
-Back in November, I was at the Graphics Programming Conference (my blog post [here](jekyll/update/2025/11/21/graphics_programming_conf.html)), and this subject reemerged for me during the conversations with people from the industry as well as from the talks. From the Teardown talk, the original game worked in OpenGL 3.3 and from the X-Plane talk, the rendering engine was using OpenGL 2.1. But both those talks were about how they transitioned to more modern API to have better graphics. This sounds like the sunset of OpenGL.
+Back in November, I was at the Graphics Programming Conference (my blog post [here](jekyll/update/2025/11/21/graphics_programming_conf.html)), and this subject reemerged for me during the conversations with people from the industry as well as from the talks. From the Teardown talk (all the conference's talks are available on the [website](https://graphicsprogrammingconference.com/2025/)), the original game worked in OpenGL 3.3 and from the X-Plane talk, the rendering engine was using OpenGL 2.1. But both those talks were about how they transitioned to more modern API to have better graphics. This sounds like the sunset of OpenGL.
 
 Two talks really caught my attention about education for Computer Graphics: the talk _Bridging Pixels and Code: Teaching Computer Graphics to Technical Artists_ from Matthieu Delaere that focus on students creating their own rasterizer from scratch and the talk from Mike Shah that focuses on the next steps after the tutorial. The latter talk actually made me think about if the actual idea to do the transition to modern API for my course made still sense.
 
@@ -85,10 +85,12 @@ But why specifically this version of OpenGL? OpenGL ES 3.0 is a mobile graphics 
 
 ![The school devkit with the rotating cubes running](/images/2026/cube_switch.jpg)
 
+*The same demo but running on the Switch*
+
 Compare to more modern API, synchronization is taken care of by the driver in OpenGL. This allows to skip most of the setup of a lot of boilerplate initialization. This is nice, but is paid with the cost of the driver overhead added for this.
 
 However, one of the hassles of the first course is having the students' laptop chooses the wrong GPU on laptop (using the Intel integrated GPU instead of the Nvidia GPU). Last year, you just needed to set the whole Nvidia configuration to be on "Performant" mode, but with a new Windows update, you need to set individually the application that is to be performant in the Windows settings, not the Nvidia settings anymore. Also, there is this trick for Windows:
-```C++
+```c++
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -110,7 +112,7 @@ When working on their samples, the students usually start to build their own abs
 
 I really dislike OpenGL naming... Pipelines are called program, so when my students comes from learnopengl.com, they name their pipelines ```shaderProgram```. Anyway, we created an abstraction called ```Pipeline``` that loads with a vertex shader and a fragment shader (also a specific abstraction) that looks like this:
 
-```C++
+```c++
 class Shader
 {
 public:
@@ -128,7 +130,7 @@ Shaders are "compiled" with *glslangValidator* that I configure with *CMake*. Th
 
 Because of OpenGL implementation of uniform buffer, we added a bunch of function to set those uniforms and to retrieve the uniform locations (and cache them for future retrieval):
 
-```C++
+```c++
 class Pipeline
 {
 public:
@@ -154,7 +156,7 @@ Several things to unpack here:
 
 One of the weird thing for me going into OpenGL is how memory is allocated (the glGen*, glBind*, and then upload the data and probably uplaod at the same time). For example, for a vertex input buffer:
 
-```C++
+```c++
 int vbo_;
 glGenBuffers(vboCount, &vbo_);
 glBindBuffer(GL_ARRAY_BUFFER, vbo_);
@@ -164,7 +166,7 @@ glBufferData(GL_ARRAY_BUFFER, vertex_buffer.size, vertex_buffer.data, GL_STATIC_
 
 For vertex inputs, you have those buffers that are to be setup in a Vertex Array Object, sort of like a container of vertex buffers, to define how the pipeline is going to read the vertex buffers, with something like this:
 
-```C++
+```c++
 int vao_;
 glGenVertexArrays(1, &vao_);
 glBindVertexArray(vao_);
@@ -468,6 +470,9 @@ When having students working on their samples and they do a mistake in OpenGL, i
 
 ## Conclusion
 
-OpenGL ES 3.0 has still a lot of advantages to be taught even in 2026 (especially WebGL2), at the cost of going through the struggle of the legacy of this API. 14 years is a lot of time in Computer Graphics.  This course has allowed throughout the years all of my students to discover how graphics programming work. For some of them, it was their first step in their computer graphics career and I am glad that I helped them in that. I want to write another blog post about why we are not yet switching to Vulkan (talking about synchronization, PSO, driver overhead), as I have a few things to say about this specific API. Don't hesitate to comment on the social media or just send me an e-mail (I am interested to know how other teachers are doing and what people working in the industry want to see from graphics programming students). Here the rotating cubes demo running on Android:
+OpenGL ES 3.0 has still a lot of advantages to be taught even in 2026 (especially WebGL2), at the cost of going through the struggle of the legacy of this API. 14 years is a lot of time in Computer Graphics. For example, at the end of his [graphics API blog post](https://asawicki.info/articles/graphics_apis_yesterday_today_tomorrow_en.php), Adam Sawicki does not recommend OpenGL as a choice (as it is rarely used anymore). 
+
+This course has allowed throughout the years all of my students to discover how graphics programming work. For some of them, it was their first step in their computer graphics career and I am glad that I helped them in that. 
+I want to write another blog post about why we are not yet switching to Vulkan (talking about synchronization, PSO, driver overhead), as I have a few things to say about this specific API. Don't hesitate to comment on the social media or just send me an e-mail (I am interested to know how other teachers are doing and what people working in the industry want to see from graphics programming students). Here the rotating cubes demo running on Android:
 
 ![Showing rotating cubes on Android](/images/2026/cube_android.jpg)
