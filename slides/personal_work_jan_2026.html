@@ -3,57 +3,142 @@
 **Personal work, Jan 2026**
 
 
-<small><em><span class="current-date"></span></em></small><br>
+<small><em>29.01.2026</em></small><br>
 Elias Farhan
 
 ---
 
-# Beach Slap
+![](/images/2025/spelkollektivet.jpg)
+
 
 ---
 
-## New shop
-
-![](/images/2025/beach_slap_shop.png style="height: 13rem")
-
----
-
-## New things
-
-- Sdding Eva Tower
-- Adding Hoot shop
+## Spelkollektivet
+- Food not too bad (French chef)
+- Sports everyday
+- Nice little office
+- Nice people
+- No distractions
+- I did some sword fighting
 
 ---
 
-# Welcome at Houdini's
+![](/images/2025/spell_office.jpg)
+
+---
+
+![](/images/2026/sword.jpg)
+
+---
+
+# AI use indication 🤖
+
+---
+
+## Beach Slap
+
+![](/images/2026/eva_and_hoot.png)
+
+---
+
+## Beach Slap - New things
+
+- Adding Eva Tower (slapping her tower makes her unhappy, and then she shoots a rocket to you)
+- Adding Hoot shop (slapping the shop spawn new items, but too many times and they close the shop)
 
 ---
 
 ## Welcome at Houdini's
 
-- I will make a mobile port of my game "Welcome at Houdini's" (as a practice for Beach Slap)
-- Using Odin Inspector to create the needed tools
-- Using Playfab to get game analytics
-- A "Support the dev" DLC
+![](/images/2026/spel/wah_new_interface.jpg)
 
 ---
 
-# My blog
+## Welcome at Houdini's
+
+- Changes to element combinations
+- Changes to the quests and characters (an actual linear story)
+- Physics-based interaction of elements
+
+---
+
+# OpenGL ES 3.0 blog post
+
+---
+
+## Hello Transform demo in WebGL
+
+<div id="webgl-container" style="text-align: center; margin: 20px 0;">
+  <canvas id="canvas" width="800" height="600" 
+          style="border: 1px solid #000; background-color: #000;">
+  </canvas>
+  <div id="status" style="margin-top: 10px;">Loading...</div>
+</div>
+<script>
+  // Lock the title
+  const originalTitle = document.title;
+  
+  Object.defineProperty(document, 'title', {
+    get: function() {
+      return originalTitle;
+    },
+    set: function(newTitle) {
+      // Ignore any attempts to change title
+      console.log('Blocked title change to:', newTitle);
+    }
+  });
+</script>
+<script>
+  var Module = {
+    canvas: document.getElementById('canvas'),
+    print: function(text) {
+      console.log(text);
+    },
+    setStatus: function(text) {
+      document.getElementById('status').innerText = text;
+    },
+    locateFile: function(path) {
+      return '/assets/webgl/hello-transform/' + path;
+    },
+  };
+</script>
+<script async src="/assets/webgl/hello-transform/HelloTransform.js"></script>
+<style>
+  #canvas {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4/3;
+    display: block !important;
+  }
+</style>
+
+---
+
+## Hello Transform On Android 🤖
+
+![](/images/2026/cube_android.jpg)
+
+---
+
+## Hello Transform On Nintendo Switch
+
+![](/images/2026/cube_switch.jpg)
+
+---
+
+## Why I still teach OpenGL ES 3.0
+
+- Because the following is possible with the same C++ and GLSL source files.
+- It's simple enough that students with no prior knowledge can make their 3d scenes.
+- Can still understand the underlying concepts required to know for real-time rendering.
+
 
 ---
 
 ## The blogger life
-![](/images/2025/elias_blog.png style="height: 13rem")
-
----
-
-## The blogger life
-- I made a post about the Graphics Programming Conference that had a little bit of traction
-- Because I had a big hole of posts between 2019 to 2024, I decided to look back to what I did and to add some posts
-- You can expect more blog posts to come (mostly posted on Linkedin afterwards so don't hesitate to follow me there)
-    - A post about OpenGL ES 3.0
-    - A post about the mobile port of Welcome at Houdini's
-    - A wrap-up of 2025
+- I made a post about why I teach OpenGL ES 3.0
+- A new post about Vulkan to come soon
+- Post-mortem of Welcome at Houdini's when game done
 
 ---
 
@@ -61,22 +146,25 @@ Elias Farhan
 
 ---
 
-## NekoLib
-- I asked Claude Code to make a code-review of the resource.h and it found the same bug that Anthony mentionned
-- However Claude Code can say dumb things like move semantics create resource leak (but that's litery unique_ptr implementation)
+## GBDev
 
-
----
-
-## KwaKwa Jam Collection project
-- I want to port my old python2/pygame game to C++ with the same engine I used for SplashOnline
-- I will try as an experiment to vibe-code most of it with Claude Code (more like a senior dev talking to a junior)
-- Maybe make a Nintendo Switch version
-- Here are the three first games that will go through this process:
+![](https://img.itch.zone/aW1hZ2UvODk0MjYvNDE5Njc1LnBuZw==/794x1000/CoUbO3.png style="width: 7rem")
+![](https://img.itch.zone/aW1hZ2UvODk0MjYvNDI0MDM0LmpwZw==/794x1000/d%2BSib6.jpg style="width: 7rem")
+![](https://img.itch.zone/aW1hZ2UvODk0MjYvNDMxMDY1LmdpZg==/794x1000/70X8Fu.gif style="width: 7rem")
+![](https://img.itch.zone/aW1hZ2UvODk0MjYvNDI0MDM1LmpwZw==/original/ys1%2Fme.jpg style="width: 7rem")
 
 ---
 
-## KwaKwa Jam Collection project / Neko2d
+## GBDev 
+
+- Update from GBDK 1.1 to GBDK 2020 🤖
+- Next steps
+    - Optimize size to fit into a 64kb rom
+    - Adding a new level with new enemies
+
+---
+
+## KwaKwa Jam Collection project / Neko2d 🤖
 
 ![Trials](/images/trials.png style="height: 6rem")
 ![The Last Promise](/images/thelastpromise.png style="height: 6rem")
@@ -84,31 +172,66 @@ Elias Farhan
 
 ---
 
-# Computer Grapcis Editor / Neko3d
+## KwaKwa Jam Collection project / Neko2d 🤖
+- Trials is done
+- Started to port The Last Promise
+- Claude loves to translate OOP to:
+```c++
+// Heap allocations for both the vector and the unique_ptr
+std::vector< std::unique_ptr< SpecificObject >> specific_objects;
+``` 
+
+but I want 
+
+```c++
+// No heap allocation
+std::array< SpecificObject, N > specific_objects;
+```
 
 ---
 
-# Horcrux
+## Computer Graphics Editor / Neko3d
+
+![](/neko2/images/shader_editor.png)
 
 ---
 
-## OpenGL ES 3.0 blog post
+## Computer Grapcis Editor / Neko3d
+
+- Finalize porting the basics to SDL GPU API 🤖
+- Framebuffer working 🤖
+- Material with textures (from drive or framebuffer) working 🤖
+- Next steps: Model Loading, NVRHI with Vulkan adding raytracing features 🤖
 
 ---
 
-# Romulan2
+## Romulan2 🤖
+
+![](/images/2026/pathtracing.png)
+
+---
+
+## Romulan2 🤖
+
+- Preparing the Vulkan course with modern Vulkan 1.4
+- Using dynamic rendering, shader objects, ...
+- More raytracing/pathtracing samples
+
+---
+
+## Course migration 🤖
+
+I took all my google slides courses and moved them to markdeep slides.
+
+This allows to have nice webgl demo directly in the slides and to OWN my slides.
 
 ---
 
 ## Next steps
-- Getting Beach Slap ready for playtesting (online disconnect management)
-- Learning to vibe-code O_ô
-- More blog post!!!
-- Going to Sweden at Spelkollektivet after Christmas with other gamedevs
-
----
-
-![](/images/2025/spelkollektivet.jpg)
+- Getting Beach Slap ready for playtesting
+- Global Game Jam
+- Continuing my vibe quest 🤖
+- More blog posts!!!
 
 ---
 
