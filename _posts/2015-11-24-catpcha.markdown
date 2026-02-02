@@ -1,0 +1,28 @@
+---
+layout: post
+title:  "Catpcha - a PROCJAM post-mortem"
+date:   2015-11-24 11:54:59 +0200
+categories: jekyll update
+---
+
+![IMG_10051.jpg](/images/2015/11/Captcha_title_2.png)
+<!--more-->
+
+
+From November 7th to November 16th 2015, I participate with <a href="https://twitter.com/ivangulizia">Ivan Guliza</a> to the <a href="http://itch.io/jam/procjam">PROCJAM</a>. The goal was to have fun creating a game with procedural generation. Of course, I wanted to have cats so we set up for a genetic game with cat where you mix them to express alleles.
+
+If you don't know much about genetics, the game is about to be very hard to understand. The game adapts the difficulty by calculating the allele expression difficulty and see if it under the difficulty max cap. Then you have typical Mendel genetics with some crossing-over, but nothing completely fancy in term of genetics.
+
+PROCJAM has this typical British notion of relaxed entertainment so the week was not too stressful, except on Sunday where I crunched to finish the game. So now on to my post-mortem.
+
+What went right:
+- Funny idea
+- Lot of motivation due to simulate genetics behaviour.
+- First time working with procedural
+
+What went wrong:
+- Gameplay is a bit clunky, if you don't understand anything about genetics, you are doomed.
+- Realistic genetics behaviors are not fun to play.
+- Sound &amp; music done at the last minute.
+
+That's it for me, you can play the game <a href="http://itch.io/jam/procjam/rate/43630">here</a>. Next game jam is <a href="http://www.leveldesigngamejam.com/">Level Design Game Jam</a> in Lausanne the 6th of December.

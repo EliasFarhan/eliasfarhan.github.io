@@ -1,0 +1,9 @@
+_site
+eliasfarhan.sql
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+Gemfile.lock
+_tmp
+*:Zone.Identifier

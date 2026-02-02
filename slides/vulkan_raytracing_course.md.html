@@ -1,0 +1,1937 @@
+<meta charset="utf-8" lang="en">
+
+**Vulkan Hardware Raytracing**
+    From Hybrid Rendering to Full Path Tracing
+
+<small><em><span class="current-date"></span></em></small><br>
+Advanced Graphics Programming - Part 2
+
+---
+
+# Course Overview
+
+---
+
+## What We'll Cover Today
+
+This course builds on the Vulkan fundamentals to explore **hardware-accelerated raytracing**:
+
+* **Part 1**: History of Raytracing (30 min)
+    - Software raytracing evolution
+    - Hardware acceleration emergence
+    - Why now?
+
+* **Part 2**: Vulkan Raytracing Fundamentals (45 min)
+    - Core concepts & API
+    - Acceleration structures
+    - Shader binding table
+    - Ray tracing pipeline
+
+* **Part 3**: Hybrid Rendering (60 min)
+    - Rasterization + raytracing combination
+    - Common hybrid techniques
+    - Performance considerations
+
+* **Part 4**: Path Tracing & Modern Extensions (45 min)
+    - From hybrid to full path tracing
+    - DOOM: The Dark Ages approach
+    - NVIDIA & AMD latest extensions
+    - Future directions
+
+---
+
+# Part 1: History of Raytracing
+
+---
+
+## The Raytracing Dream (1968-2000s)
+
+**1968**: Arthur Appel introduces ray casting
+
+**1979**: Turner Whitted's recursive raytracing paper
+- Reflections, refractions, shadows
+- Physically-based but slow
+
+**1986**: "The Rendering Equation" by Kajiya
+- Mathematical foundation for global illumination
+- Path tracing formalized
+
+**Problem**: Too slow for real-time
+- Minutes to hours per frame
+- Only practical for offline rendering (Pixar, etc.)
+
+!!! warning: The Performance Gap
+    A single raytraced frame could take longer than an entire game session!
+
+---
+
+>>> Presenter notes:
+>>>
+>>> For decades, raytracing was the "holy grail" of graphics:
+>>> - Perfect reflections
+>>> - Accurate shadows
+>>> - Realistic lighting
+>>> 
+>>> But computational cost was prohibitive. A simple scene might need:
+>>> - Millions of rays per frame
+>>> - Complex intersection tests
+>>> - Recursive bounces
+>>>
+>>> CPUs simply couldn't do this in real-time. Games stuck with rasterization + clever hacks (shadow maps, cube maps, etc.)
+
+## Software Raytracing Attempts
+
+**Early 2000s**: CPU-based real-time attempts
+- Intel Embree (optimized ray traversal)
+- Imagination Technologies PowerVR Wizard (ray tracing GPU prototype)
+- Brigade Engine (path tracing on GPUs)
+
+**2010s**: Compute shader implementations
+- Use GPU compute to trace rays
+- Still too slow for games
+- Useful for small-scale effects
+
+```glsl
+// Typical compute shader ray-sphere intersection
+bool intersectSphere(Ray ray, Sphere sphere, out float t) {
+    vec3 oc = ray.origin - sphere.center;
+    float a = dot(ray.direction, ray.direction);
+    float b = 2.0 * dot(oc, ray.direction);
+    float c = dot(oc, oc) - sphere.radius * sphere.radius;
+    float discriminant = b*b - 4*a*c;
+    if (discriminant < 0) return false;
+    t = (-b - sqrt(discriminant)) / (2.0*a);
+    return t > 0;
+}
+```
+
+**Problem**: No hardware acceleration for BVH traversal!
+
+---
+
+## The Hardware Revolution (2018)
+
+**NVIDIA RTX (Turing Architecture - 2018)**:
+- **RT Cores**: Dedicated ray-triangle intersection hardware
+- **Tensor Cores**: AI denoising
+- First consumer raytracing GPUs
+
+**Key insight**: Hardware-accelerate the bottlenecks
+- BVH traversal
+- Ray-triangle intersection
+- Everything else on shader cores
+
+**Performance**: 10-100x faster than software!
+
+!!! tip: Game Changer
+    Suddenly, real-time raytracing became feasible for high-end gaming.
+
+---
+
+## Industry Adoption Timeline
+
+```
+2018: NVIDIA RTX 2000 series
+      - Battlefield V (hybrid RT)
+      - Metro Exodus
+      ↓
+2019: Control, Minecraft RTX
+      - Path tracing experiments
+      ↓
+2020: AMD RDNA 2 (consoles + PC)
+      - PlayStation 5 / Xbox Series X
+      - Ray Accelerators in AMD GPUs
+      ↓
+2021: Unreal Engine 5 (Lumen)
+      - Software + hardware RT hybrid
+      ↓
+2023: Cyberpunk 2077: Overdrive Mode
+      - Full path tracing mode
+      ↓
+2024: DOOM: The Dark Ages announced
+      - id Tech targeting full PT
+      ↓
+2025: Next-gen RT extensions
+      - Opacity micromaps, displaced micromeshes
+      - Shader execution reordering
+```
+
+---
+
+## Why Hardware Raytracing Now?
+
+**Technology convergence:**
+
+1. **Hardware**: RT cores in all major GPUs
+2. **Denoising**: AI/ML techniques make noisy PT viable
+3. **APIs**: Vulkan RT, DXR standardized
+4. **Experience**: Developers learned hybrid techniques
+5. **Performance**: 4th gen RT cores fast enough for PT
+
+**Market reality:**
+- High-end PCs can do path tracing (with upscaling)
+- Consoles can do hybrid RT
+- Mobile starting to experiment (Snapdragon, etc.)
+
+!!! tip: The Tipping Point
+    We're at the inflection point where RT is becoming the **default**, not an option.
+
+---
+
+# Part 2: Vulkan Raytracing Fundamentals
+
+---
+
+## Vulkan Raytracing Extensions
+
+**Core extensions (promoted to Vulkan 1.3+):**
+
+- `VK_KHR_acceleration_structure` — Build & manage acceleration structures
+- `VK_KHR_ray_tracing_pipeline` — Ray tracing shaders & pipeline
+- `VK_KHR_ray_query` — Inline raytracing in any shader
+
+**Key differences from rasterization:**
+
+| Rasterization | Raytracing |
+|---------------|------------|
+| Triangles → Pixels | Pixels → Scene |
+| Fixed pipeline | Programmable ray behavior |
+| Depth buffering | Explicit ray-object tests |
+| Vertex/Fragment shaders | Ray gen/closest-hit/miss/etc. |
+
+---
+
+## Acceleration Structures (AS): The Foundation
+
+**Why needed?**
+- Naive raytracing: Test every triangle (millions!) → too slow
+- **BVH** (Bounding Volume Hierarchy): Hierarchical spatial structure
+- Hardware traverses BVH, tests only nearby triangles
+
+**Two-level structure:**
+
+```
+┌─────────────────────────────────────┐
+│  Top-Level AS (TLAS)                │
+│  ┌──────────┬──────────┬──────────┐ │
+│  │Instance 0│Instance 1│Instance 2│ │
+│  │(Car)     │(Tree)    │(Building)│ │
+│  └────┬─────┴────┬─────┴────┬─────┘ │
+└───────┼──────────┼──────────┼───────┘
+        │          │          │
+        ▼          ▼          ▼
+   ┌────────┐ ┌────────┐ ┌────────┐
+   │ BLAS 0 │ │ BLAS 1 │ │ BLAS 2 │
+   │(Car    │ │(Tree   │ │(Bldg   │
+   │ mesh)  │ │ mesh)  │ │ mesh)  │
+   └────────┘ └────────┘ └────────┘
+   Bottom-Level AS (BLAS)
+```
+
+---
+
+>>> Presenter notes:
+>>>
+>>> The two-level AS is brilliant for games:
+>>>
+>>> BLAS (Bottom-Level):
+>>> - Contains actual geometry (triangles)
+>>> - Built once per unique mesh
+>>> - Can be reused (instancing!)
+>>>
+>>> TLAS (Top-Level):
+>>> - Contains instances of BLAS
+>>> - Includes transforms (position, rotation, scale)
+>>> - Rebuilt every frame (or when objects move)
+>>>
+>>> This is like rasterization's instancing, but for raytracing. You can have thousands of instances of the same mesh (trees, rocks, etc.) with minimal memory cost.
+
+## Building a Bottom-Level AS (BLAS)
+
+**1. Define geometry:**
+```cpp
+VkAccelerationStructureGeometryKHR geometry{};
+geometry.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR;
+geometry.geometryType = VK_GEOMETRY_TYPE_TRIANGLES_KHR;
+geometry.flags = VK_GEOMETRY_OPAQUE_BIT_KHR; // No alpha testing
+
+VkAccelerationStructureGeometryTrianglesDataKHR triangles{};
+triangles.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR;
+triangles.vertexFormat = VK_FORMAT_R32G32B32_SFLOAT;
+triangles.vertexData.deviceAddress = vertexBufferAddress;
+triangles.vertexStride = sizeof(Vertex);
+triangles.maxVertex = vertexCount;
+triangles.indexType = VK_INDEX_TYPE_UINT32;
+triangles.indexData.deviceAddress = indexBufferAddress;
+
+geometry.geometry.triangles = triangles;
+```
+
+**Note**: Uses buffer device addresses (from Vulkan 1.2)!
+
+---
+
+## Building a BLAS (continued)
+
+**2. Query build size:**
+```cpp
+VkAccelerationStructureBuildGeometryInfoKHR buildInfo{};
+buildInfo.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR;
+buildInfo.type = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR;
+buildInfo.flags = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR;
+buildInfo.geometryCount = 1;
+buildInfo.pGeometries = &geometry;
+
+VkAccelerationStructureBuildSizesInfoKHR sizeInfo{};
+sizeInfo.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR;
+
+vkGetAccelerationStructureBuildSizesKHR(device, 
+    VK_ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE_KHR,
+    &buildInfo, &primitiveCount, &sizeInfo);
+
+// sizeInfo now contains:
+// - accelerationStructureSize (final AS size)
+// - buildScratchSize (temporary memory for build)
+```
+
+---
+
+## Building a BLAS (final)
+
+**3. Allocate & build:**
+```cpp
+// Create AS buffer
+VkBuffer asBuffer = createBuffer(sizeInfo.accelerationStructureSize, 
+                                  VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR);
+
+// Create AS object
+VkAccelerationStructureCreateInfoKHR createInfo{};
+createInfo.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR;
+createInfo.buffer = asBuffer;
+createInfo.size = sizeInfo.accelerationStructureSize;
+createInfo.type = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR;
+
+vkCreateAccelerationStructureKHR(device, &createInfo, nullptr, &blas);
+
+// Build in command buffer
+buildInfo.dstAccelerationStructure = blas;
+buildInfo.scratchData.deviceAddress = scratchBufferAddress;
+
+VkAccelerationStructureBuildRangeInfoKHR buildRange{};
+buildRange.primitiveCount = triangleCount;
+buildRange.primitiveOffset = 0;
+
+vkCmdBuildAccelerationStructuresKHR(commandBuffer, 1, &buildInfo, &pBuildRange);
+```
+
+---
+
+## Building a Top-Level AS (TLAS)
+
+**1. Define instances:**
+```cpp
+VkAccelerationStructureInstanceKHR instance{};
+// Transform (3x4 matrix, row-major)
+instance.transform = {
+    1.0f, 0.0f, 0.0f, position.x,
+    0.0f, 1.0f, 0.0f, position.y,
+    0.0f, 0.0f, 1.0f, position.z
+};
+instance.instanceCustomIndex = 0; // User-defined index (SBT offset)
+instance.mask = 0xFF; // Trace mask (for filtering)
+instance.instanceShaderBindingTableRecordOffset = 0; // Hit shader offset
+instance.flags = VK_GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR;
+instance.accelerationStructureReference = blasDeviceAddress;
+
+// Write instances to buffer
+writeToBuffer(instanceBuffer, instances);
+```
+
+**2. Build TLAS** (similar to BLAS, but with instance geometry type)
+
+---
+
+## Ray Tracing Pipeline: Shader Stages
+
+**New shader types:**
+
+1. **Ray Generation (`.rgen`)**: Entry point, shoots rays
+   ```glsl
+   void main() {
+       vec2 uv = (gl_LaunchIDEXT.xy + 0.5) / gl_LaunchSizeEXT.xy;
+       vec3 rayDir = computeRayDirection(uv);
+       traceRayEXT(tlas, flags, cullMask, 0, 0, 0, rayOrigin, tmin, rayDir, tmax, 0);
+   }
+   ```
+
+2. **Closest Hit (`.rchit`)**: Hit closest surface
+   ```glsl
+   void main() {
+       vec3 normal = computeNormal();
+       payload.color = lighting(normal);
+   }
+   ```
+
+3. **Miss (`.rmiss`)**: Ray hit nothing
+   ```glsl
+   void main() {
+       payload.color = skyColor;
+   }
+   ```
+
+4. **Any Hit (`.rahit`)**: Intermediate hits (transparency)
+5. **Intersection (`.rint`)**: Custom geometry intersection
+
+---
+
+>>> Presenter notes:
+>>>
+>>> Ray tracing pipeline is very different from graphics pipeline:
+>>>
+>>> Graphics: Vertex → (Geometry) → Fragment → Output
+>>> Ray Tracing: Ray Gen → (Traversal) → Intersection → Closest/Any Hit → Ray Gen
+>>>
+>>> Key concepts:
+>>> - Ray payload: Data passed between shaders
+>>> - Hit attributes: Barycentric coords, etc.
+>>> - Recursion: Rays can spawn rays (reflections!)
+>>>
+>>> The shader binding table (next) determines which shaders run for which geometry.
+
+## Shader Binding Table (SBT)
+
+**Problem**: Different objects need different shaders
+- Glass → reflection/refraction shader
+- Metal → high-gloss reflection
+- Diffuse → simple lighting
+
+**Solution**: Shader Binding Table
+- Maps geometry instances to shader groups
+- GPU looks up which shader to run based on hit geometry
+
+```
+┌─────────────────────────────────────────┐
+│ Shader Binding Table                    │
+├─────────────────────────────────────────┤
+│ Ray Gen Group       [shader + data]     │
+├─────────────────────────────────────────┤
+│ Miss Group 0        [shader + data]     │
+│ Miss Group 1        [shader + data]     │
+├─────────────────────────────────────────┤
+│ Hit Group 0 (Glass) [shader + data]     │
+│ Hit Group 1 (Metal) [shader + data]     │
+│ Hit Group 2 (Diffuse)[shader + data]    │
+└─────────────────────────────────────────┘
+```
+
+**Instance custom index** + **SBT offset** → determines hit shader!
+
+---
+
+## SBT Creation
+
+```cpp
+// Create SBT buffer layout
+const uint32_t handleSize = rtProperties.shaderGroupHandleSize;
+const uint32_t handleAlignment = rtProperties.shaderGroupHandleAlignment;
+const uint32_t baseAlignment = rtProperties.shaderGroupBaseAlignment;
+
+// Get shader handles from pipeline
+std::vector<uint8_t> shaderHandles(handleSize * groupCount);
+vkGetRayTracingShaderGroupHandlesKHR(device, rtPipeline, 0, groupCount, 
+                                      shaderHandles.size(), shaderHandles.data());
+
+// Write to SBT buffer with proper alignment
+// Layout: [Ray Gen | Miss | Hit Groups...]
+uint8_t* sbtData = mapSBTBuffer();
+memcpy(sbtData, shaderHandles.data() + (rayGenIndex * handleSize), handleSize);
+// ... copy miss and hit groups with proper stride ...
+unmapSBTBuffer();
+
+// Define regions for vkCmdTraceRaysKHR
+VkStridedDeviceAddressRegionKHR raygenRegion{};
+raygenRegion.deviceAddress = sbtAddress;
+raygenRegion.stride = alignedHandleSize;
+raygenRegion.size = alignedHandleSize;
+// ... similarly for miss and hit regions ...
+```
+
+---
+
+## Putting It All Together: Trace Rays
+
+```cpp
+// In command buffer, after building AS:
+
+// Bind ray tracing pipeline
+vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR, rtPipeline);
+
+// Bind descriptor sets (TLAS, output image, textures, etc.)
+vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR,
+                        pipelineLayout, 0, 1, &descriptorSet, 0, nullptr);
+
+// Trace rays!
+vkCmdTraceRaysKHR(cmd,
+    &raygenRegion,  // Ray generation SBT region
+    &missRegion,    // Miss SBT region
+    &hitRegion,     // Hit SBT region
+    &callableRegion,// Callable SBT region (advanced)
+    width, height, 1); // Dispatch dimensions
+```
+
+**GPU executes ray generation shader for each pixel**, which traces rays through the scene!
+
+---
+
+## Ray Queries: Inline Raytracing
+
+**Alternative to ray tracing pipeline**: `VK_KHR_ray_query`
+
+**Use inline raytracing in ANY shader:**
+```glsl
+#extension GL_EXT_ray_query : require
+
+layout(set = 0, binding = 0) uniform accelerationStructureEXT tlas;
+
+void main() {
+    // In fragment shader, compute shader, etc.
+    rayQueryEXT rq;
+    rayQueryInitializeEXT(rq, tlas, gl_RayFlagsOpaqueEXT, 0xFF,
+                          rayOrigin, 0.0, rayDir, 1000.0);
+    
+    while (rayQueryProceedEXT(rq)) {
+        if (rayQueryGetIntersectionTypeEXT(rq, false) == gl_RayQueryCandidateIntersectionTriangleEXT) {
+            rayQueryConfirmIntersectionEXT(rq);
+        }
+    }
+    
+    if (rayQueryGetIntersectionTypeEXT(rq, true) == gl_RayQueryCommittedIntersectionTriangleEXT) {
+        // Hit something!
+        float hitT = rayQueryGetIntersectionTEXT(rq, true);
+        // ...
+    }
+}
+```
+
+**Simpler for basic raytracing** (shadows, AO), no SBT needed!
+
+---
+
+# Part 3: Hybrid Rendering
+
+---
+
+## What is Hybrid Rendering?
+
+**Combination of rasterization + raytracing:**
+
+- **Rasterization**: Primary visibility (G-buffer, depth)
+  - Fast, efficient for visible surfaces
+  - Mature, well-understood
+
+- **Raytracing**: Secondary effects
+  - Reflections, shadows, ambient occlusion
+  - Global illumination
+  - Accurate, physically-based
+
+**Why hybrid?**
+- Pure path tracing still too expensive (for now)
+- Rasterization excellent for primary rays
+- Best of both worlds!
+
+---
+
+>>> Presenter notes:
+>>>
+>>> Hybrid rendering is the current state of the art for most games. Here's why:
+>>>
+>>> Pure rasterization limitations:
+>>> - Screen-space reflections (SSR) break at edges
+>>> - Shadow maps need multiple cascades, high resolution
+>>> - No global illumination without baking
+>>>
+>>> Pure path tracing limitations:
+>>> - Needs many samples per pixel (noisy)
+>>> - Requires heavy denoising
+>>> - Still challenging even on RTX 4090
+>>>
+>>> Hybrid approach:
+>>> - Use rasterization where it's strong (primary visibility)
+>>> - Use RT where it shines (accurate secondary rays)
+>>> - Get great quality with acceptable performance
+
+## Common Hybrid Techniques
+
+**1. Ray Traced Shadows**
+- Rasterize scene, shoot shadow rays from each pixel
+- One ray to light source
+- Soft shadows via area light sampling
+
+**2. Ray Traced Reflections**
+- Generate G-buffer via rasterization
+- Shoot reflection rays based on surface normals
+- Much better than SSR (no edge artifacts)
+
+**3. Ray Traced Ambient Occlusion (RTAO)**
+- Hemisphere sampling around surface point
+- More accurate than SSAO
+- Captures distant occluders
+
+**4. Ray Traced Global Illumination (RTGI)**
+- Shoot diffuse rays to gather indirect lighting
+- 1-2 bounces typical
+- Denoised heavily
+
+---
+
+## Hybrid Pipeline Flow
+
+```
+┌──────────────────────────────────────────────────────┐
+│  Rasterization Pass                                  │
+│  ┌────────────────────────────────────────────────┐  │
+│  │ G-Buffer: Albedo, Normal, Depth, Roughness... │  │
+│  └────────────────────────────────────────────────┘  │
+└────────────────┬─────────────────────────────────────┘
+                 │
+                 ▼
+┌──────────────────────────────────────────────────────┐
+│  Ray Tracing Passes                                  │
+│  ┌──────────────────┐  ┌──────────────────┐          │
+│  │ RT Shadows       │  │ RT Reflections   │          │
+│  │ (1 ray/pixel)    │  │ (1-2 rays/pixel) │          │
+│  └──────────────────┘  └──────────────────┘          │
+│  ┌──────────────────┐  ┌──────────────────┐          │
+│  │ RTAO             │  │ RTGI (optional)  │          │
+│  │ (1-4 rays/pixel) │  │ (1-2 rays/pixel) │          │
+│  └──────────────────┘  └──────────────────┘          │
+└────────────────┬─────────────────────────────────────┘
+                 │
+                 ▼
+┌──────────────────────────────────────────────────────┐
+│  Denoising                                           │
+│  ┌────────────────────────────────────────────────┐  │
+│  │ Temporal + Spatial filtering                   │  │
+│  │ (SVGF, ReSTIR, etc.)                           │  │
+│  └────────────────────────────────────────────────┘  │
+└────────────────┬─────────────────────────────────────┘
+                 │
+                 ▼
+┌──────────────────────────────────────────────────────┐
+│  Composition & Lighting                              │
+│  ┌────────────────────────────────────────────────┐  │
+│  │ Combine G-buffer + RT results                  │  │
+│  │ Final lighting equation                        │  │
+│  └────────────────────────────────────────────────┘  │
+└──────────────────────────────────────────────────────┘
+```
+
+---
+
+## RT Shadows Implementation
+
+**Ray generation shader:**
+```glsl
+#version 460
+#extension GL_EXT_ray_tracing : require
+
+layout(set = 0, binding = 0) uniform accelerationStructureEXT tlas;
+layout(set = 0, binding = 1, rgba8) uniform image2D shadowImage;
+layout(set = 0, binding = 2) uniform sampler2D gBufferDepth;
+layout(set = 0, binding = 3) uniform sampler2D gBufferNormal;
+
+layout(location = 0) rayPayloadEXT bool shadowed;
+
+void main() {
+    ivec2 pixel = ivec2(gl_LaunchIDEXT.xy);
+    vec2 uv = (vec2(pixel) + 0.5) / vec2(gl_LaunchSizeEXT.xy);
+    
+    // Reconstruct world position from G-buffer
+    float depth = texture(gBufferDepth, uv).r;
+    vec3 worldPos = reconstructWorldPos(uv, depth);
+    vec3 normal = texture(gBufferNormal, uv).xyz;
+    
+    // Shoot ray to light
+    vec3 lightDir = normalize(lightPos - worldPos);
+    float lightDist = length(lightPos - worldPos);
+    
+    shadowed = false;
+    traceRayEXT(tlas, gl_RayFlagsOpaqueEXT | gl_RayFlagsTerminateOnFirstHitEXT,
+                0xFF, 0, 0, 0,
+                worldPos + normal * 0.001, 0.0, lightDir, lightDist, 0);
+    
+    imageStore(shadowImage, pixel, vec4(shadowed ? 0.0 : 1.0));
+}
+```
+
+---
+
+## RT Shadows: Miss & Hit Shaders
+
+**Miss shader (ray didn't hit anything → lit):**
+```glsl
+#version 460
+#extension GL_EXT_ray_tracing : require
+
+layout(location = 0) rayPayloadInEXT bool shadowed;
+
+void main() {
+    shadowed = false; // Ray reached light
+}
+```
+
+**Closest hit shader (ray hit something → shadowed):**
+```glsl
+#version 460
+#extension GL_EXT_ray_tracing : require
+
+layout(location = 0) rayPayloadInEXT bool shadowed;
+
+void main() {
+    shadowed = true; // Occluder found
+}
+```
+
+**That's it!** Binary shadow (hard shadow). For soft shadows, sample area light with multiple rays.
+
+---
+
+## RT Reflections with Ray Queries
+
+**In compute shader (after G-buffer pass):**
+```glsl
+#version 460
+#extension GL_EXT_ray_query : require
+
+layout(set = 0, binding = 0) uniform accelerationStructureEXT tlas;
+layout(set = 0, binding = 1, rgba16f) uniform image2D reflectionImage;
+layout(set = 0, binding = 2) uniform sampler2D gBufferNormal;
+layout(set = 0, binding = 3) uniform sampler2D gBufferRoughness;
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+void main() {
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    vec2 uv = (vec2(pixel) + 0.5) / imageSize(reflectionImage);
+    
+    vec3 worldPos = reconstructWorldPos(uv);
+    vec3 normal = texture(gBufferNormal, uv).xyz;
+    float roughness = texture(gBufferRoughness, uv).r;
+    
+    vec3 viewDir = normalize(cameraPos - worldPos);
+    vec3 reflectDir = reflect(-viewDir, normal);
+    
+    // Roughness → cone angle (wider cone for rough surfaces)
+    reflectDir = perturbDirection(reflectDir, roughness);
+```
+
+---
+
+## RT Reflections (continued)
+
+```glsl
+    rayQueryEXT rq;
+    rayQueryInitializeEXT(rq, tlas, gl_RayFlagsOpaqueEXT, 0xFF,
+                          worldPos + normal * 0.001, 0.0,
+                          reflectDir, 10000.0);
+    
+    while (rayQueryProceedEXT(rq)) {}
+    
+    vec3 reflectionColor = vec3(0.0);
+    if (rayQueryGetIntersectionTypeEXT(rq, true) == 
+        gl_RayQueryCommittedIntersectionTriangleEXT) {
+        // Hit something - shade it
+        float hitT = rayQueryGetIntersectionTEXT(rq, true);
+        vec3 hitPos = worldPos + reflectDir * hitT;
+        int instanceID = rayQueryGetIntersectionInstanceIdEXT(rq, true);
+        int primitiveID = rayQueryGetIntersectionPrimitiveIndexEXT(rq, true);
+        vec2 barycentrics = rayQueryGetIntersectionBarycentricsEXT(rq, true);
+        
+        // Fetch material, shade
+        reflectionColor = shadeSurface(instanceID, primitiveID, barycentrics, hitPos);
+    } else {
+        // Sky
+        reflectionColor = sampleSkybox(reflectDir);
+    }
+    
+    imageStore(reflectionImage, pixel, vec4(reflectionColor, 1.0));
+}
+```
+
+---
+
+## Performance: Rasterization vs Raytracing
+
+**Typical costs (1080p, RTX 4080):**
+
+| Technique | Rasterization | Raytracing | Speedup/Cost |
+|-----------|---------------|------------|--------------|
+| Primary visibility | 2-4 ms | 8-15 ms | Raster 3-4x faster |
+| Shadows (hard) | 1-2 ms | 0.5-1 ms | RT faster! |
+| Reflections | 1-2 ms (SSR) | 2-4 ms (RT) | RT more accurate |
+| AO | 1 ms (SSAO) | 1-2 ms (RTAO) | Similar, RT better quality |
+| GI | 0 ms (baked) | 4-8 ms (RTGI) | RT enables dynamic GI |
+
+**Key takeaway**: RT shines for secondary rays, but primary rays still faster with rasterization.
+
+---
+
+>>> Presenter notes:
+>>>
+>>> This performance profile is why hybrid rendering makes sense:
+>>>
+>>> Rasterization advantages:
+>>> - Coherent memory access (whole triangles processed together)
+>>> - Hardware optimized for decades
+>>> - Early-Z, hierarchical-Z, etc.
+>>>
+>>> Raytracing advantages:
+>>> - Perfect shadows (no shadow map resolution issues)
+>>> - Perfect reflections (no SSR edge artifacts)
+>>> - Natural global illumination (just shoot rays!)
+>>>
+>>> The future will shift more toward RT as hardware improves, but for now, hybrid is the sweet spot.
+
+## Denoising: Essential for RT
+
+**Problem**: Low ray counts → noisy images
+- 1 ray/pixel for shadows → grainy
+- 1-2 rays/pixel for GI → very noisy
+
+**Solution**: Aggressive denoising
+- Leverage temporal coherence (previous frames)
+- Spatial filtering guided by G-buffer
+- Advanced: SVGF, ReSTIR, ReBLUR
+
+**Example: SVGF (Spatiotemporal Variance-Guided Filtering)**
+1. Temporal accumulation (blend with history)
+2. Variance estimation
+3. Spatial filtering (edge-aware à-trous wavelet)
+
+**Modern**: NVIDIA DLSS Ray Reconstruction (AI denoising)
+
+---
+
+## Denoising Implementation Sketch
+
+```glsl
+// Temporal reprojection
+vec3 currentColor = texelFetch(currentFrame, pixel, 0).rgb;
+vec2 motion = texelFetch(motionVectors, pixel, 0).xy;
+vec2 prevUV = uv - motion;
+vec3 historyColor = texture(previousFrame, prevUV).rgb;
+
+// Blend with history (higher weight = more temporal stability)
+float temporalWeight = 0.95;
+vec3 denoisedColor = mix(currentColor, historyColor, temporalWeight);
+
+// Spatial filtering (edge-aware)
+vec3 centerNormal = texelFetch(gBufferNormal, pixel, 0).xyz;
+float centerDepth = texelFetch(gBufferDepth, pixel, 0).r;
+
+vec3 filteredColor = vec3(0.0);
+float totalWeight = 0.0;
+
+for (int dy = -radius; dy <= radius; dy++) {
+    for (int dx = -radius; dx <= radius; dx++) {
+        ivec2 samplePixel = pixel + ivec2(dx, dy);
+        vec3 sampleNormal = texelFetch(gBufferNormal, samplePixel, 0).xyz;
+        float sampleDepth = texelFetch(gBufferDepth, samplePixel, 0).r;
+        
+        // Edge-aware weights
+        float normalWeight = pow(max(0.0, dot(centerNormal, sampleNormal)), 32.0);
+        float depthWeight = exp(-abs(centerDepth - sampleDepth) * 100.0);
+        float spatialWeight = gaussianKernel[dy + radius][dx + radius];
+        
+        float weight = normalWeight * depthWeight * spatialWeight;
+        filteredColor += texelFetch(currentFrame, samplePixel, 0).rgb * weight;
+        totalWeight += weight;
+    }
+}
+
+denoisedColor = filteredColor / totalWeight;
+```
+
+---
+
+## ReSTIR: Reservoir-based Spatiotemporal Importance Resampling
+
+**Next-gen denoising/sampling technique** (NVIDIA, 2020)
+
+**Key idea**: 
+- Reuse samples across space AND time
+- Massively increase effective sample count
+- 1 ray/pixel → quality of 100+ rays/pixel
+
+**Process**:
+1. **Temporal reuse**: Find corresponding pixel in previous frame
+2. **Spatial reuse**: Sample neighbors in current frame
+3. **Weighted reservoir sampling**: Combine samples intelligently
+4. **Final shading**: Use "winning" sample
+
+**Used in**: Portal RTX, Cyberpunk Overdrive, DOOM: The Dark Ages (likely)
+
+!!! tip: Game Changer
+    ReSTIR enabled path tracing in games. Without it, noise would be unbearable.
+
+---
+
+# Part 4: Path Tracing & Beyond
+
+---
+
+## From Hybrid to Full Path Tracing
+
+**Path tracing**: Simulate light transport physics
+- Start from camera, trace rays
+- Each bounce, randomly sample next direction
+- Accumulate light contributions
+- Average many samples → converges to correct result
+
+**Why not just use it everywhere?**
+- Needs MANY samples per pixel (hundreds to thousands)
+- Each sample traces multiple rays (bounces)
+- Total: 100+ rays per pixel minimum
+
+**Modern approach**: 
+- Low sample count (1-4 spp)
+- Heavy denoising (ReSTIR + AI)
+- Still need upscaling (DLSS, FSR)
+
+---
+
+## Path Tracing in Games: Case Studies
+
+**Minecraft RTX (2020)**:
+- Full path tracing
+- Simple geometry → fast BVH
+- 1 spp + DLSS
+- Target: 60 fps at 1080p (upscaled from 720p)
+
+**Quake II RTX (2019)**:
+- Full path traced lighting
+- Remaster of classic game
+- Demonstrated feasibility
+
+**Cyberpunk 2077: Overdrive Mode (2023)**:
+- Path traced lighting + hybrid raster
+- 1-2 bounces
+- DLSS 3 required for playable performance
+- Target: 60 fps at 4K (upscaled from ~1080p internal)
+
+---
+
+>>> Presenter notes:
+>>>
+>>> These games show the evolution:
+>>>
+>>> Minecraft RTX:
+>>> - Proof of concept
+>>> - Blocky geometry is ideal for RT
+>>> - Amazing visuals (reflections, caustics, etc.)
+>>>
+>>> Cyberpunk Overdrive:
+>>> - AAA game, complex scenes
+>>> - Required cutting-edge hardware (RTX 4090)
+>>> - Still hybrid (raster for primary visibility)
+>>>
+>>> The pattern: Path tracing is ALMOST there for real-time, but:
+>>> - Needs latest hardware
+>>> - Requires upscaling
+>>> - Benefits from denoisers
+>>>
+>>> DOOM: The Dark Ages is the next evolution...
+
+## DOOM: The Dark Ages - Full Path Tracing
+
+**id Tech 8** (confirmed features):
+- Full path traced global illumination
+- Targeting 60 fps on consoles (PS5, Xbox Series X)
+- PC: Higher quality modes
+
+**Technical approach** (based on public info):
+- Hardware-accelerated path tracing
+- Aggressive denoising (likely ReSTIR)
+- Upscaling (FSR on consoles, DLSS on NVIDIA)
+- Optimized for id Tech's MegaTexture architecture
+
+**Key optimizations** (speculative but likely):
+- BVH updates (static vs dynamic geometry)
+- Visibility buffers for primary rays
+- Importance sampling for lights
+- Material caching
+
+**Release**: TBD (2025)
+
+---
+
+## id Tech RT Optimizations (Known)
+
+**From id Tech presentations:**
+
+1. **Two-level acceleration structures**:
+   - Static world geometry → rarely rebuilt
+   - Dynamic objects → rebuild per frame
+   - Instances for repeated geometry
+
+2. **Material simplification**:
+   - Limit material complexity in RT shaders
+   - Precompute what's possible
+
+3. **Ray budget management**:
+   - Fixed ray count per pixel
+   - Importance sampling to reduce noise
+   - Adaptive sampling in quiet areas
+
+4. **Hybrid approaches**:
+   - Rasterize first hit (likely)
+   - RT for subsequent bounces
+
+---
+
+## Modern RT Extensions: NVIDIA
+
+**Opacity Micromaps (OMM)** — VK_EXT_opacity_micromap (2022)
+- Encode alpha-tested geometry (foliage, fences) in BVH
+- No any-hit shader invocations → faster!
+- 2-4x speedup for scenes with lots of alpha
+
+**Displaced Micro-Meshes (DMM)** — VK_EXT_displaced_micro_mesh (2023)
+- Store displacement as micromesh in BVH
+- Raytracing sees displaced detail without tessellating in vertex shader
+- Massive memory savings + faster traversal
+
+**Shader Execution Reordering (SER)** — VK_NV_ray_tracing_invocation_reorder (2022)
+- Reorder ray shader invocations for better coherence
+- Group similar rays together → better cache utilization
+- 2-3x performance improvement in some scenes
+
+---
+
+## Opacity Micromaps Example
+
+**Problem**: Alpha-tested geometry (leaves, chains) is slow
+- Every ray → invoke any-hit shader
+- Any-hit shader samples texture, discards if transparent
+- Incoherent, slow
+
+**Solution**: Opacity micromap
+- Precompute opacity at micro-triangle level
+- Store in BVH as additional data
+- Hardware skips transparent micro-triangles
+
+```cpp
+VkMicromapEXT opacityMicromap;
+VkMicromapCreateInfoEXT createInfo{};
+createInfo.sType = VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT;
+createInfo.type = VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT;
+createInfo.size = computedSize;
+// ... build micromap from texture data ...
+
+// Attach to BLAS geometry
+geometry.geometry.triangles.pNext = &opacityMicromapInfo;
+```
+
+**Performance**: Foliage-heavy scenes 2-4x faster!
+
+---
+
+>>> Presenter notes:
+>>>
+>>> These extensions represent the cutting edge of RT hardware:
+>>>
+>>> Opacity Micromaps:
+>>> - Brilliant for vegetation, fences, etc.
+>>> - Moves opacity testing from shader to hardware traversal
+>>> - Think of it as "alpha-tested BVH leaves"
+>>>
+>>> Displaced Micro-Meshes:
+>>> - Geometry detail without vertex explosion
+>>> - RT sees high-detail surface, raster sees low-poly
+>>> - Great for terrain, stone walls, etc.
+>>>
+>>> Shader Execution Reordering:
+>>> - Addresses fundamental RT performance issue (incoherence)
+>>> - Rays hit different materials → different code paths → cache misses
+>>> - SER groups similar rays → better GPU utilization
+>>>
+>>> All three are in NVIDIA RTX 40 series and newer. AMD equivalents coming.
+
+## Modern RT Extensions: AMD
+
+**Ray Tracing Pipeline with Hit Counters** — AMD-specific
+- Count hits per-ray for analytics
+- Optimize based on actual ray behavior
+
+**RDNA 3 Ray Accelerators** (hardware, not extension)
+- Dedicated RT hardware in RDNA 3 (RX 7000 series)
+- BVH traversal + intersection acceleration
+- Performance competitive with NVIDIA RTX 30 series
+
+**Upcoming RDNA 4** (2024-2025, rumored):
+- Enhanced ray accelerators
+- Hardware denoising support
+- Closer to NVIDIA RTX 40 performance
+
+**Cross-vendor extensions**:
+- VK_KHR_ray_tracing_position_fetch
+- VK_KHR_ray_tracing_maintenance1
+- Both AMD and NVIDIA collaborate on these
+
+---
+
+## Future: Full Path Tracing Everywhere?
+
+**Short term (2024-2026):**
+- Hybrid rendering remains dominant
+- More games with path traced modes (DOOM, etc.)
+- Better denoising (AI-driven)
+- Upscaling essential (DLSS, FSR, XeSS)
+
+**Mid term (2027-2030):**
+- Path tracing standard for high-end
+- Consoles capable of limited PT
+- RT hardware in ALL GPUs (including integrated)
+- Specialized denoisers in hardware
+
+**Long term (2030+):**
+- Pure path tracing viable at native resolution
+- Rasterization relegated to UI, simple effects
+- Real-time GI "just works"
+
+!!! tip: The Transition
+    Similar to fixed-function → programmable shaders (2000s). Takes time, but inevitable!
+
+---
+
+## ReSTIR Deep Dive
+
+**Weighted Reservoir Sampling** — core technique
+
+**Concept**: Combine many samples into one "super sample"
+- Each sample has a weight (importance)
+- Probabilistically select one
+- Reuse across time and space
+
+**Temporal reuse**:
+```
+Frame N-1: Sample S1 with weight W1
+Frame N:   Sample S2 with weight W2
+Combined:  Pick S1 or S2 based on W1/(W1+W2)
+Result:    Effectively 2 samples' worth of info from 1 new sample
+```
+
+**Spatial reuse**: Same idea, but with neighboring pixels
+
+**Result**: 1 new sample/pixel + reuse → quality of 10-20 samples/pixel
+
+---
+
+## ReSTIR Implementation Sketch
+
+```glsl
+struct Reservoir {
+    vec3 sample;       // Chosen sample (light position, direction, etc.)
+    float weight;      // Accumulated weight
+    int M;             // Number of samples seen
+    float W;           // Final weight for shading
+};
+
+Reservoir temporalReuse(Reservoir current, Reservoir history, float temporalWeight) {
+    Reservoir combined;
+    combined.weight = current.weight + history.weight * temporalWeight;
+    combined.M = current.M + history.M;
+    
+    // Probabilistically select sample
+    if (random() < current.weight / combined.weight) {
+        combined.sample = current.sample;
+    } else {
+        combined.sample = history.sample;
+    }
+    
+    // Compute final weight for shading
+    combined.W = combined.weight / (combined.M * pdf(combined.sample));
+    return combined;
+}
+
+// Spatial reuse similar, but combines neighbors
+Reservoir spatialReuse(Reservoir center, Reservoir neighbors[N]) {
+    // ... similar weighted combination ...
+}
+```
+
+---
+
+## Neural Denoising (DLSS Ray Reconstruction)
+
+**NVIDIA's latest**: DLSS 3.5 Ray Reconstruction
+- Trained neural network replaces hand-crafted denoisers
+- Inputs: Noisy RT, G-buffer, motion vectors, previous frame
+- Output: Clean, temporally stable image
+
+**Advantages**:
+- Better detail preservation
+- Fewer ghosting artifacts
+- Handles low sample counts (1 spp!)
+
+**Implementation**: Not open, requires NVIDIA SDK
+```cpp
+// Pseudocode (actual API is opaque)
+NVSDK_NGX_Parameter_SetUI(params, "DLSS.Enable", 1);
+NVSDK_NGX_Parameter_SetUI(params, "RayReconstruction.Enable", 1);
+NVSDK_NGX_D3D12_EvaluateRayReconstruction(cmdList, feature, params);
+```
+
+**Competitor**: AMD FidelityFX Denoiser (open source)
+
+---
+
+## Best Practices for RT in Production
+
+**DO**:
+- Start with hybrid (RT shadows/reflections)
+- Profile early and often (Nsight, RenderDoc)
+- Use ReSTIR or equivalent for GI
+- Denoise aggressively
+- Plan for upscaling from the start
+- Optimize BVH (static vs dynamic)
+- Use OMM for vegetation
+
+**DON'T**:
+- Try to path trace everything immediately
+- Ignore denoising (noise is unacceptable)
+- Rebuild BLAS every frame unnecessarily
+- Use complex materials in RT shaders
+- Expect native resolution path tracing (yet)
+
+---
+
+>>> Presenter notes:
+>>>
+>>> Shipping a RT game is hard. Lessons from studios:
+>>>
+>>> 1. Hybrid first: Get experience, profile, iterate
+>>> 2. Budget rays: Know exactly how many rays you can afford
+>>> 3. Denoise everything: Raw RT output is too noisy
+>>> 4. Upscaling is mandatory: Even RTX 4090 needs DLSS for PT
+>>> 5. Optimize BVH: Static world geometry should rarely rebuild
+>>> 6. Test on target hardware: Performance varies wildly
+>>>
+>>> Path tracing is the future, but it's a marathon, not a sprint.
+
+## Advanced Topics: Inline RT vs RT Pipeline
+
+**When to use inline RT** (ray queries):
+- Simple ray tests (shadows, AO)
+- Integration into existing compute shaders
+- Prototyping
+
+**When to use RT pipeline**:
+- Complex multi-bounce scenarios
+- Need SBT for per-material shaders
+- Performance-critical (hardware optimized for pipeline)
+
+**Example: Hybrid approach**
+- Primary rays: Rasterization
+- Shadows: Ray queries in fragment shader
+- Reflections/GI: RT pipeline with multiple bounces
+
+---
+
+## Multi-GPU & Ray Tracing
+
+**Challenges**:
+- AS must be replicated or shared
+- Inter-GPU synchronization
+- Memory overhead
+
+**Strategies**:
+
+1. **Replicate AS on each GPU**
+   - Simple but memory-intensive
+   - Each GPU independent
+
+2. **Split screen** (AFR - Alternate Frame Rendering)
+   - GPU 0: Frame N
+   - GPU 1: Frame N+1
+   - Temporal reuse harder
+
+3. **Split workload** (SFR - Split Frame Rendering)
+   - Top half on GPU 0
+   - Bottom half on GPU 1
+   - Seam artifacts possible
+
+**Reality**: Most games don't support multi-GPU RT (complexity not worth it)
+
+---
+
+## Mobile Ray Tracing
+
+**Current state (2024)**:
+- Qualcomm Snapdragon 8 Gen 2+: Limited RT
+- ARM Immortalis G715+: Ray tracing support
+- MediaTek Dimensity 9200: RT capable
+
+**Limitations**:
+- Much slower than desktop GPUs
+- Power constraints
+- Thermal throttling
+
+**Typical use cases**:
+- RT shadows only (1 ray/pixel)
+- Very limited GI (heavily denoised)
+- Lower resolutions (720p-1080p)
+
+**Future**: RT will become standard on mobile, but 5+ years behind desktop
+
+---
+
+## WebGPU and Ray Tracing
+
+**Current status**: No ray tracing support in WebGPU spec (2024)
+
+**Workarounds**:
+- Software ray tracing in compute shaders
+- Limited to simple scenes
+
+**Future**: 
+- `webgpu-ray-tracing` extension proposed
+- Unlikely before 2026
+- When it arrives, will enable RT in browsers
+
+**Use cases** (future):
+- Architectural visualization in browser
+- Product rendering (e.g., car configurators)
+- WebXR with realistic lighting
+
+---
+
+# Advanced Techniques & Research
+
+---
+
+## Wavefront Path Tracing
+
+**Problem**: Standard path tracing has divergent paths
+- Each ray behaves differently
+- GPU SIMD efficiency suffers (some threads idle)
+
+**Solution**: Wavefront approach
+1. Generate all primary rays
+2. Sort by material/ray type
+3. Execute in batches (better coherence)
+4. Repeat for each bounce
+
+**Performance**: 2-3x faster on GPUs vs naïve path tracing
+
+**Implementation**: Complex, but enables efficient path tracing
+
+---
+
+## Photon Mapping + RT
+
+**Classic technique**, now real-time with RT:
+
+1. **Photon pass**: Shoot photons from lights, store hits
+2. **Eye pass**: Trace from camera, gather nearby photons
+3. **Final gather**: Additional rays for smooth result
+
+**Benefits**:
+- Caustics (focused light patterns)
+- Participating media (fog, smoke)
+- Difficult lighting scenarios
+
+**Cost**: Two-pass, requires photon storage
+
+**Modern**: Used in offline renderers, too expensive for games (yet)
+
+---
+
+## Real-Time Global Illumination: The Holy Grail
+
+**Approaches**:
+
+1. **Baked lightmaps** (traditional)
+   - Precomputed, static
+   - Fast but inflexible
+
+2. **Screen-space GI** (SSGI)
+   - Based on visible surfaces only
+   - Fast but limited
+
+3. **Voxel cone tracing** (SVOGI)
+   - Voxelize scene, trace cones
+   - Good but expensive
+
+4. **Ray traced GI** (RTGI)
+   - 1-2 bounces, denoised
+   - Current state of the art
+
+5. **Path traced GI**
+   - Unlimited bounces
+   - Future (DOOM: The Dark Ages)
+
+---
+
+## Unreal Engine 5 Lumen
+
+**Hybrid approach** (software + hardware RT):
+
+**Software Lumen**:
+- Signed distance fields (SDF)
+- Screen traces
+- Works on non-RT GPUs
+
+**Hardware Lumen**:
+- Inline ray tracing for better quality
+- Faster, more accurate
+- Requires RT-capable GPU
+
+**Key insight**: Graceful degradation
+- Use RT when available
+- Fall back to software when not
+- Same content pipeline
+
+---
+
+>>> Presenter notes:
+>>>
+>>> Lumen is brilliant because it's practical:
+>>>
+>>> For developers:
+>>> - No lightmap baking workflow
+>>> - Dynamic lighting "just works"
+>>> - One content pipeline for all platforms
+>>>
+>>> For players:
+>>> - High-end PCs: Full RT Lumen
+>>> - Mid-range: Software Lumen
+>>> - Consoles: Hybrid (some RT)
+>>>
+>>> This is the future: Adaptive quality based on hardware.
+>>>
+>>> Compare to DOOM's approach (full PT, requires powerful hardware). Different trade-offs.
+
+## Research Frontiers
+
+**Active areas**:
+
+1. **Neural rendering + RT**
+   - NeRF (Neural Radiance Fields) + RT acceleration
+   - Learn scene representation, render with RT
+
+2. **Learned denoising**
+   - AI denoisers trained per-game
+   - Better than general-purpose denoisers
+
+3. **Hardware evolution**
+   - Dedicated denoising units
+   - Faster BVH traversal
+   - Lower power RT for mobile
+
+4. **Coherence optimization**
+   - Better SER implementations
+   - Predictive shader scheduling
+
+5. **Streaming AS**
+   - Load BVH on-demand for massive worlds
+   - Virtual geometry + RT integration
+
+---
+
+## Path Tracing in VR/AR
+
+**Unique challenges**:
+- 90+ fps required (motion sickness)
+- Two viewpoints (stereo)
+- Low latency critical
+
+**Current approach**:
+- Foveated rendering + RT
+   - High detail in fovea (eye center)
+   - Lower quality in periphery
+- Reprojection for smooth motion
+- Simplified RT (shadows only)
+
+**Future**: Eye tracking + AI → predict user gaze, focus RT there
+
+**Companies working on this**:
+- Meta (Quest Pro)
+- Apple (Vision Pro)
+- NVIDIA (CloudXR)
+
+---
+
+## Cloud Ray Tracing
+
+**Concept**: Render in cloud, stream to device
+
+**Use cases**:
+- High-quality RT on low-end devices
+- Architectural walkthroughs
+- Remote workstations
+
+**Challenges**:
+- Latency (50-100ms minimum)
+- Bandwidth (4K video stream)
+- Cost (cloud GPU time)
+
+**Solutions**:
+- Predictive rendering (anticipate user movement)
+- Hybrid (local low-quality + cloud high-quality)
+- Edge computing (reduce latency)
+
+**Example**: NVIDIA GeForce NOW (cloud gaming with RT)
+
+---
+
+# Practical Implementation Guide
+
+---
+
+## Setting Up RT in Your Engine
+
+**1. Check hardware support:**
+```cpp
+VkPhysicalDeviceRayTracingPipelineFeaturesKHR rtFeatures{};
+rtFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR;
+
+VkPhysicalDeviceFeatures2 features2{};
+features2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
+features2.pNext = &rtFeatures;
+
+vkGetPhysicalDeviceFeatures2(physicalDevice, &features2);
+
+if (!rtFeatures.rayTracingPipeline) {
+    // No RT support, fall back to rasterization
+}
+```
+
+**2. Enable extensions:**
+```cpp
+const std::vector<const char*> rtExtensions = {
+    VK_KHR_ACCELERATION_STRUCTURE_EXTENSION_NAME,
+    VK_KHR_RAY_TRACING_PIPELINE_EXTENSION_NAME,
+    VK_KHR_DEFERRED_HOST_OPERATIONS_EXTENSION_NAME, // For async builds
+    VK_KHR_RAY_QUERY_EXTENSION_NAME // Optional, for inline RT
+};
+```
+
+---
+
+## Performance Profiling RT
+
+**Key metrics**:
+
+1. **BVH build time**
+   - Should be <5ms for dynamic objects
+   - Static geometry: One-time cost
+
+2. **Ray trace time**
+   - Per-effect (shadows, reflections, etc.)
+   - Target: <5ms total for hybrid
+
+3. **Denoising time**
+   - Can be significant (2-4ms)
+   - Parallelize if possible
+
+4. **Total frame time**
+   - Aim for <16ms (60 fps) or <8ms (120 fps)
+
+**Tools**: 
+- NVIDIA Nsight Graphics (best for RT profiling)
+- RenderDoc (basic RT support)
+- AMD Radeon GPU Profiler
+
+---
+
+## Debugging RT Issues
+
+**Common problems**:
+
+1. **Black screen**
+   - Check AS was built correctly
+   - Verify SBT layout
+   - Check ray generation shader dispatch size
+
+2. **Incorrect geometry**
+   - Verify vertex/index buffer addresses
+   - Check transform matrices in TLAS
+   - Validate geometry flags (opaque vs non-opaque)
+
+3. **Performance issues**
+   - Profile BVH quality (depth, leaf size)
+   - Check ray coherence
+   - Verify denoisers are enabled
+
+4. **Flickering/ghosting**
+   - Temporal denoiser issue
+   - Adjust blend weights
+   - Check motion vectors
+
+---
+
+## Optimization Checklist
+
+**BVH optimization**:
+- [ ] Use `PREFER_FAST_TRACE` for static geometry
+- [ ] Use `PREFER_FAST_BUILD` for dynamic objects
+- [ ] Compact AS after build (reduces memory)
+- [ ] Refit instead of rebuild when possible
+- [ ] Use instancing for repeated geometry
+
+**Ray tracing optimization**:
+- [ ] Minimize ray payload size (<64 bytes)
+- [ ] Use `gl_RayFlagsOpaqueEXT` when possible
+- [ ] Terminate rays early (Russian roulette)
+- [ ] Use OMM for alpha-tested geometry
+- [ ] Consider SER for incoherent rays
+
+**Denoising optimization**:
+- [ ] Use temporal reuse (reprojection)
+- [ ] Reduce spatial filter radius
+- [ ] Adaptive denoising (more in shadows, less in highlights)
+
+---
+
+# Conclusion & Resources
+
+---
+
+## Key Takeaways
+
+1. **RT is here to stay** — Hardware in all modern GPUs
+
+2. **Hybrid rendering is current state** — Best of raster + RT
+
+3. **Path tracing is the future** — DOOM shows it's viable
+
+4. **Denoising is critical** — ReSTIR, AI denoisers enable low spp
+
+5. **Upscaling is mandatory** — DLSS, FSR required for PT
+
+6. **Hardware evolving fast** — OMM, DMM, SER improve performance
+
+7. **Start simple** — RT shadows → reflections → GI → path tracing
+
+---
+
+## Learning Path
+
+**Phase 1: Basics**
+1. Implement RT shadows with ray queries
+2. Add RT reflections
+3. Profile and optimize
+
+**Phase 2: Advanced**
+4. Implement RTAO or RTGI
+5. Add denoising (temporal + spatial)
+6. Explore ReSTIR
+
+**Phase 3: Cutting Edge**
+7. Full path tracing mode
+8. Neural denoising integration
+9. Modern extensions (OMM, SER)
+
+**Each step builds on the previous!**
+
+---
+
+## Essential Resources
+
+**Official Documentation**:
+- Vulkan RT Spec: khronos.org/ray-tracing
+- NVIDIA RT Best Practices: developer.nvidia.com/rtx
+- AMD RT Documentation: gpuopen.com
+
+**Papers & Presentations**:
+- "Ray Tracing Gems" (free ebook)
+- "Ray Tracing Gems II"
+- SIGGRAPH RT course notes
+- GDC presentations (search "ray tracing")
+
+**Open Source**:
+- Khronos Vulkan Samples (RT examples)
+- NVIDIA Vulkan RT Samples
+- Mini Path Tracer: github.com/nvpro-samples/vk_mini_path_tracer
+
+---
+
+## Tools & Libraries
+
+**Essential**:
+- **VMA** (Vulkan Memory Allocator) — Memory management
+- **NVVK** (NVIDIA Vulkan helpers) — Simplifies RT setup
+- **RenderDoc** — Frame capture & analysis
+- **Nsight Graphics** — Deep RT profiling
+
+**Denoising**:
+- **NVIDIA Real-Time Denoisers** (NRD)
+- **AMD FidelityFX Denoiser**
+- **Intel Open Image Denoise** (offline)
+
+**Math**:
+- **GLM** — Vectors, matrices
+- **Eigen** — Advanced math
+
+---
+
+## Sample Code Structure
+
+```
+my-rt-engine/
+├── src/
+│   ├── acceleration_structure.cpp  // BLAS/TLAS management
+│   ├── rt_pipeline.cpp              // RT pipeline creation
+│   ├── sbt.cpp                      // Shader binding table
+│   ├── denoiser.cpp                 // Temporal/spatial denoising
+│   └── main.cpp
+├── shaders/
+│   ├── raygen.rgen                  // Ray generation
+│   ├── closest_hit.rchit            // Hit shaders
+│   ├── miss.rmiss                   // Miss shaders
+│   ├── shadow.rahit                 // Any-hit (optional)
+│   └── denoise.comp                 // Denoising compute shader
+├── assets/
+│   └── models/                      // Test scenes
+└── CMakeLists.txt
+```
+
+**Build system**: Use SPIR-V compilation (glslc) in build step
+
+---
+
+## Community & Support
+
+**Forums**:
+- Khronos Vulkan Forums
+- NVIDIA Developer Forums
+- AMD GPUOpen
+- r/vulkan (Reddit)
+
+**Discord Servers**:
+- Graphics Programming
+- Vulkan
+- GameDev
+
+**Conferences**:
+- SIGGRAPH (annual, August)
+- GDC (annual, March)
+- HPG (High-Performance Graphics)
+
+**Follow**:
+- @khronosgroup (Twitter/X)
+- NVIDIA Developer Blog
+- GPUOpen Blog (AMD)
+
+---
+
+## Final Thoughts
+
+**Ray tracing journey**:
+- Started as research (1960s-1980s)
+- Offline rendering standard (1990s-2000s)
+- Real-time experiments (2010s)
+- Hardware acceleration (2018+)
+- Path tracing in games (2023+)
+- **Future: RT everywhere (2030s)**
+
+**You're joining at the perfect time!**
+- Hardware mature enough to be practical
+- APIs stable and well-documented
+- Lots of resources and examples
+- Exciting future ahead
+
+!!! tip: Start Today
+    The best way to learn RT is to implement it. Start with shadows, iterate from there. You've got this!
+
+---
+
+## Questions & Discussion
+
+**Your questions?**
+
+Topics we can explore:
+- Specific implementation details
+- Performance optimization strategies
+- Denoising techniques
+- Game-specific RT approaches
+- Mobile RT considerations
+- VR/AR ray tracing
+- Future hardware predictions
+
+---
+
+## Thank You!
+
+**Contact & Resources**:
+
+- Course materials: [your link here]
+- Sample code: [GitHub repo]
+- Slides: Markdeep format
+- Follow-up: [office hours / email]
+
+**Next steps**:
+1. Review course slides
+2. Study sample code
+3. Implement RT shadows
+4. Join community forums
+5. Keep learning!
+
+**The future is ray traced. Build it!** 🚀
+
+---
+
+## Appendix: Code Snippets
+
+**Complete BLAS build function:**
+```cpp
+VkAccelerationStructureKHR buildBLAS(
+    VkDevice device,
+    const std::vector<Vertex>& vertices,
+    const std::vector<uint32_t>& indices) {
+    
+    // 1. Create vertex/index buffers (with device addresses)
+    VkBuffer vertexBuffer = createBufferWithAddress(vertices);
+    VkBuffer indexBuffer = createBufferWithAddress(indices);
+    
+    // 2. Define geometry
+    VkAccelerationStructureGeometryKHR geometry{};
+    geometry.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR;
+    geometry.geometryType = VK_GEOMETRY_TYPE_TRIANGLES_KHR;
+    geometry.flags = VK_GEOMETRY_OPAQUE_BIT_KHR;
+    
+    geometry.geometry.triangles.sType = 
+        VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR;
+    geometry.geometry.triangles.vertexFormat = VK_FORMAT_R32G32B32_SFLOAT;
+    geometry.geometry.triangles.vertexData.deviceAddress = getBufferAddress(vertexBuffer);
+    geometry.geometry.triangles.vertexStride = sizeof(Vertex);
+    geometry.geometry.triangles.maxVertex = vertices.size() - 1;
+    geometry.geometry.triangles.indexType = VK_INDEX_TYPE_UINT32;
+    geometry.geometry.triangles.indexData.deviceAddress = getBufferAddress(indexBuffer);
+```
+
+---
+
+## Appendix: Code Snippets (continued)
+
+```cpp
+    // 3. Query build sizes
+    VkAccelerationStructureBuildGeometryInfoKHR buildInfo{};
+    buildInfo.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR;
+    buildInfo.type = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR;
+    buildInfo.flags = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR;
+    buildInfo.geometryCount = 1;
+    buildInfo.pGeometries = &geometry;
+    
+    uint32_t primitiveCount = indices.size() / 3;
+    VkAccelerationStructureBuildSizesInfoKHR sizeInfo{};
+    sizeInfo.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR;
+    vkGetAccelerationStructureBuildSizesKHR(device, 
+        VK_ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE_KHR,
+        &buildInfo, &primitiveCount, &sizeInfo);
+    
+    // 4. Create AS
+    VkBuffer asBuffer = createBuffer(sizeInfo.accelerationStructureSize,
+        VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR);
+    
+    VkAccelerationStructureCreateInfoKHR createInfo{};
+    createInfo.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR;
+    createInfo.buffer = asBuffer;
+    createInfo.size = sizeInfo.accelerationStructureSize;
+    createInfo.type = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR;
+    
+    VkAccelerationStructureKHR blas;
+    vkCreateAccelerationStructureKHR(device, &createInfo, nullptr, &blas);
+```
+
+---
+
+## Appendix: Code Snippets (final)
+
+```cpp
+    // 5. Build
+    VkBuffer scratchBuffer = createBuffer(sizeInfo.buildScratchSize,
+        VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT);
+    
+    buildInfo.mode = VK_BUILD_ACCELERATION_STRUCTURE_MODE_BUILD_KHR;
+    buildInfo.dstAccelerationStructure = blas;
+    buildInfo.scratchData.deviceAddress = getBufferAddress(scratchBuffer);
+    
+    VkAccelerationStructureBuildRangeInfoKHR buildRange{};
+    buildRange.primitiveCount = primitiveCount;
+    buildRange.primitiveOffset = 0;
+    buildRange.firstVertex = 0;
+    buildRange.transformOffset = 0;
+    
+    const VkAccelerationStructureBuildRangeInfoKHR* pBuildRange = &buildRange;
+    
+    // Record in command buffer
+    VkCommandBuffer cmd = beginSingleTimeCommands();
+    vkCmdBuildAccelerationStructuresKHR(cmd, 1, &buildInfo, &pBuildRange);
+    endSingleTimeCommands(cmd);
+    
+    // Cleanup scratch buffer (can reuse for other builds)
+    vkDestroyBuffer(device, scratchBuffer, nullptr);
+    
+    return blas;
+}
+```
+
+---
+
+## Appendix: Further Reading
+
+**Books**:
+- "Physically Based Rendering" (Pharr, Jakob, Humphreys)
+- "Ray Tracing in One Weekend" series (Shirley)
+- "Real-Time Rendering" 4th Edition (Chapter on RT)
+
+**Courses**:
+- "Introduction to Computer Graphics" (Udacity)
+- "Interactive 3D Graphics" (Coursera)
+- NVIDIA RT Course (online, free)
+
+**Blogs**:
+- "The Danger Zone" (Aras Pranckevičius)
+- "Self Shadow" (Stephen Hill)
+- "Interplay of Light" (Kostas Anagnostou)
+
+**YouTube Channels**:
+- "Two Minute Papers" (research summaries)
+- "Cherno" (engine development)
+- "Sebastian Lague" (graphics programming)
+
+---
+
+<!-- Markdeep slides stuff -->
+<script>
+    markdeepSlidesOptions = {
+        aspectRatio: 16 / 9,
+        theme: 'simple',
+        fontSize: 20,
+        diagramZoom: 1.0,
+        totalSlideNumber: false,
+        progressBar: true,
+        breakOnHeadings: false,
+        slideChangeHook: (oldSlide, newSlide) => {},
+        modeChangeHook: (newMode) => {}
+    };
+</script>
+<link rel="stylesheet" href="markdeep-slides/lib/markdeep-relative-sizes/1.11/relativize.css">
+<link rel="stylesheet" href="markdeep-slides/markdeep-slides.css">
+<script src="markdeep-slides/markdeep-slides.js"></script>
+
+<!-- Markdeep stuff -->
+<script>
+    markdeepOptions = {
+        tocStyle: 'none',
+        detectMath: false,
+        onLoad: function() {
+            initSlides();
+        }
+    };
+</script>
+<style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style>
+<script src="markdeep-slides/lib/markdeep/1.11/markdeep.min.js" charset="utf-8"></script>
+<script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
