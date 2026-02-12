@@ -6,7 +6,7 @@ categories: jekyll update
 <!--more-->
 ## Introduction
 
-I made a blog post about why I am still teaching OpenGL ES 3.0 in 2025-2026 in my introduction to Computer Graphics course at SAE Institute [here](/jekyll/update/2026/01/27/why-i-teach-opengles.html), now let's talk about why I am not teaching Vulkan yet. 
+I made a blog post about why I am still teaching OpenGL ES 3.0 in 2025-2026 in my introduction to Computer Graphics course at SAE Institute [here](/jekyll/update/2026/01/27/why-i-teach-opengles.html), now let's talk about why I am not teaching Vulkan yet and how I could introduce it in my course. One could say that OpenGL ES is enough for the introduction to computer graphics, because it manages to run simple samples on a lot of platforms. 
 
 How about a [Vulkan Rendering Hardware Interface](https://uaasoftware.bitbucket.io/vrhi.html)
 
@@ -20,6 +20,8 @@ On Android (from [here](https://developer.android.com/about/dashboards) as of Ja
 - Vulkan 1.3	26.01%
 - Vulkan 1.4	0.67%
 
+However, it still means losing the WebGL2 port compared to OpenGL ES 3.0. Yes WebGPU exists, but it is not a 1-to-1 translation like OpenGL ES 3.0 to WebGL2, it requires much more effort than most of my students want to do.
+
 ### The mental load
 
 I still remember going through the Vulkan tutorial the first time. Just to render a triangle, one has to interact with:
@@ -29,7 +31,6 @@ I still remember going through the Vulkan tutorial the first time. Just to rende
 - VkSurfaceKHR (created using SDL)
 - VkQueue (created using VkDeviceQueueCreateInfo)
 - VkSwapchainKHR and retrieving all its VkImage and generates their VkImageView
-Verbosity, so many different concepts for a triangle.
 - VkShaderModule (created in a similar way than OpenGL but loading SPIR-V files instead of GLSL)
 - VkRenderpass with its VkAttachmentDescription, VkSubpass 
 - VkPipeline created using:
@@ -46,10 +47,15 @@ Verbosity, so many different concepts for a triangle.
 - VkFramebuffer created with VkFramebufferCreateInfo  using the VkImageView attachments and the renderpass
 - VkCommandBuffer created with VkCommandBufferAllocateInfo from a VkCommandPool created using vkCreateCommandPool 
 
-All that to record the draw call of our hello world triangle in a command buffer and give it to the queue. 
+All that to record the draw call of our hello world triangle in a command buffer and give it to the queue. It does not take into account:
+- VkBuffer and allocations
+- VkImage with VkSample and the transitions from loading to using it in a sample
+- The synchronization of attachments between subpasses
+- All the nice things the OpenGL driver do for us
 
 ### Pipeline State Object (PSO)
 
+In a way, this forces the use of data-driven development. However, for my course, I want my students to quickly be able to create a sample and modify some values to showcase the techniques shown during the course.
 
 ### Render pass 
 Framebuffer, Subpasses.
@@ -59,9 +65,9 @@ Framebuffer, Subpasses.
 
 ### Memory
 
-Staging buffer
+Staging buffer. Allocation vs buffer.
 
-## Modern Vulkan?
+## Why not Modern Vulkan?
 
 Sascha Willems [How To Vulkan in 2026](https://www.howtovulkan.com/) showcases an example of modern Vulkan focusing on using those three extensions:
 - Dynamic rendering - Greatly simplifies render pass setup, one of the most criticized Vulkan areas
@@ -76,8 +82,18 @@ Also Mason Remaley: https://gamesbymason.com/blog/2026/vulkan/ describes:
 
 In this blog post, I wanted to go into the detail all those extensions and techniques and also extend other very useful extensions that really simplify using Vulkan, but might also be less available depending on the platform and GPU. All this to try to think about how the Introduction to Computer Graphics course would look like if it included Vulkan.
 
+However, one of big disadvantages of using modern Vulkan is the support on older hardware and on mobile platforms. All my students have fairly modern laptops and they never port their samples to mobile platforms like Android or the Switch, so it is fair to say that this is not really a concern of mine as a teacher.
+
 ### Pipeline dynamic state
 https://docs.vulkan.org/guide/latest/dynamic_state.html
+
+Back-face culling quick toggle
+
+[VK_EXT_extended_dynamic_state](https://docs.vulkan.org/refpages/latest/refpages/source/VK_EXT_extended_dynamic_state.html) allows culling mode, primitive topology (TRIANGLES, TRIANGLES_LIST, TRIANGLES_FAN), stencil and depth testing to be dynamically set per draw call (like OpenGL). 
+[VK_EXT_extended_dynamic_state2](https://docs.vulkan.org/refpages/latest/refpages/source/VK_EXT_extended_dynamic_state2.html) and [VK_EXT_extended_dynamic_state3](https://docs.vulkan.org/refpages/latest/refpages/source/VK_EXT_extended_dynamic_state3.html) allows depth bias, blending to be dynamic. 
+Those extensions exist to limit the number of Pipeline State Objects by avoid the replication of pipelines that have everything in common except blending or depth testing enable value.
+
+
 
 ### Dynamic rendering
 
@@ -156,6 +172,8 @@ vkCmdBindShadersEXT(cmd, 2, stages.data(), shaders.data());
 
 ### Mesh Shader
 
+Mesh optimizer
+
 ## The reason why not
 
 ### Descriptor Sets + Push Constant
@@ -182,6 +200,10 @@ However, there are some extensions that makes live simple:
 
 - [VK_KHR_synchronization2](https://docs.vulkan.org/refpages/latest/refpages/source/VK_KHR_synchronization2.html) bundles memory, buffer, and image barriers into a single structure passed to vkCmdPipelineBarrier2.
 
+### Memory
+
+Push constants, ubo and ssbo needs to align to std140 or std450 which has this weird requirements of having ```vec3``` being align at 16 bytes (instead of 4 bytes on the CPU). With [VK_EXT_scalar_block_layout](https://docs.vulkan.org/refpages/latest/refpages/source/VK_EXT_scalar_block_layout.html), it allows those non-scalar types to be aligned by their components. Actually, since Vulkan 1.4, this is no more an extension, nor optional, but required.
+
 
 ## Next steps
 
@@ -190,9 +212,11 @@ I am not switching to Vulkan yet, but this retrospective pushed to look deeper i
 ### Vulkan Bootstrap
 
 ### The extensions
-VK_EXT_scalar_block_layout
+
 
 ### Raytracing
+
+Currently, the raytracing course is at the end of the computer graphics module, just showcasing some techniques used in AAA games and introducing what a future with pathtracing might look like. If my module gets updated with modern Vulkan, I don't see any reason to defer the teaching of hardware and to limit it to theory. Why not introduce raytracing earlier to implement simple techniques with ray query and then more advanced techniques in parallel of their full rasterize counterpart.
 
 **Shadow**
 Using ray query
@@ -202,3 +226,6 @@ Using ray query
 
 **Pathtracing**
 PBR through pathtracing
+SHaRC
+SER
+OMM
