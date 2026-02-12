@@ -55,10 +55,216 @@ All that to record the draw call of our hello world triangle in a command buffer
 
 ### Pipeline State Object (PSO)
 
-In a way, this forces the use of data-driven development. However, for my course, I want my students to quickly be able to create a sample and modify some values to showcase the techniques shown during the course.
+Like showed in the mental load list, creating a VkPipeline in Vulkan 1.0 requires A LOT of different states, some often irrelevant to the current need of the graphics programmer creating a new pipeline to be used in their samples. If I need to put it in diagram, it would look like this:
+```
+
+                        ┌─────────────────────────────────┐
+                        │   vkCreateGraphicsPipelines()   │
+                        └────────────────┬────────────────┘
+                                         │
+                        ┌────────────────▼────────────────┐
+                        │ VkGraphicsPipelineCreateInfo    │
+                        └────────────────┬────────────────┘
+                                         │
+        ┌──────────────┬─────────────┬───┴────┬──────────────┬──────────────┐
+        │              │             │        │              │              │
+        ▼              ▼             ▼        ▼              ▼              ▼
+ ┌─────────────┐ ┌───────────┐ ┌─────────┐ ┌──────────┐ ┌────────────┐ ┌────────────┐
+ │ VkPipeline  │ │ VkPipeline│ │VkRender │ │VkPipeline│ │VkPipeline  │ │   stage    │
+ │   Layout    │ │   Cache   │ │  Pass   │ │  flags   │ │  subpass   │ │   Count    │
+ └─────────────┘ └───────────┘ └─────────┘ └──────────┘ └────────────┘ └──────┬─────┘
+        │                                                                     │
+        ▼                                                                     ▼
+ ┌──────────────────┐                                       ┌──────────────────────────┐
+ │ VkPipelineLayout │                                       │ VkPipelineShaderStage    │
+ │ CreateInfo       │                                       │ CreateInfo[]             │
+ │                  │                                       │                          │
+ │ ┌──────────────┐ │                                       │  ┌────────────────────┐  │
+ │ │ VkDescriptor │ │                                       │  │ VK_SHADER_STAGE_   │  │
+ │ │ SetLayout[]  │ │                                       │  │ VERTEX_BIT         │  │
+ │ └──────────────┘ │                                       │  │    ▼               │  │
+ │ ┌──────────────┐ │                                       │  │ VkShaderModule     │  │
+ │ │ VkPushConst  │ │                                       │  └────────────────────┘  │
+ │ │ Range[]      │ │                                       │  ┌────────────────────┐  │
+ │ └──────────────┘ │                                       │  │ VK_SHADER_STAGE_   │  │
+ └──────────────────┘                                       │  │ FRAGMENT_BIT       │  │
+                                                            │  │    ▼               │  │
+                                                            │  │ VkShaderModule     │  │
+                                                            │  └────────────────────┘  │
+                                                            └──────────────────────────┘
+
+   ┌──────────────────── Fixed-Function State ────────────────────────┐
+   │                                                                  │
+   │  ┌──────────────────────┐    ┌──────────────────────┐            │
+   │  │ VkPipelineVertexInput│    │ VkPipelineInputAssem │            │
+   │  │ StateCreateInfo      │    │ blyStateCreateInfo   │            │
+   │  │                      │    │                      │            │
+   │  │ • bindingDescriptions│    │ • topology           │            │
+   │  │ • attribDescriptions │    │ • primitiveRestart   │            │
+   │  └──────────────────────┘    └──────────────────────┘            │
+   │                                                                  │
+   │  ┌──────────────────────┐    ┌──────────────────────┐            │
+   │  │ VkPipelineViewport   │    │ VkPipelineRasterizat │            │
+   │  │ StateCreateInfo      │    │ ionStateCreateInfo   │            │
+   │  │                      │    │                      │            │
+   │  │ • viewports[]        │    │ • polygonMode        │            │
+   │  │ • scissors[]         │    │ • cullMode           │            │
+   │  └──────────────────────┘    │ • frontFace          │            │
+   │                              │ • depthBias          │            │
+   │                              │ • lineWidth          │            │
+   │                              └──────────────────────┘            │
+   │                                                                  │
+   │  ┌──────────────────────┐    ┌──────────────────────┐            │
+   │  │ VkPipelineMultisample│    │ VkPipelineDepthStenc │            │
+   │  │ StateCreateInfo      │    │ ilStateCreateInfo    │            │
+   │  │                      │    │                      │            │
+   │  │ • rasterizationSamp  │    │ • depthTestEnable    │            │
+   │  │ • sampleShading      │    │ • depthWriteEnable   │            │
+   │  │ • sampleMask         │    │ • depthCompareOp     │            │
+   │  └──────────────────────┘    │ • stencilTestEnable  │            │
+   │                              └──────────────────────┘            │
+   │                                                                  │
+   │  ┌──────────────────────┐    ┌──────────────────────┐            │
+   │  │ VkPipelineColorBlend │    │ VkPipelineDynamic    │            │
+   │  │ StateCreateInfo      │    │ StateCreateInfo      │            │
+   │  │                      │    │                      │            │
+   │  │ • logicOpEnable      │    │ • dynamicStates[]    │            │
+   │  │ • attachments[]      │    │   - VIEWPORT         │            │
+   │  │   - blendEnable      │    │   - SCISSOR          │            │
+   │  │   - srcColorBlendFac │    │   - LINE_WIDTH       │            │
+   │  │   - dstColorBlendFac │    │   - DEPTH_BIAS       │            │
+   │  │   - colorWriteMask   │    │   - BLEND_CONSTANTS  │            │
+   │  └──────────────────────┘    │   - ...              │            │
+   │                              └──────────────────────┘            │
+   └──────────────────────────────────────────────────────────────────┘
+
+                        ┌─────────────────────────────────┐
+                        │          VkPipeline             │
+                        │      (output handle)            │
+                        └─────────────────────────────────┘
+```
+
+In a way, this forces the use of data-driven development, defining empty structures, enabling specific features only when needing them. This was one of the goal of my computer graphics editor (mentionned in this [blog post]()), setting up states in an editor, instead than by hand.
+
+However, for my course, I also want my students to quickly be able to create a sample and modify some values to showcase the techniques shown during the course.
 
 ### Render pass 
+
+```
+                          ┌───────────────────────────────┐
+                          │     vkCreateRenderPass()      │
+                          └───────────────┬───────────────┘
+                                          │
+                          ┌───────────────▼───────────────┐
+                          │  VkRenderPassCreateInfo       │
+                          └───────────────┬───────────────┘
+                                          │
+              ┌───────────────────────────┼───────────────────────────┐
+              │                           │                           │
+              ▼                           ▼                           ▼
+ ┌─────────────────────┐  ┌─────────────────────────┐  ┌──────────────────────┐
+ │ pAttachments[]      │  │ pSubpasses[]            │  │ pDependencies[]      │
+ │ (attachmentCount)   │  │ (subpassCount)          │  │ (dependencyCount)    │
+ └──────────┬──────────┘  └────────────┬────────────┘  └──────────┬───────────┘
+            │                          │                          │
+            ▼                          ▼                          ▼
+ ┌─────────────────────┐  ┌─────────────────────────┐  ┌──────────────────────┐
+ │ VkAttachmentDescrip │  │ VkSubpassDescription    │  │ VkSubpassDependency  │
+ │ tion                │  │                         │  │                      │
+ │                     │  │                         │  │ • srcSubpass         │
+ │ • flags             │  │ • pipelineBindPoint     │  │ • dstSubpass         │
+ │ • format            │  │   (GRAPHICS)            │  │ • srcStageMask       │
+ │ • samples           │  │                         │  │ • dstStageMask       │
+ │ • loadOp            │  │ • inputAttachments[]    │  │ • srcAccessMask      │
+ │ • storeOp           │  │ • colorAttachments[]    │  │ • dstAccessMask      │
+ │ • stencilLoadOp     │  │ • resolveAttachments[]  │  │ • dependencyFlags    │
+ │ • stencilStoreOp    │  │ • depthStencilAttach    │  │                      │
+ │ • initialLayout     │  │ • preserveAttachments[] │  └──────────────────────┘
+ │ • finalLayout       │  │                         │
+ │                     │  └────────────┬────────────┘
+ └─────────────────────┘               │
+                           ┌───────────┴────────────────────────────────┐
+                           │                                            │
+                           ▼                                            ▼
+              ┌─────────────────────────┐              ┌─────────────────────────┐
+              │ VkAttachmentReference   │              │ VkAttachmentReference   │
+              │ (color / input /        │              │ (depthStencil)          │
+              │  resolve / preserve)    │              │                         │
+              │                         │              │ • attachment (index)    │
+              │ • attachment (index)    │              │ • layout                │
+              │ • layout                │              │   IMAGE_LAYOUT_DEPTH_   │
+              │   IMAGE_LAYOUT_COLOR_   │              │   STENCIL_ATTACHMENT_   │
+              │   ATTACHMENT_OPTIMAL    │              │   OPTIMAL               │
+              └─────────────────────────┘              └─────────────────────────┘
+```
 Framebuffer, Subpasses.
+
+```
+                          ┌───────────────────────────────┐
+                          │    vkCreateFramebuffer()      │
+                          └───────────────┬───────────────┘
+                                          │
+                          ┌───────────────▼───────────────┐
+                          │  VkFramebufferCreateInfo      │
+                          └───────────────┬───────────────┘
+                                          │
+         ┌──────────┬─────────────┬───────┴───────┬──────────────┐
+         │          │             │               │              │
+         ▼          ▼             ▼               ▼              ▼
+  ┌────────────┐ ┌────────┐ ┌──────────┐  ┌───────────┐  ┌───────────┐
+  │ renderPass │ │ pAttach│ │  width   │  │  height   │  │  layers   │
+  │ (VkRender  │ │ ments[]│ │          │  │           │  │           │
+  │  Pass)     │ │        │ │          │  │           │  │           │
+  └─────┬──────┘ └───┬────┘ └──────────┘  └───────────┘  └───────────┘
+        │            │
+        │            ▼
+        │    ┌─────────────────────────────────────────────────────┐
+        │    │ VkImageView[]  (attachmentCount)                    │
+        │    │                                                     │
+        │    │  ┌──────────────┐ ┌──────────────┐ ┌────────────┐   │
+        │    │  │ ImageView 0  │ │ ImageView 1  │ │ ImageView N│   │
+        │    │  │ (e.g. color) │ │ (e.g. depth) │ │ (...)      │   │
+        │    │  └──────┬───────┘ └──────┬───────┘ └─────┬──────┘   │
+        │    │         │                │               │          │
+        │    └─────────┼────────────────┼───────────────┼──────────┘
+        │              │                │               │
+        │              ▼                ▼               ▼
+        │    ┌─────────────────────────────────────────────────────┐
+        │    │ VkImageView (each one wraps a VkImage)              │
+        │    │                                                     │
+        │    │  ┌───────────────────────────────────────────────┐  │
+        │    │  │ VkImageViewCreateInfo                         │  │
+        │    │  │                                               │  │
+        │    │  │ • image        ──► VkImage                    │  │
+        │    │  │ • viewType     ──► 2D / 2D_ARRAY / CUBE ...   │  │
+        │    │  │ • format       ──► VK_FORMAT_*                │  │
+        │    │  │ • components   ──► VkComponentMapping         │  │
+        │    │  │                    (r, g, b, a swizzle)       │  │
+        │    │  │ • subresourceRange                            │  │
+        │    │  │     - aspectMask  (COLOR / DEPTH / STENCIL)   │  │
+        │    │  │     - baseMipLevel                            │  │
+        │    │  │     - levelCount                              │  │
+        │    │  │     - baseArrayLayer                          │  │
+        │    │  │     - layerCount                              │  │
+        │    │  └───────────────────────────────────────────────┘  │
+        │    └─────────────────────────────────────────────────────┘
+        │
+        │
+        ▼
+ ┌─────────────────────────────────────────────────────────────────────┐
+ │ VkRenderPass  (must be compatible)                                  │
+ │                                                                     │
+ │  Attachment 0 ◄────────────────────────────── ImageView 0           │
+ │  (format, samples, loadOp, storeOp...)        must match format     │
+ │                                                & sample count       │
+ │  Attachment 1 ◄────────────────────────────── ImageView 1           │
+ │  (format, samples, loadOp, storeOp...)        must match format     │
+ │                                                & sample count       │
+ │  ...                                                                │
+ │  Attachment N ◄────────────────────────────── ImageView N           │
+ │                                                                     │
+ └─────────────────────────────────────────────────────────────────────┘
+ ```
 
 ### Synchronization + presenting
 
@@ -131,7 +337,88 @@ vkCmdBeginRenderingKHR(commandBuffers_[imageIndex_], &render_info);
 vkCmdEndRenderingKHR(commandBuffers_[imageIndex_]);
 ```
 
-This greatly simplifies the rendering on the backbuffer, but what about multi pass rendering for techniques like shadow map, deferred rendering, post-processing? With [VK_KHR_dynamic_rendering_local_read](https://docs.vulkan.org/refpages/latest/refpages/source/VK_KHR_dynamic_rendering_local_read.html) using VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT allows an VkImage (for example the images in the deferred rendering G-Buffer) to be used both as attachment and with a sampler in the same rendering pass. This is even simplier than OpenGL framebuffer object approach where we bind the first framebuffer object with its attachments and then bind the backbuffer. 
+This greatly simplifies the rendering on the backbuffer, but what about multi pass rendering for techniques like shadow map, deferred rendering, post-processing? With [VK_KHR_dynamic_rendering_local_read](https://docs.vulkan.org/refpages/latest/refpages/source/VK_KHR_dynamic_rendering_local_read.html) using VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT allows an VkImage (for example the images in the deferred rendering G-Buffer) to be used both as attachment and with a sampler in the same rendering pass. This is even simplier than OpenGL framebuffer object approach where we bind the first framebuffer object with its attachments and then bind the backbuffer. Here is an example with a simple shadow pass and then a forward pass using the shadow map:
+
+```
+  vkCmdBeginRendering(&renderingInfo)
+  │
+  │
+  ▼
+ ┌──────────────────────────────────────────────────────────────────────┐
+ │ PASS 1 — Depth Prepass                                               │
+ │                                                                      │
+ │  Locations:  { UNUSED }                                              │
+ │  Inputs:     { UNUSED }   depth input: NONE                          │
+ │                                                                      │
+ │  Writes:                                                             │
+ │   depth ──────────────────────────────────►  depth  ██               │
+ │   (no color output)                          color  ░░               │
+ │                                                                      │
+ │  Pipeline:                                                           │
+ │   depthWriteEnable  = TRUE                                           │
+ │   depthCompareOp    = LESS                                           │
+ │   colorWriteMask    = 0  (no color writes)                           │
+ │                                                                      │
+ │  vkCmdBindPipeline(depthPrepassPipeline)                             │
+ │  vkCmdDrawIndexed(...)   ◄── all scene geometry                      │
+ │                                                                      │
+ └──────────────────────────────────────────────────────────────────────┘
+  │
+  ▼
+ ┌──────────────────────────────────────────────────────────────────────┐
+ │ BARRIER                                                              │
+ │                                                                      │
+ │  vkCmdPipelineBarrier2(VkMemoryBarrier2 {                            │
+ │    srcStageMask:  EARLY_FRAGMENT_TESTS | LATE_FRAGMENT_TESTS         │
+ │    srcAccessMask: DEPTH_STENCIL_ATTACHMENT_WRITE_BIT                 │
+ │    dstStageMask:  FRAGMENT_SHADER_BIT                                │
+ │    dstAccessMask: INPUT_ATTACHMENT_READ_BIT                          │
+ │  })                                                                  │
+ │                                                                      │
+ │  No layout transition — stays RENDERING_LOCAL_READ_KHR               │
+ │                                                                      │
+ └──────────────────────────────────────────────────────────────────────┘
+  │
+  ▼
+ ┌──────────────────────────────────────────────────────────────────────┐
+ │ PASS 2 — Forward Shading (reads prepass depth)                       │
+ │                                                                      │
+ │  Locations:  { 0 }                                                   │
+ │  Inputs:     { UNUSED }   depth input: 0                             │
+ │                                                                      │
+ │  Reads:                                                              │
+ │   input_attachment_index=0  ◄────────────  depth  ▓▓                 │
+ │                                                                      │
+ │  Writes:                                                             │
+ │   layout(location=0) outColor ───────────► color  ██                 │
+ │                                                                      │
+ │  Pipeline:                                                           │
+ │   depthWriteEnable  = FALSE  (already filled)                        │
+ │   depthCompareOp    = EQUAL  (only shade exact matches)              │
+ │                                                                      │ 
+ │  vkCmdBindPipeline(forwardPipeline)                                  │
+ │  vkCmdDrawIndexed(...)   ◄── all scene geometry                      │
+ │                                                                      │
+ └──────────────────────────────────────────────────────────────────────┘
+  │
+  ▼
+  vkCmdEndRendering()
+
+
+ ┌──────────────────────────────────────────────────────────────────────┐
+ │ ATTACHMENT STATE SUMMARY                                             │
+ │                                                                      │
+ │            Pass 1          Barrier        Pass 2                     │
+ │          (Depth Pre)      ░░░░░░░░     (Forward)                     │
+ │  ────────────────────────────────────────────────────                │
+ │  color     ----           ░░░░░░░░       WRITE                       │
+ │  depth     WRITE          ░░░░░░░░       READ (input + EQUAL test)   │
+ │                                                                      │
+ │  All layouts: RENDERING_LOCAL_READ_KHR throughout.                   │
+ │  Single rendering scope — data stays on-tile (TBR GPUs).             │
+ │                                                                      │
+ └──────────────────────────────────────────────────────────────────────┘
+```
 
 ### Shader object
 
@@ -225,7 +512,10 @@ Using ray query
 
 
 **Pathtracing**
+
 PBR through pathtracing
+
+When going to the Graphics Programming Conference ([blog post here]), I was in owe with the Pathtracing talk from idSoftware and Nvidia regarding the recently released Doom the Dark Ages. I sitll remember having my notebook and writing all the different techniques used in the game to allow for pathtracing at 60fps. 
 SHaRC
 SER
 OMM
