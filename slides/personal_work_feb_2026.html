@@ -32,6 +32,46 @@ Elias Farhan
 
 ## Reliable Data Transfer Viewer
 
+<div style="text-align: center;">
+  <div id="rdt-buttons" style="margin-bottom: 8px; display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
+    <button class="rdt-btn rdt-btn-active" onclick="switchRdt('rdt10', this)">RDT 1.0</button>
+    <button class="rdt-btn" onclick="switchRdt('rdt20', this)">RDT 2.0</button>
+    <button class="rdt-btn" onclick="switchRdt('rdt21', this)">RDT 2.1</button>
+    <button class="rdt-btn" onclick="switchRdt('rdt22', this)">RDT 2.2</button>
+    <button class="rdt-btn" onclick="switchRdt('rdt30', this)">RDT 3.0</button>
+    <button class="rdt-btn" onclick="switchRdt('rdt40', this)">RDT 4.0</button>
+    <button class="rdt-btn" onclick="switchRdt('rdt50', this)">RDT 5.0</button>
+  </div>
+  <iframe id="rdt-frame" src="/assets/webgl/rdt-viewer/index.html?version=rdt10"
+          width="1024" height="640" style="border: none; max-width: 100%;"></iframe>
+</div>
+<style>
+  .rdt-btn {
+    color: #a0c4ff;
+    background: transparent;
+    border: 1px solid #a0c4ff;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .rdt-btn:hover, .rdt-btn-active {
+    background: #a0c4ff;
+    color: #1a1a2e;
+  }
+</style>
+<script>
+  function switchRdt(version, btn) {
+    document.getElementById('rdt-frame').src =
+      '/assets/webgl/rdt-viewer/index.html?version=' + version;
+    document.querySelectorAll('.rdt-btn').forEach(function(b) {
+      b.classList.remove('rdt-btn-active');
+    });
+    btn.classList.add('rdt-btn-active');
+  }
+</script>
+
 ---
 
 ## KwaKwa Jam Collection project / Neko2d 🤖
