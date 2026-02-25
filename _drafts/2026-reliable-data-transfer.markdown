@@ -34,6 +34,8 @@ I am currently working on [Beach Slap](https://store.steampowered.com/app/317011
 
 frame id as a sequence number.
 
+confirmation frame as an ACK
+
 ## Confirmation frame
 
 # Conclusion

@@ -3,16 +3,18 @@ layout: post
 title:  "Why I am not teaching Vulkan"
 categories: jekyll update
 ---
-<!--more-->
+
 ## Introduction
 
 I made a blog post about why I am still teaching OpenGL ES 3.0 in 2025-2026 in my introduction to Computer Graphics course at SAE Institute [here](/jekyll/update/2026/01/27/why-i-teach-opengles.html), now let's talk about why I am not teaching Vulkan yet and how I could introduce it in my course. One could say that OpenGL ES is enough for the introduction to computer graphics, because it manages to run simple samples on a lot of platforms. 
 
-How about a [Vulkan Rendering Hardware Interface](https://uaasoftware.bitbucket.io/vrhi.html)
+<!--more-->
+
+However, a lot of more modern techniques used in the most common game engines are really starting to show OpenGL (especially ES) as antique, meaning that students following my course might not understand most of what makes real-time computer graphics now. But Vulkan is a beast to tackle when trying to learn it (the origin [Vulkan Tutorial](https://vulkan-tutorial.com/) definitely did not help). So what about an RHI like NVRHI or more recently the [Vulkan Rendering Hardware Interface](https://uaasoftware.bitbucket.io/vrhi.html)? I think there is value in learning the actual GPU API instead of a library that sits on top of it, so let's go dig into Vulkan!
 
 ## Vulkan 1.0
 
-The portability (Switch, Android, Windows, Linux). 
+This section will focus on Vulkan 1.0. I know that we are currently at Vulkan 1.4 and I will talk about it and its useful extensions in later sections. One of the good reasons to use Vulkan 1.0 is the portability between Switch, Android, Windows, Linux, MacOSX and iOS (through MoltenVK). 
 
 On Android (from [here](https://developer.android.com/about/dashboards) as of Jan 7th 2025):
 - Vulkan 1.0.3	3.86%
@@ -25,37 +27,37 @@ However, it still means losing the WebGL2 port compared to OpenGL ES 3.0. Yes We
 ### The mental load
 
 I still remember going through the Vulkan tutorial the first time. Just to render a triangle, one has to interact with:
-- VkInstance (created with VkInstanceCreateInfo )
-- VkPhysicalDevice (queried with vkEnumeratePhysicalDevices) and keep queue family indices
-- VkDevice (created with VkDeviceCreateInfo using the VkPhysicalDevice)
-- VkSurfaceKHR (created using SDL)
-- VkQueue (created using VkDeviceQueueCreateInfo)
-- VkSwapchainKHR and retrieving all its VkImage and generates their VkImageView
-- VkShaderModule (created in a similar way than OpenGL but loading SPIR-V files instead of GLSL)
-- VkRenderpass with its VkAttachmentDescription, VkSubpass 
-- VkPipeline created using:
-    - VkPipelineShaderStageCreateInfo 
-    - VkPipelineDynamicStateCreateInfo
-    - VkPipelineVertexInputStateCreateInfo
-    - VkPipelineInputAssemblyStateCreateInfo
-    - VkPipelineViewportStateCreateInfo using VkViewport and VkRect2D scissor
-    - VkPipelineRasterizationStateCreateInfo 
-    - VkPipelineMultisampleStateCreateInfo
-    - VkPipelineColorBlendStateCreateInfo using VkPipelineColorBlendAttachmentState
-    - VkPipelineLayout
+- `VkInstance` (created with `VkInstanceCreateInfo` )
+- `VkPhysicalDevice` (queried with `vkEnumeratePhysicalDevices`) and keep queue family indices
+- `VkDevice` (created with `VkDeviceCreateInfo` using the `VkPhysicalDevice`)
+- `VkSurfaceKHR` (created using SDL)
+- `VkQueue` (created using `VkDeviceQueueCreateInfo`)
+- `VkSwapchainKHR` and retrieving all its `VkImage` and generates their `VkImageView`
+- `VkShaderModule` (created in a similar way than OpenGL but loading SPIR-V files instead of GLSL)
+- `VkRenderpass` with its `VkAttachmentDescription`, `VkSubpass` 
+- `VkPipeline` created using:
+    - `VkPipelineShaderStageCreateInfo` 
+    - `VkPipelineDynamicStateCreateInfo`
+    - `VkPipelineVertexInputStateCreateInfo`
+    - `VkPipelineInputAssemblyStateCreateInfo`
+    - `VkPipelineViewportStateCreateInfo` using `VkViewport` and `VkRect2D` scissor
+    - `VkPipelineRasterizationStateCreateInfo` 
+    - `VkPipelineMultisampleStateCreateInfo`
+    - `VkPipelineColorBlendStateCreateInfo` using `VkPipelineColorBlendAttachmentState`
+    - `VkPipelineLayout`
     -> needed the renderpass created before as well with the subpass index
-- VkFramebuffer created with VkFramebufferCreateInfo  using the VkImageView attachments and the renderpass
-- VkCommandBuffer created with VkCommandBufferAllocateInfo from a VkCommandPool created using vkCreateCommandPool 
+- `VkFramebuffer` created with `VkFramebufferCreateInfo`  using the `VkImageView` attachments and the renderpass
+- `VkCommandBuffer` created with `VkCommandBufferAllocateInfo` from a `VkCommandPool` created using `vkCreateCommandPool` 
 
 All that to record the draw call of our hello world triangle in a command buffer and give it to the queue. It does not take into account:
-- VkBuffer and allocations
-- VkImage with VkSample and the transitions from loading to using it in a sample
+- `VkBuffer` and allocations
+- `VkImage` with `VkSample` and the transitions from loading to using it in a sample
 - The synchronization of attachments between subpasses
 - All the nice things the OpenGL driver do for us
 
 ### Pipeline State Object (PSO)
 
-Like showed in the mental load list, creating a VkPipeline in Vulkan 1.0 requires A LOT of different states, some often irrelevant to the current need of the graphics programmer creating a new pipeline to be used in their samples. If I need to put it in diagram, it would look like this:
+Like showed in the mental load list, creating a `VkPipeline` in Vulkan 1.0 requires A LOT of different states, some often irrelevant to the current need of the graphics programmer creating a new pipeline to be used in their samples. If I need to put it in diagram, it would look like this:
 ```
 
                         ┌─────────────────────────────────┐
@@ -144,9 +146,10 @@ Like showed in the mental load list, creating a VkPipeline in Vulkan 1.0 require
                         └─────────────────────────────────┘
 ```
 
-In a way, this forces the use of data-driven development, defining empty structures, enabling specific features only when needing them. This was one of the goal of my computer graphics editor (mentionned in this [blog post]()), setting up states in an editor, instead than by hand.
+In a way, this forces the use of data-driven development, defining empty default structures, enabling specific features only when needing them. This was one of the goal of my computer graphics editor (mentionned in this [blog post](/jekyll/update/2023/11/29/compgrapheditorv1.html)), setting up states in an editor, instead than by hand.
 
-However, for my course, I also want my students to quickly be able to create a sample and modify some values to showcase the techniques shown during the course.
+However, for my course, I also want my students to quickly be able to create a sample and modify some values to showcase the techniques shown during the course. Especially for the first course with Hello Triangle, the coginitive load cannot be overloaded. Here are some few problems:
+- One need to give the `VkRenderPass` and the `subpassIndex` where the pipeline is going to be used. 
 
 ### Render pass 
 
@@ -281,14 +284,16 @@ Sascha Willems [How To Vulkan in 2026](https://www.howtovulkan.com/) showcases a
 - Descriptor indexing - Simplifies descriptor management, often referred to as "bindless"
 - Synchronization2 - Improves synchronization handling, one of the hardest areas of Vulkan
 
-Also Mason Remaley: https://gamesbymason.com/blog/2026/vulkan/ describes:
+Also Mason Remaley "It's Not About the API" [talk](https://gamesbymason.com/blog/2026/vulkan/) at Handmadecon describes those techniques (among others):
 - Vertex Pulling
 - Descriptor Indexing ~ bindless
 - Draw indirect
 
 In this blog post, I wanted to go into the detail all those extensions and techniques and also extend other very useful extensions that really simplify using Vulkan, but might also be less available depending on the platform and GPU. All this to try to think about how the Introduction to Computer Graphics course would look like if it included Vulkan.
 
-However, one of big disadvantages of using modern Vulkan is the support on older hardware and on mobile platforms. All my students have fairly modern laptops and they never port their samples to mobile platforms like Android or the Switch, so it is fair to say that this is not really a concern of mine as a teacher.
+However, one of big disadvantages of using modern Vulkan is the support on older hardware and on mobile platforms. All my students have fairly modern laptops (mostly Nvidia) and they never port their samples to mobile platforms like Android or the Switch, so it is fair to say that this is not really a concern of mine as a teacher.
+
+My next computer graphics class is going to be in Decembre 2026, so I can also include extensions that just came out or are pretty recent if they can ease up the learning process of using Vulkan.
 
 ### Pipeline dynamic state
 https://docs.vulkan.org/guide/latest/dynamic_state.html
@@ -303,7 +308,7 @@ Those extensions exist to limit the number of Pipeline State Objects by avoid th
 
 ### Dynamic rendering
 
-In Vulkan 1.0, one of the painful part before the finish line to render the first triangle is going through the creation of VkRenderpass, VkSubpass, and VkFramebuffer to define the basic backbuffer that one could find in OpenGL. With [VK_KHR_dynamic_rendering](https://docs.vulkan.org/samples/latest/samples/extensions/dynamic_rendering/README.html), we get rid of render passes and framebuffers and simply gives the attachments this way:
+In Vulkan 1.0, one of the painful part before the finish line to render the first triangle is going through the creation of `VkRenderpass`, `VkSubpass`, and `VkFramebuffer` to define the basic backbuffer that one could find in OpenGL. With [VK_KHR_dynamic_rendering](https://docs.vulkan.org/samples/latest/samples/extensions/dynamic_rendering/README.html), we get rid of render passes and framebuffers and simply gives the attachments this way:
 ```c++
 const VkRenderingAttachmentInfoKHR color_attachment_info{
     .sType = VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR,
@@ -422,7 +427,7 @@ This greatly simplifies the rendering on the backbuffer, but what about multi pa
 
 ### Shader object
 
-In Vulkan 1.0, one of the more cumbersome part of the first sample "Hello Triangle" is to creation of the pipeline. But what if there is no need to create a pipeline in the first place? This is the goal of the [VK_EXT_shader object](https://docs.vulkan.org/samples/latest/samples/extensions/shader_object/README.html)
+In Vulkan 1.0, one of the more cumbersome part of the first sample "Hello Triangle" is to creation of the pipeline. But what if there is no need to create a pipeline in the first place? This is the goal of the [VK_EXT_shader_object ](https://docs.vulkan.org/samples/latest/samples/extensions/shader_object/README.html)
 
 Creating a shader object looks like this:
 ```C++
@@ -455,13 +460,49 @@ std::array<VkShaderEXT, 2> shaders = {
 vkCmdBindShadersEXT(cmd, 2, stages.data(), shaders.data());
 ```
 
+It means that I only need to give the Descriptor Set Layout and the ranges of Push Constants, which is a great simplification compare to Vulkan 1.0 PSO bloat. It's even an improvement on OpenGL `glProgram` where we needed to remove the shader modules after creating the pipeline. What is great is also that it can be used with compute shader as well. The only exception is raytracing pipelines.
+
 ### Buffer Device Address
+
+I first encounter BDA (Buffer Device Address) when playing with raytracing. I was always wondering how I could put all my meshes vertex input data and the materials with their associated textures in the same shader. For example here for my raytracing model sample:
+```glsl
+
+layout(buffer_reference, scalar) readonly buffer IndexBuffer {
+    uint indices[];
+};
+
+layout(buffer_reference, scalar) readonly buffer TexCoordBuffer {
+    vec2 texCoords[];
+};
+
+layout(buffer_reference, scalar) readonly buffer NormalBuffer {
+    vec4 normals[];
+};
+
+struct MeshDescriptor {
+    IndexBuffer indexBuffer;
+    TexCoordBuffer texCoordBuffer;
+    NormalBuffer normalBuffer;
+    uint materialIndex;
+    uint padding;
+};
+
+layout(binding = 3, set = 0, scalar) readonly buffer MeshDescriptorBuffer {
+    MeshDescriptor meshDescriptors[];
+};
+
+```
+`MeshDescriptor` refers to an index buffer, a texture coordinate buffer and a normal buffer through a BDA each. It also copied directly to memory from a CPU strucutre using `GL_EXT_scalar_block_layout`.
 
 ### Mesh Shader
 
 Mesh optimizer
 
-## The reason why not
+### Descriptor Heap
+
+## Things to still take care of
+
+While 
 
 ### Descriptor Sets + Push Constant
 
@@ -469,7 +510,7 @@ Mesh optimizer
 
 [VK_EXT_descriptor_indexing](https://docs.vulkan.org/refpages/latest/refpages/source/VK_EXT_descriptor_indexing.html)
 
-Descriptor Heap https://www.khronos.org/blog/simplifying-vulkan-one-subsystem-at-a-time
+[Descriptor Heap](https://www.khronos.org/blog/simplifying-vulkan-one-subsystem-at-a-time)
 ### Synchronization
 
 **Fences**
@@ -491,15 +532,25 @@ However, there are some extensions that makes live simple:
 
 Push constants, ubo and ssbo needs to align to std140 or std450 which has this weird requirements of having ```vec3``` being align at 16 bytes (instead of 4 bytes on the CPU). With [VK_EXT_scalar_block_layout](https://docs.vulkan.org/refpages/latest/refpages/source/VK_EXT_scalar_block_layout.html), it allows those non-scalar types to be aligned by their components. Actually, since Vulkan 1.4, this is no more an extension, nor optional, but required.
 
+Uploading images with staging buffer -> use of [VK_EXT_host_image_copy](https://docs.vulkan.org/samples/latest/samples/extensions/host_image_copy/README.html).
+
 
 ## Next steps
 
-I am not switching to Vulkan yet, but this retrospective pushed to look deeper into Vulkan and to try to implement several samples to prove my points. Maybe instead of switching, I could be adding Vulkan to my OpenGL ES course throughout the module. Most of my students work on mid-range gaming laptop with a discrete Nvidia or AMD card. If enough of the Vulkan setup is done, one can dream that a motivated could do the same samples in Vulkan as the one in OpenGL. 
+I am not switching to Vulkan yet, but this retrospective pushed to look deeper into Vulkan and to try to implement several samples to prove my points. My current plan is to add Vulkan to my OpenGL ES course throughout the module. Most of my students work on mid-range gaming laptop with a discrete Nvidia or AMD card. If enough of the Vulkan setup is done, one can dream that a motivated one could do the same samples in Vulkan as the one in OpenGL. 
 
 ### Vulkan Bootstrap
 
 ### The extensions
 
+This is the list of extensions that I use:
+- `VK_EXT_scalar_block_layout` (required in Vulkan 1.4 anyway)
+- `VK_KHR_unified_image_layouts`
+- `VK_KHR_synchronization2`
+- `VK_EXT_descriptor_heap`
+- `VK_EXT_host_image_copy`
+- `VK_KHR_dynamic_rendering` + `VK_KHR_dynamic_rendering_local_read`
+- `VK_EXT_shader_object`
 
 ### Raytracing
 
