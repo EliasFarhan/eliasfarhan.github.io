@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Why I am not teaching Vulkan"
+title:  "Why I am not teaching Vulkan (yet)"
 categories: jekyll update
 ---
 
