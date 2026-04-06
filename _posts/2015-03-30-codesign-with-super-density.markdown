@@ -2,7 +2,7 @@
 layout: post
 title:  "Codesign With Super-Density"
 date:   2015-03-30 22:02:25 +0200
-categories: jekyll update
+categories: [travel]
 ---
 ![Sisyphus 1](/images//2015/03/IMG_0554.jpg)
 

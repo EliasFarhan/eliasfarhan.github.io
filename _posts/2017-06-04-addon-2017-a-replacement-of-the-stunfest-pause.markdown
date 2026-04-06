@@ -1,6 +1,7 @@
 ---
 title: "ADDON 2017 - A replacement of the Stunfest pause"
 date: 2017-06-04
+categories: [gamedev, travel]
 ---
 
 ![ADDON-BAN-032017.jpeg](/images/2017/06/ADDON-BAN-032017.jpeg)

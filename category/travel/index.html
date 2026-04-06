@@ -1,0 +1,15 @@
+---
+layout: default
+title: "travel"
+permalink: /category/travel/
+---
+<h1>Posts: travel</h1>
+<ul class="posts">
+  {% for post in site.categories.travel %}
+    <li>
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
+      <div class="excerpt">{{ post.excerpt }}</div>
+    </li>
+  {% endfor %}
+</ul>

@@ -2,7 +2,7 @@
 layout: post
 title:  "Gamedev Suisse-Romande Meetup & Fantasy Basel"
 date:   2015-05-17 19:43:47 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 ![IMG_0787[1]](/images/2015/05/IMG_07871-e1431886430646.jpg)
 

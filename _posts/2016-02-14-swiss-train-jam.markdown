@@ -1,6 +1,7 @@
 ---
 title: "Swiss Train Jam"
 date: 2016-02-14
+categories: [gamedev, travel]
 ---
 
 ![IMG_1768.jpg](/images/2016/02/IMG_1768.jpg)

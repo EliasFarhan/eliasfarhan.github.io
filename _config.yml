@@ -48,6 +48,13 @@ plugins:
   - jekyll-paginate
 
 
+header_pages:
+  - about.markdown
+  - games.markdown
+  - blog/index.html
+  - projects.markdown
+  - talks.markdown
+
 defaults:
   - scope:
       path: "assets/webgl"

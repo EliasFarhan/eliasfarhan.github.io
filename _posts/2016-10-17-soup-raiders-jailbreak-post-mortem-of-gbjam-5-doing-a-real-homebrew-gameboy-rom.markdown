@@ -1,6 +1,7 @@
 ---
 title: "Soup Raiders: Jailbreak - Post-Mortem of #GBJam 5 doing a real homebrew gameboy rom"
 date: 2016-10-17
+categories: [gamedev]
 ---
 
 ![SoupRaiders.jpg](/images/2016/10/SoupRaiders.jpg)

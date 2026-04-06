@@ -1,6 +1,7 @@
 ---
 title: "Nordic Game Jam 17"
 date: 2017-04-23
+categories: [gamedev, travel]
 ---
 
 ![startscreen_v1.jpg](/images/2017/05/startscreen_v1.jpg)

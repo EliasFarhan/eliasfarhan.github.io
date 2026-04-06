@@ -2,7 +2,7 @@
 layout: post
 title:  "Soup Raiders: Jailbreak - patch 2019"
 #date:   2024-12-23 20:19:00 +0200
-categories: jekyll update
+categories: [gamedev, cpp]
 ---
 
 ![Gameboy image](/images/2019/gb/gb_title.jpg)

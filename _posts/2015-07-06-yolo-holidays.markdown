@@ -2,7 +2,7 @@
 layout: post
 title:  "Yolo Holidays"
 date:   2015-07-06 10:29:25 +0200
-categories: jekyll update
+categories: [travel]
 ---
 
 ![IMG_1004[1]](/images/2015/07/IMG_10041.jpg)

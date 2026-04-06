@@ -1,6 +1,7 @@
 ---
 title: "Orbital Game Jam"
 date: 2018-03-19
+categories: [gamedev]
 ---
 
 ![YxgDGN.png](https://img.itch.zone/aW1hZ2UvMjM2MDQzLzExMjIwNzMucG5n/original/YxgDGN.png)

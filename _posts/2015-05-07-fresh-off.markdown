@@ -2,7 +2,7 @@
 layout: post
 title:  "Fresh Off The Boat - a game for NewsGames Hackathon at ZHdK"
 date:   2015-05-07 12:34:35 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 ![Sisyphus 1](/images/2015/05/tumblr_nnxnury4TU1uuhxzuo3_1280.png)
 

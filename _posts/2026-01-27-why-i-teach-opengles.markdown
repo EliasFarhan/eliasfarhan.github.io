@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Why I still teach OpenGL ES 3.0"
-categories: jekyll update
+categories: [graphics, cpp]
 ---
 
 <div id="webgl-container" style="text-align: center; margin: 20px 0;">

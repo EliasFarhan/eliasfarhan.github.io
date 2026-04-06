@@ -2,7 +2,7 @@
 layout: post
 title:  "CppCon 2024"
 #date:   2024-12-23 20:19:00 +0200
-categories: jekyll update
+categories: [cpp, travel]
 ---
 
 ![Talk slide](/images/2024_wrapup/A_Simple_Rollback_System_in_C-_TitleCard_copy.jpg)

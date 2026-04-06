@@ -2,7 +2,7 @@
 layout: post
 title:  "Global Game Jam 2015"
 date:   2015-01-26 17:10:25 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 Damn, I should write more on this blog.
 

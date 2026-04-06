@@ -2,7 +2,7 @@
 layout: post
 title:  "Flower Granny"
 date:   2015-03-24 16:11:26 +0200
-categories: jekyll update
+categories: [travel]
 ---
 ![Sisyphus 1](/images/2015/03/IMG_05001.jpg)
 

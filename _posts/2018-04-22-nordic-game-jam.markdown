@@ -1,6 +1,7 @@
 ---
 title: "Nordic Game Jam"
 date: 2018-04-22
+categories: [gamedev, travel]
 ---
 
 ![IMG_20180412_165851.jpg](/images/2018/04/IMG_20180412_165851.jpg)

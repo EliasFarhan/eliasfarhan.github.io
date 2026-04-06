@@ -2,7 +2,7 @@
 layout: post
 title:  "Herofest + Stunfest 2025"
 #date:   2024-12-23 20:19:00 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 
 ![First image](/images/2025/herofest_beachslap.jpg)

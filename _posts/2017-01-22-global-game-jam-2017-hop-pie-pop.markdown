@@ -1,6 +1,7 @@
 ---
 title: "Global Game Jam 2017 - HoP-PiE-PoP"
 date: 2017-01-22
+categories: [gamedev]
 ---
 
 ![Screen-Shot-2017-05-09-at-22.13.30.png](/images/2017/01/Screen-Shot-2017-05-09-at-22.13.30.png)

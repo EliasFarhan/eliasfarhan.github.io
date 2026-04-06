@@ -2,7 +2,7 @@
 layout: post
 title:  "The Vanishing of Ethan Carter - Staging of Story in Video-Games"
 date:   2015-05-14 23:42:13 +0200
-categories: jekyll update
+categories: [graphics]
 ---
 ![Vanising2](/images/2015/05/Vanising2.png)
 

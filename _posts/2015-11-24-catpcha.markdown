@@ -2,7 +2,7 @@
 layout: post
 title:  "Catpcha - a PROCJAM post-mortem"
 date:   2015-11-24 11:54:59 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 
 ![IMG_10051.jpg](/images/2015/11/Captcha_title_2.png)

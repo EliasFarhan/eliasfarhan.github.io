@@ -2,7 +2,7 @@
 layout: post
 title:  "Value of a person is 11"
 date:   2015-03-02 13:29:28 +0200
-categories: jekyll update
+categories: [travel]
 ---
 ![Sisyphus 1](/images/2015/03/uetikon01-b48d24482df66f176d696d9e6f58bd26.jpg)
 

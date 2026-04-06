@@ -2,7 +2,7 @@
 layout: post
 title:  "Fire Monsters - Kid Game Jam 2015 Post-Mortem"
 date:   2015-10-25 21:11:21 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 
 ![Fire Monsters Logo](/images/2015/10/logo_game.png)

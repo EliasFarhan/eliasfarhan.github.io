@@ -161,3 +161,15 @@
   cursor: not-allowed;
   border-color: #e5e5e5;
 }
+.category-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-right: 4px;
+  border: 1px solid #0066cc;
+  border-radius: 3px;
+  color: #0066cc;
+  font-size: 0.8em;
+  text-decoration: none;
+  &:hover { background-color: #0066cc; color: white; }
+}
+.post-categories { margin: 4px 0 8px; }

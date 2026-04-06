@@ -1,6 +1,7 @@
 ---
 title: "Polymanga+PolyLAN+Fishcat jam+Fantasy Basel+Stunfest"
 date: 2016-06-08
+categories: [gamedev, travel]
 ---
 
 ![IMG_2095.jpg](/images/2016/06/IMG_2095.jpg)

@@ -1,6 +1,7 @@
 ---
 title: "Japan Holiday 2019"
 date: 2019-09-17
+categories: [travel]
 ---
 ![20190831_131713-1-e1578826958893.jpg](/images/2020/01/20190831_131713-1-e1578826958893.jpg)
 <!--more-->

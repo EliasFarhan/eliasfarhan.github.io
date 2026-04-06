@@ -2,7 +2,7 @@
 layout: post
 title:  "ADDON 2025"
 #date:   2024-12-23 20:19:00 +0200
-categories: jekyll update
+categories: [gamedev, travel]
 ---
 ![ADDON 2025](/images/2025/addon/addon2025.jpg)
 

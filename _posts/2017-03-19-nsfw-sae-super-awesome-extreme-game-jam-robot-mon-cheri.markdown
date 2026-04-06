@@ -1,6 +1,7 @@
 ---
 title: "NSFW - SAE (Super Awesome Extreme) Game Jam - Robot, Mon Chéri"
 date: 2017-03-19
+categories: [gamedev]
 ---
 
 ![omg.png](/images/2017/05/omg.png)

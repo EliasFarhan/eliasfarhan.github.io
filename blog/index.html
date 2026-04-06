@@ -12,6 +12,13 @@ title: Blog
         <li>
           <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
           <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
+          {% if post.categories %}
+            <p class="post-categories">
+              {% for cat in post.categories %}
+                <a href="{{ '/category/' | append: cat | relative_url }}" class="category-badge">{{ cat }}</a>
+              {% endfor %}
+            </p>
+          {% endif %}
           <div class="excerpt">
             {{ post.excerpt }}
             {% if post.excerpt != post.content %}
@@ -80,6 +87,14 @@ title: Blog
 
 
   <aside class="sidebar">
+    <h3>Categories</h3>
+    <ul>
+      <li><a href="/category/gamedev/">gamedev</a></li>
+      <li><a href="/category/graphics/">graphics</a></li>
+      <li><a href="/category/cpp/">c++</a></li>
+      <li><a href="/category/travel/">travel</a></li>
+      <li><a href="/category/thoughts/">thoughts</a></li>
+    </ul>
     <h3>All Posts</h3>
     <ul class="post-list">
       {% for post in site.posts %}

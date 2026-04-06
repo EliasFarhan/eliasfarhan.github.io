@@ -2,7 +2,7 @@
 layout: post
 title:  "Ludum Dare Spring 2015"
 date:   2015-04-27 07:22:15 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 ![start_screen](/images//2015/04/start_screen.jpg)
 

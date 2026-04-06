@@ -2,7 +2,7 @@
 layout: post
 title:  "Bacon Game Jam 9 - The Rise of Akeicha"
 date:   2015-06-17 13:47:24 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 ![Akeicha 2015-06-15 15-56-14-44](/images/2015/06/Akeicha-2015-06-15-15-56-14-44.jpg)
 

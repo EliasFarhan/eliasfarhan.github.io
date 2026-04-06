@@ -2,7 +2,7 @@
 layout: post
 title:  "Japan trip 2022"
 #date:   2024-12-23 20:19:00 +0200
-categories: jekyll update
+categories: [gamedev, travel]
 ---
 
 ![](/images/2022/japan_trip/00_welcome.jpg)

@@ -1,6 +1,7 @@
 ---
 title: "My beloved Meetup"
 date: 2017-06-17
+categories: [gamedev, thoughts]
 ---
 
 ![Screen-Shot-2017-06-15-at-08.16.07.png](/images/2017/06/Screen-Shot-2017-06-15-at-08.16.07.png)
