@@ -45,3 +45,4 @@ Game Jam Entries
 [![Simon Spaghetti (2023)](/images/simonspaghetti.png){: style="width: 31%;"}](https://teamkwakwa.itch.io/simon-spaghetti){:target="_blank" rel="noopener"} 
 [![Beach Slap (2023)](/images/beach_slap.png){: style="width: 31%;"}](https://teamkwakwa.itch.io/beach-slap){:target="_blank" rel="noopener"} 
 [![Felights (2024)](/images/felights.png){: style="width: 31%;"}](https://teamkwakwa.itch.io/felights){:target="_blank" rel="noopener"} 
+[![Tango Theater (2026)](https://img.itch.zone/aW1hZ2UvNDI1MDg5NC8yNTMyNjMxMC5wbmc=/original/nloh6S.png){: style="width: 31%;"}](https://teamkwakwa.itch.io/tango-theater){:target="_blank" rel="noopener"} 
