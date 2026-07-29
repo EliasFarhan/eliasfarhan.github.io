@@ -10,7 +10,7 @@ Beach Slap is a local- and online- multiplayer game where we play disgruntled, s
 
 ![](/images/beach_slap.jpg)
 
-[Splash Blast Panic](https://playsbp.ch){:target="_blank" rel="noopener"} (2018)
+[Splash Blast Panic](https://team-kwakwa.com/splash-blast-panic){:target="_blank" rel="noopener"} (2018)
 -------------------------------------------------------------------------------
 SPLASH BLAST PANIC is a multiplayer party fighting game where you stomp, fly and shoot your opponents with water pistol, mixing precision flight controls and a vast array of items and powerups. Inspired by old arcade titles as well as newer competitive party games, ruin all your friendships in a variety of stage which may or may not have various level of gimmicks that could backhand you if you're not careful, or tell that person you always despised your true feelings with waterbomb launchers, bubble prisons, watergun sentries, reflective shields and more !
 

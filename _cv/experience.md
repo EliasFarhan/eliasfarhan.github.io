@@ -17,7 +17,7 @@ Designed and delivered the games programming curriculum, including computer grap
 ### Co-Founder & Lead Programmer · Team KwaKwa
 
 **2015–present · Lausanne**  
-Released [Splash Blast Panic](https://playsbp.ch) on Steam, Nintendo Switch, PlayStation 4, and Xbox One using Unity; personally handled the Nintendo Switch and PlayStation 4 ports. Currently developing *Soup Raiders*, a C++ adventure game, and porting it to Nintendo Switch.
+Released [Splash Blast Panic](https://team-kwakwa.com/splash-blast-panic) on Steam, Nintendo Switch, PlayStation 4, and Xbox One using Unity; personally handled the Nintendo Switch and PlayStation 4 ports. Currently developing *Soup Raiders*, a C++ adventure game, and porting it to Nintendo Switch.
 
 ### Scientific Assistant · EPFL CRYOS Laboratory
 
