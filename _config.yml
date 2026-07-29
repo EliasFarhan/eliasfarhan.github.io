@@ -47,6 +47,10 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
 
+collections:
+  cv:
+    output: false
+
 
 header_pages:
   - about.markdown
@@ -70,4 +74,6 @@ defaults:
 # their entries' file path in the `include:` list.
 exclude:
   - CLAUDE.md
+  - Makefile
+  - scripts
   - vendor

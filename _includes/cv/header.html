@@ -1,0 +1,4 @@
+{% assign header = site.cv | where: "slug", "header" | first %}
+<header class="cv-header">
+  {{ header.content }}
+</header>
