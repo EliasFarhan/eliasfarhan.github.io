@@ -8,17 +8,23 @@ permalink: /games/
 -------------------------------------------------------------------------------
 Beach Slap is a local- and online- multiplayer game where we play disgruntled, selfish penguins who want to own the beach. Dash, stomp and slap your way to vacation supremacy in this chaotic multiplayer brawl.
 
+On this Unity project, I am responsible for the online multiplayer using rollback and the implementation of the gameplay.
+
 ![](/images/beach_slap.jpg)
 
 [Splash Blast Panic](https://team-kwakwa.com/splash-blast-panic){:target="_blank" rel="noopener"} (2018)
 -------------------------------------------------------------------------------
 SPLASH BLAST PANIC is a multiplayer party fighting game where you stomp, fly and shoot your opponents with water pistol, mixing precision flight controls and a vast array of items and powerups. Inspired by old arcade titles as well as newer competitive party games, ruin all your friendships in a variety of stage which may or may not have various level of gimmicks that could backhand you if you're not careful, or tell that person you always despised your true feelings with waterbomb launchers, bubble prisons, watergun sentries, reflective shields and more !
 
+I was the programmer on this Unity game. Recetly, for CppCon 2024, I ported the basic gameplay to a custom C++ engine.
+
 ![](/images/sbp.jpg)
 
 [Soup Raiders](https://soupraiders.com){:target="_blank" rel="noopener"} (In development)
 -------------------------------------------------------------------------------
 Soup Raiders is a wacky and fun tactical RPG with a real time battle system where pirate and merchent animals fight each other and the world is in a soup. Liberate the Western Soup from the grasps of Mr. Whale.
+
+Currently working on building the current demo into a custom 3d C++ game engine for CppCon 2026.
 
 ![](/images/sr.jpg)
 
