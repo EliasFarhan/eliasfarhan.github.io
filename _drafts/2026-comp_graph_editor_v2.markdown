@@ -12,8 +12,11 @@ Switching to SDL GPU Api.
 Modern API (vulkan, dx12, metal).
 Vulkan glsl shader compiled to dxil and msl and reflection done with SPIRV-Cross.
 
-Switching to flatbuffers
+Switching to cereal
 
+Adding Vulkan 1.4 API for raytracing support.
 
-Next steps
-- Nvidia RHI for raytracing
+Switch from Python to WASM for scripting (WASM compiled from a C++ script)
+
+Nice to have:
+- WebGPU
