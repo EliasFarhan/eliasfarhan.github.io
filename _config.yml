@@ -53,11 +53,11 @@ collections:
 
 
 header_pages:
-  - about.markdown
   - games.markdown
   - blog/index.html
   - projects.markdown
   - talks.markdown
+  - cv.md
 
 defaults:
   - scope:

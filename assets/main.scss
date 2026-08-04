@@ -36,6 +36,19 @@
   text-decoration: underline;
 }
 
+/* Title-only post list on the home page: no borders, tighter rows,
+   titles set in the same font and size as the surrounding body text */
+.posts.home-posts li {
+  border-bottom: none;
+  padding: 0.2rem 0;
+  font: inherit;
+}
+
+.posts.home-posts h2 {
+  font: inherit;
+  margin: 0;
+}
+
 .post-date {
   color: #666;
   font-size: 0.9em;
