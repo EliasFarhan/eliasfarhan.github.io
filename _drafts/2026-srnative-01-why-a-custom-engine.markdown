@@ -9,20 +9,6 @@ Opening hook: in December 2024 I wrote that Soup Raiders was over. In 2026 I cam
 
 <!--more-->
 
-## The series
-
-- (1) Rebuilding a cancelled Unity game in my own C++ engine
-- (2) Porting Unity faithfully: the quirks I reproduced and the ones I refused
-- (3) The asset compiler: JSON is an intermediate, not a shipping format
-- (4) Profiling with Tracy, including on a console
-- (5) Level load time: 32.7 s to 3.3 s, and how much of it was a build flag
-- (6) Rendering optimisation: culling, cutout silhouettes and depth sharing
-- (7) ECS, and the ECS I decided not to write
-- (8) Error handling: `core::Result` everywhere, exceptions only at startup
-- (9) Memory: fixed-capacity containers, and the heap nobody has ever sized
-- (10) Porting to a closed platform, and the trap that invalidated every number I had
-- (11) The future of Soup Raiders: Unity as an editor, or my own?
-
 ## Where the project was
 
 - Soup Raiders: action-tactical-RPG, hand-drawn characters in a 3D world, Team KwaKwa. Demo on itch.io.
