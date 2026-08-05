@@ -58,6 +58,7 @@ header_pages:
   - projects.markdown
   - talks.markdown
   - cv.md
+  - contact.md
 
 defaults:
   - scope:
