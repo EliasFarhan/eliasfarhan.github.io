@@ -4,6 +4,8 @@ title: Games
 permalink: /games/
 ---
 
+![bic win](/images/bic_win.jpg)
+
 [Beach Slap](https://team-kwakwa.com/beach-slap){:target="_blank" rel="noopener"} (In development)
 -------------------------------------------------------------------------------
 Beach Slap is a local- and online- multiplayer game where we play disgruntled, selfish penguins who want to own the beach. Dash, stomp and slap your way to vacation supremacy in this chaotic multiplayer brawl.

@@ -5,7 +5,7 @@ permalink: /contact/
 description: Programming consulting and teaching by Elias Farhan.
 ---
 
-![bic win](/images/bic_win.jpg)
+![bic win](/images/slavic_game_jam.jpg)
 
 I am available for short programming and teaching assignments for game studios and schools.
 
