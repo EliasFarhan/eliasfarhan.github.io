@@ -7,7 +7,7 @@ slug: experience
 ### Engine Programmer · 6it.dev
 
 **2024–2026 · Remote**  
-Worked under NDA, mostly with concept and template.
+Worked under NDA on a game engine, mostly with concept and template.
 
 ### Head of Games Programming · SAE Institute
 

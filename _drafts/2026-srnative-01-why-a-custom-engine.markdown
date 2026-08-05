@@ -15,7 +15,7 @@ But...
 
 ![](/images/2026/game_engine_share_sold.png)
 
- those games represent 41% of units sold.
+Those games represent 41% of units sold in 2024 and, even those are mostly AAA game engines, it still means that making your own game engine can still make sense business-wise. 
 
 Indie games in the 2008 were largely made with their own game engines.
 
