@@ -1,13 +1,22 @@
 ---
 layout: post
-title:  "Soup Raiders Native (10/11): Porting to a closed platform, and the trap that invalidated every number I had"
+title:  "Soup Raiders Goes Native (10/11): Porting to a closed platform, and the trap that invalidated every number I had"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---
 
-Opening hook: the whole game cross-compiled, linked and packaged for a console, and every translation unit compiled on the first try. Then it ran, and I spent a week profiling a USB cable.
+
 
 <!--more-->
+
+Console platforms constrained:
+- Access to filesystem (load/save)
+- Inputs
+- Network (important for profiling)
+
+Advantages:
+- Knowing exactly the CPU and GPU (specific optimization enabled)
+- Documentation
 
 *Everything about the platform itself is under NDA — the SDK, its tooling, its APIs, its hardware. So this post is about the parts that would be true of any closed platform, and about the mistakes, which were all mine.*
 

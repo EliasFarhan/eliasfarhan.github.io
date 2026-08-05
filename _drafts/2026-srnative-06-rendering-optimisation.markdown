@@ -5,9 +5,14 @@ categories: [gamedev, cpp]
 series: soupraiders-native
 ---
 
-Opening hook: the docks ran at 13.4 ms a frame on the console at 720p, with 16% of frames dropping to 30 fps. Three waves of work later it's 8.98 ms and not one frame of 25 458 misses the refresh interval. None of the wins were clever.
+
 
 <!--more-->
+
+Back-face culling
+Frustum culling
+Cutout shader (for mobile GPU)
+Copying the depth (why?)
 
 ## The baseline
 

@@ -5,9 +5,17 @@ categories: [gamedev, cpp]
 series: soupraiders-native
 ---
 
-Opening hook: the worst thing about the game on console was a black screen between islands. I set out to cut it from 18 seconds. It turned out to be 32.7 seconds, and the single biggest win was not an optimisation at all.
+
 
 <!--more-->
+
+OBJ vs GLB
+PNG vs KTX2 with basisu
+JSON vs Binary format
+Using PhysFS vs read each file one after the other.
+
+
+
 
 ## Start with the measurement, because mine were all wrong
 

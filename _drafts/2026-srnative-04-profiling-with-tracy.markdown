@@ -5,11 +5,29 @@ categories: [gamedev, cpp]
 series: soupraiders-native
 ---
 
-Opening hook: before this, the only performance instrument in the whole project was one hand-rolled `std::chrono` timer around the box3d mesh cook. Everything in posts 5 and 6 exists because Tracy went in first.
 
 <!--more-->
 
+## What is profiling?
+
+Comparing with baseline
+
+Comparing between instrumentation and the other (Superluminal vs Tracy).
+
+
+## What is tracy?
+
+## Profiling the Loading time
++transition time.
+Loading the 3d models + sprites and be ready to show the first frame.
+
+## Profiling the Update
++ Rendering (hooking up the Vulkan renderer of SDL GPU).
+How rendering work: first we issue commands (draw calls) and then the GPU will execute them. We need to measure both.
+
 *Console specifics are under NDA. The second half of this post is about getting a profiler onto a constrained target in general — no platform, no SDK, no API names.*
+
+
 
 ## The starting position
 

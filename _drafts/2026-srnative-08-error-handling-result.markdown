@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Soup Raiders Native (8/11): core::Result everywhere, exceptions only at startup"
+title:  "Soup Raiders Goes Native (8/11): Error Handling"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---

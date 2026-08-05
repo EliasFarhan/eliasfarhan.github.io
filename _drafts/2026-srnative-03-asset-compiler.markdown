@@ -1,13 +1,24 @@
 ---
 layout: post
-title:  "Soup Raiders Native (3/11): The asset compiler — JSON is an intermediate, not a shipping format"
+title:  "Soup Raiders Goes Native (3/11): The asset compiler"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---
 
-Opening hook: the game shipped 4.77 MB of JSON and spent 390 ms per level load parsing it on the console. Replacing it with a compiled binary was the obvious move — and two of my four reasons for doing it turned out to be wrong.
 
 <!--more-->
+
+The original assets:
+- 3d models
+- Sprites
+- Fmod music
+- Unity prefab/scenes data
+
+PhysFS
+
+3d models -> converted to GLB/
+Sprites -> put into atlases and converted to KTX2/
+Unity gameplay data -> JSON -> Serialized binary data (using cereal but could use C++26 static reflection instead).
 
 ## The inventory
 

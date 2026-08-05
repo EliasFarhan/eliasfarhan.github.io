@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Soup Raiders Native (2/11): Porting Unity faithfully — the quirks I reproduced and the ones I refused"
+title:  "Soup Raiders Goes Native (2/11): Porting from Unity"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---

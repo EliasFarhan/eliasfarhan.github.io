@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Soup Raiders Native (7/11): ECS, and the ECS I decided not to write"
+title:  "Soup Raiders Goes Native (7/11): When to ECS and when not to"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---

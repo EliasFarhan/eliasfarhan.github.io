@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Soup Raiders Native (11/11): The future — Unity as a level editor, or my own?"
+title:  "Soup Raiders Goes Native (11/11): The future "
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---
 
-Opening hook: the port is finished as a port. The demo plays end to end on four platforms. Which leaves the question I've been deferring for six months — where does the *next* level come from?
+Now that my CppCon talk is finally done, what is going to happen to Soup Raiders 3rd iteration?
 
 <!--more-->
 
