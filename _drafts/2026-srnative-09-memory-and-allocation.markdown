@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Soup Raiders Native (9/11): Fixed-capacity containers, and the heap nobody has ever sized"
+title:  "Soup Raiders Goes Native (9/11): Fixed-capacity containers, and the heap nobody has ever sized"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---

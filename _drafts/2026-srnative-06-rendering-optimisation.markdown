@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Soup Raiders Native (6/11): Rendering optimisation — culling, cutout silhouettes, depth sharing"
+title:  "Soup Raiders Goes Native (6/11): Rendering optimisation — culling, cutout silhouettes, depth sharing"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---

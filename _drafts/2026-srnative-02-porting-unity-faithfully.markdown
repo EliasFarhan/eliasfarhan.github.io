@@ -9,6 +9,15 @@ Opening hook: a port is not "the same game in another engine". It is a long seri
 
 <!--more-->
 
+What can be exported:
+- 3d models
+- Sprites
+- Scene layout
+- Ui layout
+
+What needs to be rewritten by hand:
+- Source code (C# -> C++) which makes for a nice refactor opportunity
+
 ## The rule that came first: never reconstruct Unity state by matching names
 
 - Paid for by the docks material fix. Names collide, names are editor-local, names lie.

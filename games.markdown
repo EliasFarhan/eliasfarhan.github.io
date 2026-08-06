@@ -4,15 +4,18 @@ title: Games
 permalink: /games/
 ---
 
-![bic win](/images/bic_win.jpg)
 
 [Beach Slap](https://team-kwakwa.com/beach-slap){:target="_blank" rel="noopener"} (In development)
 -------------------------------------------------------------------------------
+
+![bic win](/images/bic_win.jpg)
+
 Beach Slap is a local- and online- multiplayer game where we play disgruntled, selfish penguins who want to own the beach. Dash, stomp and slap your way to vacation supremacy in this chaotic multiplayer brawl.
 
 On this Unity project, I am responsible for the online multiplayer using rollback and the implementation of the gameplay.
 
 ![](/images/beach_slap.jpg)
+
 
 [Splash Blast Panic](https://team-kwakwa.com/splash-blast-panic){:target="_blank" rel="noopener"} (2018)
 -------------------------------------------------------------------------------
@@ -22,6 +25,7 @@ I was the programmer on this Unity game. Recetly, for CppCon 2024, I ported the 
 
 ![](/images/sbp.jpg)
 
+
 [Soup Raiders](https://soupraiders.com){:target="_blank" rel="noopener"} (In development)
 -------------------------------------------------------------------------------
 Soup Raiders is a wacky and fun tactical RPG with a real time battle system where pirate and merchent animals fight each other and the world is in a soup. Liberate the Western Soup from the grasps of Mr. Whale.
@@ -29,6 +33,7 @@ Soup Raiders is a wacky and fun tactical RPG with a real time battle system wher
 Currently working on building the current demo into a custom 3d C++ game engine for CppCon 2026.
 
 ![](/images/sr.jpg)
+
 
 Game Jam Entries
 ===============================================================================

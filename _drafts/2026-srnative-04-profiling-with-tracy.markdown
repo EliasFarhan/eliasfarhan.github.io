@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Soup Raiders Native (4/11): Profiling with Tracy, including on a console"
+title:  "Soup Raiders Goes Native (4/11): Profiling with Tracy, including on a console"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---

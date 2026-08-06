@@ -15,33 +15,34 @@ But...
 
 ![](/images/2026/game_engine_share_sold.png)
 
-Those games represent 41% of units sold in 2024 and, even those are mostly AAA game engines, it still means that making your own game engine can still make sense business-wise. Even Anthropic thinks Claude Code is a game engine:
+Those games represent 41% of units sold in 2024 and, even those are mostly AAA game engines, it still means that making your own game engine can still make sense business-wise. 
+
+Even Anthropic thinks Claude Code is a custom game engine:
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Most people&#39;s mental model of Claude Code is that &quot;it&#39;s just a TUI&quot; but it should really be closer to &quot;a small game engine&quot;.<br><br>For each frame our pipeline constructs a scene graph with React then<br>-&gt; layouts elements<br>-&gt; rasterizes them to a 2d screen<br>-&gt; diffs that against the…</p>&mdash; Thariq (@trq212) <a href="https://x.com/trq212/status/2014051501786931427?ref_src=twsrc%5Etfw">January 21, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
 So while we can think that most indie games are made with Unity or Unreal, actually there is a big list of them who have custom engines, among others:
 
-| Game                     | Studio                | Release Year | Engine / Technology                 |
-| ------------------------ | --------------------- | ------------ | ----------------------------------- |
-| Don't Starve             | Klei Entertainment    | 2013         | Custom C++ engine, Lua              |
-| Into the Breach          | Subset Games          | 2018         | Custom C++ engine, Lua, SDL2        |
-| FTL: Faster Than Light   | Subset Games          | 2012         | Custom C++ engine, SDL              |
-| Starbound                | Chucklefish           | 2016         | Custom C++ engine, Lua, SDL, OpenGL |
-| Factorio                 | Wube Software         | 2020         | Custom C++ engine, Lua              |
-| Darkest Dungeon          | Red Hook Studios      | 2016         | Custom C++ engine, Spine            |
-| Shovel Knight            | Yacht Club Games      | 2014         | Custom C++ engine, DirectX/OpenGL   |
-| Prison Architect         | Introversion Software | 2015         | Custom C++ engine                   |
-| This War of Mine         | 11 bit studios        | 2014         | Liquid Engine                       |
-| Banished                 | Shining Rock Software | 2014         | Custom C++ engine                   |
-| Pixel Dungeon            | Watabou               | 2012         | Java (later ported with libGDX)     |
-| Bastion                  | Supergiant Games      | 2011         | Custom C# technology, Microsoft XNA |
-| Stardew Valley           | ConcernedApe          | 2016         | C#, Microsoft XNA/MonoGame          |
-| Legend of Grimrock       | Almost Human          | 2012         | Custom C++ engine, Lua              |
-| Crypt of the NecroDancer | Brace Yourself Games  | 2015         | Custom C++ engine, Lua              |
+| Game                     | Studio                | Release Date      | Engine / Technology                 |
+| ------------------------ | --------------------- | ----------------- | ----------------------------------- |
+| Don't Starve             | Klei Entertainment    | April 23, 2013    | Custom C++ engine, Lua              |
+| Into the Breach          | Subset Games          | February 27, 2018 | Custom C++ engine, Lua, SDL2        |
+| FTL: Faster Than Light   | Subset Games          | September 14, 2012 | Custom C++ engine, SDL              |
+| Starbound                | Chucklefish           | July 22, 2016     | Custom C++ engine, Lua, SDL, OpenGL |
+| Factorio                 | Wube Software         | August 14, 2020   | Custom C++ engine, Lua              |
+| Darkest Dungeon          | Red Hook Studios      | January 19, 2016  | Custom C++ engine, Spine            |
+| Shovel Knight            | Yacht Club Games      | June 26, 2014     | Custom C++ engine, DirectX/OpenGL   |
+| Prison Architect         | Introversion Software | October 6, 2015   | Custom C++ engine                   |
+| This War of Mine         | 11 bit studios        | November 14, 2014 | Liquid Engine                       |
+| Banished                 | Shining Rock Software | February 18, 2014 | Custom C++ engine                   |
+| Pixel Dungeon            | Watabou               | November 29, 2012 | Java (later ported with libGDX)     |
+| Bastion                  | Supergiant Games      | July 20, 2011     | Custom C# technology, Microsoft XNA |
+| Stardew Valley           | ConcernedApe          | February 26, 2016 | C#, Microsoft XNA/MonoGame          |
+| Legend of Grimrock       | Almost Human          | April 11, 2012    | Custom C++ engine, Lua              |
+| Crypt of the NecroDancer | Brace Yourself Games  | April 23, 2015    | Custom C++ engine, Lua              |
 
 
-
-I still remember "Indie Game: The Movie" where all the games shown in the documentary were made with custom engines as well. But then of course, Unity came and here is a list of games made with Unity:
+I still remember "Indie Game: The Movie" where all the games shown in the documentary were made with custom engines as well. But then of course, Unity came and made nearly everybody's live easier. Here is a list of games made with Unity:
 
 | Game | Studio | Release Date | 
 |------|--------|--------------| 
@@ -68,7 +69,7 @@ But why?
 
 Making your own game engine can actually teach you how Unity or Unreal or any engines work. 
 
-I learned about rendering by teaching opengl with learnopengl
+I learned about rendering by teaching OpenGL with learnopengl.
 
 Cascaded shadow map -> a setting in Unity
 
@@ -77,11 +78,35 @@ Occlusion culling -> in Beach Slap, we disabled because we see all the objects.
 
 ## Independence
 
-Renderware
 
-The Machinery
 
-Unity runtime fee
+| Event                                          | Simple summary                                                                                                                                                                                                | Year / Timeline         | Reference                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **RenderWare no longer available**             | **2004–2007:** After EA acquired Criterion in **2004**, RenderWare was gradually withdrawn as commercial middleware and effectively disappeared from the market by **2007**. ([Wikipedia][1])                 | **2004 → 2007**         | EA acquisition: [GameSpot – EA assimilates Criterion](https://www.gamespot.com/articles/ea-assimilates-criterion/1100-6103640/?utm_source=chatgpt.com) · History: [RenderWare overview](https://en.wikipedia.org/wiki/RenderWare?utm_source=chatgpt.com)                                   |
+| **The Machinery shut down**                    | **2022:** Our Machinery announced it was ending development of **The Machinery** game engine and instructed users to delete source code and binaries. ([NME][2])                                              | **August 2022**         | [NME – The Machinery game engine cancelled](https://www.nme.com/news/gaming-news/the-machinery-game-engine-cancelled-as-developers-told-to-delete-all-source-code-3283633?utm_source=chatgpt.com)                                                                                          |
+| **Unity Runtime Fee introduced then canceled** | **2023–2024:** Unity announced the Runtime Fee in **September 2023**, faced major community backlash, revised the policy, and ultimately canceled it entirely in **September 2024**. ([Unity Discussions][3]) | **Sep 2023 → Sep 2024** | Announcement: [Unity pricing update (2023)](https://discussions.unity.com/t/unity-plan-pricing-and-packaging-updates/927079?utm_source=chatgpt.com) · Cancellation: [Unity is canceling the Runtime Fee](https://unity.com/blog/unity-is-canceling-the-runtime-fee?utm_source=chatgpt.com) |
+
+[1]: https://en.wikipedia.org/wiki/Criterion_Games?utm_source=chatgpt.com "Criterion Games"
+[2]: https://www.nme.com/news/gaming-news/the-machinery-game-engine-cancelled-as-developers-told-to-delete-all-source-code-3283633?utm_source=chatgpt.com "The Machinery game engine cancelled as devs told to delete source code"
+[3]: https://discussions.unity.com/t/unity-plan-pricing-and-packaging-updates/927079?utm_source=chatgpt.com "Unity plan pricing and packaging updates - News & General Discussion - Unity Discussions"
+
+
+Costs:
+
+| Engine              |                                               Upfront Cost | Revenue Share / Royalty                                                  | Notes                                                                                                                                                                            |
+| ------------------- | ---------------------------------------------------------: | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Unity**           | Personal: Free<br>Pro: Paid per seat (annual subscription) | **None**                                                                 | Runtime Fee was cancelled in 2024. Unity now uses a traditional seat-based subscription model. Existing Pro/Enterprise pricing increased slightly in 2025–2026. ([The Verge][1]) |
+| **Unreal Engine 5** |                                                       Free | **5% royalty** after the first **US$1M lifetime gross revenue per game** | Revenue earned through the Epic Games Store is royalty-free. Non-game commercial users over US$1M annual revenue pay **US$1,850/seat/year** instead. ([Unreal Engine][2])        |
+| **GameMaker**       |                                    Free for non-commercial | **US$99.99 one-time** for commercial games                               | Enterprise (console exports) is **US$79.99/month** or **US$799.99/year**. ([GameMaker][3])                                                                                       |
+| **CRYENGINE**       |                                                       Free | **5% royalty**                                                           | First **US$5,000/year/project** is royalty-free. Full source code included. ([CRYENGINE][4])                                                                                     |
+| **Godot**           |                                                   **Free** | **None**                                                                 | MIT license. No royalties, subscriptions, or revenue limits. ([Godot Engine][5])                                                                                                 |
+
+[1]: https://www.theverge.com/2024/9/12/24242937/unity-runtime-fee-cancelled-subscription-pricing?utm_source=chatgpt.com "Unity has eliminated its controversial runtime fee"
+[2]: https://www.unrealengine.com/license?utm_source=chatgpt.com "Unreal Engine (UE5) licensing options - Unreal Engine"
+[3]: https://gamemaker.io/en/help/articles/november-2023-pricing-terms-change-faq?utm_source=chatgpt.com "November 2023 Pricing/Terms Change FAQ"
+[4]: https://www.cryengine.com/support/view/licensing?utm_source=chatgpt.com "CRYENGINE | Support: Licensing"
+[5]: https://godotengine.org/license/?utm_source=chatgpt.com "License – Godot Engine"
+
 
 ## Game's Need
 
@@ -92,12 +117,14 @@ Total war
 ## Modding
 
 
+No modding for Splash Blast Panic.
+For Beach Slap, we have a custom level editor in the game, but we don't let the possibility through a tool to change the content of the game. 
 
 ## References
 - [Noel Berry's Making Video Games in 2025 (without an engine)](https://noelberry.ca/posts/making_games_in_2025/)
 - https://www.gdcvault.com/play/1034506/Independent-Games-Summit-A-Case
 - https://www.gamedeveloper.com/programming/real-reasons-not-to-build-custom-game-engines-in-2024
-- https://github.com/raysan5/custom_game_engines 
+- [Raysan5's list of custom game engines](https://gist.github.com/raysan5/909dc6cf33ed40223eb0dfe625c0de74)
 - https://encelo.github.io/CustomEnginesPresentation/#1
 - https://handmade.network/manifesto
 - https://www.gamesindustry.biz/a-case-for-building-your-own-tech-opinion
