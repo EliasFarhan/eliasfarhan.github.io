@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Soup Raiders Goes Native (1/11): The case for a custom engine"
+title:  "Soup Raiders Goes Native (1/?): The case for a custom engine"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---
@@ -15,13 +15,39 @@ But...
 
 ![](/images/2026/game_engine_share_sold.png)
 
-Those games represent 41% of units sold in 2024 and, even those are mostly AAA game engines, it still means that making your own game engine can still make sense business-wise. 
+Those games still represent 41% of units sold in 2024 and, even if those are mostly AAA game engines, it still means that making your own game engine can still make sense business-wise. So this blog post is about the why should you make a game engine.
 
-Even Anthropic thinks Claude Code is a custom game engine:
+However, before answering this question, we need to define what a game engine is, because even Anthropic thinks Claude Code is a custom game engine:
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Most people&#39;s mental model of Claude Code is that &quot;it&#39;s just a TUI&quot; but it should really be closer to &quot;a small game engine&quot;.<br><br>For each frame our pipeline constructs a scene graph with React then<br>-&gt; layouts elements<br>-&gt; rasterizes them to a 2d screen<br>-&gt; diffs that against the…</p>&mdash; Thariq (@trq212) <a href="https://x.com/trq212/status/2014051501786931427?ref_src=twsrc%5Etfw">January 21, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
-So while we can think that most indie games are made with Unity or Unreal, actually there is a big list of them who have custom engines, among others:
+## What's a game engine and what do we mean by custom?
+
+A game engine is a software that allows to create and run a computer game. It sits between the actual game code (gameplay logic) and the operating system (Windows, SteamOS, Android): 
+
+![](/images/2026/game_engine_stack.svg)
+
+In this position, the game engine role is to make sure that the game loop is running by interacting with the OS accordingly. This game loop runs as follow:
+
+![](/images/2026/game_loop.svg)
+
+- **Event Polling**: window resizing, keyboard/mouse/controller input changes, exiting the game, ...  
+- **Gameplay**: physics, calling the gameplay code
+- **Rendering**: generating the commands to be sent to the GPU to then present the new images on the screen.
+
+But that's not all what a game engine is supposed to do, it also needs to load all the assets that the game need (3d models, animations, sprites, music and sounds) and all of this is work that is not implementing the specifics of the actual game. 
+
+So it's no wonder that at the beginning of any project, the question of developing our own game engine arise. Technically, the goal of commerical game engines like Unreal or Unity is to sell you the game engine such that you only have to focus on making your game. While making a custom game engine is implementing this part by hand or at least gluing frameworks and libraries together to make this under-the-hood engineering. Here are some examples:
+
+- I use Unity, but I develop a lot of internal tools <- **not** a custom game engine.
+- I use SDL3 + assimp to make a 3d <- this is a custom game engine.
+- I use Unreal, but I rewrote the renderer <- **not** a custom game engine.
+- I use SFML to make a simple 2d networking game <- this is a custom game engine.
+- I use Godot and extended it with C++ <- **not** a custom game engine.
+- I handwrote from scratch the renderer in DX12 and I open a window with the Windows API <- this is a custom game engine.
+
+
+So now it's good to look at a list of games that have a custom game engine. I still remember "Indie Game: The Movie" where all the games shown in the documentary were made with custom engines as well.  But also all those very successfull games:
 
 | Game                     | Studio                | Release Date      | Engine / Technology                 |
 | ------------------------ | --------------------- | ----------------- | ----------------------------------- |
@@ -42,7 +68,7 @@ So while we can think that most indie games are made with Unity or Unreal, actua
 | Crypt of the NecroDancer | Brace Yourself Games  | April 23, 2015    | Custom C++ engine, Lua              |
 
 
-I still remember "Indie Game: The Movie" where all the games shown in the documentary were made with custom engines as well. But then of course, Unity came and made nearly everybody's live easier. Here is a list of games made with Unity:
+But then of course, it does not mean that all the successfull indie games have their own custom game engine. Unity took a big market share in mobile game development as well as indie games. For example, here is a list of games made with Unity:
 
 | Game | Studio | Release Date | 
 |------|--------|--------------| 
@@ -57,13 +83,11 @@ I still remember "Indie Game: The Movie" where all the games shown in the docume
 | Neon White | Angel Matrix | June 16, 2022 | 
 | Unpacking | Witch Beam | November 2, 2021 |
 
-Then Unity runtime fee in 2024.
 
-"Make a game or make a game engine" is a statement often thrown over the faces of computer science students who already dream of creating their MMO even before they finished their bachelor. But in 2024, when Unity tried to add runtime fee into its own engine, a lot of indie game developers were looking at godot or running their own game engine. 
+But we still have this "Make a game or make a game engine" statement that we throw over the faces of computer science students who already dream of creating their MMO even before they finished their bachelor. Because like Tyrel Gaiel puts it (in this blog post [here](https://medium.com/geekculture/how-to-make-your-own-game-engine-and-why-ddf0acbc5f3)): 
+> You think you can just make something better than Unity or Unreal (or Godot or GameMaker) in general. You can’t. It’s possible to make something that is better than these for specific use cases [...], but you, as an individual or a tiny team, are not going to compete with these for general purpose stuff. Especially if you have never made your own game engine before.
 
-
-
-But why?
+Our goal with this Soup Raiders Native Port is not to make Unity or Unreal, but it is to make a game engine that supports this specific game. So now that we know what a custom game engine is, we can try to answer the question of why making a game engine.
 
 ## Learning
 
@@ -108,17 +132,21 @@ Costs:
 [5]: https://godotengine.org/license/?utm_source=chatgpt.com "License – Godot Engine"
 
 
-## Game's Need
+## Specialization
 
 Sometimes, your game is just too crazy
 
-Total war
+Total war, Factorio
 
 ## Modding
 
 
 No modding for Splash Blast Panic.
-For Beach Slap, we have a custom level editor in the game, but we don't let the possibility through a tool to change the content of the game. 
+For Beach Slap, we have a custom level editor in the game, but we don't let the possibility through a tool to change the content of the game.
+
+## Conclusion
+
+Making a game has a lot of good, but at a time cost. We control how we load and upadte our game (to the specific need of our game), we owe no license to anybody, and we learn a bunch about asset compilation, rendering, and optimization. In the rest of the series, we will detail in the implementation details of the Soup Raiders Native Port and how we can target 60Hz in the Switch with sub-3s loading time.   
 
 ## References
 - [Noel Berry's Making Video Games in 2025 (without an engine)](https://noelberry.ca/posts/making_games_in_2025/)
@@ -128,3 +156,6 @@ For Beach Slap, we have a custom level editor in the game, but we don't let the 
 - https://encelo.github.io/CustomEnginesPresentation/#1
 - https://handmade.network/manifesto
 - https://www.gamesindustry.biz/a-case-for-building-your-own-tech-opinion
+- https://norikitech.com/posts/make-your-game/ 
+- https://medium.com/geekculture/how-to-make-your-own-game-engine-and-why-ddf0acbc5f3 
+- https://lisyarus.github.io/blog/posts/so-you-want-to-make-a-game-engine.html 
