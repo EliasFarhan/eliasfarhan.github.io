@@ -7,7 +7,7 @@ categories: [gamedev, cpp]
 <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7483892203300229120?collapsed=1" height="543" width="504" frameborder="0" allowfullscreen="" title="Post intégré"></iframe>
 
 
-Two weeks ago, I announced that my talk was accepted for CppCon 2026 happening in about a month in Denver (on Tuesday September 15th to be more exact). The talk is about building a small-but-not-trivial-scale C++ game engine, and about all the nice things Modern C++ provides to help with this task. I was not very comfortable with just doing a theoretical talk without any practical case to back it up. You can find it in the CppCon schedule [here](https://cppcon2026.sched.com/event/2RT5K/inside-a-small-game-engine-an-architecture-tour-in-modern-c++).
+Two weeks ago, I announced that my talk was accepted for CppCon 2026, happening in about a month in Denver (on Tuesday, September 15th, to be more exact). The talk is about building a small but non-trivial C++ game engine and all the nice things modern C++ provides to help with this task. I was not very comfortable with giving a purely theoretical talk without any practical example to back it up. You can find it in the CppCon schedule [here](https://cppcon2026.sched.com/event/2RT5K/inside-a-small-game-engine-an-architecture-tour-in-modern-c++).
 
 <!--more-->
 
@@ -15,28 +15,36 @@ Two weeks ago, I announced that my talk was accepted for CppCon 2026 happening i
 
 ![soup raiders docks](/images/2026/sr_docks.png)
 
-Just playing around with a simple game engine was not what I wanted to do during my summer holidays. That's because after working at [6it.dev](https://6it.dev), I realized that even though I like working and understanding game engines, my goal is still to make games. And so, to have a manageable but not too trivial project, I decided to resurrect the Soup Raiders project that was on hold since 2024 (blogpost [here](/jekyll/update/2024/12/23/soup-raiders-pause.html)).
+Just playing around with a simple game engine was not what I wanted to do during my summer holidays. That's because after working at [6it.dev](https://6it.dev), I realized that even though I like working on and understanding game engines, my goal is still to make games. And so, to have a manageable but not too trivial project, I decided to resurrect the Soup Raiders project, which had been on hold since 2024 (blog post [here](/jekyll/update/2024/12/23/soup-raiders-pause.html)).
 
-So the goal is pretty simple: take my old Unity game and port it to a new C++ custom engine using the Neko3d renderer. Through this process, I can test that the content of my CppCon talk is valid in practice. However, there are a lot of points that I will simply not have the time to bring up during my 60-minute talk, so I decided to write a few blog posts about those. I don't know how big this series is going to be, but I want to write about interesting subjects like load-time optimization, profiling, GPU optimization, error handling, platform porting.
+So the goal is pretty simple: take my old Unity game and port it to a new custom C++ engine using the Neko3d renderer. Through this process, I can test that the content of my CppCon talk is valid in practice. However, there are a lot of points that I simply will not have time to bring up during my 60-minute talk, so I decided to write a few blog posts about them. I don't know how big this series is going to be, but I want to write about interesting subjects like load-time optimization, profiling, GPU optimization, error handling, and platform porting.
 
-## 3d renderer
+## 3D renderer
 
-For the 3d renderer which is a part of a game engine that can take a lot of time, I already have the CompGraphEditor, which is a tool that I use in my course to explain the basic concepts of Computer Graphics. In secret, I have been refactoring this project into a new version for next year, renamed Neko3d:
+For the 3D renderer, a part of a game engine that can take a lot of time to build, I already have CompGraphEditor, a tool that I use in my course to explain the basic concepts of computer graphics. Behind the scenes, I have been refactoring this project into a new version for next year, renamed Neko3d:
 
 ![neko3d logo](/images/2026/neko3d.png)
 
-Neko3d uses SDL GPU as a rendering hardware interface (RHI) on top of Vulkan, DirectX and Metal. On top of the RHI, Neko3d adds shaders, pipelines, meshes, models, materials, draw commands, render passes and scenes that can be customized with C++ "scripts" to control the rendering. The main shader language I use is GLSL (I should probably switch one day to Slang).
+Neko3d uses SDL GPU as a rendering hardware interface (RHI) on top of Vulkan, DirectX, and Metal. On top of the RHI, Neko3d adds shaders, pipelines, meshes, models, materials, draw commands, render passes, and scenes that can be customized with C++ "scripts" to control the rendering. The main shader language I use is GLSL (I should probably switch to Slang one day).
+
+## The target
+
+![soup raiders switch](/images/2026/sr/sr_switch.jpg)
+
+I want this game to run on the Nintendo Switch at 60 Hz, with sub-three-second loading times between levels (and menus). The bottlenecks are going to be the GPU and the loading of visual assets. But in the previous Unity version, I managed to get the game running close to this target, and now I have full control over the codebase.
 
 ## The series
 
+So here begins a whole series about this little summer project of mine: bringing my Soup Raiders demo to a custom game engine.
+
 - (1) The case for a custom engine
-- (2) Porting from Unity
+- (2) Porting from Unity to Neko3d
 - (3) The asset compiler
 - (4) Profiling with Tracy
 - (5) Level load time
-- (6) Rendering optimisation: culling, cutout silhouettes and depth sharing
-- (7) When to ECS and when not to
+- (6) Rendering optimization: culling, cutout silhouettes and depth sharing
+- (7) When to use ECS and when not to
 - (8) Error handling
-- (9) Memory: fixed-capacity containers, and budgeting the heap
+- (9) Memory: fixed-capacity containers and heap budgeting
 - (10) Porting to a closed platform
 - (11) The future of Soup Raiders: Unity as an editor, or my own?

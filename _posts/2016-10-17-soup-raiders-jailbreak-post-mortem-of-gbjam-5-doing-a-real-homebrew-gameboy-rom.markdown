@@ -5,7 +5,9 @@ categories: [gamedev]
 ---
 
 ![SoupRaiders.jpg](/images/2016/10/SoupRaiders.jpg)
+
 <!--more-->
+
 Alexis and I participated last week at the GBJam 5. The goal was to create a gameboy-like game, with several rules (taken from <a href="https://itch.io/jam/gbjam-5">https://itch.io/jam/gbjam-5</a>):
 <ol>
  	<li>The aim of GBJam is to create a GameBoy themed game</li>
