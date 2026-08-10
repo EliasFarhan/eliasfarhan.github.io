@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Soup Raiders Goes Native (1/?): The case for a custom engine"
+title:  "Soup Raiders Goes Native (1/?): What You Gain by Building Your Own Game Engine"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---
@@ -241,14 +241,18 @@ But if we imagine that we have a lot of motivation (or a well-scoped game engine
 [5]: https://godotengine.org/license/?utm_source=chatgpt.com "License – Godot Engine"
 
 
-## Specialization
-
+## Low Level control
 Sometimes, your game is just too crazy
 
 Total war, Factorio
 
-## Modding
+## Unique Game Mechanics
 
+## Specialization
+
+## Weird Platforms
+
+## Customization
 
 No modding for Splash Blast Panic.
 For Beach Slap, we have a custom level editor in the game, but we don't give players a tool to change the content of the game.

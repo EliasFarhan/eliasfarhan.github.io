@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Soup Raiders Goes Native (5/11): Level load time — 32.7 s to 3.3 s, and how much of it was a build flag"
+title:  "Soup Raiders Goes Native (5/11): Level load time"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---
