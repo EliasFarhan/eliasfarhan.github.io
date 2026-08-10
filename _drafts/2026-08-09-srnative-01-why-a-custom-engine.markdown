@@ -151,7 +151,7 @@ Of course, Unity could not just break their RHI from one version to another, but
 
 With a custom game engine, you have full control over your development process and tech stack.
 
-### Legal
+### Legal independence
 
 You don't own your third-party engine. You just have a license with the company that allows you to use it, which also means that they can take it away whenever they consider that you violated their Terms of Service. It has happened several times to developers using Unity:
 - [Improbable/SpatialOS in 2019](https://techcrunch.com/2019/01/11/improbable-urges-unity-to-unsuspend-their-game-engine-license-or-clarify-terms/)
@@ -208,7 +208,7 @@ The consequences of this runtime fee can still be seen today in 2026: at the Gam
 
 
 
-### Financial
+### Financial independence
 
 I remember a talk by Rami Ismail at Reboot Develop 2017 where he spoke about this triangle:
 
@@ -241,16 +241,94 @@ But if we imagine that we have a lot of motivation (or a well-scoped game engine
 [5]: https://godotengine.org/license/?utm_source=chatgpt.com "License – Godot Engine"
 
 
-## Low Level control
-Sometimes, your game is just too crazy
+## Low-level control
 
-Total war, Factorio
+The Handmade Manifesto ([here](https://handmade.network/manifesto)) argues that programmers should understand how computers and their technology stacks work instead of relying on layers of opaque frameworks and dependencies. Their values add a "We like to reinvent the wheel" section. In a way, create a custom engine is implementing again a lot of code for problems that are already solved, but with a twisted on the specifics of our games. 
+
+Reimplementing low-level systems does not mean one should reimplemented all of the low-level systems. Noel Berry (article [here]) delegates platform, input, and rendering work to SDL3 and uses FMOD for audio. Nikita also recommends using libraries like SDL, GLFW, SFML or OpenAL.
+
+In their [Reddit AMA](https://www.reddit.com/r/factorio/comments/in5d3i/developer_technicaloriented_ama/), the developer of Factorio argued that for their game logic:
+> 'standard engines' are so restrictive in what can be done and leave so much performance sitting there that I wouldn't ever consider using one for something like Factorio. 
+
+Compilation time and build size are also something that change drastically when you have your own custom game engine. People working with Unreal or with Unity (especially il2cpp) might know about problems like those:
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">We upgraded a project from Unity 2022.3 to 6.3 and Unity is still the slow , cluncky thing it was before. The builds are as slow. compiling IL2CPP takes 1.5 hours on the machien that compiles UE5 source in 40 mins. It is hard to go back to Unity.</p>&mdash; Ashkan Saeidi Mazdeh (@Ashkan_GC) <a href="https://x.com/Ashkan_GC/status/2019446029175693724?ref_src=twsrc%5Etfw">February 5, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+
+For me, it got so problematic that I have a specific other computer that compiles Beach Slap at the end of a dev day for all the platforms (PC + Steam PC/Linux + Android APK/AAB + Nintendo Switch) in one bat script. 
+
+Dan Baker argues that owning your own game engine can also lower compilation time:
+> For example, our Nitrous Engine compiles very quickly. The engine compiles in less than 30 seconds. The engine code is clean and modular, so we can implement features in the engine or fix a bug in around a tenth of the time it would take in an off-the-shelf engine. Not only can we do a clean build of Ara in less than 2 minutes, but our debug version of the Ara and Nitrous is so fast that we can still run at 30 fps in full debug.
+
+Sebastien de Graffenrid build size:
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A nice thing about using your own C engine are the small build sizes.<br>And I didn&#39;t even try that hard to reduce the size! <a href="https://t.co/d85Po9ztUU">https://t.co/d85Po9ztUU</a> <a href="https://t.co/OO2QncB2lk">pic.twitter.com/OO2QncB2lk</a></p>&mdash; Sébastien de Graffenried (@seb_degraff) <a href="https://x.com/seb_degraff/status/1889649086560600088?ref_src=twsrc%5Etfw">February 12, 2025</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+
+Or Johnathan Blow own compiler:
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I did some work on the compiler that had the side effect of speeding things up! Here are the current compile speeds on my desktop.<br><br>Current compiler size: 55,273 lines. <a href="https://t.co/HmYKzZ3z3q">pic.twitter.com/HmYKzZ3z3q</a></p>&mdash; Jonathan Blow (@Jonathan_Blow) <a href="https://x.com/Jonathan_Blow/status/1353939518588502018?ref_src=twsrc%5Etfw">January 26, 2021</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+
+Those three examples show that having custom game engines can not just improve the performance of your game, but also the performance of your workflow. Like Tyler Glaeil puts it:
+> it’s nice to just have your own tech, [...]. It’s nice to be able to actually debug the internals of your game if something goes wrong. 
+
+But he warns directly:
+> But it can also suck if you made a couple of bad design choices and everything falls apart entirely, and there’s no resources online to help you. You have full control and full responsibility, and all the pros and cons that come with that.
+
+With a custom game engine, you can make things faster and easier to use, but you can also completely screw it up and still have a C++ project that takes ages to compile. It then becomes your responsability to optimize the compile time of your project.
 
 ## Unique Game Mechanics
 
+Glaiel cites games such as:
+
+- Noita
+> A great example of a justified use of a custom game engine is the well-known Noita. The game has a truly unique concept that likely wouldn’t have worked with any existing proprietary engine, a uniqueness captured in the name of its engine, "Falling Everything." Yet, Noita doesn’t rely on advanced graphical effects, it’s single-player, and it was built exclusively for one platform — PC.
+- Miegakure
+- Dwarf Fortress
+
 ## Specialization
 
-## Weird Platforms
+Noel Berry's artist uses Asesprite so he simply implemented a direct importer of the format in his game engine. He also build custom level editors for the needs of his game and the team. He can do that because he does not need most of the features of a generic-purpose game engine.
+
+Nikita makes the point that a custom game engine does not necesseraly need complex material graphs, global illumination, or advanced 3D physics, multiplayer infrastructure or industrial-scale editor tooling. For Glaiel, specialization is almost a requirement for a custom engine. He adds that:
+> [...] you can make your asset pipeline / level editor / whatever way smoother to use when considering your specific use cases instead of needing it to be general purpose.
+
+The point of specialization is also long-term. We might want to use our custom game engine for the next game, even for a whole series of games. This was the case for the [RED Engine of CD Projekt Red](https://witcher-games.fandom.com/wiki/REDengine):
+- (2007) Aurora Engine: CDPR licensed and heavily modified BioWare’s engine to create The Witcher.
+- (2011) REDengine 1: CDPR introduced its own proprietary engine with The Witcher 2.
+- (2012) REDengine 2: The engine evolved to support consoles and multiplatform development.
+- (2015) REDengine 3: REDengine was redesigned for the large open world of The Witcher 3.
+- (2020) REDengine 4: The engine evolved again for the dense urban world of Cyberpunk 2077.
+- (2023) REDengine 4: Phantom Liberty became the final major release built with REDengine.
+
+Of course, we all know now that CD Projekt Red switched to Unreal for Witcher 4, and even though a game engine changes heavily from one version to another, some of the foundations still stay. 
+
+## Multi-platform
+
+When releasing a game on multiple platforms, Unity feels like magic. The time it takes to naively port a specific game to a console (may it be not the best port) is pretty low compare to do it by hand in a custom game engine (especially when we don't know the platform). To quote Nikita on multi-platform development with a custom game engine:
+> Supporting multiple platforms adds more pain, since different platforms have different executable file formats, dynamic library formats, etc. You'll have to compile several different versions of your game, one for each platform.
+
+Compared that to the "time to triangle" (the time to draw the first triangle of game engine on the console) that [Mark Cerny was talking at Gamelab in 2013](https://www.youtube.com/watch?v=xHXrBnipHyA) about for the PS3 (among other Sony's consoles):
+
+| Platform          | “Time to triangle” |
+| ----------------- | -----------------: |
+| PlayStation       |     **1-2 months** |
+| PlayStation 2     |     **3-6 months** |
+| **PlayStation 3** |    **6-12 months** |
+| PlayStation 4     |     **1-2 months** |
+
+However, the big win for custom game engines are for very niche or retro platforms. The current version of Unity (6.4) support those game consoles:
+- PlayStation 4 (including PlayStation VR)
+- PlayStation 5 (including PlayStation VR2)
+- Xbox One
+- Xbox Series X
+- Xbox Series S
+- Nintendo Switch
+- Nintendo Switch 2
+
+Those are the previous and current generation of consoles. Which means that older or exotic game consoles requires you to use a custom game engine. On the [Playdate](https://play.date/), you are required to program in C or Lua with their SDK. The [Arduboy](https://www.arduboy.com/) also pushes the boundries with a C++ dialect in the Arduino ecosystem.
+
+For GBJam in 2016, I made a Gameboy Game in C using GBDK (blog post [here](/gamedev/2016/10/17/soup-raiders-jailbreak-post-mortem-of-gbjam-5-doing-a-real-homebrew-gameboy-rom.html)). [GB Studio](https://www.gbstudio.dev/) did not exist back in the day, so I needed to suffer through the painful process of program on a system without debugger (the screen would just be blank at boot when there was a problem). 
+
+Similarly, someone that has the same first name as me is working on a PS1 game on his custom game engine and here is the result:
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I started making stuff for PS1 exactly one year ago.<br><br>It&#39;s been a wild journey since then. I&#39;m thinking of writing a big article about it (and later a video, maybe).<br><br>And this is just the beginning of my PS1 journey! <br>Now that I have a pretty good engine, I can make a real game. <a href="https://t.co/fA1cWJfNlp">pic.twitter.com/fA1cWJfNlp</a></p>&mdash; Elias Daler (@EliasDaler) <a href="https://x.com/EliasDaler/status/1948300981130727607?ref_src=twsrc%5Etfw">July 24, 2025</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+
+Commercial game engines move forward with the technology and new game consoles, but custom game engines don't have the same requirements. 
 
 ## Customization
 
@@ -261,7 +339,7 @@ For Beach Slap, we have a custom level editor in the game, but we don't give pla
 
 Making a game engine has a lot of upsides, but it costs time. We control how we load and update our game (to the specific needs of our game), we owe no license fees to anybody, and we learn a lot about asset compilation, rendering and optimization. In the rest of the series, we will go into the implementation details of the Soup Raiders Native Port and how we can target 60Hz on the Switch with sub-3s loading times.
 
-I will leave you with one thought about creating your own game engine with an LLM:
+I will leave you with one thought about creating your own game engine with LLM:
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Now is the perfect time to write your own engine. The argument in the past was that you don&#39;t have time to write all the less important generic features. Now, the LLM will do that for you. You can focus on things that differentiate your product. <a href="https://t.co/ydEaaZOx12">https://t.co/ydEaaZOx12</a></p>&mdash; Sebastian Aaltonen (@SebAaltonen) <a href="https://x.com/SebAaltonen/status/2033460617282031835?ref_src=twsrc%5Etfw">March 16, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
