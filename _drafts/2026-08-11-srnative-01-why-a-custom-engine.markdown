@@ -274,9 +274,7 @@ With a custom game engine, you can make things faster and easier to use, but you
 
 ## Unique Game Mechanics
 
-Glaiel cites games such as:
-
-- Noita
+On this topic, Glaiel quotes:
 > A great example of a justified use of a custom game engine is the well-known Noita. The game has a truly unique concept that likely wouldn’t have worked with any existing proprietary engine, a uniqueness captured in the name of its engine, "Falling Everything." Yet, Noita doesn’t rely on advanced graphical effects, it’s single-player, and it was built exclusively for one platform — PC.
 - Miegakure
 - Dwarf Fortress
@@ -287,6 +285,8 @@ Noel Berry's artist uses Asesprite so he simply implemented a direct importer of
 
 Nikita makes the point that a custom game engine does not necesseraly need complex material graphs, global illumination, or advanced 3D physics, multiplayer infrastructure or industrial-scale editor tooling. For Glaiel, specialization is almost a requirement for a custom engine. He adds that:
 > [...] you can make your asset pipeline / level editor / whatever way smoother to use when considering your specific use cases instead of needing it to be general purpose.
+
+This is one of the talking points of [Andreas Fredriksson's Context is Everything](https://vimeo.com/644068002) talk at Handmade Seattle 2021, when you know your specific context, you can optimize accordingly and because you have low-level control over your custom engine, you can go as deep as you need to solve your problem. 
 
 The point of specialization is also long-term. We might want to use our custom game engine for the next game, even for a whole series of games. This was the case for the [RED Engine of CD Projekt Red](https://witcher-games.fandom.com/wiki/REDengine):
 - (2007) Aurora Engine: CDPR licensed and heavily modified BioWare’s engine to create The Witcher.
@@ -332,8 +332,23 @@ Commercial game engines move forward with the technology and new game consoles, 
 
 ## Customization
 
-No modding for Splash Blast Panic.
-For Beach Slap, we have a custom level editor in the game, but we don't give players a tool to change the content of the game.
+For Beach Slap, levels are json. I don't intent for Soup Raiders to support modding. 
+
+Tyler says about file management:
+> You might want to be able to build mod support or dynamic loading/unloading or whatever off of this, as long as you have the basics here and only ever load files through the file manager, you can easily add whatever other functionality you want into this later.
+
+But what can we load and allow the players to change? One of the games of my teenage years was Civilization IV (article in [Game Developer magazine of August 2005](https://media.gdcvault.com/GD_Mag_Archives/GDM_August_2005.pdf)) had an unusual good architecture for this (very data-driven). It features four tiers of moddability:
+- in-game WorldBuilder: an in-game map editor tool to customize terrain and place units, cities, buildings, resources
+- XML/data modification: all the game variables, text, asset paths, and rules were located in standard CML files.
+- Python scripting; all high-level game functionality were exposed to Python, so scripts could generate maps, modify the interface, trigger game events, override AI. 
+- a C++ GameCore DLL SDK: users could also modify, replace or extend the low-level C++ code that plays the game.
+
+While doing my research, I realized that there was a mod more than 20 years in development name Realism Invictus [here](https://www.moddb.com/mods/realism-invictus/news/realism-invictus-38-released-20-year-anniversary-of-realism-invictus) which is a total overhaul of the game adding more than 130+ technologies to the tree as well as whole family of distinct units, more than 160 leaders, 80+ additional conventional military,  promotions, 21 additional civics, which makes it feel more like Civ IV 2.0. All this is possible because the game developers spent a lot of time to make the engine moddable.
+
+[THE PANDORA'S BOX OF MODDING IN 'ARMA' GAMES Karel Mořický](https://gdcvault.com/play/1027043/The-Pandora-s-Box-of)
+
+In the opposite, Minecraft Java Edition modding ecosystem mostly grew without Mojang providing a conventional official engine-level mod API. 
+Minecraft Java Edition updates were painful. They tried a javascript addon system that was discontinued. 
 
 ## Conclusion
 
