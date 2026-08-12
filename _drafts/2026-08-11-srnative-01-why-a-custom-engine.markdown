@@ -280,11 +280,17 @@ On this topic, Glaiel quotes:
 > A great example of a justified use of a custom game engine is the well-known Noita. The game has a truly unique concept that likely wouldn’t have worked with any existing proprietary engine, a uniqueness captured in the name of its engine, "Falling Everything." Yet, Noita doesn’t rely on advanced graphical effects, it’s single-player, and it was built exclusively for one platform — PC.
 
 - Miegakure
+![Miegakure]()
 - Dwarf Fortress
+![Dwarf Fortress]()
 
+- Teardown
 ## Specialization
 
 Noel Berry's artist uses Asesprite so he simply implemented a direct importer of the format in his game engine. He also build custom level editors for the needs of his game and the team. He can do that because he does not need most of the features of a generic-purpose game engine.
+
+For Animal Well (from [this Game Developer article by Sam Machkovech]((https://www.gamedeveloper.com/design/why-animal-well-s-home-brewed-engine-was-key-to-its-success).)), the first reason why Billy Basso made his own custom engine was to avoid the "sour taste" of inefficient tools and workflows, because of his experience in mobile games using off-the-shelf that had a lot of bloat and were laggy.. Rim light shader  (Basso) recommends an engine-first mentality for new game development: 
+> [...] That opens up a lot of unique creative avenues. Once I get a cool system working, then I can play around with it and see what it allows for.
 
 Nikita makes the point that a custom game engine does not necesseraly need complex material graphs, global illumination, or advanced 3D physics, multiplayer infrastructure or industrial-scale editor tooling. For Glaiel, specialization is almost a requirement for a custom engine. He adds that:
 > [...] you can make your asset pipeline / level editor / whatever way smoother to use when considering your specific use cases instead of needing it to be general purpose.
@@ -338,7 +344,11 @@ Commercial game engines move forward with the technology and new game consoles, 
 Tyler says about file management:
 > You might want to be able to build mod support or dynamic loading/unloading or whatever off of this, as long as you have the basics here and only ever load files through the file manager, you can easily add whatever other functionality you want into this later.
 
-But what can we load and allow the players to change? One of the games of my teenage years' game was Civilization IV (article in [Game Developer magazine of August 2005](https://media.gdcvault.com/GD_Mag_Archives/GDM_August_2005.pdf)) that had an unusual good architecture for this (very data-driven). It features four tiers of moddability:
+But what can we load and allow the players to change?
+
+![civ4 mods]()
+
+One of the games of my teenage years' game was Civilization IV (article in [Game Developer magazine of August 2005](https://media.gdcvault.com/GD_Mag_Archives/GDM_August_2005.pdf)) that had an unusual good architecture for this (very data-driven). It features four tiers of moddability:
 - in-game WorldBuilder: an in-game map editor tool to customize terrain and place units, cities, buildings, resources
 - XML/data modification: all the game variables, text, asset paths, and rules were located in standard CML files.
 - Python scripting; all high-level game functionality were exposed to Python, so scripts could generate maps, modify the interface, trigger game events, override AI. 
@@ -355,20 +365,26 @@ Same with ARMA III, a game by Bohemia Interactive. In his talk [THE PANDORA'S BO
 
 I find fascinating how in ARMA, you can have multiple mods, mod of a mod (mod depending on another mod), patch mod (overloading existing content) and that it works with multiplayer (with specific server mods and client mods). At the time of the talk, they had 70,174 mods. For this to work, they have the editors available from the main menu directly. To avoid mods not working when a new game update releases, they have a special development branch along the main one available to the modders who can synchronize their development to those of the development team. 
 
+![minecraft mods]()
+
 In the opposite, Minecraft Java Edition modding ecosystem mostly grew without Mojang providing a conventional official engine-level mod API. The primitive era saw modder simply decompiling the game and directly replacing or modyfing classes insed `minecraft.jar`. Then came the common layers built by different communities throughout the history of the game. The modern ecosystem is roughly Fabric, Forge, NeoForge, Quilt, without forgetting the server software ecosystems such as Paper and derivatives.  Minecraft Java Edition updates were painful for modders. Minecraft 1.13 involved substantial internal changes, so porting large mods became difficult, even the common layer Forge required asignificant redesign. 
 
 Funny enough, the Bedrock Edition of Minecraft (aka the C++ version) tried a [JavaScript API](https://www.minecraft.net/en-us/article/scripting-api-now-public-beta) in 2018. It is now obsolete and the Script API now uses Molang a custom scripting language ([introduction here](https://learn.microsoft.com/en-us/minecraft/creator/documents/molang/introduction?view=minecraft-bedrock-stable)). 
+
+![factorio]()
 
 In the case of Factorio, mods are allowed to run Lua code at the game startup and while a map is actively being played (article [here](https://lua-api.factorio.com/latest/auxiliary/data-lifecycle.html)). 
 Deterministic script ([here](https://www.factorio.com/blog/post/fff-70))
 Dealing with broken mods ([here](https://www.factorio.com/blog/post/fff-178)) 
 Treating the game itself as mods.
 
-In my games, from the beginning we designed the level editor of Beach Slap to be able to share it with player by having it in-game. Fur this to work, our levels are json files that can be stored locally. I don't intent for Soup Raiders to support modding though. 
+In my games, for Beach Slap, from the beginning we designed the level editor to be able to share it with player by having it in-game. Fur this to work, our levels are json files that can be stored locally. I don't intent for Soup Raiders to support modding though. 
 
 ## Conclusion
 
-Making a game engine has a lot of upsides, but it costs time. We control how we load and update our game (to the specific needs of our game), we owe no license fees to anybody, and we learn a lot about asset compilation, rendering and optimization. We can even open the engine to players (at least part of it) for them to improve or to create new mods (or even games) with our technology. In the rest of the series, we will go into the implementation details of the Soup Raiders Native Port and how we can target 60Hz on the Switch with sub-3s loading times.
+The scope of this blog post went way out of my initial idea, but I wanted to lay down my thought about everything related to making our own game engine, without devling into the actual technology. Making a game engine has a lot of upsides, but it costs time. We control how we load and update our game (to the specific needs of our game), we owe no license fees to anybody, and we learn a lot about asset compilation, rendering and optimization. We can even open the engine to players (at least part of it) for them to improve or to create new mods (or even games) with our technology. I think after the Unity runtime fee announcement, independence became an even more central topic for game developers.
+
+In the rest of the series, we will go into the implementation details of the Soup Raiders Native Port and how we can target 60Hz on the Switch with sub-3s loading times.
 
 I will leave you with one thought about creating your own game engine with LLM:
 
