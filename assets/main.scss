@@ -186,3 +186,29 @@
   &:hover { background-color: #0066cc; color: white; }
 }
 .post-categories { margin: 4px 0 8px; }
+
+// Kramdown footnotes, used as the reference list on long-form posts.
+a.footnote {
+  padding: 0 1px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footnotes {
+  margin-top: 1.5em;
+  font-size: 0.85em;
+  color: #555;
+
+  ol { margin-left: 1.2em; }
+  li { margin-bottom: 0.4em; }
+  li p { margin-bottom: 0; }
+
+  // Keep long, unbroken URLs from overflowing on narrow screens.
+  a { word-break: break-word; }
+
+  a.reversefootnote {
+    margin-left: 4px;
+    text-decoration: none;
+    word-break: normal;
+  }
+}
