@@ -260,10 +260,10 @@ For me, it got so problematic that I have a specific other computer that compile
 Dan Baker argues that owning your own game engine can also lower compilation time:
 > For example, our Nitrous Engine compiles very quickly. The engine compiles in less than 30 seconds. The engine code is clean and modular, so we can implement features in the engine or fix a bug in around a tenth of the time it would take in an off-the-shelf engine. Not only can we do a clean build of Ara in less than 2 minutes, but our debug version of the Ara and Nitrous is so fast that we can still run at 30 fps in full debug.
 
-Sebastien de Graffenrid build size:
+For Sebastien de Graffenrid, his custom engine also results in minuscule build size (compared to a default Unity or Unreal build for example):
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">A nice thing about using your own C engine are the small build sizes.<br>And I didn&#39;t even try that hard to reduce the size! <a href="https://t.co/d85Po9ztUU">https://t.co/d85Po9ztUU</a> <a href="https://t.co/OO2QncB2lk">pic.twitter.com/OO2QncB2lk</a></p>&mdash; Sébastien de Graffenried (@seb_degraff) <a href="https://x.com/seb_degraff/status/1889649086560600088?ref_src=twsrc%5Etfw">February 12, 2025</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
-Or Johnathan Blow own compiler:
+Jonathan Blow also shows blasting fast compilation time with the compiler of his own programming language:
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I did some work on the compiler that had the side effect of speeding things up! Here are the current compile speeds on my desktop.<br><br>Current compiler size: 55,273 lines. <a href="https://t.co/HmYKzZ3z3q">pic.twitter.com/HmYKzZ3z3q</a></p>&mdash; Jonathan Blow (@Jonathan_Blow) <a href="https://x.com/Jonathan_Blow/status/1353939518588502018?ref_src=twsrc%5Etfw">January 26, 2021</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
 Those three examples show that having custom game engines can not just improve the performance of your game, but also the performance of your workflow. Like Tyler Glaeil puts it:
@@ -276,20 +276,37 @@ With a custom game engine, you can make things faster and easier to use, but you
 
 ## Unique Game Mechanics
 
+Unique and innovative game ideas require sometimes custom technology and the freedom that a custom game engine can give us. While it is always possible to try those of generic-purpose engines, it can mean that we have to go around the contraints of those. For example, in Unity, with the Game Object model, if you are starting to have a lot of those with a MonoBehavior script attached to each one of them, the `Update()` event overhead is going to crash the performance, so usually it means using a single MonoBehavior that works like a manager to control all those entities (yes, Unity is bringing the DOTS conceptual model to change that, but it brings in other problems).
+
+
 On this topic, Glaiel quotes:
 > A great example of a justified use of a custom game engine is the well-known Noita. The game has a truly unique concept that likely wouldn’t have worked with any existing proprietary engine, a uniqueness captured in the name of its engine, "Falling Everything." Yet, Noita doesn’t rely on advanced graphical effects, it’s single-player, and it was built exclusively for one platform — PC.
 
-- Miegakure
-![Miegakure]()
-- Dwarf Fortress
-![Dwarf Fortress]()
+![noita](/images/2026/noita-feel-alive.jpg)
 
-- Teardown
+Noita is a roguelite where *every pixel* is simulated by Nolla Games. In his GDC talk (link [here](https://www.gdcvault.com/play/1025695/Exploring-the-Tech-and-Design)), Petri Purho talks about this physics engine that started from his Quick Basic days where each pixel is simply checking if there is a pixel undere them to fall, then improved with his `Bloody Zombie` game, until he added rigid bodies. So the idea of Noita came from this physics engine that was already implemented in C++.
+
+![Miegakure](/images/2026/Miegakure.png)
+
+For Miegakure (a wild 4d puzzle game), Marc ten Bosch needed to reimplement a whole bunch of systems (from this [Vice article](https://www.vice.com/en/article/what-happened-to-miegakure-the-game-that-promised-the-4th-dimension/)):
+> People have very much figured out how to build 2D and 3D games: proof of that is that game engines like Unity exist.In 4D, none of that knowledge exists, and it is more difficult to come up with because you can’t fully visualize it and the math is more complicated. So anything a game developer would take for granted in a 3D game—like collision detection, lighting, sound, modeling props—is a new, difficult problem that has to be figured out. It takes a long time to solve these issues, but it is also extremely fun for me!
+
+![teardown](/images/2026/teardown.webp)
+For Teardown (in this interview [here](https://www.gamedeveloper.com/design/combining-bombastic-heists-with-a-fully-destructible-voxel-world-in-i-teardown-i-)), Dennis Gustafsson shares that the game concept grew out of the experimental voxel and destruction technology and he says:
+>The engine and tool pipeline are created from scratch in C++ for this game specifically, [...], but since the game relies on novel technology I don't think it would have been possible using an off-the-shelf engine.
+
 ## Specialization
 
-Noel Berry's artist uses Asesprite so he simply implemented a direct importer of the format in his game engine. He also build custom level editors for the needs of his game and the team. He can do that because he does not need most of the features of a generic-purpose game engine.
+Tyler Glaiel lists "I can do better" (than other game engines) as a bad reason for making a game engine. In his own words:
+>You think you can just make something better than Unity or Unreal (or Godot or GameMaker) in general. You can’t. It’s possible to make something that is better than these for specific use cases [...], but you, as an individual or a tiny team, are not going to compete with these for general purpose stuff.
 
-For Animal Well (from [this Game Developer article by Sam Machkovech]((https://www.gamedeveloper.com/design/why-animal-well-s-home-brewed-engine-was-key-to-its-success).)), the first reason why Billy Basso made his own custom engine was to avoid the "sour taste" of inefficient tools and workflows, because of his experience in mobile games using off-the-shelf that had a lot of bloat and were laggy.. Rim light shader  (Basso) recommends an engine-first mentality for new game development: 
+It means that to make sense, a custom game engine has to specialize into the specifics of the game, the artisitic direction, or the technical constraint of the platform. 
+
+Noel Berry's artist uses [Aseprite](https://www.aseprite.org/), so he simply implemented a direct importer of the format in his game engine. He also build custom level editors for the needs of his game and the team. He can do that because he does not need most of the features of a generic-purpose game engine.
+
+![animal well](/images/2026/Animal_Well.jpg)
+
+For Animal Well (from [this article by Sam Machkovech]((https://www.gamedeveloper.com/design/why-animal-well-s-home-brewed-engine-was-key-to-its-success).)), the first reason why Billy Basso made his own custom engine was to avoid the "sour taste" of inefficient tools and workflows, because of his experience in mobile games using off-the-shelf that had a lot of bloat and were laggy. In his development process, he could mix this rim light shader (shadowy but with highligthed edges) with a full screen Navier-Strokes fluid simulation for smoke and water effects. Basso recommends an engine-first mentality for new game development: 
 > [...] That opens up a lot of unique creative avenues. Once I get a cool system working, then I can play around with it and see what it allows for.
 
 Nikita makes the point that a custom game engine does not necesseraly need complex material graphs, global illumination, or advanced 3D physics, multiplayer infrastructure or industrial-scale editor tooling. For Glaiel, specialization is almost a requirement for a custom engine. He adds that:
@@ -346,7 +363,7 @@ Tyler says about file management:
 
 But what can we load and allow the players to change?
 
-![civ4 mods]()
+![civ4 mods](/images/2026/civ_iv.jpg)
 
 One of the games of my teenage years' game was Civilization IV (article in [Game Developer magazine of August 2005](https://media.gdcvault.com/GD_Mag_Archives/GDM_August_2005.pdf)) that had an unusual good architecture for this (very data-driven). It features four tiers of moddability:
 - in-game WorldBuilder: an in-game map editor tool to customize terrain and place units, cities, buildings, resources
@@ -356,7 +373,7 @@ One of the games of my teenage years' game was Civilization IV (article in [Game
 
 While doing my research, I realized that there was a mod more than 20 years still in development named Realism Invictus [here](https://www.moddb.com/mods/realism-invictus/news/realism-invictus-38-released-20-year-anniversary-of-realism-invictus) which is a total overhaul of the game adding more than 130+ technologies to the tree as well as whole family of distinct units, more than 160 leaders, 80+ additional conventional military,  promotions, 21 additional civics, which makes it feel more like Civ IV 2.0. All this is possible because the game developers spent a lot of time to make the game (and thus the engine) moddable.
 
-![arma 3]()
+![arma 3](/images/2026/arma3.jpg)
 
 Same with ARMA III, a game by Bohemia Interactive. In his talk [THE PANDORA'S BOX OF MODDING IN 'ARMA' GAMES](https://gdcvault.com/play/1027043/The-Pandora-s-Box-of), Karel Mořický describes the different types of games in regard to mods:
 - Standard game: cannot be tampered with, nobody see the mess of the code.
@@ -365,26 +382,25 @@ Same with ARMA III, a game by Bohemia Interactive. In his talk [THE PANDORA'S BO
 
 I find fascinating how in ARMA, you can have multiple mods, mod of a mod (mod depending on another mod), patch mod (overloading existing content) and that it works with multiplayer (with specific server mods and client mods). At the time of the talk, they had 70,174 mods. For this to work, they have the editors available from the main menu directly. To avoid mods not working when a new game update releases, they have a special development branch along the main one available to the modders who can synchronize their development to those of the development team. 
 
-![minecraft mods]()
+![minecraft mods](/images/2026/minecraft_mod.jpg)
 
 In the opposite, Minecraft Java Edition modding ecosystem mostly grew without Mojang providing a conventional official engine-level mod API. The primitive era saw modder simply decompiling the game and directly replacing or modyfing classes insed `minecraft.jar`. Then came the common layers built by different communities throughout the history of the game. The modern ecosystem is roughly Fabric, Forge, NeoForge, Quilt, without forgetting the server software ecosystems such as Paper and derivatives.  Minecraft Java Edition updates were painful for modders. Minecraft 1.13 involved substantial internal changes, so porting large mods became difficult, even the common layer Forge required asignificant redesign. 
 
 Funny enough, the Bedrock Edition of Minecraft (aka the C++ version) tried a [JavaScript API](https://www.minecraft.net/en-us/article/scripting-api-now-public-beta) in 2018. It is now obsolete and the Script API now uses Molang a custom scripting language ([introduction here](https://learn.microsoft.com/en-us/minecraft/creator/documents/molang/introduction?view=minecraft-bedrock-stable)). 
 
-![factorio]()
+![factorio](/images/2026/factorio.jpg)
 
-In the case of Factorio, mods are allowed to run Lua code at the game startup and while a map is actively being played (article [here](https://lua-api.factorio.com/latest/auxiliary/data-lifecycle.html)). 
-Deterministic script ([here](https://www.factorio.com/blog/post/fff-70))
-Dealing with broken mods ([here](https://www.factorio.com/blog/post/fff-178)) 
-Treating the game itself as mods.
+In the case of Factorio, mods are allowed to run Lua code at the game startup and while a map is actively being played (article [here](https://lua-api.factorio.com/latest/auxiliary/data-lifecycle.html)). Because it's a multiplayer game as well, they realized that even Lua hash-table iteration could make mods nondeterministix and case desyncs (blog post [here](https://www.factorio.com/blog/post/fff-70)). Of course, mods can also be broken and while installation of a broken mod was simple, they first did not show a mod crash as differently as a game crash and they showed how they fixed it in this blog post ([here](https://www.factorio.com/blog/post/fff-178)). In the end, one of the biggest changes regarding mods for Factorio 2.0 is to treat the game itself as a mod by shipping multiple first-party components through the same mod/dependency infrastructure.
 
-In my games, for Beach Slap, from the beginning we designed the level editor to be able to share it with player by having it in-game. Fur this to work, our levels are json files that can be stored locally. I don't intent for Soup Raiders to support modding though. 
+In my games, for Beach Slap, from the beginning we designed the level editor to be able to share it with player by having it in-game. Fopr this to work, our levels are json files that can be stored locally and then uploaded or downloaded easily. I don't intent for Soup Raiders native version to support modding though. 
 
 ## Conclusion
 
 The scope of this blog post went way out of my initial idea, but I wanted to lay down my thought about everything related to making our own game engine, without devling into the actual technology. Making a game engine has a lot of upsides, but it costs time. We control how we load and update our game (to the specific needs of our game), we owe no license fees to anybody, and we learn a lot about asset compilation, rendering and optimization. We can even open the engine to players (at least part of it) for them to improve or to create new mods (or even games) with our technology. I think after the Unity runtime fee announcement, independence became an even more central topic for game developers.
 
-In the rest of the series, we will go into the implementation details of the Soup Raiders Native Port and how we can target 60Hz on the Switch with sub-3s loading times.
+In the rest of the series, we will go into the implementation details of the Soup Raiders Native Port and how we can target 60Hz on the Switch with sub-3s loading times. For a final note on game engine, I share the same opnion than 
+Ted Bendixson in his Better Software Conference 2025 talk (link [here](https://www.youtube.com/watch?v=Ca53JTohdN4)) which is to make an actual game with our custom game engine, not just trivial fancy demo. This opinion is also shared by Tyler Glaiel:
+>**Make a game at the same time as you’re making the engine.** This is an unbreakable rule. The only unbreakable rule. Get the basics in as fast as you possibly can and then immediately start making a game on top of it. An engine is nothing without a game.
 
 I will leave you with one thought about creating your own game engine with LLM:
 
