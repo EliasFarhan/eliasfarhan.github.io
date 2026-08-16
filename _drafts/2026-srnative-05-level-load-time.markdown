@@ -9,7 +9,7 @@ series: soupraiders-native
 
 <!--more-->
 
-OBJ vs GLB
+FBX vs OBJ vs GLB
 PNG vs KTX2 with basisu
 JSON vs Binary format
 Using PhysFS vs read each file one after the other.

@@ -1,0 +1,31 @@
+{% assign comparison_position = include.position | default: 50 %}
+<figure class="image-comparison" style="--comparison-position: {{ comparison_position }}%;">
+  <div class="image-comparison__frame">
+    <img
+      class="image-comparison__image"
+      src="{{ include.right_image | relative_url }}"
+      alt="{{ include.right_alt | default: include.right_label }}"
+    >
+    <img
+      class="image-comparison__image image-comparison__image--left"
+      src="{{ include.left_image | relative_url }}"
+      alt="{{ include.left_alt | default: include.left_label }}"
+    >
+    <span class="image-comparison__label image-comparison__label--left">{{ include.left_label }}</span>
+    <span class="image-comparison__label image-comparison__label--right">{{ include.right_label }}</span>
+    <span class="image-comparison__divider" aria-hidden="true">
+      <span class="image-comparison__handle">&#8596;</span>
+    </span>
+    <div
+      class="image-comparison__control"
+      role="slider"
+      tabindex="0"
+      aria-label="Compare {{ include.left_label }} and {{ include.right_label }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="{{ comparison_position }}"
+    ></div>
+  </div>
+  {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>
+<script src="{{ '/assets/js/image-comparison.js' | relative_url }}" defer></script>
