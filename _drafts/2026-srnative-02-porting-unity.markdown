@@ -23,19 +23,21 @@ For the release of the PS5, Bluepoint Games worked with Sony Japan Studio to rem
 
 ![Diagram showing the original Demon's Souls game systems running alongside Bluepoint technology](/images/2026/sr/demons_souls_bluepoint.svg)
 
-This allow for the PS5 game looks radically different while combat feels extraordinarily close to the PS3 game. Visually, an enormous amount was rebuilt. On the technical part, one way Marco Brush (the CEO and also engineer) described it was to start compiling the codebase, one compile error at a time, and then run the game and fix one crash at a time. But they did not just take the old code and recompiled it, bnut also introduced things like modernized character creation, a photo mode, the mirrored Fractured World, quality-of-life adjustments, much faster loading, updated controls and other changes.
-
-Bluepoint Games was acquired by SIE on September 30, 2021, and unfortunatley on February 2026, SIE announned that it would shut down the studio.
+This allow for the PS5 game looks radically different while combat feels extraordinarily close to the PS3 game. Visually, an enormous amount was rebuilt. On the technical part, one way Marco Brush (the CEO and also engineer) described it was to start compiling the codebase, one compile error at a time, and then run the game and fix one crash at a time. But they did not just take the old code and recompiled it, but also introduced things like modernized character creation, a photo mode, the mirrored Fractured World, quality-of-life adjustments, much faster loading, updated controls and other changes. Because of the amount of work, I would say that Demon's Souls PS5 is a **remake**.
 
 ### Metal Wolf Chaos XD
 
 ![metal wolf](/images/2026/metal-wolf-chaos-xd-cover.jpg)
 
-Hilarious game by FromSoftware released on Xbox original. You can watch a speedrun [here](https://www.youtube.com/watch?v=J1n0pVxS4sw) from SGDQ2014
+Hilarious game by FromSoftware released on Xbox original only in Japan in December 2004, where the player plays as the president of the USA on a mecha. You can watch a speedrun [here](https://www.youtube.com/watch?v=J1n0pVxS4sw) from SGDQ2014 with commentary explaining the gameplay. Funny enough, Devolver proposes to work with FromSoftware to rerelease the game out of the blue:
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Count us in to help Metal Wolf Chaos get out to more gamers if From Software wants some help. <a href="https://x.com/hashtag/FreeMetalWolf?src=hash&amp;ref_src=twsrc%5Etfw">#FreeMetalWolf</a> <a href="https://t.co/867qay70j8">pic.twitter.com/867qay70j8</a></p>&mdash; Devolver Digital (@devolverdigital) <a href="https://x.com/devolverdigital/status/692330482176884736?ref_src=twsrc%5Etfw">January 27, 2016</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
+And it actually worked! It took 16 months for the team of General Arcade (game page [here](https://generalarcade.com/projects/metal-wolf-chaos-xd/)) compsed by five software engineers, two QA engineers, producer, artist and two 3D modelers to make it. They used the PhyreEngine by Sony, C++ and FMOD and Direct3d 11 for Xbox One and GNM for PlayStation 4 to port the game.
+
 ![Diagram showing how General Arcade modernized the original Metal Wolf Chaos for PC, PS4, and Xbox One](/images/2026/sr/metal_wolf_chaos_xd_port.svg)
+
+Because the CPU of the Xbox Original (an Intel Pentium III) is of the same family of our modern CPU on PC, PS4 and Xbox One (unlike the PS3 Cell processor) and probably that the amount of changes compare to the Xbox version is on the surface and not in the core, I would say *Metal Wolf Chaos XD* is a **remaster** and not a **remake**.
 
 ### Dusklight
 
@@ -55,42 +57,51 @@ But ZeldaRET is not a PC port, but it is that work that DUsklight uses to build 
 
 ![Diagram of the Dusklight application, Twilight Princess framework, GameCube-style APIs, and Aurora compatibility layers](/images/2026/sr/dusklight_architecture.svg)
 
-
-### Mega Man Legacy Collection
-
-### Taxonomy
-
-| Type | What usually happens | Typical examples |
-|---|---|---|
-| **Emulated re-release** | The original executable/ROM remains essentially intact and runs inside an emulator packaged for the modern platform. Modern UI, save states, controller support, filters, achievements, etc. may be added around it. | [SNK 40th Anniversary Collection](https://www.digitaleclipse.com/games/snk40) by Digital Eclipse; [Rocket Knight Adventures: Re-Sparked](https://limitedrungames.com/products/rocket-knight-adventures-re-sparked) using Limited Run's Carbon Engine |
-| **Source port** | The original game's source code or game logic is compiled for a new platform. Platform-specific systems such as rendering, audio, input, filesystem access, and networking are replaced or abstracted while much of the original game remains intact. | [System Shock: Enhanced Edition](https://nightdivestudios.com/system-shock-enhanced-edition/) by Nightdive Studios, adapted to the KEX Engine |
-| **Enhanced port** | Fundamentally the same game and implementation are brought to another platform, but with additions such as widescreen, higher resolutions, modern controls, improved performance, new save functionality, or quality-of-life features. | [Metal Wolf Chaos XD](https://generalarcade.com/projects/metal-wolf-chaos-xd/) by General Arcade / FromSoftware / Devolver Digital; General Arcade moved the 2004 Xbox game to PC, PS4 and Xbox One with 4K support and updated controls |
-| **Remaster** | The original game remains substantially authoritative, but rendering, textures, models, lighting, audio, UI, controls or other presentation systems may be extensively upgraded. Portions of the engine can even be replaced without necessarily turning the project into a remake. | [Star Wars: Dark Forces Remaster](https://nightdivestudios.com/star-wars-dark-forces-remaster/) by Nightdive Studios, rebuilt for modern platforms using KEX with high-resolution assets, modern rendering and controller support |
-| **Recompilation** | The original executable is translated or reconstructed into code that can be compiled for modern CPUs. This can range from automated static recompilation of machine code to decompilation-based projects that recover source code first and then adapt it for modern platforms. | [N64: Recompiled](https://github.com/N64Recomp/N64Recomp), used by projects such as [Zelda 64: Recompiled](https://github.com/Zelda64Recomp/Zelda64Recomp); [The Legend of Zelda: Twilight Princess decompilation](https://github.com/zeldaret/tp) by ZeldaRET, which became the basis for the native [Dusklight](https://twilitrealm.dev/) port |
-| **Engine reimplementation / reverse-engineered port** | A new engine or runtime is written to reproduce the behavior of the original engine and interpret the original game's data files. The original executable itself may no longer be required, although the original assets usually are. | [OpenMW](https://openmw.org/) reimplements the engine used by *The Elder Scrolls III: Morrowind*; [OpenTTD](https://www.openttd.org/) began as a reimplementation of *Transport Tycoon Deluxe* |
-| **Hybrid reconstruction** | Original gameplay code, logic or data remains authoritative, while substantial pieces of the technology and presentation are rebuilt: renderer, animation systems, assets, lighting, effects, etc. It sits between a remaster and a full remake. | [Shadow of the Colossus (PS4)](https://blog.playstation.com/2018/01/26/shadow-of-the-colossus-remaking-a-masterpiece/) by Bluepoint Games / Japan Studio; the game preserved the character and behavior of the original while its presentation and technology were massively reconstructed |
-| **Faithful remake** | The original game is substantially rebuilt as a new implementation, typically with new rendering technology, assets and production pipelines, while attempting to preserve the original level design, mechanics, progression and overall experience. | [Demon's Souls (PS5)](https://www.playstation.com/games/demons-souls/) by Bluepoint Games / Japan Studio; [Shadow of the Colossus (PS4)](https://blog.playstation.com/2017/12/09/shadow-of-the-colossus-ps4-pro-enhancements-special-edition-revealed/) was officially described by Sony as a "full, ground up remake" |
-| **Reimagining** | The older game serves as a creative blueprint rather than an implementation that must be preserved. Story, combat, camera, levels, mechanics, pacing or structure can be substantially redesigned. | [Final Fantasy VII Remake](https://ffvii-remake-intergrade.square-enix-games.com/) by Square Enix; [Resident Evil 2](https://www.residentevil2.com/) by Capcom |
-| **Archival / documentary re-release** | Original games are preserved through emulation, but the release also acts as an interactive museum containing documents, prototypes, interviews, timelines, artwork and historical material. | [Atari 50: The Anniversary Celebration](https://www.digitaleclipse.com/games/atari50) by Digital Eclipse; Digital Eclipse describes its specialty as archival game re-releases and interactive documentaries |
-
-
-
 ## And Soup Raiders?
 
-Let's go back to my Unity game with the view from the beginning of the demo in the docks of the Red Island:
+I started to work on this Soup Raiders game with Unity 2017.4.1f1 in July 2018. I remember well because we were working on a demo that we could submit to [Pro Helvetia](https://prohelvetia.ch/en/find-support/game-design-emerging-talents-production/) (the Swiss Arts Council) to get some fundings to start the production of the game. At the time, the game looked like this:
+
+![inital demo](/images/2026/sr/sr_old.png)
+
+And I looked like this:
+
+![elias pirate](/images/2026/elias_pirate.jpg)
+
+After cancelling this project in mid-2019 and starting it again in march 2020 right when the COVID pandemic hit Europe. A new prototype started to form and looked like this:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/R-jQGsZWEio?si=NOOZ8W9sYOOb6Gqp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+ The latest vertical slice (which is playable [here](https://teamkwakwa.itch.io/soup-raiders)) ran on Unity 2022.3.2f1 and featured three levels with three fights, one mini-boss and one boss. This is the view from the beginning of the demo in the docks of the Red Island:
 
 ![sr docks](/images/2026/sr/sr_docks_full.png)
+
+A lot of things need to be migrated to my custom engine to have this same view and each of the composant of this demo have their specificities. Let's explore the different parts of this porting process. In this blog post, we will check what comes out of Unity from my game (and next blog post we will check how we put them in my game engine).
 
 ### The audio
 
 This is the easiest part of the game to port. On Unity, I was using [FMOD](https://www.fmod.com/), a middleware where a sound designer can add events on their FMOD editor and then generates the banks to be imported in the game.
 
-Fortunatley, FMOD is not Unity-only and features native libs for PC and for Nintendo Switch (as well as all the other modern platforms like PS4/PS5 etc... even HTML5). So the port was about copying the banks and statically linking the libs.
+Fortunatley, FMOD is not Unity-only and features native libs for PC and for Nintendo Switch (as well as all the other modern platforms like PS4/PS5 etc... even HTML5). So the port was about copying the banks and statically linking the libs provided by FMOD. 
 
 ### 3d models
 
+[Julie Baechtold](https://juba.artstation.com/) did an incredible work on Soup Raiders. She created the 3D models in Blender, and then put them in Unity to create the levels. As she was not familiar with `git`, I created a tool that would export her scene from Unity with all its dependencies for me to import them into my Unity project. 
+
+Now there are several way to export back those models and the layout that Julie put in Unity:
+1. Use Unity FBX Exporter package
+2. Use Blender as an asset provider (exported as `.glb`) and Unity as the level composition
+3. Parse `.unity` YAML file in my engine
+4. Build a custom Unity scene exporter to generate `.glb` files (GLTF2) 
+
+I went with solution 4. The script `ExportLevelGeometry.cs` is a Uniy Editor that will generate the GLB file of all the level. GLB files contains several parts:
+- A JSON part describing the GLTF asset, the scenes, the nodes, the meshes, accessors, and buffers with their views.
+- A Binary part contained all the positions, uv, indices of the meshes.
+
+In the meantime, another script `ExportLevelRenderers.cs` exports the materials linked to the renderers, in short the visibility, textures, etc... All those are exported in to a simple `.json` file which allows to reference each textures that need to be exported as well. To join the renderer in both exporter, we use Unity **GlobalObjectId**. This allow us to export all those static meshes (including the static sprites):
+
 ![sr docks](/images/2026/sr/sr_static_mesh.png)
 
+However, it's missing the brownish water of the Soup! Because this mesh is a bit special. It was not created on Blender, but created directly in Unity with a specific `ToonWater` shader (unlike a more Standard shader like the rest of the static level). It's actually simply four quads. It is exported also by `ExportLevelGeometry.cs` for the geometry (I want the same as Unity), but goes through `ExportDocksWater()` to generate `water_geometry.glb` and `water_instances.json`. Here it is now:
 
 {% include image-comparison.html
   left_image="/images/2026/sr/sr_static_mesh.png"
@@ -102,17 +113,36 @@ Fortunatley, FMOD is not Unity-only and features native libs for PC and for Nint
   position=50
 %}
 
+### Colliders
+
+Visual is nice, but my main character needs to walk on something. In the Unity demo, I spent a lot of time adjusting the physics boxes of each level to be sure the main character does not fall or does not get stuck in a wall or in stairs. For this to work as well on my engine, I needed to export the physics boxes as well. This goes through `ExportLevelCoilliders.cs` which export those colliders:
+- Box colliders: emitted as hull (8 world corners)
+- Convex mesh colldiers: hull (world vertices)
+- Non-convex mesh colliders: mesh (vertices + triangles)
+- Sphere colliders
+- Capsule colliders
+
+On top of the colliders, we also add the surface type from the GameObject tag: Wood -> 1, Stairs -> 2, ... Because the footsteps of the main character is different depending if they step on wood or stone. One other note is that the exporter excludes specific objects like moving characters (Dorothy has a collider, but it's not static). In the end, it looks like this:
+
+![sr docks colliders](/images/2026/sr/sr_physics_box.png)
 
 ### Billboards
 
+What makes the charm of Soup Raiders are those 2D animated characters. The main characters were animated by [Camille Bovey](https://camillebovey.com/) and Julie added a lot of those seagulls in the levels. They behave like billboard, always facing the camera. While the textures were already there for the export, like the placement of meshes in the level, we need to export the placement of those billboards. This is the job of `ExportLevelBillboards.cs` that exports the world position, the world lossy scale, the flipX, the texture, pixel rect, pivot Px (where are the foot of the character) and pixels per unit, as well as the single-frame talk icons of the talkative characters.
 
 ![sr docks](/images/2026/sr/sr_billboards.png)
 
-Adding 
+There are two missing characters: 
+- The main moving character that the player controls.
+- Dorothy, who is also a cinematic moving character.
+
+With them, the world more crowded:
+
 ![sr docks](/images/2026/sr/sr_all_characters.png)
 
-
 ### Skybox
+
+As the skybox is already 6 textures, there is no need for Unity-side export. We will go more in details about the import of the skybox in my engine in the next blog post. But of course, it looks better with it:
 
 {% include image-comparison.html
   left_image="/images/2026/sr/sr_water_wit_meshes.png"
@@ -126,12 +156,18 @@ Adding
 
 ### Snap rails
 
-In Soup Raiders, the players do not control the camera. 
+In Soup Raiders, the players do not control the camera. Instead of using Cinemachine (I tend not to use all of Unity tools when I can do things myself), I implemented my own system that interpolate between snap points. Each of those points stored the camera position and direction as well as the character position (and character euler angles, but this is not exported), so the camera would move around, following the player. Those are exported as-is to a `.json` file.
+
+I had an playmode snapshot recording system where I would move in the level with free orbit camera, then find a nice spot, and save the snapshot. The snap system would then connect the closest snap points with each other if they can raycast between each other. This looks like this in Unity (with the red spheres being the snap points and the red line the connection between them):
 
 ![sr rails](/images/2026/sr/sr_rails.png)
 
+### Dialog
+
 
 ### Source code
+
+174 files with 18421 lines.
 
 Use a C# interpreter versus rewrite everything in C++.
 
@@ -139,7 +175,11 @@ GameObject + MonoBehavior
 What needs to be rewritten by hand:
 - Source code (C# -> C++) which makes for a nice refactor opportunity
 
+Unity HLSL shaders to my engine GLSL shaders.
+
+### Others
+Ground Battle UI, Menu
 
 ## Conclusion
 
-Next step is the renderer.
+Next step is the Asset Compiler.
