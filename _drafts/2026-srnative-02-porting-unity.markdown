@@ -140,6 +140,31 @@ With them, the world more crowded:
 
 ![sr docks](/images/2026/sr/sr_all_characters.png)
 
+The last detail of this section is animation. Using animator by simply switching texture at certain frames, it becomes pretty easy to export specifically the animations by hand. Here is how it looks like in the YAML:
+
+```yaml
+--- !u!74 &7400000
+AnimationClip:
+  m_Name: WalkSide
+  m_SampleRate: 12
+  m_PPtrCurves:
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 3f2a..., type: 3}
+    - time: 0.0833333
+      value: {fileID: 21300000, guid: 9c41..., type: 3}
+    attribute: sprite
+    path:
+  m_Events:
+  - time: 0.25
+    functionName: ManageAnimEvent
+    intParameter: 1
+  m_AnimationClipSettings:
+    m_StopTime: 0.5
+    m_LoopTime: 1
+```
+While `m_PPtrCurves` looks like a barbaric name, it is there that we can check the time where the animation would change from one image to another.
+
 ### Skybox
 
 As the skybox is already 6 textures, there is no need for Unity-side export. We will go more in details about the import of the skybox in my engine in the next blog post. But of course, it looks better with it:
@@ -162,23 +187,33 @@ I had an playmode snapshot recording system where I would move in the level with
 
 ![sr rails](/images/2026/sr/sr_rails.png)
 
+### Source code
+
+The Unity demo has 174 C# files with 18421 lines of code. While not enormous, it's still a big pack of code to migrate to C++. One option could be to have a C# interpreter or use Native-AOT for C# behavior and then do the core engine work in C++. In the end, because of the C# being in the GameObject + MonoBehavior logic, I decided to migrate the whole code to C++, which was a good opportunity to do a nice refactoring. 
+
+Another area of thought is the shader code source. As Unity already have their own renderer and pipeline, a lot of shader code is already implemented in the engine, but it is not the case for my game engine that use a custom renderer with GLSL (I'll talk about the features and specifcs in another blog post). Fortunately, we can find shaders from the Built-in renderer pipeline online (like [here](https://github.com/chsxf/unity-built-in-shaders/tree/master)). Unity uses a Cg/HLSL-style shader code (dating back from [Nvidia Cg](https://developer.nvidia.com/cg-toolkit), a shader language that would outputs both OpenGL and Direct3D but stopped development in April 2012). 
+
+While my renderer uses GLSL to then compile to SPIR-V, HLSL, MSL, and WGSL using all the tools from the Vulkan SDK. It might be smart to switch to [Slang](https://shader-slang.org/) in the near future, a working Nvidia CG successor. 
+
 ### Dialog
 
 
-### Source code
+The Dialog System went through several iterations during the production of the demo. I started using [Ink from inkle](https://www.inklestudios.com/ink/) and I had [Nicolas Schneider](https://www.linkedin.com/in/nicolas-schneider-14135a170/), one of my students that I hired as a intern now working at [Old Skull Games](https://www.oldskullgames.com/), who made a tool for me to integrate it to our Dialog scene. 
 
-174 files with 18421 lines.
+![dialog](/images/2026/sr/sr_dialog.png)
 
-Use a C# interpreter versus rewrite everything in C++.
+However, as I advanced the production, the intern tool became deprecated, and I finally decided to take matter into my own hand and change to [YarnSpinner](https://www.yarnspinner.dev/) which is closer to write dialogs as programs with conditions and other things. While the export of all the `.yarn` scripts (that's what they call the dialog files), YarnSpinner works by giving the dialogs to their system written in C#. In the end, I simply rewrote a simple interpreter for my use case.
 
-GameObject + MonoBehavior
-What needs to be rewritten by hand:
-- Source code (C# -> C++) which makes for a nice refactor opportunity
-
-Unity HLSL shaders to my engine GLSL shaders.
 
 ### Others
-Ground Battle UI, Menu
+
+![sr_battle](/images/2026/sr/sr_battle.png)
+
+I did not talk about the ground battle migration in this blog post. It's a very 2D animation intensive part of the game with a UI layout that also need to be exported. FOr animation, we can simply use the same trick as before and import all the `m_PPtrCurves` of all the animation clips used in the animator, which allows use to import all the needed textures to play those animations. 
+
+![sr_menu](/images/2026/sr/sr_menu.png)
+
+The title screen is fairly simple, however, it contains a large soup boat animation that will need some processing in the asset compiler part (but this is for the next blog post). 
 
 ## Conclusion
 
