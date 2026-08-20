@@ -39,7 +39,7 @@ I want this game to run on the Nintendo Switch at 60 Hz, with sub-three-second l
 So here begins a whole series about this little summer project of mine: bringing my *Soup Raiders* demo to a custom game engine.
 
 - (1) [What You Gain by Building Your Own Game Engine](/gamedev/cpp/2026/08/14/srnative-01-why-a-custom-engine.html)
-- (2) Porting from Unity to Neko3d + The Renderer
+- (2) [Porting from Unity](/gamedev/cpp/2026/08/20/srnative-02-porting-unity.html)
 - (3) The asset compiler
 - (4) Profiling with Tracy
 - (5) Level load time

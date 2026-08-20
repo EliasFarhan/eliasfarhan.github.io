@@ -409,6 +409,8 @@ I will leave you with one final thought on building a game engine with the help 
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Now is the perfect time to write your own engine. The argument in the past was that you don&#39;t have time to write all the less important generic features. Now, the LLM will do that for you. You can focus on things that differentiate your product. <a href="https://t.co/ydEaaZOx12">https://t.co/ydEaaZOx12</a></p>&mdash; Sebastian Aaltonen (@SebAaltonen) <a href="https://x.com/SebAaltonen/status/2033460617282031835?ref_src=twsrc%5Etfw">March 16, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
+Continue with part 2: [Porting the *Soup Raiders* Demo from Unity](/gamedev/cpp/2026/08/20/srnative-02-porting-unity.html).
+
 ## Further Reading
 
 These are not cited above, but they cover the same ground and are worth your time:
