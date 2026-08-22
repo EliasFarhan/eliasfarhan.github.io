@@ -1,91 +1,62 @@
 ---
 layout: post
-title:  "Soup Raiders Goes Native (3/11): The asset compiler"
+title:  "Soup Raiders Goes Native: The asset compiler and loading time"
 categories: [gamedev, cpp]
 series: soupraiders-native
 ---
 
+In my quest to get sub 3s to load each level of Soup Raiders on the Nintendo Switch, I got to learn a bunch of things.
 
 <!--more-->
 
 The original assets:
 - 3d models
-- Sprites
+- Sprites/textures
 - Fmod music
 - Unity prefab/scenes data
 
+level	assets	textures	mesh	data	stored	read
+docks	87	68 (21.5 MB)	2 (8.4 MB)	17 (5.7 MB read)	31.76 MB	35.16 MB
+palace	54	37 (14.0 MB)	1 (4.4 MB)	16 (1.0 MB read)	18.78 MB	19.39 MB
+fishpalace	41	29 (12.5 MB)	1 (1.6 MB)	11 (0.2 MB read)	14.16 MB	14.29 MB
+globeisland	27	17 (4.7 MB)	2 (0.2 MB)	8 (0.2 MB read)	4.89 MB	5.03 MB
+
+The biggest single reads per level:
+
+docks — LevelDocks_baked.glb 7.94 · docks_collision.bin 5.55 · battle_character_atlas.ktx2 5.15 (deferred) · bg_rock_01.ktx2 3.25 · skybox.ktx2 2.74 · ending_atlas.ktx2 1.44 (deferred)
+palace — battle_character_atlas 5.15 (deferred) · LevelPalace_baked.glb 4.38 · skybox 2.74 · palace_collision.bin 0.90
+fishpalace — battle_character_atlas 5.15 (deferred) · skybox 2.74 · LevelFishPalace_baked.glb 1.58
+globeisland — skybox 2.74 · overworld_npc_atlas 0.60 · character_atlas 0.47
+
+Read once at boot, not per level: FMOD banks 35.67 MB (4), title + logos 16.31 MB (180 files), shaders 47 × .spv (0.20 MB), loading widget 0.19 MB, registry + cost table 0.02 MB. Whole image: 99.59 MB, 461 entries.
+
+What's in the Docks?
+
+What's in the Palace?
+
+What's in the Fish Palace Boss Battle?
+
+Separating the assets into zip
+Compression vs fast reading.
+
+PNG vs KTX2
+
+Single images vs atlases
+
 PhysFS
 
-3d models -> converted to GLB/
+3d models -> converted to GLB from Unity
+JSON to binary with cereal
 Sprites -> put into atlases and converted to KTX2/
 Unity gameplay data -> JSON -> Serialized binary data (using cereal but could use C++26 static reflection instead).
-
-## The inventory
-
-- **16 schemas, 31 files, 4.77 MB of shipped JSON.**
-- `docks_collision.json` alone is **3.33 MB — 95% of the docks' JSON**.
-- The three collision files together are **4.0 MB of the 4.77 MB, i.e. 84%.** Everything else together is 0.75 MB.
-- Consequence: any step ordering that doesn't put collision first is optimising the wrong 16%. Collision was the pilot.
-
-## Four motivations. Two died on measurement, before a line of code
-
-This is the part I want to keep: I measured the premises *first*, because a previous plan had nearly shipped three steps on premises that didn't survive.
-
-- ❌ **Shipped size — essentially zero.** Deflate compresses decimal text very well and raw `float32` arrays very badly. On `docks_collision.json`: 3 333 609 → 742 335 as JSON in the archive, 2 121 636 → 667 584 as binary. A **36% raw win collapses to 10% inside the zip**, i.e. 75 KB against a 155 MB image. And the raw ratio is only 1.6×, not the 4–6× "text vs binary" intuition suggests — this JSON is compact, short-decimal and payload-dominated. String-heavy schemas do worse still.
-- ❌ **Compile time — oversold.** Removing `nlohmann/json.hpp` shrinks the PCH build, not the per-TU cost the PCH already amortises. The PCH still carries `novus/scene.h` (4.14 s), `engine/scene.h` (3.57 s) and entt (2.70 s). A few seconds off a clean build, not a transformation.
-- ✅ **Load time — 390 ms/load, measured on hardware.** `LoadJsonAsset` 40 calls / 1.396 s, of which `::Parse` is **1.171 s** and `::Read` only 0.198 s. That is **43% of the entire synchronous load segment** (2697 ms across three loads). And it is a *lower bound* — the zone covers read+parse only; each loader's copy-out walk and the DOM's destruction (hundreds of thousands of node frees for the collision asset) happen outside it.
-- ✅ **Heap churn + code simplification.** nlohmann allocates per node — every object, every array, every string — and then every loader copies out of it. Cereal reads straight into the final vectors. And ~2 000 lines of hand-written `.at()`/`.value()` parsing across 13 `.cpp` files collapse into one `serialize()` per struct.
-- Worth saying plainly: JSON parsing looked prominent *because* the load-time work had fixed everything around it, not because it got worse.
-
-## The design, in one idea
-
-- A schema exists **once**: one struct, one `serialize()`, two consumers — the compiler and the runtime. A mismatch is a **compile error**.
-- **The existing parsing code isn't deleted, it's moved.** Every `.at()` walk becomes the compiler's front end, essentially verbatim. The risky, fiddly, Unity-quirk-encoding half keeps working exactly as it does — it just runs on a PC at bake time instead of on the console at load time.
-- Shape: a C++ host tool (`asset_compiler`, `EXCLUDE_FROM_ALL`) driven by a Python wrapper, mirroring the existing `ktxtools` / `compress_textures.py` pattern.
-
-## The thing that will bite you: cereal binary fails silently
-
-- JSON fails loudly. A cereal binary archive is **not self-describing**. Read a v1 blob with a v2 `serialize()` and it doesn't error — it reads the *next* field's bytes as this field's value and carries on.
-- A `float` becomes garbage. A container's `size_type` becomes an arbitrary `uint64`, and the very next thing that happens is `resize()` on it. On a console that is an **OOM abort, not an exception**.
-- Hence a fixed, uncompressed, validated header ahead of every payload:
-
-| Field | Width | Why |
-|---|---|---|
-| magic `SRAB` | 4 B | truncated read, wrong file, unexpected mount |
-| container version | `uint32` | the header's own format |
-| asset kind | `uint32` | catches "loaded `palace_collision.bin` into a `FontAtlas`" |
-| schema version | `uint32` | the existing content version, unchanged in meaning |
-| source hash | `uint64` | hash of the source JSON — the staleness guard |
-| payload bytes | `uint64` | bounds-check *before* `resize` |
-
-- Two of the sixteen had no version gate at all under JSON (`water.json` carries none; snap rails carries one nobody read). Latent bug under JSON, unbounded `resize` under cereal.
-
-## Staleness is a brand new way to lose an afternoon
-
-- Editing the JSON now changes **nothing** until the compiler runs. Three layers, cheapest first:
-  1. The compiler is idempotent and hash-stamped — re-running it is free, so running it is the default habit.
-  2. **`pack_assets.py` verifies the stamp.** A `.bin` whose stamp doesn't match the `.json` beside it fails the pack. This is the load-bearing layer, because packing is on the path to every archive that ships.
-  3. The compiler runs in the exporters' wake, documented as the step that follows every Unity export.
-- Not a build dependency: one of my targets can't build a host tool at all, so the `.bin` files are **committed artifacts** like every other baked asset. Making desktop depend on the compiler while that target consumed a committed copy would let the two diverge, which is worse than neither.
-
-## One engine fix that the whole thing rested on
-
-- `ReadCerealFromBuffer` copied the payload **twice** — into a `std::string`, then into an `std::istringstream` — before reading a byte. On a 3.33 MB asset that's two extra multi-MB allocations inside the function whose entire purpose is to reduce allocation. Replaced with a zero-copy `std::streambuf` over the existing buffer.
-
-## Results
-
-- **~9× on the whole asset read path, ~50× on decode alone.**
-- The synchronous load segment went **2697 ms → 1490 ms on hardware, from collision alone**.
-- By the end of the pilot the load-time motivation was *spent*: the remaining fifteen schemas parsed in ~32 ms/load combined. The other fifteen shipped for simplification and heap, and the acceptance criteria were rewritten to say so.
-
-## What I haven't done yet
-
-The compiler is where load-time work goes to die, and I've only used it for translation so far. Still on the list:
-
-- Emit collision meshes already welded and indexed, so box3d's two expensive flags can be turned off (⚠️ needs verifying that box3d permits it — a silently un-welded mesh is a collision bug, not a crash).
-- Resolve clip names → indices; resolve talk-icon → NPC linkage at bake instead of by position.
-- Flatten the dialog line table and the font atlas glyph map; turn Unity GUID maps into dense indices.
 
 ## Next
 
 Profiling with Tracy — including the part where the client had to run on a platform it had never seen.
+
+- https://www.gdcvault.com/play/1022268/Streaming-in-Sunset-Overdrive-s
+- https://www.gdcvault.com/play/1027205/Zen-of-Streaming-Building-and
+- https://gdcvault.com/play/1012445/Data-is-a-Four-Letter
+- https://web.archive.org/web/20120614235137/http://www.bitsquid.se/files/resource_management.html
+- https://web.archive.org/web/20120507185423/http://www.bitsquid.se/presentations/cutting-the-pipe.pdf
+- https://www.dominikgrabiec.com/posts/2025/11/13/accu_2025_review.html
