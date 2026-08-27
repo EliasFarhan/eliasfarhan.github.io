@@ -15,6 +15,30 @@ My goal is to get sub-3s to load each level of Soup Raiders on the Nintendo Swit
 
 ## A little history of game loading times
 
+Loading time in games is a story of hardware, techniques and game size. 
+
+### Before the CD-ROM
+
+
+### Some good and bad examples of CD-ROM games 
+
+Legacy of Kain: Soul Reaver — PlayStation, 1999 
+- https://blog.playstation.com/archive/2012/10/12/behind-the-classics-legacy-of-kain-soul-reaver/
+- https://blog.playstation.com/2024/11/19/the-legacy-of-kain-series-retrospective-with-original-developers/
+
+Ridge Racer — PlayStation, 1994/95
+>> almost everything required for gameplay was loaded into RAM at startup.
+- Christmas 2014 EDGE
+
+### DVD-era
+
+Jak and Dakter falling animation
+
+### Installing the disk on the HDD
+
+### SSD era
+
+
 ## What we got in Soup Raiders
 
 From the previous blog post ([here](/gamedev/cpp/2026/08/20/srnative-02-porting-unity.html)), the original assets that we got from the Unity demo are:
