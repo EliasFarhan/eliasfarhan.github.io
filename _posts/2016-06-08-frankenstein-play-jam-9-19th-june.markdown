@@ -1,6 +1,7 @@
 ---
 title: "Frankenstein Play Jam (9-19th June)"
 date: 2016-06-08
+categories: [gamedev]
 ---
 
 ![](https://upload.wikimedia.org/wikipedia/commons/a/a7/Frankenstein's_monster_(Boris_Karloff).jpg)

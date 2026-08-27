@@ -1,6 +1,7 @@
 ---
 title: "BIC Fest 2018"
 date: 2018-09-17
+categories: [gamedev, travel]
 ---
 
 ![20180916_095443.jpg](/images/2018/11/20180916_095443.jpg)

@@ -2,7 +2,7 @@
 layout: post
 title:  "Sardegna"
 date:   2015-09-08 19:58:52 +0200
-categories: jekyll update
+categories: [travel]
 ---
 
 ![IMG_1083[1]](/images/2015/09/IMG_11671.jpg)

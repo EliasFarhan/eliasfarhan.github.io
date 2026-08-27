@@ -2,7 +2,7 @@
 layout: post
 title:  "New Master Project - Gamejam as Design Method"
 date:   2015-07-07 13:32:26 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 
 ![IMG_1083[1]](/images/2015/07/IMG_10831.jpg)

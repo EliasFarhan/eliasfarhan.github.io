@@ -2,7 +2,7 @@
 layout: post
 title:  "CompGraphEditor First Version"
 #date:   2024-12-23 20:19:00 +0200
-categories: jekyll update
+categories: [graphics]
 ---
 
 ![First image](/neko2/images/01_hello_triangle.png)

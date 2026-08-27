@@ -2,7 +2,7 @@
 layout: post
 title:  "Ludicious 2016"
 date: 2016-01-25 23:14:05 +0200
-categories: jekyll update
+categories: [gamedev, travel]
 ---
 2016-01-25 23:14:05
 

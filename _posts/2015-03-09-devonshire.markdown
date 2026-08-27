@@ -2,7 +2,7 @@
 layout: post
 title:  "Devonshire"
 date:   2015-03-09 14:56:10 +0200
-categories: jekyll update
+categories: [travel]
 ---
 
 ![Sisyphus 1](/images/2015/03/image5.jpg)

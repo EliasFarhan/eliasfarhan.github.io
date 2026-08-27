@@ -2,7 +2,7 @@
 layout: post
 title:  "Faith 0.1"
 date:   2015-03-12 16:27:14 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 ![Sisyphus 1](/images/2015/03/Pastafarisme-monste-spaghetti-volant.jpg)
 

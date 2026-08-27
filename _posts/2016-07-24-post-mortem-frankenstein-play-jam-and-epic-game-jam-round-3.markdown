@@ -1,6 +1,7 @@
 ---
 title: "Post-Mortem Frankenstein Play Jam and Epic Game Jam Round #3"
 date: 2016-07-24
+categories: [gamedev]
 ---
 
 ![wB2qpr.png](/images/2016/07/wB2qpr.png)

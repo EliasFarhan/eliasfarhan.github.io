@@ -1,6 +1,7 @@
 ---
 title: "On the act of Jamming"
 date: 2016-07-24
+categories: [gamedev, thoughts]
 ---
 
 ![IMG_1772.jpg](/images/2016/07/IMG_1772.jpg)

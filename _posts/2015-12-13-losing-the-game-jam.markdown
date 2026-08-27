@@ -2,7 +2,7 @@
 layout: post
 title:  "I lost the game jam"
 date: 2015-12-13 18:06:31 +0200
-categories: jekyll update
+categories: [gamedev, thoughts]
 ---
 
 <blockquote class="twitter-tweet" lang="en">

@@ -2,7 +2,7 @@
 layout: post
 title:  "Splash - SuisseToy & gameZ"
 date:   2015-10-06 09:52:35 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 
 ![Swiss Toy Booth](/images/2015/10/IMG_12351-e1444118284250.jpg)

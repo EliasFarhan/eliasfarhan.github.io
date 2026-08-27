@@ -1,6 +1,7 @@
 ---
 title: "Tokyo Game Show 2016"
 date: 2016-10-17
+categories: [gamedev, travel]
 ---
 
 ![IMG_2938.jpg](/images/2016/10/IMG_2938.jpg)

@@ -2,7 +2,7 @@
 layout: post
 title:  "2024 Wrap up!"
 date:   2024-12-31 17:10:25 +0200
-categories: jekyll update
+categories: [graphics, thoughts]
 ---
 Let’s wrap up 2024. A lot of things happened this year for me and I wanted to share them. 
 

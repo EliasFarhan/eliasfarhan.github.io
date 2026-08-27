@@ -1,6 +1,7 @@
 ---
 title: "Polymanga & PolyLAN"
 date: 2018-04-02
+categories: [gamedev, travel]
 ---
 
 ![IMG_20180331_180434.jpg](/images/2018/04/IMG_20180331_180434.jpg)

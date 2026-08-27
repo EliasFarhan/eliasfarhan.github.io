@@ -1,6 +1,7 @@
 ---
 title: "Nordic Game Conference 2019"
 date: 2019-05-26
+categories: [gamedev, travel]
 ---
 
 ![20190520_142042-e1559640247460.jpg](/images/2019/06/20190520_142042-e1559640247460.jpg)

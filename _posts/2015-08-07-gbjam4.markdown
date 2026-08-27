@@ -2,7 +2,7 @@
 layout: post
 title:  "GBJam 4 - Catptain Hook"
 date:   2015-08-07 09:22:27 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 
 ![IMG_1083[1]](http://4.bp.blogspot.com/-fNk62Hwmle4/VbjYBLwhcQI/AAAAAAAAWNI/re-o_Ok9sLs/s640/CK8nl7NUkAEYvYj.jpg)

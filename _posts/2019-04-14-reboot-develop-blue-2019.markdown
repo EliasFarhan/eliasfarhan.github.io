@@ -1,6 +1,7 @@
 ---
 title: "Reboot Develop Blue 2019"
 date: 2019-04-14
+categories: [gamedev, travel]
 ---
 
 ![20190411_102521.jpg](/images/2019/04/20190411_102521.jpg)

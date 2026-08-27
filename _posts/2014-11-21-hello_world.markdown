@@ -2,7 +2,7 @@
 layout: post
 title:  "Hello World"
 date:   2014-11-21 17:10:25 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 ![Last czar's family piano](/images/2014/11/IMG_5448.jpg)
 

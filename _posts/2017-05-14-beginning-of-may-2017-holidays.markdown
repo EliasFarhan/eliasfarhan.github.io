@@ -1,6 +1,7 @@
 ---
 title: "Beginning of May 2017 holidays"
 date: 2017-05-14
+categories: [travel]
 ---
 
 ![IMG_20170505_201417.jpg](/images/2017/05/IMG_20170505_201417.jpg)

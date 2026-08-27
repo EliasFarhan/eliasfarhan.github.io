@@ -2,7 +2,7 @@
 layout: post
 title:  "Project Splash"
 date:   2015-07-20 10:33:47 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 ![IMG_1083[1]](/images/splash3.gif)
 

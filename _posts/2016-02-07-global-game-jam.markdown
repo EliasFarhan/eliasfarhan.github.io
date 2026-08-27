@@ -2,7 +2,7 @@
 layout: post
 title:  "Global Game Jam 2016 - The Witch, The Irish, and The Imp"
 date: 2016-02-07 18:21:14 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 
 ![RGB Conference Photos 1](/images/2016/02/12628566_10207131381337723_4821628448289956395_o.jpg)

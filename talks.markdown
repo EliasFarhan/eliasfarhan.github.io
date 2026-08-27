@@ -7,6 +7,13 @@ permalink: /talks/
   margin-left: auto;
   margin-right: auto;
   width: 50%;"}
+
+Upcoming:
+
+- [Inside a Small Game Engine: An Architecture Tour in Modern C++](https://cppcon2026.sched.com/event/2RT5K/inside-a-small-game-engine-an-architecture-tour-in-modern-c++) at CppCon 2026 in Denver, USA.
+- [Beach Slap Technical Postmortem: Fast Online Multiplayer the Hard-Won Way](https://gamespace.ch/program/beach-slap-technical-postmortem-fast-online-multiplayer-the-hard-won-way) at Gamespace Conference 2026 in Zurich, Switzerland
+
+Past:
 - Faire un jeu en ligne multijoueur avec un système rollback, at ADDON 2025 ([slides](https://eliasfarhan.ch/ADDON2025){:target="_blank" rel="noopener"}, [video](https://www.youtube.com/watch?v=1gXWoCVc330){:target="_blank" rel="noopener"})
 - A Simple Rollback System in C++ : The Secrets Behind Online Multiplayer Games, at CppCon2024 ([slides](https://eliasfarhan.ch/CppCon2024){:target="_blank" rel="noopener"}, [video](https://www.youtube.com/watch?v=xkcGa-Xw154){:target="_blank" rel="noopener"})
 - Optimisation: une approche continue, at ADDON 2023 ([slides](https://eliasfarhan.ch/ADDON2023){:target="_blank" rel="noopener"}, [video](https://www.youtube.com/watch?v=IsZuUBd-sZE){:target="_blank" rel="noopener"})

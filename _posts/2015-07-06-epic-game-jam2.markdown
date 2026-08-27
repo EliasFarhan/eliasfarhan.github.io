@@ -2,7 +2,7 @@
 layout: post
 title:  "Epic Game Jam - Round #2"
 date:   2015-07-06 14:31:48 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 
 ![MeowZeDong_Banner](/images/2015/07/MeowZeDong_Banner.bmp)

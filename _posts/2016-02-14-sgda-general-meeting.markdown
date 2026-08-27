@@ -1,6 +1,7 @@
 ---
 title: "SGDA General Meeting"
 date: 2016-02-14
+categories: [gamedev]
 ---
 
 ![logo.png](https://www.sgda.ch/wp-content/uploads/2019/04/cropped-sgda-logo.png)

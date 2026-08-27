@@ -2,7 +2,7 @@
 layout: post
 title:  "Black Whiskers - a GBJam 4 entry post-mortem"
 date:   2015-09-21 10:10:40 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 ![IMG_1083[1]](/images/2015/08/title_screen2.gif)
 

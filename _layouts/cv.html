@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page.description | escape }}">
+    <title>{{ page.title | escape }} · {{ site.title | escape }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/cv.css' | relative_url }}">
+  </head>
+  <body class="cv-page">
+    <main class="cv-sheet">
+      {% include cv/header.html %}
+
+      <div class="cv-columns">
+        <div class="cv-main">
+          {% include cv/section.html id="summary" %}
+          {% include cv/section.html id="experience" %}
+          {% include cv/section.html id="projects" %}
+        </div>
+
+        <aside class="cv-sidebar" aria-label="Additional details">
+          {% include cv/section.html id="contact" %}
+          {% include cv/section.html id="skills" %}
+          {% include cv/section.html id="technologies" %}
+          {% include cv/section.html id="languages" %}
+          {% include cv/section.html id="education" %}
+          {% include cv/section.html id="interests" %}
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

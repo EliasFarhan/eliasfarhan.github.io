@@ -1,6 +1,7 @@
 ---
 title: "Level Up Game Jam 2017"
 date: 2017-02-22
+categories: [gamedev]
 ---
 
 ![StartScreen.png](/images/2017/05/StartScreen.png)

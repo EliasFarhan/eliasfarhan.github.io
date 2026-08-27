@@ -2,7 +2,7 @@
 layout: post
 title:  "Nordic Game Jam 2015"
 date:   2015-02-09 14:20:23 +0200
-categories: jekyll update
+categories: [gamedev, travel]
 ---
 
 ![Nordic Game Jam](/images/2015/02/DSC3065.jpg)

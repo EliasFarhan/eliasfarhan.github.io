@@ -1,6 +1,7 @@
 ---
 title: "Indie Train Jam 2017 and GDC17"
 date: 2017-03-03
+categories: [gamedev, travel]
 ---
 
 ![IMG_20170301_101754.jpg](/images/2017/05/IMG_20170301_101754.jpg)

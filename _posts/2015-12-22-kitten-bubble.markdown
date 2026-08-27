@@ -2,7 +2,7 @@
 layout: post
 title:  "Kitten Bubble - a ZX Sequel Jam entry"
 date: 2015-12-22 11:42:32 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 
 

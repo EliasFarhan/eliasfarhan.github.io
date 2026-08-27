@@ -2,7 +2,7 @@
 layout: post
 title:  "Amsterdam Seminar Trip"
 date: 2016-02-14 20:42:32 +0200
-categories: jekyll update
+categories: [travel]
 ---
 
 ![RGB Conference Photos 1](/images/2016/02/IMG_1688.jpg)

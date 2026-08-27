@@ -1,0 +1,6 @@
+{% assign section = site.cv | where: "slug", include.id | first %}
+{% if section %}
+  <section class="cv-section cv-section--{{ include.id }}">
+    {{ section.content }}
+  </section>
+{% endif %}

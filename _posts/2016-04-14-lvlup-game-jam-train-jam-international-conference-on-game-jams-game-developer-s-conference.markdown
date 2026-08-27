@@ -1,6 +1,7 @@
 ---
 title: "LvlUp Game Jam/Train Jam/International Conference on Game Jams/Game Developer's Conference"
 date: 2016-04-14
+categories: [gamedev, travel]
 ---
 
 ![IMG_1986.jpg](/images/2016/03/IMG_1986.jpg)

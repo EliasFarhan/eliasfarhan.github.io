@@ -2,7 +2,7 @@
 layout: post
 title:  "First I3 game jam, second iteration"
 date: 2015-12-13 17:02:31 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 ![IMG_10051.jpg](/images/2015/12/YDoypVgU_400x400.jpg)
 

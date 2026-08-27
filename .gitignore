@@ -4,6 +4,7 @@ eliasfarhan.sql
 .jekyll-cache
 .jekyll-metadata
 vendor
+.bundle
 Gemfile.lock
 _tmp
 *:Zone.Identifier

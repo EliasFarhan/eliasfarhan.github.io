@@ -2,7 +2,7 @@
 layout: post
 title:  "#NotInYourMouth"
 date:   2015-03-12 08:29:13 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 ![Sisyphus 1](/images/2015/03/IMG_0349.jpg)
 

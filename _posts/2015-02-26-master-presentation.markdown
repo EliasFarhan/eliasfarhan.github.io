@@ -2,7 +2,7 @@
 layout: post
 title:  "Master Project Idea Presentation"
 date:   2015-02-26 10:30:23 +0200
-categories: jekyll update
+categories: [gamedev]
 ---
 
 ![Sisyphus 1](/images/2015/02/sisyphus.png)
