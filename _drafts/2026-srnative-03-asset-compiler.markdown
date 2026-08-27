@@ -13,22 +13,33 @@ My goal is to get sub-3s to load each level of Soup Raiders on the Nintendo Swit
 
 <blockquote class="twitter-tweet" data-media-max-width="560"><p lang="en" dir="ltr">Animal Crossing New Horizons Switch 1 VS Switch 2 load times... WOW <a href="https://t.co/D6WFxxgJE1">pic.twitter.com/D6WFxxgJE1</a></p>&mdash; NintenTalk (@NintenTalk) <a href="https://x.com/NintenTalk/status/1930656532636606865?ref_src=twsrc%5Etfw">June 5, 2025</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
+Not to take a hit on *Animal Crossing* which is a game that I enjoyed a lot during the COVID-19 pandemic, but what is going on during 30 seconds? The Nintendo Switch has 4 cores (minmus 1 used by the OS) to do things and it has a *32 GB eMMC 5.1* that could theoricatlly load at max bus rate of 400 MB/s (yes, if your game is on a miroSD you can expect 70-90 MiB/s with a good card). 
+
+Another example of crazy loading time is GTA V online with this blog post [here](https://nee.lv/2021/02/28/How-I-cut-GTA-Online-loading-times-by-70/) talking about how this modder (?) managed to optimize the loading time from ~6min flat to 1m 50s on his SSD. This teaches us that loading time is not just about loading files from the drive (CD, DVD, HDD, SSD) to the RAM (or VRAM), but how we do it. Let's go first on a trip into history.
+
 ## A little history of game loading times
 
-Loading time in games is a story of hardware, techniques and game size. 
+Loading time like a lot of topics in games is a story of hardware constraints, techniques and game size. How is my games being distributed? On which support? What is the available space on this support? How fast can I read from this support? 
 
 ### Before the CD-ROM
 
+![soup raiders jailbreak](/images/srjailbreak.png)
+
+I made a small Gameboy game a few years ago (blog post [here](/gamedev/2016/10/17/soup-raiders-jailbreak-post-mortem-of-gbjam-5-doing-a-real-homebrew-gameboy-rom.html)). On this platform, there are several type of **Memory Bank Controller** (MBC). If you choose a **MBC5** mapper, you can have up to 8 MiB of data in the ROM (for example for Pokemon Trading Card Game [reference](https://gbhwdb.gekkio.fi/cartridges/DMG-AXQP-0/)). But earlier games used **MBC1** with up to 2 MiB ROM size, like Super Mario Land 1 ([reference](https://gbhwdb.gekkio.fi/cartridges/DMG-MLA-0/)) that has a 64 KiB ROM. So obviously, you don't have a lot of space to put a lot of assets, but there is also not a lot of CPU power to process and render too many sprites anyway. And coming back to our topic, loading time was not a problem (it was mostly invisible). 
 
 ### Some good and bad examples of CD-ROM games 
+
+![kain](/images/2026/legend_kain.jpg)
 
 Legacy of Kain: Soul Reaver — PlayStation, 1999 
 - https://blog.playstation.com/archive/2012/10/12/behind-the-classics-legacy-of-kain-soul-reaver/
 - https://blog.playstation.com/2024/11/19/the-legacy-of-kain-series-retrospective-with-original-developers/
 
-Ridge Racer — PlayStation, 1994/95
+![ridge racer](/images/2026/riraps0f.jpg)
+
+Ridge Racer — PlayStation, 1994/95 (Christmas 2014 EDGE):
 >> almost everything required for gameplay was loaded into RAM at startup.
-- Christmas 2014 EDGE
+
 
 ### DVD-era
 
