@@ -27,7 +27,19 @@ Loading time like a lot of topics in games is a story of hardware constraints, t
 
 I made a small Gameboy game a few years ago (blog post [here](/gamedev/2016/10/17/soup-raiders-jailbreak-post-mortem-of-gbjam-5-doing-a-real-homebrew-gameboy-rom.html)). On this platform, there are several type of **Memory Bank Controller** (MBC). If you choose a **MBC5** mapper, you can have up to 8 MiB of data in the ROM (for example for Pokemon Trading Card Game [reference](https://gbhwdb.gekkio.fi/cartridges/DMG-AXQP-0/)). But earlier games used **MBC1** with up to 2 MiB ROM size, like Super Mario Land 1 ([reference](https://gbhwdb.gekkio.fi/cartridges/DMG-MLA-0/)) that has a 64 KiB ROM. So obviously, you don't have a lot of space to put a lot of assets, but there is also not a lot of CPU power to process and render too many sprites anyway. And coming back to our topic, loading time was not a problem (it was mostly invisible). 
 
-### Some good and bad examples of CD-ROM games 
+### Then come the CD-ROM
+
+While the best-case sequential transfer rate on the PS1 was 300KB/s and that the RAM had 2MD main + 1 MB VRAM, we could estimate that loading time would be in the range of 10 seconds maximum. But this does not take into account seek time. From Jason Gregory's Game Engine Architecture 3rd edition:
+> "When loading data from files, [...] **seek times** (i.e., moving the read
+> head to the correct place on the physical media), [...]. Of these, the seek times [...] can be nontrivial on many operating systems." — §7.2.2.2, **p. 505**
+
+> "Solid-state drives (SSD) do not suffer from the seek time problems that plague spinning media
+> like DVDs, Blu-ray discs and hard disc drives (HDD). [...] So
+> designing your game's I/O patterns in order to minimize seek times is likely to be a necessity
+> for some time to come.**" — **p. 505**
+
+A PS1 CD Drive is mechanically slow, so if a game needed many files scattered around the disc, the laser had the seek between them, and those seeks could cost far more time than actually reading the data.
+
 
 ![kain](/images/2026/legend_kain.jpg)
 
@@ -185,16 +197,9 @@ pipeline the platform-specific step happens.
 
 ### The load-cost model the book is built on — and the sentence that dates it
 
-> "When loading data from files, the three biggest costs are **seek times** (i.e., moving the read
-> head to the correct place on the physical media), **the time required to open each individual
-> file**, and **the time to read the data** from the file into memory. Of these, the seek times and
-> file-open times can be nontrivial on many operating systems." — §7.2.2.2, **p. 505**
 
-> "Solid-state drives (SSD) do not suffer from the seek time problems that plague spinning media
-> like DVDs, Blu-ray discs and hard disc drives (HDD). **However, no game console to date includes
-> a solid-state drive as the primary fixed storage device (not even the PS4 and Xbox One). So
-> designing your game's I/O patterns in order to minimize seek times is likely to be a necessity
-> for some time to come.**" — **p. 505**
+
+
 
 **Contrast material — what the Switch numbers say about that three-term model:**
 
