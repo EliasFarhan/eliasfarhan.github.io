@@ -25,7 +25,9 @@ Loading time like a lot of topics in games is a story of hardware constraints, t
 
 ![soup raiders jailbreak](/images/srjailbreak.png)
 
-I made a small Gameboy game a few years ago (blog post [here](/gamedev/2016/10/17/soup-raiders-jailbreak-post-mortem-of-gbjam-5-doing-a-real-homebrew-gameboy-rom.html)). On this platform, there are several type of **Memory Bank Controller** (MBC). If you choose a **MBC5** mapper, you can have up to 8 MiB of data in the ROM (for example for Pokemon Trading Card Game [reference](https://gbhwdb.gekkio.fi/cartridges/DMG-AXQP-0/)). But earlier games used **MBC1** with up to 2 MiB ROM size, like Super Mario Land 1 ([reference](https://gbhwdb.gekkio.fi/cartridges/DMG-MLA-0/)) that has a 64 KiB ROM. So obviously, you don't have a lot of space to put a lot of assets, but there is also not a lot of CPU power to process and render too many sprites anyway. And coming back to our topic, loading time was not a problem (it was mostly invisible). 
+I made a small Gameboy game a few years ago (blog post [here](/gamedev/2016/10/17/soup-raiders-jailbreak-post-mortem-of-gbjam-5-doing-a-real-homebrew-gameboy-rom.html)). On this platform, there are several type of **Memory Bank Controller** (MBC). If you choose a **MBC5** mapper, you can have up to 8 MiB of data in the ROM (for example for Pokemon Trading Card Game [reference](https://gbhwdb.gekkio.fi/cartridges/DMG-AXQP-0/)). But earlier games used **MBC1** with up to 2 MiB ROM size, like Super Mario Land 1 ([reference](https://gbhwdb.gekkio.fi/cartridges/DMG-MLA-0/)) that has a 64 KiB ROM. 
+
+So obviously, you don't have a lot of space to put a lot of assets, but there is also not a lot of CPU power to process and render too many sprites anyway. And coming back to our topic, loading time was not a problem (it was mostly invisible). 
 
 ### Then come the CD-ROM
 
@@ -38,24 +40,40 @@ While the best-case sequential transfer rate on the PS1 was 300KB/s and that the
 > designing your game's I/O patterns in order to minimize seek times is likely to be a necessity
 > for some time to come.**" — **p. 505**
 
-A PS1 CD Drive is mechanically slow, so if a game needed many files scattered around the disc, the laser had the seek between them, and those seeks could cost far more time than actually reading the data.
+A PS1 CD Drive is mechanically slow, so if a game needed many files scattered around the disc, the laser had the seek between them, and those seeks could cost far more time than actually reading the data. A March 17, [1997 SCEI R&D technical note by Keiso Shimakawa](https://psx.arthus.net/sdk/Psy-Q/DOCS/TECHNOTE/note588.pdf) specifically tells developers to "minimize the number of seek commands." It says that when reading two or more files, developers should put them contiguously on the disc and read them with only a single seek command. It also warns that repeatedly searching for file locations can produce long loading times.
 
+Because of the limited 2 MiB of main RAM + 1 MiB of VRAM, that meant a game often could not load a whole level, character set, soundtrack data, textures, and scripts at once. It had to repeatedly unload old assets and fetch new ones from CD. So limited RAM didn't make the CD itself slower; it made the game need to access the CD more often. But even with those limitations, certain games managed to make most loading time invisible.
 
 ![kain](/images/2026/legend_kain.jpg)
 
-Legacy of Kain: Soul Reaver — PlayStation, 1999 
-- https://blog.playstation.com/archive/2012/10/12/behind-the-classics-legacy-of-kain-soul-reaver/
-- https://blog.playstation.com/2024/11/19/the-legacy-of-kain-series-retrospective-with-original-developers/
+For Legacy of Kain: Soul Reaver (PlayStation, 1999), Scott Krotz (chief of engineering) says on a [Playstation blog interview in 2024](https://blog.playstation.com/2024/11/19/the-legacy-of-kain-series-retrospective-with-original-developers/): 
+> The streaming technology we developed was great, and I think we only had one loading screen in the entire game once getting into it. 
+
+However, in a [2012 interview for Playstation blog](https://blog.playstation.com/archive/2012/10/12/behind-the-classics-legacy-of-kain-soul-reaver/), director Amy Hennig said:
+> Our biggest challenge, hands-down, was getting the data-streaming working, to allow us to have a seamless, interconnected world with no load events.
+
+Executive Producer Andrew Bennett explained on this [IGN 2001 interview](https://web.archive.org/web/20160304081818/http://www.ign.com/articles/2001/01/11/igndc-interviews-crystal-dynamics-andrew-bennett):
+> [...] on average we were only holding an average of 3 or 4 rooms' worth of geometry, textures, objects, music, sound effects and animations in memory, compared with a normal engine which would have had to use the same memory for an entire level of the game
+
+All those thanks to previous work on the *Gex* engine, described in this reverse-engineer article [here](https://www.thelostworlds.net/TechDocs/Soul_Reavers_Gex_Engine.html). 
+
 
 ![ridge racer](/images/2026/riraps0f.jpg)
 
 Ridge Racer — PlayStation, 1994/95 (Christmas 2014 EDGE):
->> almost everything required for gameplay was loaded into RAM at startup.
+> almost everything required for gameplay was loaded into RAM at startup.
 
 
 ### DVD-era
 
-Jak and Dakter falling animation
+Jak and Dakter falling animation [](https://www.naughtydog.com/blog/uncharted_legacy_of_thieves_collection_pc_launch)
+> This isn’t something we’ve had to worry about since the Jak and Daxter days, when we added an animation of Jak stumbling if data was loading in too slowly.
+
+Loading time is not just a programmer job. Game artists need also to provide assets in the correct size. In this Brendon SHeffield article "You Wouldn't Like Me When I'm Angry" in [Dirty Coding Tricks with assets load developer face](https://www.gamedeveloper.com/programming/dirty-coding-tricks), Nick Waanders explains that when working at *THQ studio Relic Entertainment* on the Xbox 360 port on *The Outfit*:
+> there were also lots of problems on the content side as well. Some models were too detailed, some shaders were too expensive, and some missions simply had too many guys running around.
+
+So he found a simple solution, by implementing a solution that took about an hour:
+> A fellow programmer took four pictures of my face -- one really happy, one normal, one a bit angry, and one where I am pulling my hair out. I put this image in the corner of the screen, and it was linked to the frame rate. If the game ran at over 30fps, I was really happy, if it ran below 20, I was angry.
 
 ### Installing the disk on the HDD
 
@@ -64,7 +82,9 @@ Jak and Dakter falling animation
 
 ## What we got in Soup Raiders
 
-From the previous blog post ([here](/gamedev/cpp/2026/08/20/srnative-02-porting-unity.html)), the original assets that we got from the Unity demo are:
+![](/images/2026/sr/sr_level_skybox.png)
+
+Back to our game *Soup Raiders*. From the previous blog post ([here](/gamedev/cpp/2026/08/20/srnative-02-porting-unity.html)), the original assets that we got from the Unity demo are:
 - 3d models (exported as `.glb`),
 - Sprites/textures (exported as `.png` and `.jpg`),
 - Fmod music banks (exported as `.banks`),
