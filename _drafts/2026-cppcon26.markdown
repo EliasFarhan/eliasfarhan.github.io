@@ -1,0 +1,68 @@
+---
+layout: post
+title:  "CppCon 2026"
+categories: jekyll update
+---
+
+![Intro cppcon photo](/images/2026/cppcon/20260918_131140.jpg)
+
+After two years, I went back to CppCon this week to give a talk about game engine and my little summer experiment with Soup Raiders (blog series [here](/gamedev/cpp/2026/08/05/srnative-00.html)). But CppCon is more than just talks!
+
+<!--more-->
+
+I landed on Saturday evening in Denver after a stop at Washingthon Dulles. Then I woke up at 4am on Sunday, got some time to work on my slides before heading for the field trip at Red Rocks:
+
+![red rocks](/images/2026/cppcon/20260913_124336.jpg)
+
+The heat was really hitting but everybody was still smiling. This field trip is a nice opportunity to meet new people in a small group. I tend to feel incomfortable when I am suddenly in the presence of a lot of people that I don't know at all, but we speak the same (programming) language. We then went to see some dinosaur footsteps nearby:
+
+![dino1](/images/2026/cppcon/20260913_144233.jpg)
+
+![dino2](/images/2026/cppcon/20260913_144726.jpg)
+
+We needed to hike up a hill to see those and with the heat, I simply wear my Korean Daiso umbrella to avoid the sun. Conversion subjects varied from next week's talks, AI, programming, skiing, current job, etc... We then went back to the hotel to join the registration reception:
+
+![registration](/images/2026/cppcon/20260913_200739.jpg)
+
+After getting all my swag, I did not stay too long, because the jetlag was kicking hard. Any way, time for the talks.
+
+On Monday, I went to:
+- *Are you smarter than a branch predictor* by Michelle D'Souza: I am giving a course about branch prediction to my students in the following weeks, so getting a refresher and learning new things was nice.
+- *The journey to "/W4 /WX": How hard could it be?* by Keith Stockdale
+![](/images/2026/cppcon/20260914_150719.jpg): Very interesting talk with a lot of small code review to showcase all the little bugs/UB that can infiltrate a codebase without proper warnings as error facility.
+- *Zero Cost Scripting Languages for Game Engines With C++26 Static Reflection* by Koen Samyn: I did not know much about AngelScript, but compiling its bytecode combining #embed and static reflection was very fascinating and giving me ideas. 
+
+On Tuesday, with my talk in the afternoon, I missed the Language Designers Panel in the morning. I was still adjusting the slides before the talk. Finally came the time. This was the room I gave the talk in:
+
+![](/images/2026/cppcon/20260915_133808.jpg)
+
+In my slides, I had a few web demo that required me to interactive with them. Fortunatly, there was a screen under the stage that was showing the content that the attendees (and me needed to interactive with my slides) were seeing. 
+
+After my talk, I went to Jody Haggins talk 
+
+Then dodo
+
+Wednesday, I went to those talks:
+- Awaiters and Awaitables by Mateusz Pusz
+- How C++26 changes the way we write code by Timur Doumler
+- Rule of 0,1,2,5,6,7,8,9,10? by Jason Turner
+- Graphics Programming with SDL 3 Part 2 by Mike Shah
+- Lightning Talks
+
+Thursday, I went to those talks:
+- Back to Basics: Lambdas, Funciton Objects, and std::function by Roth Michaels
+- The Address is Not The Place: Object Residency in C++26 by Laurie Kirk.
+- Meet Guy Davidson
+- Meet the Presenters Banquet
+- Lightning Talks
+
+Friday, I went to those talks:
+- Safety in Numbers by Jason Turner
+- Refactoring C++: Techniques, Smells, and Discussion by Dave Steffen
+- Code You Didn't Write: Understanding Large and Unfamiliar Codebases by Mike Shah and CHris Croft.White.
+- In Pursuit of a 6,000 FPS Game Boy Emulator by Tom Tesch.
+
+
+Then it was time to go to the airport to catch my flight. Going back home, the head full of ideas and getting ready for the future, without forgetting that C++ is an expert language. 
+
+![cpp hard](/images/2026/cppcon/20260915_153735.jpg)
