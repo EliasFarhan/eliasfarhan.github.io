@@ -38,29 +38,30 @@ On Tuesday, with my talk in the afternoon, I missed the Language Designers Panel
 
 In my slides, I had a few web demo that required me to interactive with them. Fortunatly, there was a screen under the stage that was showing the content that the attendees (and me needed to interactive with my slides) were seeing. 
 
-After my talk, I went to Jody Haggins talk 
+After my talk, I went to Jody Haggins' talk: *C++ in an AI World*
 
 Then dodo
 
 Wednesday, I went to those talks:
-- Awaiters and Awaitables by Mateusz Pusz
-- How C++26 changes the way we write code by Timur Doumler
-- Rule of 0,1,2,5,6,7,8,9,10? by Jason Turner
-- Graphics Programming with SDL 3 Part 2 by Mike Shah
-- Lightning Talks
+- *Awaiters and Awaitables* by Mateusz Pusz: While the networking proposal is linked to coroutine and my colleague tried to play with it, I took opportunity to do learn about it in Mateusz' talk. He managed to make accessible something that seems no to.
+- *How C++26 changes the way we write code* by Timur Doumler: The big four: Reflection, Contracts, Execution and SIMD.
+- *Rule of 0,1,2,5,6,7,8,9,10?* by Jason Turner
+- *Graphics Programming with SDL 3 Part 2* by Mike Shah
+- *Lightning Talks*: 1 hour of 5 min talks in various subjets around C++. Two years ago, I was too tired to follow them, but this year, I was happy to be there. 
 
 Thursday, I went to those talks:
-- Back to Basics: Lambdas, Funciton Objects, and std::function by Roth Michaels
-- The Address is Not The Place: Object Residency in C++26 by Laurie Kirk.
-- Meet Guy Davidson
-- Meet the Presenters Banquet
-- Lightning Talks
+- *Back to Basics: Lambdas, Function Objects, and std::function* by Roth Michaels
+- *The Address is Not The Place: Object Residency in C++26* by Laurie Kirk.
+- *Meet Guy Davidson*
+- *Meet the Presenters Banquet*: 
+![](/images/2026/cppcon/20260917_183834.jpg)
+- *Lightning Talks*: Part 2 and I could again attend (caffeine helping). There is an energy during the lightning talks. 
 
 Friday, I went to those talks:
-- Safety in Numbers by Jason Turner
-- Refactoring C++: Techniques, Smells, and Discussion by Dave Steffen
-- Code You Didn't Write: Understanding Large and Unfamiliar Codebases by Mike Shah and CHris Croft.White.
-- In Pursuit of a 6,000 FPS Game Boy Emulator by Tom Tesch.
+- *Safety in Numbers* by Jason Turner. 
+- *Refactoring C++: Techniques, Smells, and Discussion* by Dave Steffen. 
+- *Code You Didn't Write: Understanding Large and Unfamiliar Codebases* by Mike Shah and Chris Croft-White. 
+- *In Pursuit of a 6,000 FPS Game Boy Emulator* by Tom Tesch: It was the talk that I could attend. This talk was the end of the Tetris Game Boy trilogy. 
 
 
 Then it was time to go to the airport to catch my flight. Going back home, the head full of ideas and getting ready for the future, without forgetting that C++ is an expert language. 
