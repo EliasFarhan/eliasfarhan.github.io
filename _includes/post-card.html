@@ -1,0 +1,65 @@
+{%- comment -%}
+  One post card for the blog and category listings.
+  Parameters: post (required), hero (optional, renders the large variant).
+  Thumbnail: `image` front matter, else the first image of the post body.
+  Teaser: `description` front matter, else the first words of the post.
+{%- endcomment -%}
+{%- assign card_post = include.post -%}
+{%- assign card_image = card_post.image.path | default: card_post.image -%}
+{%- unless card_image -%}
+  {%- assign card_img_tags = card_post.content | split: '<img ' -%}
+  {%- if card_img_tags.size > 1 -%}
+    {%- assign card_img_src = card_img_tags[1] | split: '>' | first | split: 'src="' -%}
+    {%- if card_img_src.size > 1 -%}
+      {%- assign card_image = card_img_src[1] | split: '"' | first -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endunless -%}
+{%- assign card_words = 30 -%}
+{%- if include.hero -%}{%- assign card_words = 50 -%}{%- endif -%}
+{%- if card_post.description -%}
+  {%- assign card_teaser = card_post.description | strip_html -%}
+{%- else -%}
+  {%- comment -%} Drop footnote markers so their numbers do not stick to the preceding word. {%- endcomment -%}
+  {%- assign card_chunks = card_post.content | split: '<sup id="fnref' -%}
+  {%- capture card_teaser -%}
+    {%- for chunk in card_chunks -%}
+      {%- if forloop.first -%}
+        {{- chunk -}}
+      {%- else -%}
+        {%- assign card_marker = chunk | split: '</sup>' | first -%}
+        {{- chunk | remove_first: card_marker | remove_first: '</sup>' -}}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- assign card_teaser = card_teaser | strip_html | truncatewords: card_words -%}
+{%- endif -%}
+{%- assign card_teaser = card_teaser | strip -%}
+<article class="post-card{% if include.hero %} post-card--hero{% endif %}">
+  <div class="post-card__media">
+    {%- if card_image %}
+    <img src="{{ card_image | relative_url }}" alt="" loading="{% if include.hero %}eager{% else %}lazy{% endif %}">
+    {%- else %}
+    <span class="post-card__placeholder">{{ card_post.categories | first | default: "blog" }}</span>
+    {%- endif %}
+  </div>
+  <div class="post-card__body">
+    <p class="post-card__meta">
+      <time datetime="{{ card_post.date | date_to_xmlschema }}">{{ card_post.date | date: "%-d %B %Y" }}</time>
+      {%- if card_post.series %}
+      <span class="post-card__series">{{ card_post.series | replace: "-", " " }}</span>
+      {%- endif %}
+    </p>
+    <h2 class="post-card__title"><a href="{{ card_post.url | relative_url }}">{{ card_post.title | escape }}</a></h2>
+    {%- if card_teaser != "" %}
+    <p class="post-card__teaser">{{ card_teaser }}</p>
+    {%- endif %}
+    {%- if card_post.categories.size > 0 %}
+    <p class="post-categories">
+      {%- for cat in card_post.categories %}
+      <a href="{{ '/category/' | append: cat | append: '/' | relative_url }}" class="category-badge">{{ cat }}</a>
+      {%- endfor %}
+    </p>
+    {%- endif %}
+  </div>
+</article>

@@ -34,6 +34,7 @@ This is Elias Farhan's personal technical blog and portfolio, built with Jekyll 
 
 - Posts use `<!--more-->` as excerpt separator
 - Front matter fields: `layout`, `title`, `date`, `categories`
+- Optional front matter for the blog/category card grid (`_includes/post-card.html`): `image` (thumbnail, defaults to the first image of the post) and `description` (teaser, defaults to the first words of the post)
 - Images stored in `images/YYYY/` directories
 - Main styling in `assets/main.scss` (extends Minima theme)
 

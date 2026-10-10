@@ -1,0 +1,28 @@
+{%- comment -%}
+  Category bar followed by a grid of post cards.
+  Parameters: posts (required), hero (optional, shows the first post large),
+  heading (optional, page heading aligned with the grid).
+{%- endcomment -%}
+<div class="post-listing">
+  {%- if include.heading %}
+  <h1>{{ include.heading }}</h1>
+  {%- endif %}
+  <nav class="category-bar" aria-label="Categories">
+    <a href="{{ '/blog/' | relative_url }}" class="category-badge{% if page.url contains '/blog/' %} current{% endif %}">all</a>
+    {%- assign bar_categories = "gamedev|graphics|cpp|travel|thoughts" | split: "|" -%}
+    {%- for cat in bar_categories -%}
+      {%- assign cat_url = '/category/' | append: cat | append: '/' %}
+    <a href="{{ cat_url | relative_url }}" class="category-badge{% if page.url == cat_url %} current{% endif %}">{% if cat == "cpp" %}c++{% else %}{{ cat }}{% endif %}</a>
+    {%- endfor %}
+  </nav>
+
+  <div class="post-grid">
+    {%- for post in include.posts -%}
+      {%- if include.hero and forloop.first %}
+    {% include post-card.html post=post hero=true %}
+      {%- else %}
+    {% include post-card.html post=post %}
+      {%- endif -%}
+    {%- endfor %}
+  </div>
+</div>
