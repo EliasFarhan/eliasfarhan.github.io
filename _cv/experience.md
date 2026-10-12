@@ -13,7 +13,7 @@ Designing and preparing the code & tech curriculum with games programming minor.
 ### Engine Programmer · 6it.dev
 
 **2024–2026 · Remote**  
-Worked under NDA on a game engine, mostly with concept and template.
+Worked under NDA on a game engine, mostly with C++ concept and template.
 
 ### Head of Games Programming · SAE Institute
 
@@ -23,5 +23,5 @@ Designed and delivered the games programming curriculum, including computer grap
 ### Co-Founder & Lead Programmer · Team KwaKwa
 
 **2015–present · Lausanne**  
-Released [Splash Blast Panic](https://team-kwakwa.com/splash-blast-panic) on Steam, Nintendo Switch, PlayStation 4, and Xbox One using Unity; personally handled the Nintendo Switch and PlayStation 4 ports. Currently developing *Soup Raiders*, a C++ adventure game, and porting it to Nintendo Switch.
+Released [Splash Blast Panic](https://team-kwakwa.com/splash-blast-panic) on Steam, Nintendo Switch, PlayStation 4, and Xbox One using Unity; personally handled the Nintendo Switch and PlayStation 4 ports. Currently developing *Beach Slap*, an online multiplayer game with Unity and *Soup Raiders*, a C++ adventure game, and porting it to Nintendo Switch.
 
