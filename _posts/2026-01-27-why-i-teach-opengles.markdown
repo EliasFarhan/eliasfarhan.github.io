@@ -5,7 +5,7 @@ categories: [graphics, cpp]
 ---
 
 <div id="webgl-container" style="text-align: center; margin: 20px 0;">
-  <canvas id="canvas" width="800" height="600" 
+  <canvas id="canvas" width="800" height="600" tabindex="0"
           style="border: 1px solid #000; background-color: #000;">
   </canvas>
   <div id="status" style="margin-top: 10px;">Loading...</div>
@@ -36,7 +36,25 @@ categories: [graphics, cpp]
     locateFile: function(path) {
       return '/assets/webgl/hello-transform/' + path;
     },
+    // SDL listens to the keyboard on the whole window by default,
+    // which blocks browser shortcuts like Ctrl/Cmd +/- (zoom) on the page.
+    preRun: [function() {
+      Module.ENV.SDL_EMSCRIPTEN_KEYBOARD_ELEMENT = '#canvas';
+    }],
   };
+
+  // Let zoom gestures reach the browser instead of the demo.
+  window.addEventListener('keydown', function(e) {
+    if (e.ctrlKey || e.metaKey) e.stopPropagation();
+  }, true);
+  window.addEventListener('wheel', function(e) {
+    if (e.ctrlKey) e.stopPropagation();
+  }, true);
+  ['touchstart', 'touchmove'].forEach(function(type) {
+    window.addEventListener(type, function(e) {
+      if (e.touches.length > 1) e.stopPropagation();
+    }, true);
+  });
 </script>
 <script async src="/assets/webgl/hello-transform/HelloTransform.js"></script>
 <style>
